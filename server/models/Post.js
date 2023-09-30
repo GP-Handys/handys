@@ -8,6 +8,10 @@ const Post = connection.define("post", {
             primaryKey: true,
             autoIncrement: true
         },
+        title: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },      
         content: {
             type: Sequelize.STRING,
             allowNull: false
