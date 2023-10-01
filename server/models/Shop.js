@@ -1,5 +1,7 @@
 const Sequelize = require("sequelize");
 const connection = require("../database/database");
+const User = require("./User")
+
 
 const Shop = connection.define("shop", {
    id: {
@@ -25,5 +27,7 @@ const Shop = connection.define("shop", {
    }
 })
 
+Shop.belongsTo(User)
+User.hasMany(Shop)
 
 module.exports = Shop
