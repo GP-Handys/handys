@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const connection = require("../database/database")
-const user = require("./user")
+const user = require("./User")
 
 const Post = connection.define("post", {
         id: {
