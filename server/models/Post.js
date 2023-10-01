@@ -31,6 +31,11 @@ const Post = connection.define("post", {
         is_first_post: {
             type: Sequelize.BOOLEAN,
             allowNull: false
+        },
+        is_deleted: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
     }
 )
