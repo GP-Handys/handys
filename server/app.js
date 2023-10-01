@@ -10,4 +10,10 @@ async function syncDb() {
 }
 syncDb()
 
+const bodyParser = require('body-parser')
+const Routes = require("./routes/index.js")
+app.use(bodyParser.urlencoded({extended:  true}));
+app.use(express.json()); 
+app.use(Routes)
+
 app.listen(process.env.PORT)
