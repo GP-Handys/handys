@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-require("dotenv").config({ path: '../.env' })
+require("dotenv").config()
 
 const DATABASE_NAME = process.env.DATABASE_NAME
 const HOST = process.env.HOST

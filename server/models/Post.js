@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const connection = require("../database/database")
-const user = require("./user")
+const User = require("./User")
 
 const Post = connection.define("post", {
         id: {
@@ -41,8 +41,8 @@ const Post = connection.define("post", {
 )
 
 // A user has many posts. A post belongs to many users.
-user.hasMany(Post)
-Post.belongsTo(user)
+User.hasMany(Post)
+Post.belongsTo(User)
 
 // A post has many children posts. A child post belongs to one post. 
 Post.hasMany(Post, { as: 'ChildPosts', foreignKey: 'parentId' });
