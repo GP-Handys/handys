@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const connection = require("../database/database")
-const user = require("./User")
+const user = require("./user")
 
 const Post = connection.define("post", {
         id: {
@@ -31,6 +31,11 @@ const Post = connection.define("post", {
         is_first_post: {
             type: Sequelize.BOOLEAN,
             allowNull: false
+        },
+        is_deleted: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
     }
 )

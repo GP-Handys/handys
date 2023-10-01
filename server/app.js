@@ -6,6 +6,8 @@ const connection = require('./database/database.js')
 const cookiesParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const routes = require("./routes/index.js")
+require("./models/Item.js")
+require("./models/Shop.js")
 
 const app = express()
 

@@ -20,9 +20,6 @@ const user = connection.define("user",
                 isEmail: true
             }
         },
-        password: {
-            type: Sequelize.STRING,
-        },
         phone_number: {
             type: Sequelize.INTEGER,
             validator: {
@@ -31,8 +28,7 @@ const user = connection.define("user",
         },
         is_sys_admin: {
             type: Sequelize.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
+            allowNull: false
         },
         pfp_url: {
             type: Sequelize.STRING
