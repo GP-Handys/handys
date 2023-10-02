@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const connection = require("../database/database")
 const User = require('./User')
 const Item = require('./Item')
+const Shop = require("./Shop")
 
 const Order = connection.define("order", {
       id: {
@@ -9,22 +10,35 @@ const Order = connection.define("order", {
          primaryKey: true,
          autoIncrement: true,
       },
-      createdAt: {
-         type: Sequelize.DATE,
-         allowNull: false,
-      },
-      address: {
+      delivery_address: {
          type : Sequelize.STRING,
          allowNull: false,
       },
-      paymentMethod: {
+      payment_method: {
          type: Sequelize.STRING,
+         allowNull: false
+      },
+      price: {
+         type: Sequelize.DOUBLE,
          allowNull: false
       }
    }
 )
 
+const ItemOrder = connection.define("item_orders", {
+   quantity: {
+     type: Sequelize.INTEGER,
+     allowNull: false,
+   }
+ });
+
+Order.belongsTo(Shop)
+Shop.hasMany(Order)
+
 Order.belongsTo(User)
-Order.hasMany(Item)
+User.hasMany(Order)
+
+Item.belongsToMany(Order, {through: "item_orders"})
+Order.belongsToMany(Item, {through: "item_orders"})
 
 module.exports = Order
