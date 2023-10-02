@@ -21,6 +21,10 @@ const Order = connection.define("order", {
       price: {
          type: Sequelize.DOUBLE,
          allowNull: false
+      },
+      is_confirmed: {
+         type: Sequelize.BOOLEAN,
+         defaultValue: false
       }
    }
 )
