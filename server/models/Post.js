@@ -25,7 +25,6 @@ const Post = connection.define("post", {
         },
         is_resolved: {
             type: Sequelize.BOOLEAN,
-            allowNull: false,
             defaultValue: false
         },
         is_first_post: {
@@ -34,7 +33,6 @@ const Post = connection.define("post", {
         },
         is_deleted: {
             type: Sequelize.BOOLEAN,
-            allowNull: false,
             defaultValue: false
         }
     }

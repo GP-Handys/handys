@@ -32,7 +32,6 @@ const User = connection.define("user",
         },
         is_sys_admin: {
             type: Sequelize.BOOLEAN,
-            allowNull: false,
             defaultValue:false
         },
         pfp_url: {

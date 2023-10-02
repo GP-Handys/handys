@@ -13,6 +13,14 @@ const Shop = connection.define("shop", {
       type:Sequelize.STRING,
       allowNull: false
    },
+   rating: {
+      type: Sequelize.INTEGER,
+      defaultValue: 1,
+      validate: {
+         min: 1,
+         max: 5,
+      },
+   },
    is_premium: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
@@ -20,6 +28,10 @@ const Shop = connection.define("shop", {
    is_deleted: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
+   },
+   is_approved: {
+      type:Sequelize.BOOLEAN,
+      defaultValue: false
    },
    pfp_url: {
       type: Sequelize.STRING,

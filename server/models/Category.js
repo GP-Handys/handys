@@ -12,7 +12,14 @@ const Category = connection.define("category", {
       caregoryName: {
          type: Sequelize.STRING,
          allowNull: false,
+      },
+      is_approved: {
+         type: Sequelize.BOOLEAN,
+         defaultValue: false
       }
+   }, 
+   {
+      timestamps: false
    }
 )
 

@@ -35,20 +35,18 @@ const Item = connection.define("item", {
    },
    rating: {
       type: Sequelize.INTEGER,
-      allowNull: true,
+      defaultValue: 1,
       validate: {
-         min: 0,
+         min: 1,
          max: 5,
       },
    },
    in_stock: {
       type: Sequelize.BOOLEAN,
-      allowNull: false,
       defaultValue: true,
    },
    is_customizable: {
       type: Sequelize.BOOLEAN,
-      allowNull: false,
       defaultValue: false
    },
    img_url: {
@@ -57,7 +55,6 @@ const Item = connection.define("item", {
    },
    is_deleted: {
       type: Sequelize.BOOLEAN,
-      allowNull: false,
       defaultValue: false
    }
 })

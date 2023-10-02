@@ -13,7 +13,7 @@ const ItemReview = connection.define('item_reviews', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    stars: {
+    rating: {
         type: Sequelize.INTEGER,
         allowNull: false,
         validator: {
