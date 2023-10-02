@@ -8,7 +8,7 @@ const userRouter = require("./userRouter")
 router.post("/login", userRouter.login)
 router.post("/signup", userRouter.signup)
 router.get("/getUser/:id", tokenValidate, userRouter.getUser)
-router.post("/editUser/:id", tokenValidate, userRouter.editUser)
-router.post("/deleteUser/:id", tokenValidate, userRouter.deleteUser)
+router.put("/editUser/:id", tokenValidate, userRouter.editUser)
+router.delete("/deleteUser/:id", tokenValidate, userRouter.deleteUser)
 
 module.exports = router
