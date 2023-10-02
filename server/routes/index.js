@@ -1,14 +1,14 @@
 const express = require("express")
 const router = express.Router()
 const { tokenValidate } = require("../middleware/authMiddleware")
-const { login, signup, getUser, editUser, deleteUser } = require("./userRouter")
+const userRouter = require("./userRouter")
 
 
 //user Routes
-router.post("/login", login)
-router.post("/signup", signup)
-router.get("/getUser/:id", tokenValidate, getUser)
-router.post("/editUser/:id", tokenValidate, editUser)
-router.post("/deleteUser/:id", tokenValidate, deleteUser)
+router.post("/login", userRouter.login)
+router.post("/signup", userRouter.signup)
+router.get("/getUser/:id", tokenValidate, userRouter.getUser)
+router.post("/editUser/:id", tokenValidate, userRouter.editUser)
+router.post("/deleteUser/:id", tokenValidate, userRouter.deleteUser)
 
 module.exports = router

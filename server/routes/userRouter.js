@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 const User = require("../models/User")
 const jwtDecode = require("jwt-decode");
 
-async function signup(req, res) {
+module.exports.signup = async (req, res) => {
     let { id, name, email, password, phone_number } = req.body;
     try {
         let user = await User.findOne({ where: { email: email } })
@@ -29,7 +29,7 @@ async function signup(req, res) {
     }
 }
 
-async function login(req, res) {
+module.exports.login = async (req, res) => {
     let { email, password } = req.body
     try {
         let user = await User.findOne({ where: { email: email } })
@@ -54,7 +54,7 @@ async function login(req, res) {
     }
 }
 
-async function getUser(req, res) {
+module.exports.getUser = async (req, res) => {
     let id = req.params.id
     let user = await User.findOne({ where: { id: id } })
 
@@ -65,7 +65,7 @@ async function getUser(req, res) {
     }
 }
 
-async function editUser(req, res) {
+module.exports.editUser = async (req, res) => {
     try {
         
         const decodedtoken = jwtDecode(req.get("Authorization"));
@@ -96,7 +96,7 @@ async function editUser(req, res) {
     }
 }
 
-async function deleteUser(req, res) {
+module.exports.deleteUser = async (req, res) => {
     try {
         const decodedtoken = jwtDecode(req.get("Authorization"));
         let id = req.params.id
@@ -124,5 +124,3 @@ async function deleteUser(req, res) {
         res.status(500).send(err)
     }
 }
-
-module.exports = { login, signup, getUser, editUser, deleteUser }
