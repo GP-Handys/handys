@@ -10,7 +10,7 @@ async function signup(req, res) {
     try {
         let user = await User.findOne({ where: { email: email } })
         if (user) {
-            res.status(401).send("Invalid credentials")
+            res.status(400).send("User already exists")
         }
         else {
             let data = { id, name, email, password: await bcrypt.hash(password, 10), phone_number }
@@ -107,7 +107,6 @@ async function deleteUser(req, res) {
             res.sendStatus(404)
             return;
         }
-        
 
         if (user.is_sys_admin || id == token_userid) {
             
@@ -116,10 +115,10 @@ async function deleteUser(req, res) {
                 res.status(200).send("User deleted")
             }
             else {
-                res.status(401).send("Failed to delete user")
+                res.status(500).send("Failed to delete user")
             }
         } else {
-            res.sendStatus(403)
+            res.sendStatus(401)
         }
     } catch (err) {
         res.status(500).send(err)
