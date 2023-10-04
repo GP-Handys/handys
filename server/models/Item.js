@@ -43,7 +43,7 @@ const Item = connection.define("item", {
    },
    quantity: {
       type: Sequelize.INTEGER,
-      defaultValue: true,
+      allowNull: false
    },
    is_customizable: {
       type: Sequelize.BOOLEAN,
