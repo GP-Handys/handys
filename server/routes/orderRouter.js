@@ -49,7 +49,7 @@ module.exports.getOrderForShopId = async (req, res) => {
     const shopId = req.params.shopId
 
     try {
-        const orders = Order.findAll({
+        const orders = await Order.findAll({
             where: {
                 shopId: shopId
             }
@@ -66,7 +66,7 @@ module.exports.getOrderForUserId = async (req, res) => {
     const userId = req.params.userId
 
     try {
-        const orders = Order.findAll({
+        const orders = await Order.findAll({
             userId: userId
         })
 
