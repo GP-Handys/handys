@@ -56,7 +56,7 @@ module.exports.login = async (req, res) => {
 module.exports.getUser = async (req, res) => {
     try {
         let id = req.params.id
-        let user = await User.findOne({ where: { id: id } })
+        let user = await User.findByPk(id)
 
         if (user) {
             res.status(200).send(user)
@@ -72,10 +72,10 @@ module.exports.getUser = async (req, res) => {
 module.exports.updateUser = async (req, res) => {
     try {
         const decodedtoken = jwtDecode(req.get("Authorization"));
-        let path_id = req.params.id
-        let user = await User.findOne({ where: { id: path_id } })
-        let { id, name, email, password, phone_number } = req.body;
-        let data = { id, name, email, password: await bcrypt.hash(password, 10), phone_number }
+        let userId = req.params.id
+        let user = await User.findByPk(userId)
+        let { name, email, password, phone_number } = req.body;
+        let data = { name, email, password: await bcrypt.hash(password, 10), phone_number }
 
         if (user == null) {
             res.sendStatus(404)
@@ -104,7 +104,7 @@ module.exports.deleteUser = async (req, res) => {
         const decodedtoken = jwtDecode(req.get("Authorization"));
         let id = req.params.id
         let token_userid = decodedtoken.id;
-        let user = await User.findOne({ where: { id: id } })
+        let user = await User.findByPk(id)
 
         if (user == null) {
             res.sendStatus(404)

@@ -47,7 +47,7 @@ module.exports.updateItem = async (req, res) => {
         let user = await User.findByPk(userID)
         let item = await Item.findByPk(itemID)
 
-        if (item == null) {
+        if (item == null || shop==null) {
             res.sendStatus(404)
             return;
         }
@@ -81,12 +81,12 @@ module.exports.deleteItem = async (req, res) => {
         let user = await User.findByPk(userID)
         let item = await Item.findByPk(itemID)
 
-        if (item == null) {
+        if (item == null || shop==null) {
             res.sendStatus(404)
             return;
         }
 
-        if (user.is_sys_admin || (shop.userId == userID && shopID == item.shopId)) {
+        if ((user.is_sys_admin || (shop.userId == userID && shopID == item.shopId))) {
             item = item.destroy()
             if (user) {
                 res.status(200).send("Item deleted")
@@ -127,6 +127,13 @@ module.exports.addReviewToItem = async (req, res) => {
         let userId = decodedtoken.id
         let { content, rating } = req.body
         let data = { content, rating, userId, itemID }
+        let item = await Item.findByPk(itemID)
+
+        if (item == null) {
+            res.sendStatus(404)
+            return;
+        }
+
         let review = ItemReview.create(data);
         if (review) {
             res.status(200).send("Review Added successfully")
@@ -147,6 +154,11 @@ module.exports.removeReviewFromItem = async (req, res) => {
         let userId = decodedtoken.id
         let user = await User.findByPk(userID)
         let review = await User.findByPk(reviewID)
+
+        if (review == null) {
+            res.sendStatus(404)
+            return;
+        }
 
         if (user.is_sys_admin || userId == review.userId) {
             review = review.destroy()
