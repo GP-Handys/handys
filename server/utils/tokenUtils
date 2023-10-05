@@ -1,0 +1,8 @@
+const jwtDecode = require("jwt-decode");
+
+function extractUserFromJwt(jwt) {
+    const decoded = jwtDecode(jwt)
+    return decoded.id
+}
+
+module.exports = extractUserFromJwt

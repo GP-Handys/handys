@@ -1,102 +1,120 @@
 require('dotenv').config()
 
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 const User = require("../models/User")
 const Item = require("../models/Item")
 const Shop = require("../models/Shop")
 const ItemReview = require("../models/ItemReview")
 const jwtDecode = require("jwt-decode");
+const { extractUserFromJwt } = require("../utils/tokenUtils")
 
 module.exports.addItem = async (req, res) => {
     try {
-        let { name, description, base_price, discount, quantity, is_customizable, shopID } = req.body
-        const decodedtoken = jwtDecode(req.get("Authorization"));
-        let userID = decodedtoken.id
+        const { name, description, base_price, discount, quantity, is_customizable, shopId } = req.body
+        const jwt = req.get("Authorization")
+        const userId = extractUserFromJwt(jwt)
 
-        let shop = await Shop.findByPk(shopID)
-        let user = await User.findByPk(userID)
+        const shop = await Shop.findByPk(shopId)
+        const user = await User.findByPk(userId)
 
         if (user.is_sys_admin || shop.userId == userID) {
-            let data = { name, description, base_price, discount, quantity, is_customizable, shopID }
-            let item = Item.create(data)
+            const item = Item.create({
+                name,
+                description,
+                base_price,
+                discount,
+                quantity,
+                is_customizable,
+                shopId
+            })
 
             if (item) {
-                res.status(200).send("Item created successfully")
+                res.status(200).json("Item created successfully")
             }
             else {
-                res.status(500).send("Failed to create item")
+                res.status(500).json("Failed to create item")
             }
         }
         else {
-            res.sendStatus(401)
+            res.sendStatus(403)
         }
     }
     catch (error) {
-        res.status(500).send(error)
+        res.status(500).josn(error)
     }
 }
 
 module.exports.updateItem = async (req, res) => {
     try {
-        let { name, description, base_price, discount, quantity, is_customizable, shopID } = req.body
-        let itemID = req.params.itemID
-        const decodedtoken = jwtDecode(req.get("Authorization"));
-        let userID = decodedtoken.id
-        let shop = await Shop.findByPk(shopID)
-        let user = await User.findByPk(userID)
-        let item = await Item.findByPk(itemID)
+        const { name, description, base_price, discount, quantity, is_customizable, shopId } = req.body
+        const itemId = req.params.itemID
+        const jwt = req.get("Authorization")
+        const userId = extractUserFromJwt(jwt)
+        const shop = await Shop.findByPk(shopId)
+        const user = await User.findByPk(userId)
+        let item = await Item.findByPk(itemId)
 
-        if (item == null || shop==null) {
+        if (item == null || shop == null) {
             res.sendStatus(404)
             return;
         }
 
-        if (user.is_sys_admin || (shop.userId == userID && shopID == item.shopId)) {
-            let data = { name, description, base_price, discount, quantity, is_customizable, shopID }
-            item = await item.update(data)
+        if (user.is_sys_admin || (shop.userId == userId && shopId == item.shopId)) {
+            item = await item.update({
+                name,
+                description,
+                base_price,
+                discount,
+                quantity,
+                is_customizable,
+                shopId
+            })
             if (item) {
-                res.status(200).send("item modified")
+                res.status(200).json("item modified")
             }
             else {
                 res.sendStatus(500)
             }
         }
         else {
-            res.sendStatus(401)
+            res.sendStatus(403)
         }
 
     }
     catch (error) {
-        res.status(500).send(error)
+        res.status(500).json(error)
     }
 }
 
 module.exports.deleteItem = async (req, res) => {
     try {
-        let itemID = req.params.itemID
-        const decodedtoken = jwtDecode(req.get("Authorization"));
-        let userID = decodedtoken.id
-        let shop = await Shop.findByPk(shopID)
-        let user = await User.findByPk(userID)
-        let item = await Item.findByPk(itemID)
+        const itemId = req.params.itemID
+        const jwt = req.get("Authorization")
+        const userId = extractUserFromJwt(jwt)
+        const user = await User.findByPk(userId)
+        let item = await Item.findByPk(itemId)
+        if(item == null) {
+            res.sendStatus(404)
+            return
+        }
+        const shopId = item.shopId
+        const shop = await Shop.findByPk(shopId)
 
-        if (item == null || shop==null) {
+        if (shop == null) {
             res.sendStatus(404)
             return;
         }
 
-        if ((user.is_sys_admin || (shop.userId == userID && shopID == item.shopId))) {
+        if (user.is_sys_admin || (shop.userId == userId && shopId == item.shopId)) {
             item = item.destroy()
-            if (user) {
-                res.status(200).send("Item deleted")
+            if (item) {
+                res.status(200).json("Item deleted")
             }
             else {
-                res.status(500).send("Failed to delete item")
+                res.status(500).json("Failed to delete item")
             }
         }
         else {
-            res.send(401)
+            res.send(403)
         }
     }
     catch (error) {
@@ -105,55 +123,55 @@ module.exports.deleteItem = async (req, res) => {
 }
 
 module.exports.getItem = async (req,res) =>{
-    let itemID = req.params.itemID
+    const itemId = req.params.itemID
     try{
-        let item = await Item.findByPk(itemID)
+        const item = await Item.findByPk(itemId)
         if (item) {
-            res.status(200).send(item)
+            res.status(200).json(item)
         } else {
             res.sendStatus(404)
         }
     }
     catch (error) {
-        res.status(500).send(error)
+        res.status(500).json(error)
     }
 }
 
 module.exports.addReviewToItem = async (req, res) => {
     //TODO : check if user buy the item
     try {
-        let itemID = req.params.itemID
-        const decodedtoken = jwtDecode(req.get("Authorization"));
-        let userId = decodedtoken.id
-        let { content, rating } = req.body
-        let data = { content, rating, userId, itemID }
-        let item = await Item.findByPk(itemID)
+        const itemId = req.params.itemID
+        const jwt = req.get("Authorization")
+        const userId = extractUserFromJwt(jwt)
+        const { content, rating } = req.body
+        const data = { content, rating, userId, itemId }
+        const item = await Item.findByPk(itemId)
 
         if (item == null) {
             res.sendStatus(404)
             return;
         }
 
-        let review = ItemReview.create(data);
+        const review = ItemReview.create(data);
         if (review) {
-            res.status(200).send("Review Added successfully")
+            res.status(200).json("Review Added successfully")
         }
         else {
             res.sendStatus(500)
         }
     }
     catch (error) {
-        res.status(500).send(error)
+        res.status(500).json(error)
     }
 }
 
 module.exports.removeReviewFromItem = async (req, res) => {
     try {
-        let reviewID = req.params.reviewID
-        const decodedtoken = jwtDecode(req.get("Authorization"));
-        let userId = decodedtoken.id
-        let user = await User.findByPk(userID)
-        let review = await User.findByPk(reviewID)
+        const reviewId = req.params.reviewID
+        const jwt = req.get("Authorization")
+        const userId = extractUserFromJwt(jwt)
+        const user = await User.findByPk(userId)
+        let review = await User.findByPk(reviewId)
 
         if (review == null) {
             res.sendStatus(404)
@@ -163,7 +181,7 @@ module.exports.removeReviewFromItem = async (req, res) => {
         if (user.is_sys_admin || userId == review.userId) {
             review = review.destroy()
             if (review) {
-                res.status(200).send("Review removed successfully ")
+                res.status(200).json("Review removed successfully ")
             }
             else {
                 res.sendStatus(500)
@@ -174,15 +192,15 @@ module.exports.removeReviewFromItem = async (req, res) => {
         }
     }
     catch (error) {
-        res.status(500).send(error)
+        res.status(500).json(error)
     }
 }
 
 module.exports.searchItem = async (req, res) => {
     //TODO : add seach with category
     try {
-        let string = req.query.search
-        searchResult = `SELECT * FROM items WHERE name LIKE '%${string}%' OR description LIKE '%${string}%';`
+        const string = req.query.search
+        const searchResult = `SELECT * FROM items WHERE name LIKE '%${string}%' OR description LIKE '%${string}%';`
             if (searchResult) {
             res.status(200).send(searchResult)
         }
