@@ -41,9 +41,9 @@ const Item = connection.define("item", {
          max: 5,
       },
    },
-   in_stock: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: true,
+   quantity: {
+      type: Sequelize.INTEGER,
+      allowNull: false
    },
    is_customizable: {
       type: Sequelize.BOOLEAN,

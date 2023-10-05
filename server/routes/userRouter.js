@@ -16,7 +16,7 @@ module.exports.signup = async (req, res) => {
             let data = { id, name, email, password: await bcrypt.hash(password, 10), phone_number }
             user = await User.create(data)
             if (user) {
-                res.status(200).send("User created sucesfully")
+                res.status(200).send("User created successfully")
             }
             else {
                 res.status(500).send("Failed to create user")
@@ -24,7 +24,6 @@ module.exports.signup = async (req, res) => {
         }
     }
     catch (error) {
-        console.log(error);
         res.status(500).send(error)
     }
 }
@@ -55,30 +54,34 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.getUser = async (req, res) => {
-    let id = req.params.id
-    let user = await User.findOne({ where: { id: id } })
+    try {
+        let id = req.params.id
+        let user = await User.findOne({ where: { id: id } })
 
-    if (user) {
-        res.status(200).send(user)
-    } else {
-        res.sendStatus(404)
+        if (user) {
+            res.status(200).send(user)
+        } else {
+            res.sendStatus(404)
+        }
+    }
+    catch (error) {
+        res.status(500).send(error)
     }
 }
 
-module.exports.editUser = async (req, res) => {
+module.exports.updateUser = async (req, res) => {
     try {
-        
         const decodedtoken = jwtDecode(req.get("Authorization"));
         let path_id = req.params.id
         let user = await User.findOne({ where: { id: path_id } })
         let { id, name, email, password, phone_number } = req.body;
         let data = { id, name, email, password: await bcrypt.hash(password, 10), phone_number }
 
-        if(user==null){
+        if (user == null) {
             res.sendStatus(404)
             return;
         }
-        
+
         if (user.is_sys_admin || decodedtoken.id == user.id) {
             user = await user.update(data)
             if (user) {
@@ -89,7 +92,7 @@ module.exports.editUser = async (req, res) => {
             }
         }
         else {
-            res.sendStatus(403)
+            res.sendStatus(401)
         }
     } catch (err) {
         res.status(500).send(err)
@@ -103,14 +106,14 @@ module.exports.deleteUser = async (req, res) => {
         let token_userid = decodedtoken.id;
         let user = await User.findOne({ where: { id: id } })
 
-        if(user==null){
+        if (user == null) {
             res.sendStatus(404)
             return;
         }
 
         if (user.is_sys_admin || id == token_userid) {
-            
-            let user = await User.destroy({ where: { id: id } })
+
+            let user = await user.destroy()
             if (user) {
                 res.status(200).send("User deleted")
             }
