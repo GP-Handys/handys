@@ -6,14 +6,14 @@ const User = require("../models/User")
 const jwtDecode = require("jwt-decode");
 
 module.exports.signup = async (req, res) => {
-    let { id, name, email, password, phone_number } = req.body;
+    let { name, email, password, phone_number } = req.body;
     try {
         let user = await User.findOne({ where: { email: email } })
         if (user) {
             res.status(400).send("User already exists")
         }
         else {
-            let data = { id, name, email, password: await bcrypt.hash(password, 10), phone_number }
+            let data = { name, email, password: await bcrypt.hash(password, 10), phone_number }
             user = await User.create(data)
             if (user) {
                 res.status(200).send("User created successfully")
