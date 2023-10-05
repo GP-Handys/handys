@@ -2,8 +2,8 @@ const express = require("express")
 const router = express.Router()
 const { tokenValidate } = require("../middleware/authMiddleware")
 const userRouter = require("./userRouter")
+const orderRouter = require("./orderRouter")
 const itemRouter = require("./itemRouter")
-
 
 //user Routes
 router.post("/api/users/login", userRouter.login)
@@ -19,5 +19,10 @@ router.delete("/api/items/deleteItem/:itemID",tokenValidate,itemRouter.deleteIte
 router.get("/api/items/getItem/:itemID",tokenValidate,itemRouter.getItem)
 router.post("/api/items/addReviewToItem/:itemID",tokenValidate)
 router.post("/api/items/search",tokenValidate)
+
+//order routes
+router.post("/api/orders/place", orderRouter.placeOrder)
+router.get("/api/orders/shop/:shopId", orderRouter.getOrderForShopId)
+router.get("/api/orders/user/:userId", orderRouter.getOrderForUserId)
 
 module.exports = router
