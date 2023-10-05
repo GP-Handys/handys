@@ -119,3 +119,68 @@ module.exports.getItem = async (req,res) =>{
     }
 }
 
+module.exports.addReviewToItem = async (req, res) => {
+    //TODO : check if user buy the item
+    try {
+        let itemID = req.params.itemID
+        const decodedtoken = jwtDecode(req.get("Authorization"));
+        let userId = decodedtoken.id
+        let { content, rating } = req.body
+        let data = { content, rating, userId, itemID }
+        let review = ItemReview.create(data);
+        if (review) {
+            res.status(200).send("Review Added successfully")
+        }
+        else {
+            res.sendStatus(500)
+        }
+    }
+    catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+module.exports.removeReviewFromItem = async (req, res) => {
+    try {
+        let reviewID = req.params.reviewID
+        const decodedtoken = jwtDecode(req.get("Authorization"));
+        let userId = decodedtoken.id
+        let user = await User.findByPk(userID)
+        let review = await User.findByPk(reviewID)
+
+        if (user.is_sys_admin || userId == review.userId) {
+            review = review.destroy()
+            if (review) {
+                res.status(200).send("Review removed successfully ")
+            }
+            else {
+                res.sendStatus(500)
+            }
+        }
+        else {
+            res.sendStatus(404)
+        }
+    }
+    catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+module.exports.searchItem = async (req, res) => {
+    //TODO : add seach with category
+    try {
+        let string = req.query.search
+        searchResult = `SELECT * FROM items WHERE name LIKE '%${string}%' OR description LIKE '%${string}%';`
+            if (searchResult) {
+            res.status(200).send(searchResult)
+        }
+        else {
+            res.sendStatus(500)
+        }
+    }
+    catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+
