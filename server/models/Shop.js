@@ -36,6 +36,17 @@ const Shop = connection.define("shop", {
    pfp_url: {
       type: Sequelize.STRING,
       allowNull: true
+   },
+   bio: {
+      type: Sequelize.STRING,
+      allowNull: false,
+   },
+   socialMedia: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+         isUrl: true
+      }
    }
 })
 
