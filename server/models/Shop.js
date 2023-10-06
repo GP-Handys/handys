@@ -41,7 +41,7 @@ const Shop = connection.define("shop", {
       type: Sequelize.STRING,
       allowNull: false,
    },
-   socialMedia: {
+   socialMediaLink: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
