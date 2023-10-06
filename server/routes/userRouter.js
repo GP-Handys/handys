@@ -78,7 +78,7 @@ module.exports.updateUser = async (req, res) => {
         const jwt = req.get("Authorization")
         const userIdToken = extractUserFromJwt(jwt)
         const userId = req.params.id
-        const user = await User.findByPk(userId)
+        let user = await User.findByPk(userId)
         const { name, email, password, phone_number } = req.body;
         const data = { name, email, password: await bcrypt.hash(password, 10), phone_number }
 
@@ -100,7 +100,7 @@ module.exports.updateUser = async (req, res) => {
             res.sendStatus(403)
         }
     } catch (err) {
-        res.status(500).josn(err)
+        res.status(500).json(err)
     }
 }
 

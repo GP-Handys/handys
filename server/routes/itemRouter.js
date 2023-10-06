@@ -4,7 +4,7 @@ const User = require("../models/User")
 const Item = require("../models/Item")
 const Shop = require("../models/Shop")
 const ItemReview = require("../models/ItemReview")
-const jwtDecode = require("jwt-decode");
+const DB = require("../database/database")
 const { extractUserFromJwt } = require("../utils/tokenUtils")
 
 module.exports.addItem = async (req, res) => {
@@ -17,7 +17,7 @@ module.exports.addItem = async (req, res) => {
         const user = await User.findByPk(userId)
 
         if (user.is_sys_admin || shop.userId == userID) {
-            const item = Item.create({
+            const item = await Item.create({
                 name,
                 description,
                 base_price,
@@ -39,7 +39,7 @@ module.exports.addItem = async (req, res) => {
         }
     }
     catch (error) {
-        res.status(500).josn(error)
+        res.status(500).json(error)
     }
 }
 
@@ -92,7 +92,7 @@ module.exports.deleteItem = async (req, res) => {
         const userId = extractUserFromJwt(jwt)
         const user = await User.findByPk(userId)
         let item = await Item.findByPk(itemId)
-        if(item == null) {
+        if (item == null) {
             res.sendStatus(404)
             return
         }
@@ -105,7 +105,7 @@ module.exports.deleteItem = async (req, res) => {
         }
 
         if (user.is_sys_admin || (shop.userId == userId && shopId == item.shopId)) {
-            item = item.destroy()
+            item = await item.destroy()
             if (item) {
                 res.status(200).json("Item deleted")
             }
@@ -122,9 +122,9 @@ module.exports.deleteItem = async (req, res) => {
     }
 }
 
-module.exports.getItem = async (req,res) =>{
+module.exports.getItem = async (req, res) => {
     const itemId = req.params.itemID
-    try{
+    try {
         const item = await Item.findByPk(itemId)
         if (item) {
             res.status(200).json(item)
@@ -152,7 +152,7 @@ module.exports.addReviewToItem = async (req, res) => {
             return;
         }
 
-        const review = ItemReview.create(data);
+        const review = await ItemReview.create(data);
         if (review) {
             res.status(200).json("Review Added successfully")
         }
@@ -179,7 +179,7 @@ module.exports.removeReviewFromItem = async (req, res) => {
         }
 
         if (user.is_sys_admin || userId == review.userId) {
-            review = review.destroy()
+            review = await review.destroy()
             if (review) {
                 res.status(200).json("Review removed successfully ")
             }
@@ -197,19 +197,20 @@ module.exports.removeReviewFromItem = async (req, res) => {
 }
 
 module.exports.searchItem = async (req, res) => {
-    //TODO : add seach with category
+    //TODO : add search with category
     try {
-        const string = req.query.search
-        const searchResult = `SELECT * FROM items WHERE name LIKE '%${string}%' OR description LIKE '%${string}%';`
-            if (searchResult) {
-            res.status(200).send(searchResult)
+        const search = req.query.search
+        const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%';`
+        const searchResult = await DB.query(query)
+        if (searchResult) {
+            res.status(200).json(searchResult)
         }
         else {
             res.sendStatus(500)
         }
     }
     catch (error) {
-        res.status(500).send(error)
+        res.status(500).json(error)
     }
 }
 

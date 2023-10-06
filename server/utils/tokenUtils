@@ -5,4 +5,4 @@ function extractUserFromJwt(jwt) {
     return decoded.id
 }
 
-module.exports = extractUserFromJwt
+module.exports = {extractUserFromJwt}
