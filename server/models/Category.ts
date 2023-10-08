@@ -1,26 +1,33 @@
-const Sequelize = require("sequelize")
-const connection = require("../database/database");
-const Item = require("./Item");
+import { DataTypes, Model } from 'sequelize';
+import {connection} from '../database/database';
+import {Item} from './Item'
 
+class Category extends Model{
+   public id! : number
+   public category_number! : number;
+   public is_approved! : boolean;
+}
 
-const Category = connection.define("category", {
-      id: {
-         type: Sequelize.INTEGER,
-         primaryKey: true,
-         autoIncrement: true,
-      },
-      caregoryName: {
-         type: Sequelize.STRING,
-         allowNull: false,
-      },
-      is_approved: {
-         type: Sequelize.BOOLEAN,
-         defaultValue: false
-      }
-   }, 
+Category.init(
    {
-      timestamps: false
-   }
+      id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+         },
+         caregoryName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+         },
+         is_approved: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+         },
+   }, 
+      {
+         sequelize: connection,
+         modelName: 'Item'
+      }
 )
 
 //M:N
