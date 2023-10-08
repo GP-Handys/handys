@@ -2,7 +2,7 @@ import express from 'express'
 import { connection } from './database/database'
 import * as dotenv from 'dotenv';
 dotenv.config()
-require("./models/Models.js")
+import './models/Models'
 
 const app = express()
 
