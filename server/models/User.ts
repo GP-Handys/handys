@@ -1,43 +1,57 @@
-const Sequelize = require('sequelize')
-const connection = require("../database/database")
+import { DataTypes, Model, Sequelize } from 'sequelize';
+import {connection} from '../database/database';
 
-const User = connection.define("user",
+class User extends Model {
+    public id!: number;
+    public name!: string;
+    public email!: string;
+    public password!: string;
+    public phone_number!: number | null;
+    public is_sys_admin!: boolean;
+    public pfp_url!: string | null;
+}
+
+User.init(
     {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
         name: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         email: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
-                isEmail: true
-            }
+                isEmail: true,
+            },
         },
         password: {
-            type: Sequelize.STRING,
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         phone_number: {
-            type: Sequelize.INTEGER,
-            validator: {
+            type: DataTypes.INTEGER,
+            validate: {
                 is: /^(07[789]\d{7})$/,
-            }
+            },
         },
         is_sys_admin: {
-            type: Sequelize.BOOLEAN,
-            defaultValue:false
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
         },
         pfp_url: {
-            type: Sequelize.STRING
-        }
+            type: DataTypes.STRING,
+        },
+    },
+    {
+        sequelize: connection,
+        modelName: 'User',
     }
-)
+);
 
-export {User}
+export default User;
