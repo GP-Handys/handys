@@ -29,4 +29,4 @@ Shop.hasMany(ShopReview)
 ShopReview.belongsTo(User)
 User.hasMany(ShopReview)
 
-module.exports = ShopReview
+export {ShopReview}

@@ -46,4 +46,4 @@ Post.belongsTo(User)
 Post.hasMany(Post, { as: 'ChildPosts', foreignKey: 'parentId' });
 Post.belongsTo(Post, { as: 'ParentPost', foreignKey: 'parentId' });
 
-module.exports = Post
+export {Post}

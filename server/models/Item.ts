@@ -62,4 +62,4 @@ const Item = connection.define("item", {
 Item.belongsTo(Shop)
 Shop.hasMany(Item)
 
-module.exports = Item
+export  {Item}

@@ -29,4 +29,4 @@ Item.hasMany(ItemReview)
 ItemReview.belongsTo(User)
 User.hasMany(ItemReview)
 
-module.exports = ItemReview
+export {ItemReview}
