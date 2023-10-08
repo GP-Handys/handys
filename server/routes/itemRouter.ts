@@ -1,22 +1,25 @@
-require('dotenv').config()
+import * as dotenv from 'dotenv';
+import {Request,Response} from 'express';
+dotenv.config()
+import * as User from '../models/User'
+import * as Item from '../models/Item'
+import * as Shop from '../models/Shop'
+import * as ItemReview from '../models/ItemReview'
+import { connection as DB} from '../database/database' 
+import { extractUserFromJwt } from '../utils/tokenUtils'
 
-const User = require("../models/User")
-const Item = require("../models/Item")
-const Shop = require("../models/Shop")
-const ItemReview = require("../models/ItemReview")
-const DB = require("../database/database")
-const { extractUserFromJwt } = require("../utils/tokenUtils")
 
-module.exports.addItem = async (req, res) => {
+
+module.exports.addItem = async (req : Request, res : Response) => {
     try {
-        const { name, description, base_price, discount, quantity, is_customizable, shopId } = req.body
-        const jwt = req.get("Authorization")
+        const { name , description, base_price, discount, quantity, is_customizable, shopId } = req.body
+        const jwt : string =  req.get("Authorization")?.toString()!
         const userId = extractUserFromJwt(jwt)
 
         const shop = await Shop.findByPk(shopId)
         const user = await User.findByPk(userId)
 
-        if (user.is_sys_admin || shop.userId == userID) {
+        if (user.is_sys_admin || shop.userId == userId) {
             const item = await Item.create({
                 name,
                 description,
