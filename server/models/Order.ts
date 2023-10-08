@@ -1,4 +1,4 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { connection } from "../database/database";
 import { User } from "./User";
 import { Item } from "./Item";
