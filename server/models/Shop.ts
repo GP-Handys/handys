@@ -53,4 +53,4 @@ const Shop = connection.define("shop", {
 Shop.belongsTo(User)
 User.hasMany(Shop)
 
-module.exports = Shop
+export {Shop}
