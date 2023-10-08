@@ -1,23 +1,49 @@
-const Sequelize = require("sequelize");
-const connection = require("../database/database");
-const User = require("./User")
+import { DataTypes, Model, Optional } from 'sequelize';
+import {connection} from '../database/database';
+import { User } from './User';
 
-const Ticket = connection.define("ticket", {
+interface TicketAttributes {
+  id: number;
+  content: string;
+  is_resolved: boolean;
+}
+
+interface TicketCreationAttributes extends Optional<TicketAttributes, 'id'> {}
+
+class Ticket
+  extends Model<TicketAttributes, TicketCreationAttributes>
+  implements TicketAttributes {
+  public id!: number;
+  public content!: string;
+  public is_resolved!: boolean;
+
+  // Timestamps (createdAt and updatedAt) are automatically created by Sequelize.
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+Ticket.init(
+  {
     id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
     content: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING,
     },
     is_resolved: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-    }
-})
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
+  {
+    sequelize: connection,
+    modelName: 'ticket',
+  }
+);
 
-Ticket.belongsTo(User)
-User.hasMany(Ticket)
+Ticket.belongsTo(User);
+User.hasMany(Ticket);
 
-export {Ticket}
+export { Ticket };

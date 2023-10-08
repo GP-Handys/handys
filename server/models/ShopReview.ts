@@ -1,32 +1,44 @@
-const Sequelize = require("sequelize");
-const connection = require("../database/database");
-const Shop = require("./Shop")
-const User = require("./User")
+import { DataTypes, Model } from 'sequelize';
+import { connection } from '../database/database';
+import { Shop } from './Shop';
+import { User } from './User';
 
-const ShopReview = connection.define('shop_reviews', {
+class ShopReview extends Model {
+  public id!: number;
+  public content!: string;
+  public rating!: number;
+}
+
+ShopReview.init(
+  {
     id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
     content: {
-        type: Sequelize.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     rating: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validator: {
-            min: 1,
-            max: 5
-        }
-    }
-})
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1,
+        max: 5,
+      },
+    },
+  },
+  {
+    sequelize: connection,
+    modelName: 'shop_reviews',
+  }
+);
 
-ShopReview.belongsTo(Shop)
-Shop.hasMany(ShopReview)
+ShopReview.belongsTo(Shop);
+Shop.hasMany(ShopReview);
 
-ShopReview.belongsTo(User)
-User.hasMany(ShopReview)
+ShopReview.belongsTo(User);
+User.hasMany(ShopReview);
 
-export {ShopReview}
+export { ShopReview };
