@@ -1,15 +1,27 @@
-const Sequelize = require('sequelize')
-const connection = require("../database/database")
+import { DataTypes, Model } from 'sequelize';
+import { connection } from '../database/database';
 
-const Wishlist = connection.define("wishlist", {
-    user_id:{
-        type: Sequelize.INTEGER,
-        primaryKey: true
+class Wishlist extends Model {
+    public user_id!: number;
+    public item_id!: number
+}
+
+Wishlist.init(
+    {
+        user_id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
+        item_id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
+
     },
-    item_id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
+    {
+        sequelize: connection,
+        modelName: 'Item'
     }
-})
+)
 
-export {Wishlist}
+export { Wishlist }
