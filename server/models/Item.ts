@@ -13,7 +13,7 @@ class Item extends Model{
    public rating! : number;
    public quantity! : number;
    public is_customizable! : boolean;
-   public img_url! : string;
+   public img_url? : string | null;
    public is_deleted! : boolean;
 
 }
