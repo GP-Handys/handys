@@ -1,4 +1,4 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import {connection} from '../database/database';
 
 class User extends Model {
@@ -6,9 +6,11 @@ class User extends Model {
     public name!: string;
     public email!: string;
     public password!: string;
-    public phone_number!: number | null;
+    public phone_number!: number;
     public is_sys_admin!: boolean;
-    public pfp_url!: string | null;
+    public pfp_url?: string | null;
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
 }
 
 User.init(
@@ -54,4 +56,4 @@ User.init(
     }
 );
 
-export default User;
+export {User}

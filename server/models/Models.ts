@@ -1,4 +1,4 @@
-import "./User";
+import "./Users";
 import "./Post";
 import "./Item";
 import "./Shop";
