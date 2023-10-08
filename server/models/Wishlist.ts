@@ -14,4 +14,4 @@ const Wishlist = connection.define("wishlist", {
     }
 })
 
-module.exports = Wishlist
+export {Wishlist}

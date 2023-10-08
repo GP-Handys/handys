@@ -27,4 +27,4 @@ const Category = connection.define("category", {
 Item.belongsToMany(Category, {through: "item_category"})
 Category.belongsToMany(Item, {through: "item_category"})
 
-module.exports = Category
+export {Category}

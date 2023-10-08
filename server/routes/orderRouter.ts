@@ -1,7 +1,8 @@
 const Order = require("../models/Order")
 const Item = require("../models/Item")
+import { Request, Response } from 'express';
 
-module.exports.placeOrder = async (req, res) => {
+export const placeOrder = async (req: Request, res: Response) => {
     try {
         const {
             delivery_address,
@@ -23,7 +24,7 @@ module.exports.placeOrder = async (req, res) => {
         });
 
         if (items && items.length > 0) {
-            for (const itemData in items) {
+            for (const itemData of items) {
                 const { itemId, quantity } = itemData;
 
                 const item = await Item.findByPk(itemId);
@@ -45,7 +46,7 @@ module.exports.placeOrder = async (req, res) => {
     }
 }
 
-module.exports.getOrderForShopId = async (req, res) => {
+export const getOrderForShopId = async (req: Request, res: Response) => {
     const shopId = req.params.shopId
 
     try {
@@ -62,7 +63,7 @@ module.exports.getOrderForShopId = async (req, res) => {
     }
 }
 
-module.exports.getOrderForUserId = async (req, res) => {
+export const getOrderForUserId = async (req: Request, res: Response) => {
     const userId = req.params.userId
 
     try {

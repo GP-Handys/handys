@@ -45,4 +45,4 @@ User.hasMany(Order)
 Item.belongsToMany(Order, {through: "item_orders"})
 Order.belongsToMany(Item, {through: "item_orders"})
 
-module.exports = Order
+export {Order}

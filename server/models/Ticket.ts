@@ -20,4 +20,4 @@ const Ticket = connection.define("ticket", {
 Ticket.belongsTo(User)
 User.hasMany(Ticket)
 
-module.exports = Ticket
+export {Ticket}
