@@ -1,32 +1,44 @@
-const Sequelize = require("sequelize");
-const connection = require("../database/database");
-const Item = require("./Item")
-const User = require("./User")
+import { DataTypes, Model, Sequelize } from "sequelize";
+import { connection } from "../database/database";
+import { Item } from "./Item";
+import { User } from "./User";
 
-const ItemReview = connection.define('item_reviews', {
+class ItemReview extends Model {
+  public id!: number;
+  public content!: string;
+  public rating!: number;
+}
+
+ItemReview.init(
+  {
     id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
     content: {
-        type: Sequelize.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     rating: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validator: {
-            min: 1,
-            max: 5
-        }
-    }
-})
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1,
+        max: 5,
+      },
+    },
+  },
+  {
+    sequelize: connection,
+    modelName: "item_reviews",
+  }
+);
 
-ItemReview.belongsTo(Item)
-Item.hasMany(ItemReview)
+ItemReview.belongsTo(Item);
+Item.hasMany(ItemReview);
 
-ItemReview.belongsTo(User)
-User.hasMany(ItemReview)
+ItemReview.belongsTo(User);
+User.hasMany(ItemReview);
 
-export {ItemReview}
+export { ItemReview };
