@@ -1,4 +1,4 @@
-const express = require("express")
+import express from 'express'
 const router = express.Router()
 const { tokenValidate } = require("../middleware/authMiddleware")
 const userRouter = require("./userRouter")
@@ -26,4 +26,4 @@ router.post("/api/orders/place", orderRouter.placeOrder)
 router.get("/api/orders/shop/:shopId", orderRouter.getOrderForShopId)
 router.get("/api/orders/user/:userId", orderRouter.getOrderForUserId)
 
-module.exports = router
+export {router}
