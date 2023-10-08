@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 const { tokenValidate } = require("../middleware/authMiddleware")
 const userRouter = require("./userRouter")
-const orderRouter = require("./orderRouter")
+import * as orderRouter from './orderRouter'
 const itemRouter = require("./itemRouter")
 
 //user Routes
