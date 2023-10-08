@@ -99,9 +99,9 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
 
 export const deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const jwtToken = req.get("Authorization");
-        const userIdToken = extractUserFromJwt(jwtToken as string);
-        const id = req.params.id;
+        const jwtToken = req.get("Authorization")?.toString()!
+        const userIdToken = extractUserFromJwt(jwtToken);
+        const id = Number(req.params.id)
         const user = await User.findByPk(id);
 
         if (user == null) {
