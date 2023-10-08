@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { connection } from '../database/database'
-import { User } from './user'
+import { User } from "./User"
 
 class Shop extends Model {
    public id!: number;

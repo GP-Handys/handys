@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import { User } from "../models/User"
 import { extractUserFromJwt } from '../utils/tokenUtils';
 
 dotenv.config();

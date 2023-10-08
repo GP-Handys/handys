@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import {Request,Response} from 'express';
 dotenv.config()
-import * as User from '../models/User'
+import { User } from "../models/User"
 import * as Item from '../models/Item'
 import * as Shop from '../models/Shop'
 import * as ItemReview from '../models/ItemReview'
