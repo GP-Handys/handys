@@ -1,8 +1,8 @@
-import jwtDecode from "jwt-decode";
+import jwt from 'jsonwebtoken';
 
-function extractUserFromJwt(jwt : string) : number{
-    const decoded =JSON.parse(jwtDecode(jwt))
-    return decoded.id
+function extractUserFromJwt(token : string) : number{
+    const { id } = jwt.decode(token) as { id :number}
+    return id
 }
 
 export {extractUserFromJwt}
