@@ -32,7 +32,7 @@ export const placeOrder = async (req: Request, res: Response) => {
 
                 const item: Item | null = await Item.findByPk(itemId);
 
-                if (!item) {
+                if (item == null) {
                     return res.status(400).json({ error: `Item with ID ${itemId} not found` });
                 }
 
