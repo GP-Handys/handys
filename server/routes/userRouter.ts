@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/User";
 import { extractUserFromJwt } from "../utils/tokenUtils";
-import { error, log } from "console";
 dotenv.config();
 
 export const signup = async (req: Request, res: Response) => {
@@ -23,7 +22,7 @@ export const signup = async (req: Request, res: Response) => {
       res.status(200).json("User created successfully");
     }
   } catch (error) {
-    log(error);
+    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -50,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
       }
     }
   } catch (error) {
-    log(error);
+    console.log(error);
     res.status(500).send(error);
   }
 };
