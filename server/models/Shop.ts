@@ -12,6 +12,7 @@ class Shop extends Model {
   public pfp_url?: string | null;
   public bio!: string;
   public socialMediaLink!: string;
+  public userId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -37,11 +38,11 @@ Shop.init(
     },
     is_premium: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      defaultValue: false,
     },
     is_deleted: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      defaultValue: false,
     },
     is_approved: {
       type: DataTypes.BOOLEAN,
