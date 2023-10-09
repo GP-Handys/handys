@@ -1,21 +1,24 @@
-const Order = require("../models/Order")
-const Item = require("../models/Item")
+import { Order } from '../models/Order'
+import { Item } from '../models/Item' 
+import { ItemOrder } from '../models/Order'
+import { extractUserFromJwt } from '../utils/tokenUtils'
 import { Request, Response } from 'express';
 
 export const placeOrder = async (req: Request, res: Response) => {
+    const jwt : string = req.get("Authorization")?.toString()!
+    const userId: number = extractUserFromJwt(jwt)
     try {
         const {
             delivery_address,
             payment_method,
             price,
             is_confirmed,
-            userId,
             shopId,
             items
         } = req.body;
 
-        const order = await Order.create({
-            deliver_address: delivery_address,
+        const order: Order = await Order.create({
+            delivery_address: delivery_address,
             payment_method: payment_method,
             price: price,
             is_confirmed: is_confirmed,
@@ -27,14 +30,18 @@ export const placeOrder = async (req: Request, res: Response) => {
             for (const itemData of items) {
                 const { itemId, quantity } = itemData;
 
-                const item = await Item.findByPk(itemId);
+                const item: Item | null = await Item.findByPk(itemId);
 
                 if (!item) {
                     return res.status(400).json({ error: `Item with ID ${itemId} not found` });
                 }
 
                 // add to item_orders joint table
-                await order.addItem(item, { through: { quantity } });
+                await ItemOrder.create({
+                    quantity: quantity,
+                    itemId: itemId,
+                    orderId: order.id
+                })
             }
         }
 
@@ -64,12 +71,14 @@ export const getOrderForShopId = async (req: Request, res: Response) => {
 }
 
 export const getOrderForUserId = async (req: Request, res: Response) => {
-    const userId = req.params.userId
+    const userId: number = Number(req.params.userId)
 
     try {
         const orders = await Order.findAll({
-            userId: userId
-        })
+            where: { 
+                userId: userId 
+            }
+        });
 
         res.status(200).json(orders)
     } catch (error) {
