@@ -1,6 +1,5 @@
-import { Order } from '../models/Order'
+import { Order, ItemOrder} from '../models/Order'
 import { Item } from '../models/Item' 
-import { ItemOrder } from '../models/Order'
 import { extractUserFromJwt } from '../utils/tokenUtils'
 import { Request, Response } from 'express';
 
