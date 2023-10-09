@@ -20,7 +20,7 @@ Wishlist.init(
     },
     {
         sequelize: connection,
-        modelName: 'Item'
+        modelName: 'wishlist'
     }
 )
 

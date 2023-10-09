@@ -31,14 +31,14 @@ ItemReview.init(
   },
   {
     sequelize: connection,
-    modelName: "item_reviews",
+    modelName: "item_review",
   }
 );
 
-ItemReview.belongsTo(Item);
 Item.hasMany(ItemReview);
+ItemReview.belongsTo(Item);
 
-ItemReview.belongsTo(User);
 User.hasMany(ItemReview);
+ItemReview.belongsTo(User);
 
 export { ItemReview };
