@@ -14,6 +14,7 @@ class Item extends Model {
   public is_customizable!: boolean;
   public img_url?: string | null;
   public is_deleted!: boolean;
+    shopId: any;
 }
 
 Item.init(
@@ -72,6 +73,10 @@ Item.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    shopId:{
+      type:DataTypes.INTEGER,
+      allowNull:false
+    }
   },
 
   {
