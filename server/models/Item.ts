@@ -14,6 +14,7 @@ class Item extends Model {
   public is_customizable!: boolean;
   public img_url?: string | null;
   public is_deleted!: boolean;
+  public shopId!: number;
 }
 
 Item.init(

@@ -7,6 +7,7 @@ class ItemReview extends Model {
   public id!: number;
   public content!: string;
   public rating!: number;
+  public userId!: number;
 }
 
 ItemReview.init(
@@ -28,6 +29,10 @@ ItemReview.init(
         max: 5,
       },
     },
+    userId:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
   {
     sequelize: connection,
