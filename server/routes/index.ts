@@ -25,8 +25,8 @@ router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
 router.put("/api/items/updateItem/:itemId",tokenValidate,itemRouter.updateItem)
 router.delete("/api/items/deleteItem/:itemId",tokenValidate,itemRouter.deleteItem)
 router.get("/api/items/getItem/:itemId",tokenValidate,itemRouter.getItem)
-router.post("/api/items/addReviewToItem/:itemId",tokenValidate,itemRouter.addReviewToItem)
-router.post("/api/items/removeReviewFormItem/:reviewId",tokenValidate,itemRouter.removeReviewFromItem)
+router.post("/api/items/addReview/:itemId",tokenValidate,itemRouter.addReviewToItem)
+router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReviewFromItem)
 router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
 
 //order routes

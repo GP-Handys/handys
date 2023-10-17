@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { User } from "../models/User";
 import { Item } from "../models/Item";
 import { Shop } from "../models/Shop";
@@ -35,15 +35,12 @@ export const addItem = async (req: Request, res: Response) => {
         shopId,
       });
 
-      if (item) {
-        res.status(200).json("Item created successfully");
-      } else {
-        res.status(500).json("Failed to create item");
-      }
+      res.status(200).json("Item created successfully");
+      
     } else {
       res.sendStatus(403);
     }
-  } catch (error) {
+  } catch (error) {    
     res.status(500).json(error);
   }
 };
@@ -57,9 +54,9 @@ export const updateItem = async (req: Request, res: Response) => {
       discount,
       quantity,
       is_customizable,
-      shopId,
     } = req.body;
-    const itemId = req.params.itemID;
+    const itemId = req.params.itemId;
+    const shopId = Number(req.query.shopId)
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
     const shop = await Shop.findByPk(shopId);
@@ -84,13 +81,7 @@ export const updateItem = async (req: Request, res: Response) => {
         is_customizable,
         shopId,
       });
-      if (item) {
         res.status(200).json("item modified");
-      } else {
-        res.sendStatus(500);
-      }
-    } else {
-      res.sendStatus(403);
     }
   } catch (error) {
     res.status(500).json(error);
@@ -99,7 +90,7 @@ export const updateItem = async (req: Request, res: Response) => {
 
 export const deleteItem = async (req: Request, res: Response) => {
   try {
-    const itemId = req.params.itemID;
+    const itemId = req.params.itemId;
     const jwt: string = req.get("Authorization")?.toString()!;
 
     const userId = extractUserFromJwt(jwt);
@@ -132,7 +123,7 @@ export const deleteItem = async (req: Request, res: Response) => {
 };
 
 export const getItem = async (req: Request, res: Response) => {
-  const itemId = req.params.itemID;
+  const itemId = req.params.itemId;
   try {
     const item = await Item.findByPk(itemId);
     if (item) {
@@ -148,7 +139,7 @@ export const getItem = async (req: Request, res: Response) => {
 export const addReviewToItem = async (req: Request, res: Response) => {
   //TODO : check if user buy the item
   try {
-    const itemId = req.params.itemID;
+    const itemId = req.params.itemId;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
     const { content, rating } = req.body;
@@ -169,7 +160,7 @@ export const addReviewToItem = async (req: Request, res: Response) => {
 
 export const removeReviewFromItem = async (req: Request, res: Response) => {
   try {
-    const reviewId = req.params.reviewID;
+    const reviewId = req.params.reviewId;
     const jwt: string = req.get("Authorization")?.toString()!;
 
     const userId = extractUserFromJwt(jwt);
@@ -196,7 +187,7 @@ export const searchItem = async (req: Request, res: Response) => {
   //TODO : add search with category
   try {
     const search = req.query.search;
-    const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%';`;
+    const query = `SELECT id FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%';`;
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult);
   } catch (error) {
