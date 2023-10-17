@@ -14,6 +14,12 @@ router.get("/api/users/getUser/:id", tokenValidate, userRouter.getUser)
 router.put("/api/users/updateUser/:id", tokenValidate, userRouter.updateUser)
 router.delete("/api/users/deleteUser/:id", tokenValidate, userRouter.deleteUser)
 
+//shop routes
+router.post("/api/shop/create", tokenValidate,shopRouter.createShop)
+router.get("/api/shop/read/:shopId", tokenValidate,shopRouter.getShop)
+router.put("/api/shop/update/:shopId", tokenValidate,shopRouter.updateShop)
+router.delete("/api/shop/delete/:shopId", tokenValidate,shopRouter.deleteShop)
+
 //item Routes
 router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
 router.put("/api/items/updateItem/:itemId",tokenValidate,itemRouter.updateItem)
@@ -24,14 +30,8 @@ router.post("/api/items/removeReviewFormItem/:reviewId",tokenValidate,itemRouter
 router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
 
 //order routes
-router.post("/api/orders/place", orderRouter.placeOrder)
-router.get("/api/orders/shop/:shopId", orderRouter.getOrderForShopId)
-router.get("/api/orders/user/:userId", orderRouter.getOrderForUserId)
-
-//shop routes
-router.post("/api/shop/create", shopRouter.createShop)
-router.get("/api/shop/read/:shopId", shopRouter.getShop)
-router.put("/api/shop/update/:shopId", shopRouter.updateShop)
-router.delete("/api/shop/delete/:shopId", shopRouter.deleteShop)
+router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
+router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrderForShopId)
+router.get("/api/orders/user/:userId",tokenValidate, orderRouter.getOrderForUserId)
 
 export {router}
