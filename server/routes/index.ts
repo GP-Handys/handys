@@ -1,9 +1,11 @@
 import express from 'express'
-const router = express.Router()
-const { tokenValidate } = require("../middleware/authMiddleware")
-const userRouter = require("./userRouter")
+import { tokenValidate } from '../middleware/authMiddleware'
+import * as userRouter from './userRouter'
 import * as orderRouter from './orderRouter'
-const itemRouter = require("./itemRouter")
+import * as itemRouter from './itemRouter'
+import * as shopRouter from './shopRouter'
+
+const router = express.Router()
 
 //user Routes
 router.post("/api/users/login", userRouter.login)
@@ -25,5 +27,11 @@ router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
 router.post("/api/orders/place", orderRouter.placeOrder)
 router.get("/api/orders/shop/:shopId", orderRouter.getOrderForShopId)
 router.get("/api/orders/user/:userId", orderRouter.getOrderForUserId)
+
+//shop routes
+router.post("/api/shop/create", shopRouter.createShop)
+router.get("/api/shop/read/:shopId", shopRouter.getShop)
+router.put("/api/shop/update/:shopId", shopRouter.updateShop)
+router.delete("/api/shop/delete/:shopId", shopRouter.deleteShop)
 
 export {router}
