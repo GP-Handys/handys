@@ -3,6 +3,8 @@ import * as dotenv from 'dotenv';
 import { User } from '../models/User'
 import { extractUserFromJwt } from '../utils/tokenUtils';
 import { Shop } from "../models/Shop";
+import { connection as DB } from "../database/database";
+
 dotenv.config();
 
 export const createShop = async (req: Request, res: Response) => {
@@ -74,20 +76,27 @@ export const deleteShop = async (req: Request, res: Response) => {
 export const getShop = async (req: Request, res: Response) => {
    try {
       const shopId = req.params.shopId
-
       const shop = await Shop.findByPk(shopId)
       
       if (shop == null) {
          res.sendStatus(404);
          return;
       }
-
       res.status(200).json(shop)
-
+      
    } catch (error) {
       res.status(500).json(error)
    }
 
 }
 
-
+export const searchShop = async (req: Request, res: Response) => {
+  try {
+   const search = req.query.search;
+   const query = `SELECT * FROM shops WHERE name LIKE '%${search}%' OR bio LIKE '%${search}%';`;
+   const searchResult = await DB.query(query);
+   res.status(200).json(searchResult);
+ } catch (error) {
+   res.status(500).json(error);
+ }
+};
