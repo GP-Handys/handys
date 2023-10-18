@@ -19,15 +19,18 @@ router.post("/api/shop/create", tokenValidate,shopRouter.createShop)
 router.get("/api/shop/read/:shopId", tokenValidate,shopRouter.getShop)
 router.put("/api/shop/update/:shopId", tokenValidate,shopRouter.updateShop)
 router.delete("/api/shop/delete/:shopId", tokenValidate,shopRouter.deleteShop)
+router.get("/api/shop/search" , tokenValidate,shopRouter.searchShop)
 
 //item Routes
 router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
 router.put("/api/items/updateItem/:itemId",tokenValidate,itemRouter.updateItem)
 router.delete("/api/items/deleteItem/:itemId",tokenValidate,itemRouter.deleteItem)
 router.get("/api/items/getItem/:itemId",tokenValidate,itemRouter.getItem)
+router.get("/api/items/getReviews/:itemId" , tokenValidate,itemRouter.getReviews)
 router.post("/api/items/addReview/:itemId",tokenValidate,itemRouter.addReviewToItem)
 router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReviewFromItem)
 router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
+router.get("/api/items/getByShop/:shopId" , tokenValidate,itemRouter.getByShop)
 
 //order routes
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
