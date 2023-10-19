@@ -168,7 +168,7 @@ export const deletePost = async (req: Request, res: Response) => {
     }
 }
 
-export const editPost = async (req: Request, res: Response) {
+export const editPost = async (req: Request, res: Response) => {
     const {
         img_url,
         content,
