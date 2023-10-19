@@ -9,7 +9,7 @@ import * as communityRouter from './communityRouter'
 
 const router = express.Router()
 
-//user Routes
+//user routes
 router.post("/api/users/login", userRouter.login)
 router.post("/api/users/signup", userRouter.signup)
 router.get("/api/users/getUser/:id", tokenValidate, userRouter.getUser)
@@ -28,7 +28,7 @@ router.get("api/shop/getReviews", tokenValidate, shopRouter.getShopReviews)
 router.get("api/shop/pendingShops", tokenValidate,shopRouter.pendingShops)
 router.put("api/shop/approveShop", tokenValidate,shopRouter.approveShop)
 
-//item Routes
+//item routes
 router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
 router.put("/api/items/updateItem/:itemId",tokenValidate,itemRouter.updateItem)
 router.delete("/api/items/deleteItem/:itemId",tokenValidate,itemRouter.deleteItem)
@@ -45,6 +45,7 @@ router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
 router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrderForShopId)
 router.get("/api/orders/user/:userId",tokenValidate, orderRouter.getOrderForUserId)
 
+//community routes
 router.post("/api/community/addPost", tokenValidate, communityRouter.addPost)
 router.post("/api/community/comment/:postId", tokenValidate, communityRouter.addCommentOnPost)
 router.get("/api/community/posts", tokenValidate, communityRouter.getPosts)
