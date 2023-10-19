@@ -7,6 +7,8 @@ class ShopReview extends Model {
   public id!: number;
     public content!: string;
     public rating!: number;
+    public userId!: number;
+
 }
 
 ShopReview.init(

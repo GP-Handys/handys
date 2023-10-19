@@ -21,6 +21,11 @@ router.get("/api/shop/read/:shopId", tokenValidate,shopRouter.getShop)
 router.put("/api/shop/update/:shopId", tokenValidate,shopRouter.updateShop)
 router.delete("/api/shop/delete/:shopId", tokenValidate,shopRouter.deleteShop)
 router.get("/api/shop/search" , tokenValidate,shopRouter.searchShop)
+router.post("/api/shop/addReview", tokenValidate,shopRouter.addReview)
+router.delete("api/shop/removeReview", tokenValidate,shopRouter.removeReview)
+router.get("api/shop/getReviews", tokenValidate, shopRouter.getShopReviews)
+router.get("api/shop/pendingShops", tokenValidate,shopRouter.pendingShops)
+router.put("api/shop/approveShop", tokenValidate,shopRouter.approveShop)
 
 //item Routes
 router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
