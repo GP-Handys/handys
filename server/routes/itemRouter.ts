@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import e, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { User } from "../models/User";
 import { Item } from "../models/Item";
 import { Shop } from "../models/Shop";
@@ -36,11 +36,10 @@ export const addItem = async (req: Request, res: Response) => {
       });
 
       res.status(200).json("Item created successfully");
-      
     } else {
       res.sendStatus(403);
     }
-  } catch (error) {    
+  } catch (error) {
     res.status(500).json(error);
   }
 };
@@ -56,7 +55,7 @@ export const updateItem = async (req: Request, res: Response) => {
       is_customizable,
     } = req.body;
     const itemId = req.params.itemId;
-    const shopId = Number(req.query.shopId)
+    const shopId = Number(req.query.shopId);
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
     const shop = await Shop.findByPk(shopId);
@@ -81,7 +80,7 @@ export const updateItem = async (req: Request, res: Response) => {
         is_customizable,
         shopId,
       });
-        res.status(200).json("item modified");
+      res.status(200).json("item modified");
     }
   } catch (error) {
     res.status(500).json(error);
@@ -184,12 +183,34 @@ export const removeReviewFromItem = async (req: Request, res: Response) => {
 };
 
 export const searchItem = async (req: Request, res: Response) => {
-  //TODO : add search with category
   try {
     const search = req.query.search;
-    const query = `SELECT id FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%';`;
+    const query = `SELECT id FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
+     OR id LIKE (select itemId from item_category where categoryId Like 
+      (select categoryId from categories where category_name LIKE '%${search}%' and is_approved LIKE 1));`;
+
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export const getByShop = async (req: Request, res: Response) => {
+  try {
+    const shopId = req.params.shopId;
+    const result = await Item.findAll({ where: { shopId: shopId } });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export const getReviews = async (req: Request, res: Response) => {
+  try {
+    const itemId = req.params.shopId;
+    const result = await ItemReview.findAll({ where: { itemId: itemId } });
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
   }
