@@ -38,7 +38,7 @@ router.post("/api/items/addReview/:itemId",tokenValidate,itemRouter.addReview)
 router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReview)
 router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
 router.get("/api/items/getByShop/:shopId" , tokenValidate,itemRouter.getByShop)
-router.get("/api/item/getRandomItems"),tokenValidate,itemRouter.getRandomItems)
+router.get("/api/item/getRandomItems",tokenValidate,itemRouter.getRandomItems)
 
 //order routes
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
