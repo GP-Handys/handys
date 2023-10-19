@@ -11,6 +11,8 @@ class Post extends Model {
   public is_resolved!: boolean;
   public is_first_post!: boolean;
   public is_deleted!: boolean;
+  public userId!: number;
+  public parentId?: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -24,7 +26,7 @@ Post.init(
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     content: {
       type: DataTypes.STRING,
@@ -32,6 +34,7 @@ Post.init(
     },
     img_url: {
       type: DataTypes.STRING,
+      allowNull: true
     },
     votes: {
       type: DataTypes.INTEGER,
