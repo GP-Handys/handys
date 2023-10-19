@@ -4,6 +4,8 @@ import * as userRouter from './userRouter'
 import * as orderRouter from './orderRouter'
 import * as itemRouter from './itemRouter'
 import * as shopRouter from './shopRouter'
+import * as wishlistRouter from './wishlistRouter'
+
 
 const router = express.Router()
 
@@ -36,5 +38,10 @@ router.get("/api/items/getByShop/:shopId" , tokenValidate,itemRouter.getByShop)
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
 router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrderForShopId)
 router.get("/api/orders/user/:userId",tokenValidate, orderRouter.getOrderForUserId)
+
+//wishlist routes
+router.post("/api/wishlist/add", tokenValidate,wishlistRouter.addToWishList)
+router.delete("/api/wishlist/delete", tokenValidate,wishlistRouter.removeFromWishList)
+router.get("/api/wishlist/get", tokenValidate,wishlistRouter.getWishList)
 
 export {router}
