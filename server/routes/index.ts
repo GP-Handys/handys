@@ -4,6 +4,7 @@ import * as userRouter from './userRouter'
 import * as orderRouter from './orderRouter'
 import * as itemRouter from './itemRouter'
 import * as shopRouter from './shopRouter'
+import * as wishlistRouter from './wishlistRouter'
 import * as communityRouter from './communityRouter'
 
 const router = express.Router()
@@ -37,20 +38,24 @@ router.post("/api/items/addReview/:itemId",tokenValidate,itemRouter.addReview)
 router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReview)
 router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
 router.get("/api/items/getByShop/:shopId" , tokenValidate,itemRouter.getByShop)
-router.get("/api/item/getRandomItems"),tokenValidate,itemRouter.getRandomItems
+router.get("/api/item/getRandomItems"),tokenValidate,itemRouter.getRandomItems)
 
 //order routes
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
 router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrderForShopId)
 router.get("/api/orders/user/:userId",tokenValidate, orderRouter.getOrderForUserId)
 
-//community routes
 router.post("/api/community/addPost", tokenValidate, communityRouter.addPost)
 router.post("/api/community/comment/:postId", tokenValidate, communityRouter.addCommentOnPost)
 router.get("/api/community/posts", tokenValidate, communityRouter.getPosts)
 router.get("api/community/resolve/:postId", tokenValidate, communityRouter.resolvePost)
 router.get("/api/community/vote/:voteType", tokenValidate, communityRouter.votePost)
 router.delete("/api/community/deletePost/:postId", tokenValidate, communityRouter.deletePost)
-router.put("/api/community/updatePost/:postId", tokenValidate, communityRouter.updatePost)
+router.put("/api/community/updatePost/:postId", tokenValidate, communityRouter.editPost)
+
+//wishlist routes
+router.post("/api/wishlist/add", tokenValidate,wishlistRouter.addToWishList)
+router.delete("/api/wishlist/delete", tokenValidate,wishlistRouter.removeFromWishList)
+router.get("/api/wishlist/get", tokenValidate,wishlistRouter.getWishList)
 
 export {router}
