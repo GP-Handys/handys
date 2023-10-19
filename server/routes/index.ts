@@ -27,10 +27,11 @@ router.put("/api/items/updateItem/:itemId",tokenValidate,itemRouter.updateItem)
 router.delete("/api/items/deleteItem/:itemId",tokenValidate,itemRouter.deleteItem)
 router.get("/api/items/getItem/:itemId",tokenValidate,itemRouter.getItem)
 router.get("/api/items/getReviews/:itemId" , tokenValidate,itemRouter.getReviews)
-router.post("/api/items/addReview/:itemId",tokenValidate,itemRouter.addReviewToItem)
-router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReviewFromItem)
+router.post("/api/items/addReview/:itemId",tokenValidate,itemRouter.addReview)
+router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReview)
 router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
 router.get("/api/items/getByShop/:shopId" , tokenValidate,itemRouter.getByShop)
+router.get("/api/item/getRandomItems"),tokenValidate,itemRouter.getRandomItems
 
 //order routes
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)

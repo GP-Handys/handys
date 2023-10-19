@@ -7,6 +7,7 @@ import { Shop } from "../models/Shop";
 import { ItemReview } from "../models/ItemReview";
 import { connection as DB } from "../database/database";
 import { extractUserFromJwt } from "../utils/tokenUtils";
+import { Sequelize } from "sequelize";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -135,7 +136,7 @@ export const getItem = async (req: Request, res: Response) => {
   }
 };
 
-export const addReviewToItem = async (req: Request, res: Response) => {
+export const addReview = async (req: Request, res: Response) => {
   //TODO : check if user buy the item
   try {
     const itemId = req.params.itemId;
@@ -157,7 +158,7 @@ export const addReviewToItem = async (req: Request, res: Response) => {
   }
 };
 
-export const removeReviewFromItem = async (req: Request, res: Response) => {
+export const removeReview = async (req: Request, res: Response) => {
   try {
     const reviewId = req.params.reviewId;
     const jwt: string = req.get("Authorization")?.toString()!;
@@ -215,3 +216,12 @@ export const getReviews = async (req: Request, res: Response) => {
     res.status(500).json(error);
   }
 };
+
+export const getRandomItems = async (req: Request, res: Response) => {
+  try{
+    let result = Item.findAll({ order:[Sequelize.fn('RAND')],limit:10},)
+  } catch (error) {
+    res.status(500).json(error);
+  }
+
+}
