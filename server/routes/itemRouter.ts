@@ -6,6 +6,7 @@ import { ItemReview } from "../models/ItemReview";
 import { connection as DB } from "../database/database";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Sequelize } from "sequelize";
+import { Category } from "../models/Category";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -17,6 +18,7 @@ export const addItem = async (req: Request, res: Response) => {
       quantity,
       is_customizable,
       shopId,
+      category,
     } = req.body;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
@@ -32,6 +34,7 @@ export const addItem = async (req: Request, res: Response) => {
         quantity,
         is_customizable,
         shopId,
+        category,
       });
 
       res.status(200).json("Item created successfully");
