@@ -6,6 +6,7 @@ import * as itemRouter from './itemRouter'
 import * as shopRouter from './shopRouter'
 import * as wishlistRouter from './wishlistRouter'
 import * as communityRouter from './communityRouter'
+import * as ticketRouter from "./ticketRouter"
 
 const router = express.Router()
 
@@ -58,5 +59,10 @@ router.put("/api/community/updatePost/:postId", tokenValidate, communityRouter.e
 router.post("/api/wishlist/add", tokenValidate,wishlistRouter.addToWishList)
 router.delete("/api/wishlist/delete", tokenValidate,wishlistRouter.removeFromWishList)
 router.get("/api/wishlist/get", tokenValidate,wishlistRouter.getWishList)
+
+//ticket routes
+router.get("/api/ticket/getTickets" , tokenValidate , ticketRouter.getTickets)
+router.post("/api/ticket/submitTicket" , tokenValidate , ticketRouter.submitTicket)
+router.get("/api/ticket/resolve/:ticketId",tokenValidate ,ticketRouter.resolveTicket)
 
 export {router}
