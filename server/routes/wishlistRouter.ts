@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Wishlist } from "../models/Wishlist";
 
-
 export const addToWishList = async (req: Request, res: Response) => {
     const jwt: string = req.get("Authorization")?.toString()!
     const userId: number = extractUserFromJwt(jwt)
