@@ -218,6 +218,7 @@ export const getReviews = async (req: Request, res: Response) => {
 export const getRandomItems = async (req: Request, res: Response) => {
   try{
     let result = Item.findAll({ order:[Sequelize.fn('RAND')],limit:10},)
+    res.status(200).json(result)
   } catch (error) {
     res.status(500).json(error);
   }
