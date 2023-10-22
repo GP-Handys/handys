@@ -34,7 +34,7 @@ Post.init(
     },
     img_url: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     votes: {
       type: DataTypes.INTEGER,

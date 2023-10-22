@@ -29,10 +29,10 @@ ItemReview.init(
         max: 5,
       },
     },
-    userId:{
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    }
+    },
   },
   {
     sequelize: connection,

@@ -5,10 +5,9 @@ import { User } from "./User";
 
 class ShopReview extends Model {
   public id!: number;
-    public content!: string;
-    public rating!: number;
-    public userId!: number;
-
+  public content!: string;
+  public rating!: number;
+  public userId!: number;
 }
 
 ShopReview.init(
@@ -37,10 +36,10 @@ ShopReview.init(
   }
 );
 
-Shop.hasMany(ShopReview)
-ShopReview.belongsTo(Shop)
+Shop.hasMany(ShopReview);
+ShopReview.belongsTo(Shop);
 
-User.hasMany(ShopReview)
-ShopReview.belongsTo(User)
+User.hasMany(ShopReview);
+ShopReview.belongsTo(User);
 
 export { ShopReview };

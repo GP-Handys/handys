@@ -1,23 +1,12 @@
-import { DataTypes, Model, Optional } from 'sequelize';
-import {connection} from '../database/database';
-import { User } from './User';
+import { DataTypes, Model, Optional } from "sequelize";
+import { connection } from "../database/database";
+import { User } from "./User";
 
-interface TicketAttributes {
-  id: number;
-  content: string;
-  is_resolved: boolean;
-}
-
-interface TicketCreationAttributes extends Optional<TicketAttributes, 'id'> {}
-
-class Ticket
-  extends Model<TicketAttributes, TicketCreationAttributes>
-  implements TicketAttributes {
+class Ticket extends Model {
   public id!: number;
   public content!: string;
   public is_resolved!: boolean;
-
-  // Timestamps (createdAt and updatedAt) are automatically created by Sequelize.
+  public userId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -39,7 +28,7 @@ Ticket.init(
   },
   {
     sequelize: connection,
-    modelName: 'ticket',
+    modelName: "ticket",
   }
 );
 
