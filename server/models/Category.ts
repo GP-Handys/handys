@@ -4,8 +4,8 @@ import { Item } from "./Item";
 
 class Category extends Model {
   public id!: number;
-  public category_number!: number;
-  public is_approved!: boolean;
+  public category_name!: string;
+  public category_pfp?: string | null;
 }
 
 Category.init(
@@ -20,9 +20,9 @@ Category.init(
       unique: true,
       allowNull: false,
     },
-    is_approved: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+    category_pfp: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
@@ -33,6 +33,10 @@ Category.init(
 
 //M:N
 Item.belongsToMany(Category, { through: "item_category" });
-Category.belongsToMany(Item, { through: "item_category" });
+Category.belongsToMany(Item, {
+  through: "item_category",
+  onDelete: "cascade",
+  hooks: true,
+});
 
 export { Category };
