@@ -17,6 +17,7 @@ Category.init(
     },
     category_name: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
     },
     is_approved: {
