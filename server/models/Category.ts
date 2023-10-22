@@ -5,7 +5,7 @@ import { Item } from "./Item";
 class Category extends Model {
   public id!: number;
   public category_name!: string;
-  public pfp_url?: string | null;
+  public category_pfp?: string | null;
 }
 
 Category.init(
@@ -22,6 +22,7 @@ Category.init(
     },
     category_pfp: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
