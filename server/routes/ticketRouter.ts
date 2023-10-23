@@ -53,3 +53,21 @@ export const resolveTicket = async (req: Request, res: Response) => {
     res.status(500).json(error);
   }
 };
+
+export const getTicketById =async (req: Request, res: Response) => {
+  try {
+    const jwt: string = req.get("Authorization")?.toString()!;
+    const userId: number = extractUserFromJwt(jwt);
+    const user: User | null = await User.findByPk(userId);
+    const ticketId = req.params.ticketId;
+    let ticket = await Ticket.findByPk(ticketId);
+    if (user?.is_sys_admin || ticket?.userId == userId) {
+      res.status(200).json(ticket);
+    }
+    else {
+      res.sendStatus(403);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}

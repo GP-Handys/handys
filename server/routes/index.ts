@@ -68,7 +68,9 @@ router.delete("/api/category/delete",tokenValidate,categoryRouter.deleteCategory
 
 //ticket routes
 router.get("/api/ticket/getTickets" , tokenValidate , ticketRouter.getTickets)
+router.get("/api/ticket/getTicket/:ticketId",tokenValidate,ticketRouter.getTicketById)
 router.post("/api/ticket/submitTicket" , tokenValidate , ticketRouter.submitTicket)
 router.get("/api/ticket/resolve/:ticketId",tokenValidate ,ticketRouter.resolveTicket)
+
 
 export {router}
