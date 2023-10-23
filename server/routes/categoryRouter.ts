@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../models/User";
 import { Category } from "../models/Category";
 import { extractUserFromJwt } from "../utils/tokenUtils";
+import { literal } from "sequelize";
 
 export const getAllCategories = async (req: Request, res: Response) => {
   try {
@@ -15,18 +16,18 @@ export const getAllCategories = async (req: Request, res: Response) => {
 
 export const addCategory = async (req: Request, res: Response) => {
   try {
-    const { name, category_pfp } = req.body;
-
+    const { category_name, category_pfp } = req.body;
+    
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
     const user = await User.findByPk(userId);
 
     if (user!.is_sys_admin) {
       const category = await Category.create({
-        name,
+        category_name,
         category_pfp,
       });
-      res.status(200).json("Category created successfully");
+      res.status(200).json(category);
     } else {
       res.sendStatus(403);
     }
@@ -54,5 +55,17 @@ export const deleteCategory = async (req: Request, res: Response) => {
     }
   } catch (error) {
     res.status(500).send(error);
+  }
+};
+
+export const randomCategory = async (req: Request, res: Response) => {
+  try {
+    const categories = await Category.findAll({
+      order: literal("rand()"),
+      limit: 7,
+    });
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(500).json(error);
   }
 };

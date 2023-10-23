@@ -63,8 +63,9 @@ router.get("/api/wishlist/get", tokenValidate,wishlistRouter.getWishList)
 
 // Category routes 
 router.get("/api/category/get", tokenValidate,categoryRouter.getAllCategories)
-router.post("/api/category/add",tokenValidate,categoryRouter.addCategory)
+router.post("/api/category/add",tokenValidate, categoryRouter.addCategory)
 router.delete("/api/category/delete",tokenValidate,categoryRouter.deleteCategory)
+router.get("/api/category/getRandom",tokenValidate,categoryRouter.randomCategory)
 
 //ticket routes
 router.get("/api/ticket/getTickets" , tokenValidate , ticketRouter.getTickets)

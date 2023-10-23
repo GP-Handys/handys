@@ -7,6 +7,7 @@ import { connection as DB } from "../database/database";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Sequelize } from "sequelize";
 import { Category } from "../models/Category";
+import { addCategory } from "./categoryRouter";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -24,7 +25,6 @@ export const addItem = async (req: Request, res: Response) => {
     const userId = extractUserFromJwt(jwt);
     const shop = await Shop.findByPk(shopId);
     const user = await User.findByPk(userId);
-
     if (user!.is_sys_admin || shop!.userId == userId) {
       const item = await Item.create({
         name,
