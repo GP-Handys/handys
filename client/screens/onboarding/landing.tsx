@@ -7,9 +7,9 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
-import CommonBackground from "../common/background";
-import STRINGS from "../strings/strings";
-import COLORS from "../common/colors";
+import CommonBackground from "../../common/background";
+import STRINGS from "../../strings/strings";
+import COLORS from "../../common/colors";
 
 export default function Landing() {
   const dimensions = Dimensions.get("window");
@@ -19,9 +19,9 @@ export default function Landing() {
       <View style={styles.defaultContainer}>
         <Image
           style={{ width: dimensions.width }}
-          source={require("../assets/landing.png")}
+          source={require("../../assets/landing.png")}
         />
-        <Image style={styles.logo} source={require("../assets/logo.png")} />
+        <Image style={styles.logo} source={require("../../assets/logo.png")} />
       </View>
       <View style={styles.welcomeContainer}>
         <Text style={styles.welcome}>{STRINGS.welcome}</Text>
