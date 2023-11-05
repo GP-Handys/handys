@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 
 interface Props {
-  marginHorizontal: number;
+  marginHorizontal?: number;
 }
 
 export default function ThematicBreak({ marginHorizontal }: Props) {
