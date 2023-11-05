@@ -7,7 +7,8 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
-import CommonBackground from "../../common/background";
+import {CommonBackgroundWithNoSafeArea} from "../../common/background";
+import Logo from "../../components/logo";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 
@@ -15,13 +16,15 @@ export default function Landing() {
   const dimensions = Dimensions.get("window");
 
   return (
-    <CommonBackground>
-      <View style={styles.defaultContainer}>
+    <CommonBackgroundWithNoSafeArea>
+      <View style={styles.imagesContainer}>
         <Image
           style={{ width: dimensions.width }}
           source={require("../../assets/landing.png")}
         />
-        <Image style={styles.logo} source={require("../../assets/logo.png")} />
+        <View style={styles.logo}>
+         <Logo />
+        </View>
       </View>
       <View style={styles.welcomeContainer}>
         <Text style={styles.welcome}>{STRINGS.welcome}</Text>
@@ -56,12 +59,12 @@ export default function Landing() {
           </Text>
         </Pressable>
       </View>
-    </CommonBackground>
+    </CommonBackgroundWithNoSafeArea>
   );
 }
 
 const styles = StyleSheet.create({
-  defaultContainer: {
+  imagesContainer: {
     alignItems: "center",
     justifyContent: "center",
   },
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
     height: 41,
     borderWidth: 2,
-    borderColor: "#464949",
+    borderColor: COLORS.handysGrey,
     borderRadius: 8,
   },
 });
