@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 async function syncDb() {
-  await connection.sync({ force: true });
+  await connection.sync({ force: false });
 }
 syncDb();
 

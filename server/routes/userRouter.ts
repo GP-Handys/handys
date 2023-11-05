@@ -106,13 +106,13 @@ export const deleteUser = async (req: Request, res: Response) => {
     const jwtToken = req.get("Authorization")?.toString()!;
     const userIdToken = extractUserFromJwt(jwtToken);
     const id = Number(req.params.id);
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(userIdToken);
 
     if (user == null) {
       res.sendStatus(404);
       return;
     }
-
+    
     if (user.is_sys_admin || id == userIdToken) {
       await user.destroy();
       res.status(200).json("User deleted");
