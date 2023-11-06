@@ -15,20 +15,20 @@ export default function SignUp() {
 
   return (
     <CommonBackgroundWithSafeArea>
-      <OnboardingHeader/>
-      <View style={{marginTop: 31, marginHorizontal: 30}}>
+      <OnboardingHeader />
+      <View style={{ marginTop: 31, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Name"
           left={<TextInput.Icon icon="account" color={"white"} />}
         />
       </View>
-      <View style={{marginTop: 14, marginHorizontal: 30}}>
+      <View style={{ marginTop: 14, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Email"
           left={<TextInput.Icon icon="email" color={"white"} />}
         />
       </View>
-      <View style={{marginTop: 14, marginHorizontal: 30}}>
+      <View style={{ marginTop: 14, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Password"
           isSecureTextEntry={isSecureTextEntry}
@@ -48,7 +48,7 @@ export default function SignUp() {
           }
         />
       </View>
-      <View style={{marginHorizontal: 38}}>
+      <View style={{ marginHorizontal: 38 }}>
         <Pressable
           style={({ pressed }) => [
             styles.signUpPressable,
@@ -91,4 +91,3 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
-

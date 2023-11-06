@@ -7,8 +7,8 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
-import {CommonBackgroundWithNoSafeArea} from "../../common/background";
-import Logo from "../../components/logo";
+import { CommonBackgroundWithNoSafeArea } from "../../common/background";
+import Logo from "../../components/HandysLogo";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 
@@ -23,7 +23,7 @@ export default function Landing() {
           source={require("../../assets/landing.png")}
         />
         <View style={styles.logo}>
-         <Logo />
+          <Logo />
         </View>
       </View>
       <View style={styles.welcomeContainer}>

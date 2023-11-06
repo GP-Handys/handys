@@ -17,7 +17,7 @@ export default function CustomTextInput({
   isSecureTextEntry,
 }: Props) {
   return (
-    <TextInput 
+    <TextInput
       style={styles.commonStyle}
       placeholder={placeholder}
       secureTextEntry={isSecureTextEntry}

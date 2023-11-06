@@ -1,3 +1,5 @@
-export default function toggleIsSecureTextEntry(isSecureTextEntry: boolean): boolean {
+export default function toggleIsSecureTextEntry(
+  isSecureTextEntry: boolean
+): boolean {
   return isSecureTextEntry ? false : true;
 }

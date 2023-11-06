@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet} from "react-native";
-import ThematicBreak from "./thematic-break";
+import { View, Text, StyleSheet } from "react-native";
+import ThematicBreak from "./ThematicBreak";
 import STRINGS from "../strings/strings";
-import Logo from "./logo";
+import Logo from "./HandysLogo";
 
 export default function OnboardingHeader() {
   return (
