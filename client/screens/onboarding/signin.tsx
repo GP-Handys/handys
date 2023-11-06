@@ -16,7 +16,7 @@ export default function SignIn() {
   return (
     <CommonBackgroundWithSafeArea>
       <OnboardingHeader/>
-      <View style={{marginTop: 14, marginHorizontal: 30}}>
+      <View style={{marginTop: 31, marginHorizontal: 30}}>
         <CustomTextInput
           placeholder="Email"
           left={<TextInput.Icon icon="email" color={"white"} />}
