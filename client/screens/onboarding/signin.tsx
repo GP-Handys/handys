@@ -27,7 +27,7 @@ export default function SignIn() {
         placeholder="Name"
         textColor="white"
         placeholderTextColor={"#FFFFFF80"}
-        selectionColor="white"
+        selectionColor="#00000090"
         activeUnderlineColor="transparent"
         left={<TextInput.Icon icon="account" color={"white"} />}
       />
@@ -36,7 +36,7 @@ export default function SignIn() {
         placeholder="Email"
         textColor="white"
         placeholderTextColor={"#FFFFFF80"}
-        selectionColor="white"
+        selectionColor="#00000090"
         activeUnderlineColor="transparent"
         left={<TextInput.Icon icon="email" color={"white"} />}
       />
@@ -45,7 +45,7 @@ export default function SignIn() {
         placeholder="Password"
         textColor="white"
         placeholderTextColor={"#FFFFFF80"}
-        selectionColor="white"
+        selectionColor="#00000090"
         activeUnderlineColor="transparent"
         left={<TextInput.Icon icon="lock" color={"white"}/>}
         secureTextEntry={isSecureTextEntry}
