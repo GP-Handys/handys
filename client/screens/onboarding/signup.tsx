@@ -7,6 +7,7 @@ import COLORS from "../../common/colors";
 import CustomTextInput from "../../components/CustomTextInput";
 import { TextInput } from "react-native-paper";
 import { useState } from "react";
+import OnboardingHeader from "../../components/OnboardingHeader";
 
 export default function SignUp() {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
@@ -14,15 +15,7 @@ export default function SignUp() {
 
   return (
     <CommonBackgroundWithSafeArea>
-      <View style={styles.logo}>
-        <Logo />
-      </View>
-      <View style={styles.welcomeContainer}>
-        <Text style={styles.welcome}>{STRINGS.welcome}</Text>
-      </View>
-      <View style={{marginTop: 14}}>
-        <ThematicBreak marginHorizontal={38} />
-      </View>
+      <OnboardingHeader/>
       <View style={{marginTop: 31, marginHorizontal: 30}}>
         <CustomTextInput
           placeholder="Name"
