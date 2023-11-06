@@ -8,7 +8,7 @@ import CustomTextInput from "../../components/CustomTextInput";
 import { TextInput } from "react-native-paper";
 import { useState } from "react";
 
-export default function SignIn() {
+export default function SignUp() {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
 
