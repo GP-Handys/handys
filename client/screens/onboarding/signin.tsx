@@ -4,6 +4,7 @@ import { CommonBackgroundWithSafeArea } from "../../common/background";
 import ThematicBreak from "../../components/thematic-break";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
+import CustomTextInput from "../../components/CustomTextInput";
 import { TextInput } from "react-native-paper";
 import { useState } from "react";
 
@@ -19,49 +20,42 @@ export default function SignIn() {
       <View style={styles.welcomeContainer}>
         <Text style={styles.welcome}>{STRINGS.welcome}</Text>
       </View>
-      <View style={styles.thematicBreakContainer}>
+      <View style={{marginTop: 14}}>
         <ThematicBreak marginHorizontal={38} />
       </View>
-      <TextInput
-        style={[styles.commonTextInput, styles.name]}
-        placeholder="Name"
-        textColor="white"
-        placeholderTextColor={"#FFFFFF80"}
-        selectionColor="#00000090"
-        activeUnderlineColor="transparent"
-        left={<TextInput.Icon icon="account" color={"white"} />}
-      />
-      <TextInput
-        style={[styles.commonTextInput, styles.email]}
-        placeholder="Email"
-        textColor="white"
-        placeholderTextColor={"#FFFFFF80"}
-        selectionColor="#00000090"
-        activeUnderlineColor="transparent"
-        left={<TextInput.Icon icon="email" color={"white"} />}
-      />
-      <TextInput
-        style={[styles.commonTextInput, styles.password]}
-        placeholder="Password"
-        textColor="white"
-        placeholderTextColor={"#FFFFFF80"}
-        selectionColor="#00000090"
-        activeUnderlineColor="transparent"
-        left={<TextInput.Icon icon="lock" color={"white"}/>}
-        secureTextEntry={isSecureTextEntry}
-        right={
-          <TextInput.Icon
-            icon={icon}
-            color={"white"}
-            onPress={() => {
-              Keyboard.dismiss();
-              setIsSecureTextEntry(toggleIsSecureTextEntry(isSecureTextEntry));
-              setIcon(toggleEyeIcon(icon));
-            }}
-          />
-        }
-      />
-      <View style={styles.pressableContainer}>
+      <View style={{marginTop: 31, marginHorizontal: 30}}>
+        <CustomTextInput
+          placeholder="Name"
+          left={<TextInput.Icon icon="account" color={"white"} />}
+        />
+      </View>
+      <View style={{marginTop: 14, marginHorizontal: 30}}>
+        <CustomTextInput
+          placeholder="Email"
+          left={<TextInput.Icon icon="email" color={"white"} />}
+        />
+      </View>
+      <View style={{marginTop: 14, marginHorizontal: 30}}>
+        <CustomTextInput
+          placeholder="Password"
+          isSecureTextEntry={isSecureTextEntry}
+          left={<TextInput.Icon icon="lock" color={"white"} />}
+          right={
+            <TextInput.Icon
+              icon={icon}
+              color={"white"}
+              onPress={() => {
+                Keyboard.dismiss();
+                setIsSecureTextEntry(
+                  toggleIsSecureTextEntry(isSecureTextEntry)
+                );
+                setIcon(toggleEyeIcon(icon));
+              }}
+            />
+          }
+        />
+      </View>
+      <View style={{marginHorizontal: 38}}>
         <Pressable
           style={({ pressed }) => [
             styles.signUpPressable,
@@ -94,31 +88,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     textAlign: "center",
     fontSize: 13,
-  },
-  thematicBreakContainer: {
-    marginTop: 14,
-  },
-  commonTextInput: {
-    backgroundColor: COLORS.handysGrey,
-    marginHorizontal: 30,
-    marginTop: 31,
-    color: "FFFFFF",
-    height: 44,
-    borderRadius: 9,
-    borderTopLeftRadius: 9,
-    borderTopRightRadius: 9,
-  },
-  name: {
-    marginTop: 31,
-  },
-  email: {
-    marginTop: 14,
-  },
-  password: {
-    marginTop: 14,
-  },
-  pressableContainer: {
-    marginHorizontal: 38,
   },
   signUpPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
