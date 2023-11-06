@@ -3,5 +3,5 @@ import SignIn from "./screens/onboarding/signin";
 import SignUp from "./screens/onboarding/signup";
 
 export default function App() {
-  return <SignIn />;
+  return <Landing />;
 }

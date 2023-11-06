@@ -13,13 +13,12 @@ import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 
 export default function Landing() {
-  const dimensions = Dimensions.get("window");
 
   return (
     <CommonBackgroundWithNoSafeArea>
       <View style={styles.imagesContainer}>
         <Image
-          style={{ width: dimensions.width }}
+          style={{ width: "100%" }}
           source={require("../../assets/landing.png")}
         />
         <View style={styles.logo}>
