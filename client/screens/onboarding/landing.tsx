@@ -8,11 +8,16 @@ import {
   Dimensions,
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import Logo from "../../components/HandysLogo";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
+import { OnboardingStackParamList } from "../../App";
 
-export default function Landing() {
+
+type LandingProps = NativeStackScreenProps<OnboardingStackParamList, 'Landing'>
+
+export default function Landing({navigation}: LandingProps) {
 
   return (
     <CommonBackgroundWithNoSafeArea>
@@ -36,6 +41,9 @@ export default function Landing() {
               opacity: pressed ? 0.6 : 1,
             },
           ]}
+          onPress={() => {
+            navigation.navigate('SignIn')
+          }}
         >
           <Text
             style={{ color: "#202525", fontWeight: "bold", fontSize: 18.44 }}
@@ -52,6 +60,9 @@ export default function Landing() {
               opacity: pressed ? 0.6 : 1,
             },
           ]}
+          onPress={() => {
+            navigation.navigate('SignUp')
+          }}
         >
           <Text style={{ color: "#FFFF", fontWeight: "bold", fontSize: 18.44 }}>
             {STRINGS.signUp}
