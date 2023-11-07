@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   logo: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 60,
   },
   welcomeContainer: {
     alignItems: "center",
