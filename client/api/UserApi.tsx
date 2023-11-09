@@ -17,4 +17,21 @@ export const user_login = async (data: any) => {
         return error.message
     }
 }
+
+export const user_signup =async (data:any)=>{
+    try{
+        const result = await ApiManager("/users/signup" ,{
+            method:'post',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            data:data,
+        });        
+        return result
+    }   
+    catch (error:any){
+        return error.message
+    }
+
+}
     

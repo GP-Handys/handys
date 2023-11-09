@@ -8,10 +8,28 @@ import { useState } from "react";
 import OnboardingHeader from "../../components/OnboardingHeader";
 import toggleEyeIcon from "../../helpers/toggle/toggleEyeIcon";
 import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntry";
+import { user_signup } from "../../api/UserApi";
 
 export default function SignUp() {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
+  const [name ,setName] = useState("")
+  const [email ,setEmail] = useState("")
+  const [password ,setPassword] = useState("")
+
+  function handleSignUp(){
+    user_signup({
+      name:name,
+      email:email,
+      password:password
+    }).then((result:any)=>{
+      if(result.status == 200){
+        alert("user signup succefully")
+      }
+    }).catch(err=>{
+      console.error(err);
+    })
+  }
 
   return (
     <CommonBackgroundWithSafeArea>
@@ -20,18 +38,24 @@ export default function SignUp() {
         <CustomTextInput
           placeholder="Name"
           left={<TextInput.Icon icon="account" color={"white"} />}
+          value={name}
+          onChangeText={(text)=>setName(text)}
         />
       </View>
       <View style={{ marginTop: 14, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Email"
           left={<TextInput.Icon icon="email" color={"white"} />}
+          value={email}
+          onChangeText={(text)=>setEmail(text)}
         />
       </View>
       <View style={{ marginTop: 14, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Password"
           isSecureTextEntry={isSecureTextEntry}
+          value={password}
+          onChangeText={(text)=>setPassword(text)}
           left={<TextInput.Icon icon="lock" color={"white"} />}
           right={
             <TextInput.Icon
@@ -50,6 +74,7 @@ export default function SignUp() {
       </View>
       <View style={{ marginHorizontal: 38 }}>
         <Pressable
+        onPress={handleSignUp}
           style={({ pressed }) => [
             styles.signUpPressable,
             {

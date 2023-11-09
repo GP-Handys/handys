@@ -10,7 +10,8 @@ import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 import { user_login } from "../../api/UserApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { OnboardingStackParamList } from "../../App";
 
 export default function SignIn() {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
