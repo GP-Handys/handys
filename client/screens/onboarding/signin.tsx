@@ -1,4 +1,11 @@
-import { StyleSheet, View, Text, Pressable, Keyboard } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  Keyboard,
+  Alert,
+} from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import { TextInput } from "react-native-paper";
@@ -8,38 +15,36 @@ import toggleEyeIcon from "../../helpers/toggle/toggleEyeIcon";
 import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntry";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
-import { user_login } from "../../api/UserApi";
+import signin from "../../helpers/onboarding/signin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { OnboardingStackParamList } from "../../App";
 
 export default function SignIn() {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
-  const [email ,setEmail] = useState("")
-  const [password ,setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = ()=>{
-    user_login({
-      email:email,
-      password:password
-    }).then((result:any)=>{
-      if(result.status == 200){
-        AsyncStorage.setItem("AccessToken",result.data)
-      }
-    }).catch(err=>{
-      console.error(err);
-    })
-  }
+  const handleLogin = () => {
+    let token = signin(email, password);
+
+    if(token.length!=0){
+      AsyncStorage.setItem("Authorization",token)
+      //TODO:navigate to home
+    }
+    else{
+      Alert.alert(STRINGS.failPopUp,STRINGS.InvalidCredentials)
+    }
+  };
+
   return (
     <CommonBackgroundWithSafeArea>
       <OnboardingHeader />
       <View style={{ marginTop: 31, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Email"
-          left={<TextInput.Icon icon="email" color={"white"}/>}
+          left={<TextInput.Icon icon="email" color={"white"} />}
           value={email}
-          onChangeText={(text)=>setEmail(text)}
+          onChangeText={(text) => setEmail(text)}
         />
       </View>
       <View style={{ marginTop: 14, marginHorizontal: 30 }}>
@@ -48,7 +53,7 @@ export default function SignIn() {
           isSecureTextEntry={isSecureTextEntry}
           left={<TextInput.Icon icon="lock" color={"white"} />}
           value={password}
-          onChangeText={(text)=>setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
           right={
             <TextInput.Icon
               icon={icon}
@@ -66,7 +71,7 @@ export default function SignIn() {
       </View>
       <View style={{ marginHorizontal: 38 }}>
         <Pressable
-        onPress={handleLogin}
+          onPress={handleLogin}
           style={({ pressed }) => [
             styles.signUpPressable,
             {

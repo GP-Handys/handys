@@ -1,4 +1,10 @@
-import { StyleSheet, View, Text, Pressable, Keyboard } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  Keyboard,
+} from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
@@ -8,27 +14,17 @@ import { useState } from "react";
 import OnboardingHeader from "../../components/OnboardingHeader";
 import toggleEyeIcon from "../../helpers/toggle/toggleEyeIcon";
 import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntry";
-import { user_signup } from "../../api/UserApi";
+import signup from "../../helpers/onboarding/signup";
 
 export default function SignUp() {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
-  const [name ,setName] = useState("")
-  const [email ,setEmail] = useState("")
-  const [password ,setPassword] = useState("")
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  function handleSignUp(){
-    user_signup({
-      name:name,
-      email:email,
-      password:password
-    }).then((result:any)=>{
-      if(result.status == 200){
-        alert("user signup succefully")
-      }
-    }).catch(err=>{
-      console.error(err);
-    })
+  function handleSignUp() {
+    signup(email, password, name);
   }
 
   return (
@@ -39,7 +35,7 @@ export default function SignUp() {
           placeholder="Name"
           left={<TextInput.Icon icon="account" color={"white"} />}
           value={name}
-          onChangeText={(text)=>setName(text)}
+          onChangeText={(text) => setName(text)}
         />
       </View>
       <View style={{ marginTop: 14, marginHorizontal: 30 }}>
@@ -47,7 +43,7 @@ export default function SignUp() {
           placeholder="Email"
           left={<TextInput.Icon icon="email" color={"white"} />}
           value={email}
-          onChangeText={(text)=>setEmail(text)}
+          onChangeText={(text) => setEmail(text)}
         />
       </View>
       <View style={{ marginTop: 14, marginHorizontal: 30 }}>
@@ -55,7 +51,7 @@ export default function SignUp() {
           placeholder="Password"
           isSecureTextEntry={isSecureTextEntry}
           value={password}
-          onChangeText={(text)=>setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
           left={<TextInput.Icon icon="lock" color={"white"} />}
           right={
             <TextInput.Icon
@@ -74,7 +70,7 @@ export default function SignUp() {
       </View>
       <View style={{ marginHorizontal: 38 }}>
         <Pressable
-        onPress={handleSignUp}
+          onPress={handleSignUp}
           style={({ pressed }) => [
             styles.signUpPressable,
             {

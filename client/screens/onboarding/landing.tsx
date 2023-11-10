@@ -1,24 +1,15 @@
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  Dimensions,
-} from "react-native";
+import { Image, StyleSheet, View, Text, Pressable } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
-import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Logo from "../../components/HandysLogo";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 import { OnboardingStackParamList } from "../../App";
 
+type LandingProps = NativeStackScreenProps<OnboardingStackParamList, "Landing">;
 
-type LandingProps = NativeStackScreenProps<OnboardingStackParamList, 'Landing'>
-
-export default function Landing({navigation}: LandingProps) {
-
+export default function Landing({ navigation }: LandingProps) {
   return (
     <CommonBackgroundWithNoSafeArea>
       <View style={styles.imagesContainer}>
@@ -42,7 +33,7 @@ export default function Landing({navigation}: LandingProps) {
             },
           ]}
           onPress={() => {
-            navigation.navigate('SignIn')
+            navigation.navigate("SignIn");
           }}
         >
           <Text
@@ -61,7 +52,7 @@ export default function Landing({navigation}: LandingProps) {
             },
           ]}
           onPress={() => {
-            navigation.navigate('SignUp')
+            navigation.navigate("SignUp");
           }}
         >
           <Text style={{ color: "#FFFF", fontWeight: "bold", fontSize: 18.44 }}>
