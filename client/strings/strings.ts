@@ -8,7 +8,7 @@ let STRINGS = {
   invalidEmail: "Please enter a valid email",
   invalidPassword: "The password should be at least 8 characters long",
   invalidName: "The name should be at least 3 characters long",
-  emailRegex: /^w+([.-]?w+)*@w+([.-]?w+)*(.ww+)+$/,
+  emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   InvalidCredentials: "Invalid credentials",
 };
 

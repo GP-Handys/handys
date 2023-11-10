@@ -8,8 +8,8 @@ interface Props {
   left?: ReactNode;
   right?: ReactNode;
   isSecureTextEntry?: boolean;
-  value?:string
-  onChangeText?:(((text: string) => void) & Function)
+  value?: string;
+  onChangeText?: ((text: string) => void) & Function;
 }
 
 export default function CustomTextInput({
@@ -18,7 +18,7 @@ export default function CustomTextInput({
   right,
   isSecureTextEntry,
   value,
-  onChangeText
+  onChangeText,
 }: Props) {
   return (
     <TextInput
@@ -33,7 +33,6 @@ export default function CustomTextInput({
       activeUnderlineColor="transparent"
       value={value}
       onChangeText={onChangeText}
-      
     />
   );
 }

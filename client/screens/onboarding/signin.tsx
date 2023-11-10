@@ -16,7 +16,6 @@ import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntr
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 import signin from "../../helpers/onboarding/signin";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignIn() {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
@@ -25,15 +24,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    let token = signin(email, password);
-
-    if(token.length!=0){
-      AsyncStorage.setItem("Authorization",token)
-      //TODO:navigate to home
-    }
-    else{
-      Alert.alert(STRINGS.failPopUp,STRINGS.InvalidCredentials)
-    }
+    signin(email, password);
   };
 
   return (

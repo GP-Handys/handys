@@ -6,12 +6,12 @@ export default function signup(email: string, password: string, name: string) {
   email = email.toLowerCase();
   let emailReg = STRINGS.emailRegex;
 
-  if (!email.match(emailReg)) {
+  if (name.length < 3) {
+    Alert.alert(STRINGS.failPopUp, STRINGS.invalidName);
+  } else if (!emailReg.test(email)) {
     Alert.alert(STRINGS.failPopUp, STRINGS.invalidEmail);
   } else if (password.length < 8) {
     Alert.alert(STRINGS.failPopUp, STRINGS.invalidPassword);
-  } else if (name.length < 3) {
-    Alert.alert(STRINGS.failPopUp, STRINGS.invalidName);
   } else {
     signupUser({
       name: name,

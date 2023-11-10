@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  Keyboard,
-} from "react-native";
+import { StyleSheet, View, Text, Pressable, Keyboard } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
