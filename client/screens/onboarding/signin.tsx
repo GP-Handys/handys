@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  Keyboard,
-  Alert,
-} from "react-native";
+import { StyleSheet, View, Text, Pressable, Keyboard } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import { TextInput } from "react-native-paper";
@@ -16,15 +9,19 @@ import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntr
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 import signin from "../../helpers/onboarding/signin";
+import { StackParamList } from "../../App";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-export default function SignIn() {
+type StackProps = NativeStackScreenProps<StackParamList>;
+
+export default function SignIn({ navigation }: StackProps) {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    signin(email, password);
+    signin(email, password, navigation)
   };
 
   return (
