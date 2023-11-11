@@ -1,17 +1,20 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Landing from "./screens/onboarding/landing";
 import SignIn from "./screens/onboarding/signin";
 import SignUp from "./screens/onboarding/signup";
 import COLORS from "./common/colors";
+import Home from "./screens/mainscreens/home";
 
-export type OnboardingStackParamList = {
+export type StackParamList = {
   Landing: undefined;
   SignIn: undefined;
   SignUp: undefined;
+  Home: undefined;
 };
 
-const Stack = createNativeStackNavigator<OnboardingStackParamList>();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 export default function App() {
   return (
@@ -47,6 +50,14 @@ export default function App() {
             },
             headerShadowVisible: false,
           }}
+        />
+        <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+          gestureEnabled: false
+        }}
         />
       </Stack.Navigator>
     </NavigationContainer>

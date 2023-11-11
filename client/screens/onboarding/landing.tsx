@@ -5,11 +5,11 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Logo from "../../components/HandysLogo";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
-import { OnboardingStackParamList } from "../../App";
+import { StackParamList } from "../../App";
 
-type LandingProps = NativeStackScreenProps<OnboardingStackParamList, "Landing">;
+type StackProps = NativeStackScreenProps<StackParamList>;
 
-export default function Landing({ navigation }: LandingProps) {
+export default function Landing({ navigation }: StackProps) {
   return (
     <CommonBackgroundWithNoSafeArea>
       <View style={styles.imagesContainer}>
