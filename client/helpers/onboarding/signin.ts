@@ -26,7 +26,7 @@ export default function signin(
         const message = result.data;
         if (result.status == 200) {
           await AsyncStorage.setItem("Authorization", message);
-          navigation.navigate("Home");
+          navigation.navigate("MainScreensContainer");
         } else {
           Alert.alert(STRINGS.failPopUp, message);
         }

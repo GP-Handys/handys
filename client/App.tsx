@@ -5,13 +5,13 @@ import Landing from "./screens/onboarding/landing";
 import SignIn from "./screens/onboarding/signin";
 import SignUp from "./screens/onboarding/signup";
 import COLORS from "./common/colors";
-import Home from "./screens/mainscreens/home";
+import TabBarNavigationContainer from "./components/navigation/TabBarNavigationContainer";
 
 export type StackParamList = {
   Landing: undefined;
   SignIn: undefined;
   SignUp: undefined;
-  Home: undefined;
+  MainScreensContainer: undefined;
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -52,8 +52,8 @@ export default function App() {
           }}
         />
         <Stack.Screen
-        name="Home"
-        component={Home}
+        name="MainScreensContainer"
+        component={TabBarNavigationContainer}
         options={{
           headerShown: false,
           gestureEnabled: false
