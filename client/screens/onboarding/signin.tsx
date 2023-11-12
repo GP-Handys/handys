@@ -9,10 +9,7 @@ import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntr
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 import signin from "../../helpers/onboarding/signin";
-import { StackParamList } from "../../components/navigation/NavigationStack";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-
-type StackProps = NativeStackScreenProps<StackParamList>;
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 export default function SignIn({ navigation }: StackProps) {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);

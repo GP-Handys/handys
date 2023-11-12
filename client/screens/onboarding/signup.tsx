@@ -9,8 +9,9 @@ import OnboardingHeader from "../../components/OnboardingHeader";
 import toggleEyeIcon from "../../helpers/toggle/toggleEyeIcon";
 import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntry";
 import signup from "../../helpers/onboarding/signup";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
-export default function SignUp() {
+export default function SignUp({navigation}: StackProps) {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
 
   function handleSignUp() {
-    signup(email, password, name);
+    signup(email, password, name, navigation);
   }
 
   return (

@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NativeStackScreenProps, createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export type StackParamList = {
   Landing: undefined;
@@ -9,3 +9,5 @@ export type StackParamList = {
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
+
+export type StackProps = NativeStackScreenProps<StackParamList>;

@@ -1,8 +1,15 @@
 import { Alert } from "react-native";
 import { signupUser } from "../../api/UserApi";
 import STRINGS from "../../strings/strings";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackParamList } from "../../components/navigation/NavigationStack";
 
-export default function signup(email: string, password: string, name: string) {
+export default function signup(
+  email: string,
+  password: string,
+  name: string,
+  navigation: NativeStackNavigationProp<StackParamList>
+) {
   email = email.toLowerCase();
   let emailReg = STRINGS.emailRegex;
 
@@ -22,6 +29,9 @@ export default function signup(email: string, password: string, name: string) {
         const message = result.data;
         const title = result.status == 200 ? "Yay!" : "Oops";
         Alert.alert(title, message);
+        if (result.status == 200) {
+          navigation.navigate("SignIn");
+        }
       })
       .catch((err) => {
         console.error(err);
