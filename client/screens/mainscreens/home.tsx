@@ -1,10 +1,10 @@
 import { Button } from "react-native-paper";
-import { CommonBackgroundWithSafeArea } from "../../common/background";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 
 export default function Home() {
   return (
-    <CommonBackgroundWithSafeArea>
+    <CommonBackgroundWithNoSafeArea>
       <Button
         onPress={async () => {
           console.log(await AsyncStorage.getItem("Authorization"));
@@ -12,6 +12,6 @@ export default function Home() {
       >
         CLICK ME
       </Button>
-    </CommonBackgroundWithSafeArea>
+    </CommonBackgroundWithNoSafeArea>
   );
 }

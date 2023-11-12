@@ -1,12 +1,13 @@
-import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { Button } from "react-native-paper";
+import { CommonBackgroundWithNoSafeArea } from "../../common/background";
+
 
 export default function Profile() {
     return (
-        <CommonBackgroundWithSafeArea>
+        <CommonBackgroundWithNoSafeArea>
             <Button buttonColor="purple" textColor="white">
                 CLICK ME
             </Button>
-        </CommonBackgroundWithSafeArea>
+        </CommonBackgroundWithNoSafeArea>
     );
 }
