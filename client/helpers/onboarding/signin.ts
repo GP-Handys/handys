@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 import { loginUser } from "../../api/UserApi";
 import STRINGS from "../../strings/strings";
-import { StackParamList } from "../../App";
+import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

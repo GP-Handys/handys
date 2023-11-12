@@ -9,7 +9,7 @@ import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntr
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 import signin from "../../helpers/onboarding/signin";
-import { StackParamList } from "../../App";
+import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type StackProps = NativeStackScreenProps<StackParamList>;
