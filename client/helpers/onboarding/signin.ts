@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 import { loginUser } from "../../api/UserApi";
 import STRINGS from "../../strings/strings";
-import { StackParamList } from "../../App";
+import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -26,7 +26,7 @@ export default function signin(
         const message = result.data;
         if (result.status == 200) {
           await AsyncStorage.setItem("Authorization", message);
-          navigation.navigate("Home");
+          navigation.navigate("MainScreensContainer");
         } else {
           Alert.alert(STRINGS.failPopUp, message);
         }

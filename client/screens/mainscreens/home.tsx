@@ -1,6 +1,6 @@
 import { Button } from "react-native-paper";
-import { CommonBackgroundWithSafeArea } from "../../common/background";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CommonBackgroundWithSafeArea } from "../../common/background";
 
 export default function Home() {
   return (

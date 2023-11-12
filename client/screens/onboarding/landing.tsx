@@ -5,7 +5,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Logo from "../../components/HandysLogo";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
-import { StackParamList } from "../../App";
+import { StackParamList } from "../../components/navigation/NavigationStack";
 
 type StackProps = NativeStackScreenProps<StackParamList>;
 
