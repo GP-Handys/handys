@@ -1,12 +1,24 @@
-import { Button } from "react-native-paper";
-import { CommonBackgroundWithNoSafeArea } from "../../common/background";
-
-export default function Cart() {
+import {
+    SafeAreaView,
+    View,
+    FlatList,
+    StyleSheet,
+    Text,
+    StatusBar,
+    Pressable,
+    Alert,
+    TouchableOpacity,
+  } from "react-native";
+  import { CommonBackgroundWithNoSafeArea } from "../../common/background";
+  import CartItem from "../../components/cart/cartItem";
+  
+  export default function Community() {
     return (
-        <CommonBackgroundWithNoSafeArea>
-            <Button buttonColor="orange" textColor="white">
-                CLICK ME
-            </Button>
-        </CommonBackgroundWithNoSafeArea>
+      <CommonBackgroundWithNoSafeArea>
+        <CartItem />
+      </CommonBackgroundWithNoSafeArea>
     );
-}
+  }
+  
+  const styles = StyleSheet.create({});
+  

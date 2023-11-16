@@ -18,9 +18,8 @@ const styles = StyleSheet.create({
   Iconbutton: {
     width: 45,
     height: 45,
-    position: "absolute",
-    top: 540,
-    left: 290,
+    marginLeft: 300,
+    marginTop: 600,
   },
 
   wtf: {},
