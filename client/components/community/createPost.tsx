@@ -7,7 +7,7 @@ export default function createPostButton() {
     <CommonBackgroundWithNoSafeArea>
       <View style={styles.Iconbutton}>
         <TouchableOpacity>
-          <MaterialIcons name="post-add" size={50} color="#F6977F" />
+          <MaterialIcons name="add-circle" size={50} color="#F6977F" />
         </TouchableOpacity>
       </View>
     </CommonBackgroundWithNoSafeArea>
@@ -17,10 +17,10 @@ export default function createPostButton() {
 const styles = StyleSheet.create({
   Iconbutton: {
     position: "absolute",
-    width: 45,
-    height: 45,
-    bottom: 18,
-    right:12,
+    width: 48,
+    height: 48,
+    bottom: 25,
+    right: 20,
   },
 
   wtf: {},

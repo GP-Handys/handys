@@ -16,6 +16,7 @@ export default function Community() {
   return (
     <CommonBackgroundWithNoSafeArea>
       <CreatePostButton />
+      
     </CommonBackgroundWithNoSafeArea>
   );
 }
