@@ -2,8 +2,9 @@ import { View, Text } from "react-native";
 import moment from "moment";
 
 export default function TimeStamp() {
-  const formattedTime = moment().startOf("day").fromNow();
-
+  const formattedTime = moment("2023-11-17 17:08:31", "YYYY-MM-DD HH:mm:ss")
+  .add(3,"hours").fromNow();
+   
   return (
     <View>
       <Text style={{ color: "#FFFFFA", fontSize: 13.11 }}>{formattedTime}</Text>

@@ -10,12 +10,10 @@ import {
     TouchableOpacity,
   } from "react-native";
   import { CommonBackgroundWithNoSafeArea } from "../../common/background";
-  import CartItem from "../../components/cart/cartItem";
   
   export default function Community() {
     return (
       <CommonBackgroundWithNoSafeArea>
-        <CartItem />
       </CommonBackgroundWithNoSafeArea>
     );
   }

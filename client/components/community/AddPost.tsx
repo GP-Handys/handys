@@ -22,6 +22,4 @@ const styles = StyleSheet.create({
     bottom: 25,
     right: 20,
   },
-
-  wtf: {},
 });
