@@ -17,10 +17,10 @@ export default function createPostButton() {
 const styles = StyleSheet.create({
   Iconbutton: {
     position: "absolute",
-    width: 45,
-    height: 45,
     bottom: 18,
     right:12,
+    width: 45,
+    height: 45,
   },
 
   wtf: {},

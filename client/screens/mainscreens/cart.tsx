@@ -16,6 +16,8 @@ import {
     return (
       <CommonBackgroundWithNoSafeArea>
         <CartItem />
+        <CartItem />
+        <CartItem />
       </CommonBackgroundWithNoSafeArea>
     );
   }

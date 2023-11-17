@@ -1,56 +1,94 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-  import { Button } from "react-native-paper";
-  import { CommonBackgroundWithNoSafeArea } from "../../common/background";
-  import React from "react";
+import ThematicBreak from "../ThematicBreak"
+import React, {useState} from 'react';
+
 
 export default function cartItem() {
-      
+  const [timesPressed, setTimesPressed] = useState(0);
+
         return (
-          <CommonBackgroundWithNoSafeArea>
-            <Image
-              style={styles.root}
-              source={require("../../assets/landing.png")}
-            />
-          </CommonBackgroundWithNoSafeArea>
-        );
-      }
-      
-      const styles = StyleSheet.create({
-        root: {
-          width: 333,
-          height: 115,
-          flexShrink: 0
-        },
-        item_pic: {
-          width: 93,
-          height: 17,
-          flexShrink: 0,
-          color: "rgba(255, 255, 255, 1)",
-          fontFamily: "Readex Pro",
-          fontSize: 16,
-          fontStyle: "normal",
-          fontWeight: "500"
-        },
-        price: {
-          width: 71,
-          height: 14,
-          flexShrink: 0,
-          color: "rgba(255, 255, 255, 1)",
-          fontFamily: "Readex Pro",
-          fontSize: 13,
-          fontStyle: "normal",
-          fontWeight: "400"
-        },
-        quantity: {
-          width: 7,
-          height: 8,
-          flexShrink: 0,
-          color: "rgba(255, 255, 255, 1)",
-          fontFamily: "Readex Pro",
-          fontSize: 13,
-          fontStyle: "normal",
-          fontWeight: "400"
-        }
+          
+          <View>
+            <View style={styles.container}>
+              <View style={styles.info}>
+                <Text style={styles.title} >
+                  {`Embroidery`}
+                </Text>
+                <Text style={styles.customize} >
+                  {`Customize`}
+                </Text>
+                <Text style={styles.description} >
+                  {`Details: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla blaDetails: bla bla bla`}
+                </Text>
+
+                <View style={styles.footer}>
+                  <Text style={styles.quantity} >
+                    <Pressable><MaterialIcons name="add" size={14} color="#ffffff"/></Pressable>
+                    {`    1    `}
+                    <Pressable><MaterialIcons name="remove" size={14} color="#ffffff"/></Pressable>
+                  </Text>
+                  <Text style={styles.price} >
+                    {`JOD 199.50`}
+                  </Text>
+                </View>
+              </View>
+              <Image source={require("../../assets/pic1.jpg")} style={styles.image} />
+              </View>
+              <ThematicBreak marginHorizontal={15} />
+        </View>
+      );
+    }
+    
+    const styles = StyleSheet.create({
+      container: {
+        marginTop: 20,
+        flexDirection: "row",
+        paddingBottom: 10,
+        //borderColor: "#e6e6e6",
+        //borderBottomWidth: 1,
+      },
+      footer: {
+        flexDirection: "row",
+      },
+      title: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontSize: 16
+      },
+      customize: {
+        color: 'rgba(246, 151, 127, 1)',
+        fontSize: 14,
+        textDecorationLine: 'underline',
+      },
+      image: {
+        width: 130,
+        height: 130,
+        borderRadius: 10,
+        marginLeft:40
+      },
+      info: {
+        marginLeft: 15,
+        flexDirection: "column",
+        //justifyContent: "space-between",
+        width: 160
+      },
+      description: {
+        fontSize: 12,
+        color: "#8e8e93",
+        marginTop: 5,
+        width: 206,
+        height: 87,
+        marginBottom:5
+      },
+      price: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontSize: 16,
+        fontWeight:'bold',
+        marginLeft: 40
+      },
+      quantity: {
+        color: 'rgba(255, 255, 255, 1)',
+        fontSize: 16,
+      },
       });
       
