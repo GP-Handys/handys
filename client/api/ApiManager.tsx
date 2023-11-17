@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "https://8ef2-2a01-9700-1364-7f00-d169-b7f8-c711-a10d.ngrok-free.app";
+const BACKEND_URL = "https://f743-109-107-243-139.ngrok-free.app";
 const ApiManager = axios.create({
   baseURL: `${BACKEND_URL}/api`,
   responseType: "json",
