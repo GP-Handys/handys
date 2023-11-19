@@ -3,7 +3,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import toggleLikeIcon from "../../helpers/toggle/toggleLikeIcon";
 
-export default function LikeDisLikeButton() {
+export default function LikeButton() {
   const [icon, setIcon] = useState("thumb-up-off-alt");
 
   return (

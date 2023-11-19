@@ -4,7 +4,7 @@ import TimeStamp from "../../components/community/TimeStamp";
 import HandysLogo from "../../components/HandysLogo";
 import COLORS from "../../common/colors";
 import ThematicBreak from "../../components/ThematicBreak";
-import LikeDislike from "../../components/community/LikeDisLikeButton";
+import LikeButton from "../../components/community/LikeButton";
 
 export default function Community() {
   const Posts = [
@@ -13,49 +13,49 @@ export default function Community() {
       user: "laith",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike: <LikeDislike />,
+      LikeButton: <LikeButton />,
     },
     {
       postTime: <TimeStamp />,
       user: "assem",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike: <LikeDislike />,
+      LikeButton: <LikeButton />,
     },
     {
       postTime: <TimeStamp />,
       user: "rayyan",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike: <LikeDislike />,
+      LikeButton: <LikeButton />,
     },
     {
       postTime: <TimeStamp />,
       user: "5ara",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike: <LikeDislike />,
+      LikeButton: <LikeButton />,
     },
     {
       postTime: <TimeStamp />,
       user: "dog",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike: <LikeDislike />,
+      LikeButton: <LikeButton />,
     },
     {
       postTime: <TimeStamp />,
       user: "shit",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike: <LikeDislike />,
+      LikeButton: <LikeButton />,
     },
     {
       postTime: <TimeStamp />,
       user: "ass",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike: <LikeDislike />,
+      LikeButton: <LikeButton />,
     },
   ];
 
@@ -67,13 +67,13 @@ export default function Community() {
       user: string;
       postText: string;
       pfp: JSX.Element;
-      likeDisLike: JSX.Element;
+      LikeButton: JSX.Element;
     };
   }) => {
     return (
       <View>
         {item.pfp}
-        <LikeDislike />
+        <LikeButton />
         <Text>{item.user} </Text>
         <Text style={{ position: "absolute", right: 0 }}> {item.postTime}</Text>
         <ThematicBreak />
