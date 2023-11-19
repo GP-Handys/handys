@@ -18,7 +18,7 @@ export default function SignIn({ navigation }: StackProps) {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    signin(email, password, navigation)
+    signin(email, password, navigation);
   };
 
   return (

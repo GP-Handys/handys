@@ -1,10 +1,4 @@
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Text,
-  Image,
-} from "react-native";
+import { View, FlatList, StyleSheet, Text, Image } from "react-native";
 import CreatePostButton from "../../components/community/AddPost";
 import TimeStamp from "../../components/community/TimeStamp";
 import HandysLogo from "../../components/HandysLogo";
@@ -18,57 +12,50 @@ export default function Community() {
       postTime: <TimeStamp />,
       user: "laith",
       postText: " random text",
-      pfp: <Image source={require("../../assets/landing.png")} />,
-      likeDisLike : <LikeDislike/>
-
+      pfp: <HandysLogo />,
+      likeDisLike: <LikeDislike />,
     },
     {
       postTime: <TimeStamp />,
       user: "assem",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike : <LikeDislike/>
-
+      likeDisLike: <LikeDislike />,
     },
     {
       postTime: <TimeStamp />,
       user: "rayyan",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike : <LikeDislike/>
-
+      likeDisLike: <LikeDislike />,
     },
     {
       postTime: <TimeStamp />,
       user: "5ara",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike : <LikeDislike/>
-
+      likeDisLike: <LikeDislike />,
     },
     {
       postTime: <TimeStamp />,
       user: "dog",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike : <LikeDislike/>
-
+      likeDisLike: <LikeDislike />,
     },
     {
       postTime: <TimeStamp />,
       user: "shit",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike : <LikeDislike/>
-
+      likeDisLike: <LikeDislike />,
     },
     {
       postTime: <TimeStamp />,
       user: "ass",
       postText: " random text",
       pfp: <HandysLogo />,
-      likeDisLike : <LikeDislike/>
-
+      likeDisLike: <LikeDislike />,
     },
   ];
 
@@ -80,18 +67,17 @@ export default function Community() {
       user: string;
       postText: string;
       pfp: JSX.Element;
-      likeDisLike : JSX.Element;
+      likeDisLike: JSX.Element;
     };
   }) => {
     return (
       <View>
         {item.pfp}
-        <LikeDislike/>
+        <LikeDislike />
         <Text>{item.user} </Text>
         <Text style={{ position: "absolute", right: 0 }}> {item.postTime}</Text>
         <ThematicBreak />
       </View>
-
     );
   };
 
@@ -101,7 +87,6 @@ export default function Community() {
         <FlatList data={Posts} renderItem={renderItem} />
       </View>
       <CreatePostButton />
-    
     </View>
   );
 }
