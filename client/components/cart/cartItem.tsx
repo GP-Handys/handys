@@ -4,40 +4,39 @@ import {
   Image,
   Text,
   Pressable,
-  TouchableOpacity
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import React, { useState } from "react";
 
-export default function cartItem() {
+interface Props {
+  items: any;
+}
+
+export default function cartItem({ items }: Props) {
   const [counter, setCounter] = useState(0);
-  var [total, setTotal] = useState(0);
+  var [ItemTotal, setItemTotal] = useState(0);
 
   const Plus = () => {
     setCounter(counter + 1);
-    setTotal((total += 199.5));
+    setItemTotal((items.price += items.price));
   };
 
   const Minus = () => {
     if (counter > 0) {
       setCounter(counter - 1);
-      setTotal((total -= 199.5));
+      setItemTotal((items.price -= 1));
     }
   };
+
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.info}>
-          <Text style={styles.title}>{`Embroidery`}</Text>
-          <Text style={styles.customize}>{`Customize`}</Text>
-          <Text style={styles.description}>
-            {`Details: bla bla blaDetails:bla bla blaDetails: bla bla blaDetails: `}
-          </Text>
-
+          <Text style={styles.title}>{items.name}</Text>
+          <Text style={styles.description}>{items.description}</Text>
           <View style={styles.footer}>
-            <Text style={styles.price}>{total + "JOD"}</Text>
-
+            <Text style={styles.price}>{items.price + "JOD"}</Text>
             <View style={styles.quantity}>
               <View>
                 <Pressable onPress={Plus}>
@@ -57,7 +56,9 @@ export default function cartItem() {
         </View>
         <Image source={require("../../assets/pic1.jpg")} style={styles.image} />
       </View>
-      <ThematicBreak marginHorizontal={15} />
+      <View style={{ marginTop: 20 }}>
+        <ThematicBreak marginHorizontal={15} />
+      </View>
     </View> // mainView
   );
 }
@@ -65,8 +66,7 @@ export default function cartItem() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    flexDirection: "row",
-    paddingBottom: 10
+    flexDirection: "row"
   },
   footer: {
     borderColor: "rgba(255, 255, 255, 1)"
@@ -103,20 +103,17 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 1)",
     fontSize: 16,
     fontWeight: "bold",
-    marginLeft: 85,
-
-    
+    marginLeft: 85
   },
   quantity: {
     marginLeft: 2,
     color: "rgba(255, 255, 255, 1)",
-    width:60,
-    flexDirection:'row-reverse',
-    justifyContent: 'space-between'
-    
+    width: 60,
+    flexDirection: "row-reverse",
+    justifyContent: "space-between"
   },
   counter: {
     fontSize: 16,
-    color:'white'
+    color: "white"
   }
 });
