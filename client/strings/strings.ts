@@ -10,6 +10,8 @@ let STRINGS = {
   invalidName: "The name should be at least 3 characters long",
   emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   InvalidCredentials: "Invalid credentials",
+  homeBannerTitle: "Products Made With Love",
+  homeBannerSubtitle: "Handys offers a wide variety of handicrafts made with love by skilled artisans."
 };
 
 export default STRINGS;
