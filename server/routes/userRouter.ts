@@ -54,6 +54,24 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+
+export const getProfile = async (req: Request, res: Response) => {
+  try {
+    const jwtToken: string = req.get("Authorization")?.toString()!;
+    const id = extractUserFromJwt(jwtToken);
+    const user = await User.findByPk(id);    
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
 export const getUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
