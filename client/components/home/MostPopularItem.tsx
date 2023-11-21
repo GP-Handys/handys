@@ -1,10 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-interface Props {
-
-}
-
 export default function MostPopularItem({}) {
   return (
     <View style={styles.container}>
@@ -25,8 +21,6 @@ export default function MostPopularItem({}) {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 30,
-    marginTop: 20,
     paddingBottom: 40
   },
   itemName: {

@@ -97,7 +97,17 @@ export default function Home() {
       </ScrollView>
 
       <Text style={styles.sectionTitle}>Most Popular Items</Text>
-      <MostPopularItem />
+      <View style={styles.mostPopularContainer}>
+        <MostPopularItem />
+        <MostPopularItem />
+        <MostPopularItem />
+        <MostPopularItem />
+        <MostPopularItem />
+        <MostPopularItem />
+        <MostPopularItem />
+        <MostPopularItem />
+        <MostPopularItem />
+      </View>
     </CommonScrollableBackground>
   );
 }
@@ -136,4 +146,13 @@ const styles = StyleSheet.create({
   categoryScrollViewContent: {
     paddingRight: 23,
   },
+  mostPopularContainer: {
+    marginLeft: 30,
+    marginTop: 20,
+    marginRight: 30,
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  }
 });
