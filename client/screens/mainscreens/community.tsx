@@ -33,7 +33,7 @@ export default function Community() {
       pfp: require("../../assets/logo.png"),
     },
     {
-      id: "shit", 
+      id: "shit",
       postText: " random text",
       pfp: require("../../assets/logo.png"),
     },
@@ -44,7 +44,8 @@ export default function Community() {
     },
   ];
 
-  const onePost = ({ item }) => (
+  type ItemPros = { item: any };
+  const onePost = ({ item }: ItemPros) => (
     <View>
       <View>
         <Image source={item.pfp} />

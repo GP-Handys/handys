@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 export default function LikeButton() {
   interface Ibutton {
-    iconName: string;
+    iconName: any;
   }
 
   const toggleLikeIcon = (currentIcon: Ibutton): Ibutton => {
