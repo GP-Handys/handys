@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApiManager from "./ApiManager";
 
 export const loginUser = async (data: any) => {
@@ -29,3 +30,22 @@ export const signupUser = async (data: any) => {
     return error.message;
   }
 };
+
+export const getProfile = async ()=>{
+  
+  try {
+    let token = await AsyncStorage.getItem("Authorization");
+    const result = await ApiManager("/users/profile", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });
+    console.log(result);
+    
+    return result;    
+  } catch (error: any) {
+    return error.message;
+  }
+}

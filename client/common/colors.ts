@@ -4,7 +4,8 @@ let COLORS = {
   handysGrey: "#464949",
   textInputSelection: "#00000090",
   textInputPlaceholder: "#FFFFFF80",
-  tabNavIconFocused: "#F6977F"
+  tabNavIconFocused: "#F6977F",
+  DividerColor:"rgba(255, 255, 255, 0.25)"
 };
 
 export default COLORS;

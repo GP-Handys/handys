@@ -1,4 +1,6 @@
 import { View, StyleSheet } from "react-native";
+import { Divider } from "react-native-paper";
+import COLORS from "../common/colors";
 
 interface Props {
   marginHorizontal?: number;
@@ -6,13 +8,13 @@ interface Props {
 
 export default function ThematicBreak({ marginHorizontal }: Props) {
   return (
-    <View style={[styles.line, { marginHorizontal: marginHorizontal }]}></View>
+    <Divider style={[styles.line, { marginHorizontal: marginHorizontal }]}></Divider>
   );
 }
 
 const styles = StyleSheet.create({
   line: {
-    borderBottomColor: "#FFFFFA40",
-    borderWidth: 1,
+    backgroundColor: COLORS.DividerColor,
+    height:2
   },
 });
