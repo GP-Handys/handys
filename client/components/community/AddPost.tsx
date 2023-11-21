@@ -2,7 +2,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function createPostButton() {
+export default function AddPost() {
   return (
     <CommonBackgroundWithNoSafeArea>
       <View style={styles.Iconbutton}>

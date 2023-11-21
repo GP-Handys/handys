@@ -1,100 +1,87 @@
 import { View, FlatList, StyleSheet, Text, Image } from "react-native";
-import CreatePostButton from "../../components/community/AddPost";
 import TimeStamp from "../../components/community/TimeStamp";
-import HandysLogo from "../../components/HandysLogo";
-import COLORS from "../../common/colors";
 import ThematicBreak from "../../components/ThematicBreak";
 import LikeButton from "../../components/community/LikeButton";
+import AddPost from "../../components/community/AddPost";
+import COLORS from "../../common/colors";
 
 export default function Community() {
-  const Posts = [
+  const posts = [
     {
-      postTime: <TimeStamp />,
-      user: "laith",
+      id: "laith",
       postText: " random text",
-      pfp: <HandysLogo />,
-      LikeButton: <LikeButton />,
+      pfp: require("../../assets/logo.png"),
     },
     {
-      postTime: <TimeStamp />,
-      user: "assem",
+      id: "assem",
       postText: " random text",
-      pfp: <HandysLogo />,
-      LikeButton: <LikeButton />,
+      pfp: require("../../assets/logo.png"),
     },
     {
-      postTime: <TimeStamp />,
-      user: "rayyan",
+      id: "rayyan",
       postText: " random text",
-      pfp: <HandysLogo />,
-      LikeButton: <LikeButton />,
+      pfp: require("../../assets/logo.png"),
     },
     {
-      postTime: <TimeStamp />,
-      user: "5ara",
+      id: "5ara",
       postText: " random text",
-      pfp: <HandysLogo />,
-      LikeButton: <LikeButton />,
+      pfp: require("../../assets/logo.png"),
     },
     {
-      postTime: <TimeStamp />,
-      user: "dog",
+      id: "dog",
       postText: " random text",
-      pfp: <HandysLogo />,
-      LikeButton: <LikeButton />,
+      pfp: require("../../assets/logo.png"),
     },
     {
-      postTime: <TimeStamp />,
-      user: "shit",
+      id: "shit", 
       postText: " random text",
-      pfp: <HandysLogo />,
-      LikeButton: <LikeButton />,
+      pfp: require("../../assets/logo.png"),
     },
     {
-      postTime: <TimeStamp />,
-      user: "ass",
+      id: "ass",
       postText: " random text",
-      pfp: <HandysLogo />,
-      LikeButton: <LikeButton />,
+      pfp: require("../../assets/logo.png"),
     },
   ];
 
-  const renderItem = ({
-    item,
-  }: {
-    item: {
-      postTime: JSX.Element;
-      user: string;
-      postText: string;
-      pfp: JSX.Element;
-      LikeButton: JSX.Element;
-    };
-  }) => {
+  const onePost = ({ item }) => (
+    <View>
+      <View>
+        <Image source={item.pfp} />
+      </View>
+      <Text> {item.id}</Text>
+      <View>
+        <LikeButton />
+      </View>
+      <View>
+        <TimeStamp />
+      </View>
+      <Text>{item.postText}</Text>
+    </View>
+  );
+
+  const itemSeparator = () => {
     return (
       <View>
-        {item.pfp}
-        <LikeButton />
-        <Text>{item.user} </Text>
-        <Text style={{ position: "absolute", right: 0 }}> {item.postTime}</Text>
         <ThematicBreak />
       </View>
     );
   };
 
   return (
-    <View>
-      <View style={styles.itemContainer}>
-        <FlatList data={Posts} renderItem={renderItem} />
-      </View>
-      <CreatePostButton />
+    <View style={styles.listtt}>
+      <FlatList
+        data={posts}
+        renderItem={onePost}
+        ItemSeparatorComponent={itemSeparator}
+      />
+      <AddPost />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  itemContainer: {
-    borderBottomColor: "#ccc",
-    padding: 16,
+  listtt: {
     backgroundColor: COLORS.commonBackground,
   },
 });
