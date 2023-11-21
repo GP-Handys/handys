@@ -1,12 +1,23 @@
-import { Button } from "react-native-paper";
+import {
+  SafeAreaView,
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  StatusBar,
+  Pressable,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
+import CreatePostButton from "../../components/community/createPost";
 
 export default function Community() {
-    return (
-        <CommonBackgroundWithNoSafeArea>
-            <Button buttonColor="red" textColor="white">
-                CLICK ME
-            </Button>
-        </CommonBackgroundWithNoSafeArea>
-    );
+  return (
+    <CommonBackgroundWithNoSafeArea>
+      <CreatePostButton />
+    </CommonBackgroundWithNoSafeArea>
+  );
 }
+
+const styles = StyleSheet.create({});
