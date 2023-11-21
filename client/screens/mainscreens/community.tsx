@@ -47,12 +47,11 @@ export default function Community() {
   type ItemPros = { item: any };
   const onePost = ({ item }: ItemPros) => (
     <View>
-        <Text style={styles.userId}> {item.userId}</Text>
+      <Text style={styles.userId}> {item.userId}</Text>
       <View style={styles.user}>
-
-          <View style={styles.imgContainer}>
-            <Image style={styles.pfpImg} source={item.pfp} />
-          </View>
+        <View style={styles.imgContainer}>
+          <Image style={styles.pfpImg} source={item.pfp} />
+        </View>
       </View>
       <View>
         <LikeButton />
@@ -89,38 +88,33 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.commonBackground,
   },
   timeStamp: {
-   position: "absolute",
-   left:275,
-   top:15,
+    position: "absolute",
+    left: 275,
+    top: 15,
   },
-  user: {
-    
-  },
+  user: {},
   imgContainer: {
-    flexDirection:"column",
-    height:39,
+    flexDirection: "column",
+    height: 39,
     width: 39,
-    aspectRatio : 1*1,
-    left:25,
+    aspectRatio: 1 * 1,
+    left: 25,
     borderWidth: 1.5,
     right: 5,
     borderRadius: 7,
-
   },
-  
+
   pfpImg: {
-    resizeMode:"cover",
+    resizeMode: "cover",
     width: "100%",
     height: "100%",
     borderRadius: 7,
     borderColor: "red",
-    
   },
-  userId:{
+  userId: {
     fontSize: 14,
-    left: 60, 
-    top :15,
+    left: 60,
+    top: 15,
     color: "white",
-    
   },
 });
