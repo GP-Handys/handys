@@ -8,53 +8,56 @@ import COLORS from "../../common/colors";
 export default function Community() {
   const posts = [
     {
-      id: "laith",
+      userId: "laith",
       postText: " random text",
-      pfp: require("../../assets/logo.png"),
+      pfp: require("../../assets/pic1.jpg"),
     },
     {
-      id: "assem",
+      userId: "assem",
       postText: " random text",
-      pfp: require("../../assets/logo.png"),
+      pfp: require("../../assets/pic1.jpg"),
     },
     {
-      id: "rayyan",
+      userId: "rayyan",
       postText: " random text",
-      pfp: require("../../assets/logo.png"),
+      pfp: require("../../assets/pic1.jpg"),
     },
     {
-      id: "5ara",
+      userId: "5ara",
       postText: " random text",
-      pfp: require("../../assets/logo.png"),
+      pfp: require("../../assets/pic1.jpg"),
     },
     {
-      id: "dog",
+      userId: "dog",
       postText: " random text",
-      pfp: require("../../assets/logo.png"),
+      pfp: require("../../assets/pic1.jpg"),
     },
     {
-      id: "shit",
+      userId: "shit",
       postText: " random text",
-      pfp: require("../../assets/logo.png"),
+      pfp: require("../../assets/pic1.jpg"),
     },
     {
-      id: "ass",
+      userId: "ass",
       postText: " random text",
-      pfp: require("../../assets/logo.png"),
+      pfp: require("../../assets/pic1.jpg"),
     },
   ];
 
   type ItemPros = { item: any };
   const onePost = ({ item }: ItemPros) => (
     <View>
-      <View>
-        <Image source={item.pfp} />
+        <Text style={styles.userId}> {item.userId}</Text>
+      <View style={styles.user}>
+
+          <View style={styles.imgContainer}>
+            <Image style={styles.pfpImg} source={item.pfp} />
+          </View>
       </View>
-      <Text> {item.id}</Text>
       <View>
         <LikeButton />
       </View>
-      <View>
+      <View style={styles.timeStamp}>
         <TimeStamp />
       </View>
       <Text>{item.postText}</Text>
@@ -84,5 +87,40 @@ export default function Community() {
 const styles = StyleSheet.create({
   listtt: {
     backgroundColor: COLORS.commonBackground,
+  },
+  timeStamp: {
+   position: "absolute",
+   left:275,
+   top:15,
+  },
+  user: {
+    
+  },
+  imgContainer: {
+    flexDirection:"column",
+    height:39,
+    width: 39,
+    aspectRatio : 1*1,
+    left:25,
+    borderWidth: 1.5,
+    right: 5,
+    borderRadius: 7,
+
+  },
+  
+  pfpImg: {
+    resizeMode:"cover",
+    width: "100%",
+    height: "100%",
+    borderRadius: 7,
+    borderColor: "red",
+    
+  },
+  userId:{
+    fontSize: 14,
+    left: 60, 
+    top :15,
+    color: "white",
+    
   },
 });

@@ -8,7 +8,7 @@ export default function TimeStamp() {
 
   return (
     <View>
-      <Text style={{ color: "#FFFFFA", fontSize: 13.11 }}>{formattedTime}</Text>
+      <Text style={{ color: "red", fontSize: 13.11 }}>{formattedTime}</Text>
     </View>
   );
 }
