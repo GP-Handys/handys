@@ -10,7 +10,6 @@ import {
   ScrollView,
 } from "react-native";
 import COLORS from "./colors";
-import { ScrollView } from "react-native";
 
 interface Props {
   children: ReactNode;
