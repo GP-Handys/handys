@@ -14,6 +14,7 @@ const router = express.Router()
 //user routes
 router.post("/api/users/login", userRouter.login)
 router.post("/api/users/signup", userRouter.signup)
+router.get("/api/users/profile", tokenValidate, userRouter.getProfile)
 router.get("/api/users/getUser/:id", tokenValidate, userRouter.getUser)
 router.put("/api/users/updateUser/:id", tokenValidate, userRouter.updateUser)
 router.delete("/api/users/deleteUser/:id", tokenValidate, userRouter.deleteUser)
