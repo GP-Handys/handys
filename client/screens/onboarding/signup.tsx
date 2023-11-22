@@ -11,7 +11,7 @@ import toggleIsSecureTextEntry from "../../helpers/toggle/toggleIsSecureTextEntr
 import signup from "../../helpers/onboarding/signup";
 import { StackProps } from "../../components/navigation/NavigationStack";
 
-export default function SignUp({navigation}: StackProps) {
+export default function SignUp({ navigation }: StackProps) {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
   const [name, setName] = useState("");
