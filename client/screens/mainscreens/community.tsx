@@ -4,41 +4,47 @@ import ThematicBreak from "../../components/ThematicBreak";
 import LikeButton from "../../components/community/LikeButton";
 import AddPost from "../../components/community/AddPost";
 import COLORS from "../../common/colors";
+import CommentButton from "../../components/community/CommentButton";
 
 export default function Community() {
   const posts = [
     {
-      userId: "laith",
-      postText: " random text",
+      userId: "Innovative crafts",
+      postText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       pfp: require("../../assets/pic1.jpg"),
+      postPfp: require("../../assets/pic1.jpg"),
     },
     {
-      userId: "assem",
-      postText: " random text",
+      userId: "assem ",
+      postText:
+        "assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem assem ",
       pfp: require("../../assets/pic1.jpg"),
     },
     {
       userId: "rayyan",
+      postText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      pfp: require("../../assets/pic1.jpg"),
+      postPfp: require("../../assets/pic1.jpg"),
+    },
+    {
+      userId: "yousef",
       postText: " random text",
       pfp: require("../../assets/pic1.jpg"),
     },
     {
-      userId: "5ara",
+      userId: "ammar",
       postText: " random text",
       pfp: require("../../assets/pic1.jpg"),
     },
     {
-      userId: "dog",
+      userId: "abdallah",
       postText: " random text",
       pfp: require("../../assets/pic1.jpg"),
     },
     {
-      userId: "shit",
-      postText: " random text",
-      pfp: require("../../assets/pic1.jpg"),
-    },
-    {
-      userId: "ass",
+      userId: "jesus",
       postText: " random text",
       pfp: require("../../assets/pic1.jpg"),
     },
@@ -47,19 +53,31 @@ export default function Community() {
   type ItemPros = { item: any };
   const onePost = ({ item }: ItemPros) => (
     <View>
-      <Text style={styles.userId}> {item.userId}</Text>
-      <View style={styles.user}>
+      <View style={styles.userProfile}>
         <View style={styles.imgContainer}>
           <Image style={styles.pfpImg} source={item.pfp} />
         </View>
-      </View>
-      <View>
-        <LikeButton />
+        <Text style={styles.userName}> {item.userId}</Text>
       </View>
       <View style={styles.timeStamp}>
         <TimeStamp />
       </View>
-      <Text>{item.postText}</Text>
+      <View style={styles.mainPost}>
+        <Text style={{ color: "white", fontSize: 12 }}>{item.postText}</Text>
+        {item.postPfp && (
+          <View style={styles.postImgContainer}>
+            <Image style={styles.postImg} source={item.postPfp} />
+          </View>
+        )}
+      </View>
+      <View style={styles.interActive}>
+        <View style={styles.like}>
+          <LikeButton />
+        </View>
+        <View style={styles.comment}>
+          <CommentButton />
+        </View>
+      </View>
     </View>
   );
 
@@ -72,7 +90,7 @@ export default function Community() {
   };
 
   return (
-    <View style={styles.listtt}>
+    <View style={styles.community}>
       <FlatList
         data={posts}
         renderItem={onePost}
@@ -84,7 +102,7 @@ export default function Community() {
 }
 
 const styles = StyleSheet.create({
-  listtt: {
+  community: {
     backgroundColor: COLORS.commonBackground,
   },
   timeStamp: {
@@ -92,29 +110,65 @@ const styles = StyleSheet.create({
     left: 275,
     top: 15,
   },
-  user: {},
-  imgContainer: {
-    flexDirection: "column",
-    height: 39,
-    width: 39,
-    aspectRatio: 1 * 1,
-    left: 25,
-    borderWidth: 1.5,
-    right: 5,
-    borderRadius: 7,
+  userProfile: {
+    flexDirection: "row",
+    alignSelf: "flex-start",
+    alignContent: "space-around",
   },
 
-  pfpImg: {
-    resizeMode: "cover",
-    width: "100%",
-    height: "100%",
-    borderRadius: 7,
-    borderColor: "red",
+  imgContainer: {
+    aspectRatio: 1 * 1,
+    left: 12,
+    height: 45,
+    width: 45,
+    borderRadius: 50,
+    borderWidth: 0.5,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+    top: 7,
   },
-  userId: {
-    fontSize: 14,
-    left: 60,
+  pfpImg: {
+    height: 45,
+    width: 45,
+    borderRadius: 50,
+  },
+
+  userName: {
+    left: 15,
     top: 15,
-    color: "white",
+    color: "#FFFFFFE0",
+    fontSize: 14,
+    fontStyle: "italic",
+  },
+
+  mainPost: {
+    height: "auto",
+    width: "auto",
+    marginLeft: 65,
+    right: 5,
+  },
+
+  postImgContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    top: 11,
+    right: 5,
+  },
+  postImg: {
+    height: 200,
+    width: 289,
+  },
+  interActive: {
+    flexDirection: "row",
+    height: 50,
+    top: 23,
+    marginLeft: 1,
+  },
+  like: {
+    left: 55,
+  },
+  comment: {
+    left: 80,
   },
 });

@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 
@@ -19,20 +19,14 @@ export default function LikeButton() {
   const [icon, setIcon] = useState<Ibutton>({ iconName: "thumb-up-off-alt" });
 
   return (
-    <View style={styles.likeButton}>
+    <View>
       <TouchableOpacity
         onPress={() => {
           setIcon(toggleLikeIcon(icon));
         }}
       >
-        <MaterialIcons name={icon.iconName} size={25} color="#FFFFFF" />
+        <MaterialIcons name={icon.iconName} size={20} color="#FFFFFFBF" />
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  likeButton: {
-    width: 30,
-  },
-});
