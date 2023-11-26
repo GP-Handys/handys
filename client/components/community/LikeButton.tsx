@@ -2,12 +2,13 @@ import { View, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 
-export default function LikeButton() {
-  interface Ibutton {
-    iconName: any;
-  }
+interface IButton {
+  iconName: any;
+}
 
-  const toggleLikeIcon = (currentIcon: Ibutton): Ibutton => {
+
+export default function LikeButton() {
+  const toggleLikeIcon = (currentIcon: IButton): IButton => {
     return {
       iconName:
         currentIcon.iconName === "thumb-up-off-alt"
@@ -16,7 +17,7 @@ export default function LikeButton() {
     };
   };
 
-  const [icon, setIcon] = useState<Ibutton>({ iconName: "thumb-up-off-alt" });
+  const [icon, setIcon] = useState<IButton>({ iconName: "thumb-up-off-alt" });
 
   return (
     <View>
