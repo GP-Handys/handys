@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     alignContent: "space-around",
   },
-
   imgContainer: {
     aspectRatio: 1 * 1,
     left: 12,
@@ -133,7 +132,6 @@ const styles = StyleSheet.create({
     width: 45,
     borderRadius: 50,
   },
-
   userName: {
     left: 15,
     top: 15,
@@ -141,7 +139,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: "italic",
   },
-
   mainPost: {
     height: "auto",
     width: "auto",
@@ -149,16 +146,12 @@ const styles = StyleSheet.create({
     marginRight: 20,
     right: 5,
   },
-
   postImgContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    top: 11,
-    right: 5,
+    marginTop: 20,
   },
   postImg: {
-    height: 200,
-    width: 289,
+    height: 150,
+    width: 250,
   },
   interActive: {
     flexDirection: "row",
