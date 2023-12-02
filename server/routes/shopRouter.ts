@@ -5,6 +5,7 @@ import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Shop } from "../models/Shop";
 import { connection as DB } from "../database/database";
 import { ShopReview } from "../models/ShopReview";
+import { log } from "console";
 
 dotenv.config();
 
@@ -181,6 +182,23 @@ export const approveShop = async (req: Request, res: Response) => {
       res.sendStatus(200);
     } else {
       res.sendStatus(403);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export const getUserShops = async (req: Request, res: Response) => {
+  try {    
+    const userId = req.params.userId;
+    let user = await User.findByPk(userId)
+    
+    if(user!=null){
+      let shops =await Shop.findAll({where:{userId:userId}});
+      return res.send(shops)
+    }
+    else{
+      res.sendStatus(403);  
     }
   } catch (error) {
     res.status(500).json(error);

@@ -26,10 +26,12 @@ router.put("/api/shop/update/:shopId", tokenValidate,shopRouter.updateShop)
 router.delete("/api/shop/delete/:shopId", tokenValidate,shopRouter.deleteShop)
 router.get("/api/shop/search" , tokenValidate,shopRouter.searchShop)
 router.post("/api/shop/addReview", tokenValidate,shopRouter.addReview)
-router.delete("api/shop/removeReview", tokenValidate,shopRouter.removeReview)
-router.get("api/shop/getReviews", tokenValidate, shopRouter.getShopReviews)
-router.get("api/shop/pendingShops", tokenValidate,shopRouter.pendingShops)
-router.put("api/shop/approveShop", tokenValidate,shopRouter.approveShop)
+router.delete("/api/shop/removeReview", tokenValidate,shopRouter.removeReview)
+router.get("/api/shop/getReviews", tokenValidate, shopRouter.getShopReviews)
+router.get("/api/shop/pendingShops", tokenValidate,shopRouter.pendingShops)
+router.put("/api/shop/approveShop/:shopId", tokenValidate,shopRouter.approveShop)
+router.get("/api/shop/getUserShops/:userId", tokenValidate,shopRouter.getUserShops)
+
 
 //item routes
 router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
