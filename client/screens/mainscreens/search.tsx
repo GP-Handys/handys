@@ -5,7 +5,7 @@ import SendTicket from '../supportscreens/sendTicket';
 export default function Search() {
     return (
         <CommonBackgroundWithNoSafeArea>
-            <Choose/>
+            <SendTicket/>
         </CommonBackgroundWithNoSafeArea>
     );
 }
