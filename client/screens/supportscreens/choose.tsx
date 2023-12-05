@@ -3,14 +3,10 @@ import {
   Pressable,
   Text,
   StyleSheet,
-  ScrollView,
-  TextInput
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
-import CustomTextInput from "../../components/CustomTextInput";
 import COLORS from "../../common/colors";
-import STRINGS from "../../strings/strings";
 
 export default function choose() {
   return (

@@ -27,9 +27,9 @@ export default function sendTicket() {
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.upperContainer}>
-            <Entypo name="ticket" size={100} color="white" />
+            <Entypo name="ticket" size={100} color='white' />
             <Text style={styles.textTitle}>
-              Fill the form below and we will get back to you soon
+              Fill the form below and we will get back to you soon :)
             </Text>
           </View>
 
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textTitle: {
+    color: 'white',
     marginTop: 10,
-    color: "white",
     fontWeight: "500",
     fontSize: 20,
     textAlign: "center",
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   textArea: {
     color: "#ABABAB",
-    padding:10,
+    padding:15,
     backgroundColor: COLORS.handysGrey,
     height: 100,
     borderRadius: 6,
