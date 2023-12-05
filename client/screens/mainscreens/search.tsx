@@ -6,7 +6,7 @@ import DoneScreen from "../supportscreens/doneScreen";
 export default function Search() {
     return (
         <CommonBackgroundWithNoSafeArea>
-            <DoneScreen/>
+            <SendTicket/>
         </CommonBackgroundWithNoSafeArea>
     );
 }

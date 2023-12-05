@@ -14,10 +14,19 @@ import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 
 export default function sendTicket() {
+  const validator = require('validator');
   const [email, onChangeEmail] = useState("");
   const [subject, onChangesubject] = useState("");
   const [message, onChangeMessage] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
 
+
+  const handleEmailChange = (text : string) => {
+    onChangeEmail(text);
+    const regex = /\S+@\S+\.\S+/;
+    setIsValidEmail(regex.test(text));
+  };
   return (
     <CommonBackgroundWithNoSafeArea>
       <KeyboardAvoidingView
@@ -42,8 +51,10 @@ export default function sendTicket() {
               placeholder="E-mail (optional)"
               placeholderTextColor={COLORS.textInputPlaceholder}
               value={email}
-              onChangeText={onChangeEmail}
+              onChangeText={handleEmailChange}
+              keyboardType='email-address'
             />
+            {isValidEmail ? null : <Text>Invalid email address</Text>}
             <TextInput
               style={styles.input}
               placeholder="Subject"
@@ -64,13 +75,15 @@ export default function sendTicket() {
 
           <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
             <Pressable
+              disabled = {!isValidEmail}
               onPress={() => {}}
               style={({ pressed }) => [
                 styles.signUpPressable,
                 {
-                  opacity: pressed ? 0.6 : 1,
+                  opacity: pressed ? 0.6 : 1 
                 },
               ]}
+              
             >
               <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
                 Confirm

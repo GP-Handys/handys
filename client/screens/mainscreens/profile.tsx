@@ -92,6 +92,7 @@ export default function Profile() {
             <Text style={style.cardFont}>Orders</Text>
           </View>
         </View>
+        
         <View style={style.otherGrid}>
           <View style={style.card}>
             <FontAwesome5 name="heart" size={24} color="white" />
