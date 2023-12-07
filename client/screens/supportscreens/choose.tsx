@@ -24,7 +24,7 @@ export default function choose() {
             styles.signUpPressable,
             {
               opacity: pressed ? 0.6 : 1
-            }
+            },
           ]}
         >
           <Text style={{ color: "white", fontWeight: "600", fontSize: 16 }}>

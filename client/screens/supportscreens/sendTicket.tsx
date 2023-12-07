@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Pressable,
@@ -13,8 +13,7 @@ import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 
-export default function sendTicket() {
-  const validator = require('validator');
+export default function SendTicket() {
   const [email, onChangeEmail] = useState("");
   const [subject, onChangesubject] = useState("");
   const [message, onChangeMessage] = useState("");
@@ -22,11 +21,22 @@ export default function sendTicket() {
   const [isDisabled, setIsDisabled] = useState(true);
 
 
-  const handleEmailChange = (text : string) => {
+  const handleEmailChange = (text: string) => {
     onChangeEmail(text);
+  
     const regex = /\S+@\S+\.\S+/;
-    setIsValidEmail(regex.test(text));
+    const isEmailValid = regex.test(text);
+    const isSubjectValid = subject.trim() !== null;
+    const isMessageValid = message.trim() !== null;
+  
+    setIsValidEmail(isEmailValid);
+    setIsDisabled(!(isEmailValid && isSubjectValid && isMessageValid));
   };
+
+  const handlePress = () => {
+    // Handle press logic here
+  };
+
   return (
     <CommonBackgroundWithNoSafeArea>
       <KeyboardAvoidingView
@@ -36,7 +46,7 @@ export default function sendTicket() {
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.upperContainer}>
-            <Entypo name="ticket" size={100} color='white' />
+            <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
               Fill the form below and we will get back to you soon :)
             </Text>
@@ -52,9 +62,11 @@ export default function sendTicket() {
               placeholderTextColor={COLORS.textInputPlaceholder}
               value={email}
               onChangeText={handleEmailChange}
-              keyboardType='email-address'
+              keyboardType="email-address"
             />
-            {isValidEmail ? null : <Text>Invalid email address</Text>}
+            {isValidEmail ? null : (
+              <Text style={styles.emailError}>*Invalid email address</Text>
+            )}
             <TextInput
               style={styles.input}
               placeholder="Subject"
@@ -74,21 +86,32 @@ export default function sendTicket() {
           </View>
 
           <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
-            <Pressable
-              disabled = {!isValidEmail}
-              onPress={() => {}}
+
+            {isDisabled?
+              <Pressable
+                disabled={isDisabled}
+                onPress={handlePress}
+                style={styles.signUpPressableDisabled}
+              >
+                <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
+                  Confirm
+                </Text>
+              </Pressable>
+              :
+              <Pressable
+              onPress={handlePress}
               style={({ pressed }) => [
                 styles.signUpPressable,
                 {
-                  opacity: pressed ? 0.6 : 1 
-                },
+                  opacity: pressed ? 0.6 : 1
+                }
               ]}
-              
             >
               <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
                 Confirm
               </Text>
             </Pressable>
+            }
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -121,6 +144,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
+  },
+  signUpPressableDisabled: {
+    backgroundColor: COLORS.CTAButtonBackground,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 50,
+    borderRadius: 8,
+    opacity:0.5
   },
   input: {
     color: "#ABABAB",
@@ -162,4 +193,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'space-between',
   },
+  emailError:{
+    color:'red',
+    marginLeft:20,
+  }
 });
