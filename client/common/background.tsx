@@ -7,8 +7,8 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import COLORS from "./colors";
 
 interface Props {
@@ -34,7 +34,11 @@ export function CommonBackgroundWithSafeArea({ children }: Props) {
 }
 
 export function CommonScrollableBackground({ children }: Props) {
-  return <ScrollView style={styles.commonContainer}>{children}</ScrollView>;
+  return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAwareScrollView style={styles.commonContainer}>{children}</KeyboardAwareScrollView>
+    </TouchableWithoutFeedback>
+  );
 }
 
 const styles = StyleSheet.create({
