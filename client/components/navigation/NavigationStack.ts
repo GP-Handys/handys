@@ -6,6 +6,7 @@ export type StackParamList = {
   SignUp: undefined;
   MainScreensContainer: undefined;
   OnboardingScreensContainer: undefined;
+  CreateShopScreen:undefined;
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
