@@ -4,6 +4,9 @@ import OnboardingNavigationContainer from "./components/navigation/OnboardingNav
 import { Stack } from "./components/navigation/NavigationStack";
 import { firebaseConfig } from "./storage/firebase";
 import { initializeApp } from "firebase/app";
+import CreateShop from "./screens/Profile/CreateShop";
+import { Title } from "react-native-paper";
+import COLORS from "./common/colors";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -26,7 +29,21 @@ export default function App() {
             gestureEnabled: false,
           }}
         />
+        <Stack.Screen
+          name="CreateShopScreen"
+          component={CreateShop}
+          options={{
+            title:"Create new Shop",
+            headerTitleStyle:{color:"white"},
+            headerStyle:{backgroundColor:COLORS.commonBackground},
+            headerTintColor:"white",
+            headerTitleAlign:"center"
+          }}
+
+        />
       </Stack.Navigator>
+
+      
     </NavigationContainer>
   );
 }
