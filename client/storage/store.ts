@@ -2,7 +2,7 @@ import * as ImagePicker from "expo-image-picker";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import extractImageId from "../helpers/imageIdExtractor";
 
-export default async function pickImageAndStore() {
+export default async function pickImageAndStore(basePath: string) {
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
@@ -12,7 +12,7 @@ export default async function pickImageAndStore() {
     const storage = getStorage();
     const storageRef = ref(
       storage,
-      "items/" + extractImageId(result.assets[0].uri)
+      basePath + "/" + extractImageId(result.assets[0].uri)
     );
     const img = await fetch(result.assets[0].uri);
     const bytes = await img.blob();
