@@ -42,9 +42,7 @@ export const getProfile = async ()=>{
         "Authorization": token,
       },
     });
-    console.log(result);
-    
-    return result;    
+    return result.data;    
   } catch (error: any) {
     return error.message;
   }
