@@ -9,112 +9,160 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { getProfile } from "../../api/UserApi";
-import React, {useState} from "react";{  }
+import { getShops } from "../../api/ShopApi";
+import React, { useState, useEffect } from "react";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { StackParamList } from "../../components/navigation/NavigationStack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ActivityIndicator } from "react-native-paper";
 
-export default function Profile() {
-  let shops: any = [
-    {
-      name: "Innovative crafts",
-      pfp_url: "../../assets/logo.png",
-      is_premium: false,
-      id: 1,
-    },
-    {
-      name: "Raqi store",
-      pfp_url: "../../assets/logo.png",
-      is_premium: true,
-      id: 2,
-    },
-  ];
+type StackProps = NativeStackScreenProps<StackParamList>;
 
-  let user :any= getProfile()
-  
+export default function Profile({ navigation }: StackProps) {
+  const [user, setUser]: any = useState({});
+  const [url, setUrl] = useState();
+  const [shops, setShops] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  return (
-    <CommonScrollableBackground>
-      {/* page container */}
-      <View style={{ paddingHorizontal: 40, alignItems: "center" }}>
-        {/* user informations */}
-        <Image source={require("../../assets/default_profile_img.jpg")} style={style.profileIMG}
-        />
-        <Text style={style.font}>Assem musallam</Text>
+  useEffect(() => {
+    const fetchProfileImg = async (link: any) => {
+      const storage = getStorage();
+      const storageRef = ref(storage, "users/" + link);
 
-        <View style={{ marginTop: 17, marginBottom: 20, alignSelf: "stretch" }}>
-          <ThematicBreak />
-        </View>
+      if (link != null)
+        await getDownloadURL(storageRef).then((url: any) => {
+          setUrl(url);
+        });
+    };
 
-        <Pressable style={style.editProfile}>
-          <Feather name="edit" size={32} color={"white"} />
-          <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
-            Edit Profile
-          </Text>
-        </Pressable>
+    const fetchShops = async (id: any) => {
+      await getShops(id)
+        .then((result) => {
+          setShops(result);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
 
-        {/*user shops */}
-        <View style={style.lable}>
-          <Text style={style.lableFont}>Your shops</Text>
-        </View>
+    const fetchProfile = async () => {
+      await getProfile().then(async (result) => {
+        setUser(result);
+        fetchProfileImg(result.pfp_url);
+        fetchShops(result.id);
+      });
+    };
 
-        <View style={{ gap: 20, paddingVertical: 15 }}>
-          {shops.map((shop: any) => (
-            <UserShop key={shop.id} shop={shop} />
-          ))}
+    fetchProfile();
+  }, []);
 
-          <Pressable style={style.createShop}>
-            <Text style={style.createNewShopFont}>+ Create new Shop</Text>
-          </Pressable>
-        </View>
-
-        <View style={{ marginTop: 5, marginBottom: 18, alignSelf: "stretch" }}>
-          <ThematicBreak />
-        </View>
-
-        {/* Other */}
-        <View style={style.lable}>
-          <Text style={style.lableFont}>Other</Text>
-        </View>
+  if (loading) {
+    return (
+      <View style={style.loadingPage}>
+        <ActivityIndicator size={"large"} color="white" />
       </View>
+    );
+  } else
+    return (
+      <CommonScrollableBackground>
+        {/* page container */}
+        <View style={{ paddingHorizontal: 40, alignItems: "center" }}>
+          {/* user informations */}
 
-      <View
-        style={style.cardsContainer}
-      >
-        <View style={style.otherGrid}>
-          <View style={style.card}>
-            <MaterialCommunityIcons
-              name="note-text-outline"
-              size={28}
-              color="white"
+          {user.pfp_url === null ? (
+            <Image
+              source={require("../../assets/default_profile_img.jpg")}
+              style={style.profileIMG}
             />
-            <Text style={style.cardFont}>My Posts</Text>
-          </View>
-          <View style={style.card}>
-            <Entypo name="shopping-bag" size={24} color="white" />
-            <Text style={style.cardFont}>Orders</Text>
-          </View>
-        </View>
-        <View style={style.otherGrid}>
-          <View style={style.card}>
-            <FontAwesome5 name="heart" size={24} color="white" />
-            <Text style={style.cardFont}>Favorites</Text>
-          </View>
-          <View style={style.card}>
-            <MaterialIcons name="headset-mic" size={24} color="white" />
-            <Text style={style.cardFont}>Support</Text>
-          </View>
-        </View>
-      </View>
+          ) : (
+            <Image source={{ uri: url }} style={style.profileIMG} />
+          )}
 
-      <Pressable style={style.logout}>
-        <MaterialIcons
-          name="logout"
-          size={28}
-          color={"white"}
-          style={{ paddingTop: 11 }}
-        />
-        <Text style={style.font}>Logout</Text>
-      </Pressable>
-    </CommonScrollableBackground>
-  );
+          <Text style={style.font}>{user.name}</Text>
+
+          <View
+            style={{ marginTop: 17, marginBottom: 20, alignSelf: "stretch" }}
+          >
+            <ThematicBreak />
+          </View>
+
+          <Pressable style={style.editProfile}>
+            <Feather name="edit" size={32} color={"white"} />
+            <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
+              Edit Profile
+            </Text>
+          </Pressable>
+
+          {/*user shops */}
+          <View style={style.lable}>
+            <Text style={style.lableFont}>Your shops</Text>
+          </View>
+
+          <View style={{ gap: 20, paddingVertical: 15 }}>
+            {shops.map((shop: any) => (
+              <UserShop key={shop.id} shop={shop} />
+            ))}
+
+            <Pressable
+              style={style.createShop}
+              onPress={() => {
+                navigation.navigate("CreateShopScreen");
+              }}
+            >
+              <Text style={style.createNewShopFont}>+ Create new Shop</Text>
+            </Pressable>
+          </View>
+
+          <View
+            style={{ marginTop: 5, marginBottom: 18, alignSelf: "stretch" }}
+          >
+            <ThematicBreak />
+          </View>
+
+          {/* Other */}
+          <View style={style.lable}>
+            <Text style={style.lableFont}>Other</Text>
+          </View>
+        </View>
+
+        <View style={style.cardsContainer}>
+          <View style={style.otherGrid}>
+            <View style={style.card}>
+              <MaterialCommunityIcons
+                name="note-text-outline"
+                size={28}
+                color="white"
+              />
+              <Text style={style.cardFont}>My Posts</Text>
+            </View>
+            <View style={style.card}>
+              <Entypo name="shopping-bag" size={24} color="white" />
+              <Text style={style.cardFont}>Orders</Text>
+            </View>
+          </View>
+          <View style={style.otherGrid}>
+            <View style={style.card}>
+              <FontAwesome5 name="heart" size={24} color="white" />
+              <Text style={style.cardFont}>Favorites</Text>
+            </View>
+            <View style={style.card}>
+              <MaterialIcons name="headset-mic" size={24} color="white" />
+              <Text style={style.cardFont}>Support</Text>
+            </View>
+          </View>
+        </View>
+
+        <Pressable style={style.logout}>
+          <MaterialIcons
+            name="logout"
+            size={28}
+            color={"white"}
+            style={{ paddingTop: 11 }}
+          />
+          <Text style={style.font}>Logout</Text>
+        </Pressable>
+      </CommonScrollableBackground>
+    );
 }
 
 const style = StyleSheet.create({
@@ -183,7 +231,7 @@ const style = StyleSheet.create({
     color: "white",
     fontWeight: "500",
   },
-  cardsContainer:{
+  cardsContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
@@ -191,5 +239,12 @@ const style = StyleSheet.create({
     alignItems: "center",
     gap: 25,
     paddingTop: 10,
-  }
+  },
+  loadingPage: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
+  },
 });
