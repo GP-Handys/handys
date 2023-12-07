@@ -5,6 +5,7 @@ import LikeButton from "../../components/community/LikeButton";
 import AddPost from "../../components/community/AddPost";
 import COLORS from "../../common/colors";
 import CommentButton from "../../components/community/CommentButton";
+import UserProfile from "../../components/community/UserProfile";
 
 export default function Community() {
   const posts = [
@@ -54,9 +55,7 @@ export default function Community() {
   const onePost = ({ item }: ItemPros) => (
     <View>
       <View style={styles.userProfile}>
-        <View style={styles.imgContainer}>
-          <Image style={styles.pfpImg} source={item.pfp} />
-        </View>
+       <UserProfile />
         <Text style={styles.userName}> {item.userId}</Text>
       </View>
       <View style={styles.timeStamp}>

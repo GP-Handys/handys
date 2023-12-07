@@ -4,6 +4,7 @@ import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import COLORS from "../../common/colors";
+import UserProfile from "../../components/community/UserProfile";
 
 export default function AddPost() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -31,6 +32,16 @@ export default function AddPost() {
             </View>
             <ThematicBreak />
           </View>
+          <View style={{borderWidth:4,flexDirection: "row", alignItems: "center",}}> 
+            <View style={{top:-7}}>
+          <UserProfile />
+            </View>
+          <TouchableOpacity style={{borderWidth:4, left:200}}>
+          <MaterialIcons name="insert-photo" size={28} color="#FFFFFF83"/> 
+          </TouchableOpacity>
+          </View>
+          
+
         </CommonBackgroundWithSafeArea>
       </Modal>
     </View>
