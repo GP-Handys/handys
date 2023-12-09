@@ -6,7 +6,6 @@ interface IButton {
   iconName: any;
 }
 
-
 export default function LikeButton() {
   const toggleLikeIcon = (currentIcon: IButton): IButton => {
     return {

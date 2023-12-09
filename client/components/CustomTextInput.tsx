@@ -9,11 +9,11 @@ interface Props {
   isSecureTextEntry?: boolean;
   value?: string;
   onChangeText?: ((text: string) => void) & Function;
-  maxLength?:number;
-  multiline?:boolean
-  minHeight?:number
-  maxHeight?:number
-  bgColor?: string
+  maxLength?: number;
+  multiline?: boolean;
+  minHeight?: number;
+  maxHeight?: number;
+  bgColor?: string;
 }
 
 export default function CustomTextInput({
@@ -25,13 +25,20 @@ export default function CustomTextInput({
   onChangeText,
   maxLength,
   multiline,
-  minHeight=44,
-  maxHeight=440,
-  bgColor="#464949", 
+  minHeight = 44,
+  maxHeight = 440,
+  bgColor = "#464949",
 }: Props) {
   return (
     <TextInput
-      style={[styles.commonStyle,{minHeight:minHeight,maxHeight:maxHeight, backgroundColor:bgColor}]}
+      style={[
+        styles.commonStyle,
+        {
+          minHeight: minHeight,
+          maxHeight: maxHeight,
+          backgroundColor: bgColor,
+        },
+      ]}
       placeholder={placeholder}
       secureTextEntry={isSecureTextEntry}
       left={left}
@@ -54,6 +61,5 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     borderTopLeftRadius: 9,
     borderTopRightRadius: 9,
-    
   },
 });

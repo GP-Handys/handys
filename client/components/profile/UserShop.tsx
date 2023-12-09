@@ -22,9 +22,7 @@ interface Props {
 }
 
 export function UserShop({ shop }: Props) {
-
-  
-  let imageUrl = require("../../assets/logo.png")
+  let imageUrl = require("../../assets/logo.png");
   return (
     <Pressable key={shop.id} style={styles.shop}>
       <View style={styles.shopDetails}>

@@ -20,17 +20,14 @@ export default function CreateShop({ navigation }: StackProps) {
   async function handleCreateShop() {
     CreateShopHelper(name, link, bio, null, navigation);
   }
-
   return (
     <CommonScrollableBackground>
-      <View style={{ marginHorizontal: 30}}>
+      <View style={{ marginHorizontal: 30 }}>
         <Text style={style.font}>Upload image</Text>
         <Pressable style={style.uploadIMG}>
           <Feather name="upload" size={30} color="white" />
         </Pressable>
-
         <Text style={style.font}>Shop name</Text>
-
         <View style={{ marginTop: 15 }}>
           <CustomTextInput
             placeholder={"Enter shop name"}
@@ -41,7 +38,6 @@ export default function CreateShop({ navigation }: StackProps) {
             {name.length}/{ShopNameLength}
           </Text>
         </View>
-
         <View style={{ gap: 10 }}>
           <Text style={style.font}>Social Media link</Text>
           <CustomTextInput
@@ -49,7 +45,6 @@ export default function CreateShop({ navigation }: StackProps) {
             onChangeText={(text: any) => setLink(text)}
           />
         </View>
-
         <View style={{ marginTop: 15, gap: 15 }}>
           <Text style={style.font}>Shop description</Text>
           <CustomTextInput
@@ -63,7 +58,6 @@ export default function CreateShop({ navigation }: StackProps) {
           </Text>
         </View>
       </View>
-
       <View style={{ marginHorizontal: 38 }}>
         <Pressable
           onPress={handleCreateShop}
