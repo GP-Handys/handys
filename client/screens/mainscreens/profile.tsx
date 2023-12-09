@@ -5,7 +5,6 @@ import {
   Text,
   StyleSheet,
   Pressable,
-  RefreshControl,
 } from "react-native";
 import COLORS from "../../common/colors";
 import { Entypo, Feather, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";

@@ -8,7 +8,7 @@ export const addPost = async (data: any) => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token, 
+        Authorization: token,
       },
       data: data,
     });
@@ -26,7 +26,7 @@ export const getPosts = async () => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
     return result.data;

@@ -30,7 +30,7 @@ export default function AddPost() {
   };
   useEffect(() => {
     const fetchProfile = async () => {
-      await getProfile().then(result => {
+      await getProfile().then((result) => {
         setUser(result);
       });
     };
@@ -64,7 +64,7 @@ export default function AddPost() {
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", top: 7 }}>
             <View style={{ top: -4 }}>
-              <PostOwnerHeader userId={user.id}/>
+              <PostOwnerHeader userId={user.id} />
             </View>
             <TouchableOpacity style={{ left: 200 }}>
               <MaterialIcons
