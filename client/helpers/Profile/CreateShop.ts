@@ -25,7 +25,6 @@ export default function CreateShop(
         const title = result.status == 200 ? "Yay!" : "Oops";
         Alert.alert(title, message);
         navigation.pop();
-
       })
       .catch((err) => {
         console.error(err);
