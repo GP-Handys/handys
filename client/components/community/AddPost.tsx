@@ -1,22 +1,45 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Modal, Text, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  Text,
+  Image,
+} from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import COLORS from "../../common/colors";
-import UserProfile from "../../components/community/UserProfile";
+import PostOwnerHeader from "./PostOwnerHeader";
 import CustomTextInput from "../../components/CustomTextInput";
 import pickImageAndStore from "../../storage/store";
+import { addPost } from "../../api/CommunityApi";
+import { getProfile } from "../../api/UserApi";
 
 export default function AddPost() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const handleModal = () => setIsModalVisible(!isModalVisible);
-  const [postImagUrl, setPostImagUrl] = useState()
-  const [postImgPicked,setPostImgPicked] = useState(false)
+  const handleModalDismiss = () => setIsModalVisible(!isModalVisible);
+  const [postImagUrl, setPostImagUrl] = useState();
+  const [postImgPicked, setPostImgPicked] = useState(false);
+  const [postText, setPostText] = useState("");
+  const [user, setUser] = useState({} as any);
+  const handleAddPost = async () => {
+    await addPost({ content: postText, img_url: postImagUrl });
+    handleModalDismiss();
+  };
+  useEffect(() => {
+    const fetchProfile = async () => {
+      await getProfile().then(result => {
+        setUser(result);
+      });
+    };
+    fetchProfile();
+  }, []);
 
   return (
     <View style={styles.Iconbutton}>
-      <TouchableOpacity onPress={handleModal}>
+      <TouchableOpacity onPress={handleModalDismiss}>
         <MaterialIcons name="add-circle" size={50} color="#F6977F" />
       </TouchableOpacity>
       <Modal animationType="slide" transparent={false} visible={isModalVisible}>
@@ -24,13 +47,16 @@ export default function AddPost() {
           <View style={styles.ModalBackGround}>
             <View style={styles.ModalHeadrer}>
               <TouchableOpacity
-                onPress={handleModal}
+                onPress={handleModalDismiss}
                 style={styles.CloseButton}
               >
                 <MaterialIcons name="close" size={23} color="white" />
               </TouchableOpacity>
               <Text style={styles.HeaderText}>Create post</Text>
-              <TouchableOpacity onPress={handleModal} style={styles.PostButton}>
+              <TouchableOpacity
+                onPress={handleAddPost}
+                style={styles.PostButton}
+              >
                 <Text style={styles.InnerPostButton}>Post</Text>
               </TouchableOpacity>
             </View>
@@ -38,34 +64,41 @@ export default function AddPost() {
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", top: 7 }}>
             <View style={{ top: -4 }}>
-              <UserProfile />
+              <PostOwnerHeader userId={user.id}/>
             </View>
             <TouchableOpacity style={{ left: 200 }}>
-              <MaterialIcons name="insert-photo" size={28} color="#FFFFFF83"
-              onPress={
-                async () => {
-                  const imgId = await pickImageAndStore("posts",setPostImagUrl )
-                  if (imgId )
-                  {
-                    setPostImgPicked(true)
+              <MaterialIcons
+                name="insert-photo"
+                size={28}
+                color="#FFFFFF83"
+                onPress={async () => {
+                  const imgId = await pickImageAndStore(
+                    "posts",
+                    setPostImagUrl
+                  );
+                  if (imgId) {
+                    setPostImgPicked(true);
                   }
-                }
-              }
+                }}
               />
-            </TouchableOpacity> 
+            </TouchableOpacity>
           </View>
-          <View style={{ top: 10, paddingLeft:10 }}>
+          <View style={{ top: 10, paddingLeft: 10 }}>
             <CustomTextInput
               placeholder={"Share your thoughts!"}
               multiline={true}
               bgColor={COLORS.commonBackground}
+              onChangeText={(text) => {
+                setPostText(text);
+              }}
             />
           </View>
-          {
-            postImgPicked && (
-              <Image source={{uri:postImagUrl}} style={styles.postImgUploaded} />
-            )
-          }
+          {postImgPicked && (
+            <Image
+              source={{ uri: postImagUrl }}
+              style={styles.postImgUploaded}
+            />
+          )}
         </CommonBackgroundWithSafeArea>
       </Modal>
     </View>
@@ -116,10 +149,10 @@ const styles = StyleSheet.create({
     top: 5,
     fontWeight: "800",
   },
-  postImgUploaded:{
-    width:350,
-    height:250,
+  postImgUploaded: {
+    width: 350,
+    height: 250,
     marginTop: 8,
-    left:5
-  }
+    left: 5,
+  },
 });

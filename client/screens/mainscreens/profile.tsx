@@ -1,20 +1,16 @@
 import { CommonScrollableBackground } from "../../common/background";
 import { Image, View, Text, StyleSheet, Pressable } from "react-native";
 import COLORS from "../../common/colors";
-import { Feather } from "@expo/vector-icons";
+import { Entypo, Feather, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { getProfile } from "../../api/UserApi";
 import { getShops } from "../../api/ShopApi";
 import React, { useState, useEffect } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ActivityIndicator } from "react-native-paper";
+import { getProfile } from "../../api/UserApi";
 
 type StackProps = NativeStackScreenProps<StackParamList>;
 
@@ -39,6 +35,7 @@ export default function Profile({ navigation }: StackProps) {
       await getShops(id)
         .then((result) => {
           setShops(result);
+          console.log(result);
         })
         .finally(() => {
           setLoading(false);

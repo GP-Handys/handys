@@ -47,3 +47,20 @@ export const getProfile = async ()=>{
     return error.message;
   }
 }
+export const getUserById = async (userId:number)=>{
+  
+  try {
+    let token = await AsyncStorage.getItem("Authorization");
+    const result = await ApiManager("/users/getUser/"+userId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });
+    return result.data;    
+  } catch (error: any) {
+    return error.message;
+  }
+}
+
