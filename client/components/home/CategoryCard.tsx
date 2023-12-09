@@ -27,7 +27,6 @@ export default function CategoryCard() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   categoryName: {
     color: "white",

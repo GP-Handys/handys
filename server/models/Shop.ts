@@ -46,7 +46,7 @@ Shop.init(
     },
     is_approved: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
     pfp_url: {
       type: DataTypes.STRING,
@@ -58,7 +58,7 @@ Shop.init(
     },
     socialMediaLink: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         isUrl: true,
       },

@@ -1,8 +1,12 @@
 import { View, Text } from "react-native";
 import moment from "moment";
 
-export default function TimeStamp() {
-  const formattedTime = moment("2023-11-17 17:08:31", "YYYY-MM-DD HH:mm:ss")
+interface TimeStampProps {
+time: Date;
+
+}
+export default function TimeStamp({time}: TimeStampProps) {
+  const formattedTime = moment(time, "YYYY-MM-DD HH:mm:ss")
     .add(3, "hours")
     .fromNow();
 
