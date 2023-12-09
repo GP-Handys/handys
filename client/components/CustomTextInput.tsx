@@ -13,6 +13,7 @@ interface Props {
   multiline?:boolean
   minHeight?:number
   maxHeight?:number
+  bgColor?: string
 }
 
 export default function CustomTextInput({
@@ -25,11 +26,12 @@ export default function CustomTextInput({
   maxLength,
   multiline,
   minHeight=44,
-  maxHeight=440
+  maxHeight=440,
+  bgColor="#464949", 
 }: Props) {
   return (
     <TextInput
-      style={[styles.commonStyle,{minHeight:minHeight,maxHeight:maxHeight}]}
+      style={[styles.commonStyle,{minHeight:minHeight,maxHeight:maxHeight, backgroundColor:bgColor}]}
       placeholder={placeholder}
       secureTextEntry={isSecureTextEntry}
       left={left}
@@ -48,7 +50,7 @@ export default function CustomTextInput({
 
 const styles = StyleSheet.create({
   commonStyle: {
-    backgroundColor: COLORS.handysGrey,
+    borderColor: "red",
     borderRadius: 9,
     borderTopLeftRadius: 9,
     borderTopRightRadius: 9,

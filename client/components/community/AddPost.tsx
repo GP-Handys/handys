@@ -5,10 +5,12 @@ import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import COLORS from "../../common/colors";
 import UserProfile from "../../components/community/UserProfile";
+import CustomTextInput from "../../components/CustomTextInput";
 
 export default function AddPost() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const handleModal = () => setIsModalVisible(!isModalVisible);
+  const [postDisabled, setPostDisabled] = useState(true);
 
   return (
     <View style={styles.Iconbutton}>
@@ -32,16 +34,21 @@ export default function AddPost() {
             </View>
             <ThematicBreak />
           </View>
-          <View style={{borderWidth:4,flexDirection: "row", alignItems: "center",}}> 
-            <View style={{top:-7}}>
-          <UserProfile />
+          <View style={{ flexDirection: "row", alignItems: "center", top: 7 }}>
+            <View style={{ top: -4 }}>
+              <UserProfile />
             </View>
-          <TouchableOpacity style={{borderWidth:4, left:200}}>
-          <MaterialIcons name="insert-photo" size={28} color="#FFFFFF83"/> 
-          </TouchableOpacity>
+            <TouchableOpacity style={{ left: 200 }}>
+              <MaterialIcons name="insert-photo" size={28} color="#FFFFFF83" />
+            </TouchableOpacity>
           </View>
-          
-
+          <View style={{ top: 10, right: -10 }}>
+            <CustomTextInput
+              placeholder={"Share your thoughts!"}
+              multiline={true}
+              bgColor={COLORS.commonBackground}
+            />
+          </View>
         </CommonBackgroundWithSafeArea>
       </Modal>
     </View>
