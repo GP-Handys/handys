@@ -6,9 +6,9 @@ import { StackParamList } from "../../components/navigation/NavigationStack";
 
 export default function CreateShop(
   name: string,
-  socialMediaLink: string,
-  bio: string,
-  pfp_url:string,
+  socialMediaLink: string | null,
+  bio: string | null,
+  pfp_url:string | null,
   navigation: NativeStackNavigationProp<StackParamList>
 ) {
   if (name.length==0) {
@@ -24,9 +24,7 @@ export default function CreateShop(
         const message = result.data;
         const title = result.status == 200 ? "Yay!" : "Oops";
         Alert.alert(title, message);
-        if (result.status == 200) {
-          navigation.navigate("SignIn");
-        }
+        navigation.pop();
       })
       .catch((err) => {
         console.error(err);

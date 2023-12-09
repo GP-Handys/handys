@@ -1,5 +1,12 @@
 import { CommonScrollableBackground } from "../../common/background";
-import { Image, View, Text, StyleSheet, Pressable } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  RefreshControl,
+} from "react-native";
 import COLORS from "../../common/colors";
 import { Feather } from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
@@ -53,7 +60,7 @@ export default function Profile({ navigation }: StackProps) {
       });
     };
 
-    fetchProfile();
+    navigation.addListener("focus",fetchProfile)
   }, []);
 
   if (loading) {
@@ -112,6 +119,7 @@ export default function Profile({ navigation }: StackProps) {
               <Text style={style.createNewShopFont}>+ Create new Shop</Text>
             </Pressable>
           </View>
+
 
           <View
             style={{ marginTop: 5, marginBottom: 18, alignSelf: "stretch" }}
