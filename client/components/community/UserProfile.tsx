@@ -6,7 +6,7 @@ export default function UserProfile () {
       <View style={styles.imgContainer}>
         <Image style={styles.pfpImg} source={require("../../assets/pic1.jpg")} />
       </View>
-      <Text style={styles.userName}> laith </Text>
+      <Text style={styles.userName}> </Text>
     </View>
   );
 };
@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
     left: 15,
     top: 15,
     color: '#FFFFFFE0',
-    fontSize: 14,
-    fontStyle: 'italic',
+    fontSize: 16,
   },
 });
 
