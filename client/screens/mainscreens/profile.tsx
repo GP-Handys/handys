@@ -61,6 +61,7 @@ export default function Profile({ navigation }: StackProps) {
     };
 
     navigation.addListener("focus",fetchProfile)
+
   }, []);
 
   if (loading) {
@@ -119,7 +120,6 @@ export default function Profile({ navigation }: StackProps) {
               <Text style={style.createNewShopFont}>+ Create new Shop</Text>
             </Pressable>
           </View>
-
 
           <View
             style={{ marginTop: 5, marginBottom: 18, alignSelf: "stretch" }}
