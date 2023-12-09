@@ -7,35 +7,31 @@ import {
   ScrollView,
   TextInput,
   KeyboardAvoidingView,
-  Platform,
+  Platform
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
+import validator from "validator"; // For email validation
 
 export default function SendTicket() {
-  const [email, onChangeEmail] = useState("");
-  const [subject, onChangesubject] = useState("");
-  const [message, onChangeMessage] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [inputValues, setInputValues] = useState({
+    email: "",
+    subject: "",
+    message: ""
+  });
 
+  const isButtonEnabled =
+    inputValues.email.trim().length > 0 &&
+    validator.isEmail(inputValues.email) &&
+    inputValues.subject.trim().length > 0 &&
+    inputValues.message.trim().length > 0;
 
-  const handleEmailChange = (text: string) => {
-    onChangeEmail(text);
-  
-    const regex = /\S+@\S+\.\S+/;
-    const isEmailValid = regex.test(text);
-    const isSubjectValid = subject.trim() !== null;
-    const isMessageValid = message.trim() !== null;
-  
-    setIsValidEmail(isEmailValid);
-    setIsDisabled(!(isEmailValid && isSubjectValid && isMessageValid));
+  const handleInputChange = (key: any, value: any) => {
+    setInputValues({ ...inputValues, [key]: value });
   };
 
-  const handlePress = () => {
-    // Handle press logic here
-  };
+  const isValidEmail = validator.isEmail(inputValues.email) && inputValues.email.trim()!== null;
 
   return (
     <CommonBackgroundWithNoSafeArea>
@@ -54,14 +50,16 @@ export default function SendTicket() {
 
           <View style={styles.inputsContainer}>
             <Text style={styles.note}>
-              *We will use your Handy’s email if you leave this field empty.
+              *We will use your Handy's email if you leave this field empty.
             </Text>
+
             <TextInput
               style={styles.input}
               placeholder="E-mail (optional)"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              value={email}
-              onChangeText={handleEmailChange}
+              onChangeText={(inputValue) =>
+                handleInputChange("email", inputValue)
+              }
               keyboardType="email-address"
             />
             {isValidEmail ? null : (
@@ -71,57 +69,56 @@ export default function SendTicket() {
               style={styles.input}
               placeholder="Subject"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              value={subject}
-              onChangeText={onChangesubject}
+              onChangeText={(inputValue) =>
+                handleInputChange("subject", inputValue)
+              }
             />
 
             <TextInput
               style={styles.textArea}
               placeholder="Message"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              value={message}
-              onChangeText={onChangeMessage}
+              onChangeText={(inputValue) =>
+                handleInputChange("message", inputValue)
+              }
               multiline={true}
             />
           </View>
 
           <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
-
-            {isDisabled?
-              <Pressable
-                disabled={isDisabled}
-                onPress={handlePress}
-                style={styles.signUpPressableDisabled}
-              >
-                <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
+            {!isButtonEnabled ? (
+              <Pressable disabled={true} style={styles.signUpPressableDisabled}>
+                <Text
+                  style={{ color: "black", fontWeight: "600", fontSize: 16 }}
+                >
                   Confirm
                 </Text>
               </Pressable>
-              :
+            ) : (
               <Pressable
-              onPress={handlePress}
-              style={({ pressed }) => [
-                styles.signUpPressable,
-                {
-                  opacity: pressed ? 0.6 : 1
-                }
-              ]}
-            >
-              <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
-                Confirm
-              </Text>
-            </Pressable>
-            }
+                style={({ pressed }) => [
+                  styles.signUpPressable,
+                  {
+                    opacity: pressed ? 0.6 : 1
+                  }
+                ]}
+              >
+                <Text
+                  style={{ color: "black", fontWeight: "600", fontSize: 16 }}
+                >
+                  Confirm
+                </Text>
+              </Pressable>
+            )}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </CommonBackgroundWithNoSafeArea>
   );
 }
-
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flex: 1
   },
   upperContainer: {
     width: 300,
@@ -129,21 +126,21 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     textAlign: "left",
     alignSelf: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   textTitle: {
-    color: 'white',
+    color: "white",
     marginTop: 10,
     fontWeight: "500",
     fontSize: 20,
-    textAlign: "center",
+    textAlign: "center"
   },
   signUpPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 50,
-    borderRadius: 8,
+    borderRadius: 8
   },
   signUpPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    opacity:0.5
+    opacity: 0.5
   },
   input: {
     color: "#ABABAB",
@@ -164,11 +161,11 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginHorizontal: 20,
     marginBottom: 12,
-    marginTop: 1,
+    marginTop: 1
   },
   textArea: {
     color: "#ABABAB",
-    padding:15,
+    padding: 15,
     backgroundColor: COLORS.handysGrey,
     height: 100,
     borderRadius: 6,
@@ -176,25 +173,25 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontSize: 15,
     fontWeight: "600",
-    textAlignVertical: 'top',
+    textAlignVertical: "top"
   },
   inputsContainer: {
     marginTop: 10,
-    flex: 1,
+    flex: 1
   },
   note: {
     alignSelf: "center",
     fontSize: 11.5,
     fontWeight: "600",
     color: COLORS.textInputPlaceholder,
-    alignItems: "center",
+    alignItems: "center"
   },
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: 'space-between',
+    justifyContent: "space-between"
   },
-  emailError:{
-    color:'red',
-    marginLeft:20,
+  emailError: {
+    color: "red",
+    marginLeft: 20
   }
 });
