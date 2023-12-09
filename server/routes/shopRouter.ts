@@ -5,7 +5,6 @@ import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Shop } from "../models/Shop";
 import { connection as DB } from "../database/database";
 import { ShopReview } from "../models/ShopReview";
-import { log } from "console";
 
 dotenv.config();
 
@@ -19,7 +18,7 @@ export const createShop = async (req: Request, res: Response) => {
 
     res.status(200).json("Shop is created");
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json("something went wrong");    
   }
 };
 
