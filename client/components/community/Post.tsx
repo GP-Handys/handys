@@ -12,20 +12,24 @@ interface PostProps {
 export default function Post({ post }: PostProps) {
   return (
     <View>
-      <View>
-        <PostOwnerHeader userId={post.userId} />
-        <TimeStamp time={post.createdAt} />
+      <View style={{ flexDirection: "row" }}>
+        <View style={styles.timeStamp}>
+          <PostOwnerHeader userId={post.userId} />
+        </View>
+        <View style={{ marginLeft: 150, marginTop: 15 }}>
+          <TimeStamp time={post.createdAt} />
+        </View>
       </View>
       <View>
         <View style={styles.mainPost}>
-          <Text style={{ color: "white", fontSize: 12 }}>{post.content}</Text>
+          <Text style={{ color: "white", fontSize: 12.5 }}>{post.content}</Text>
           {post.img_url && (
             <View style={styles.postImgContainer}>
               <Image style={styles.postImg} source={{ uri: post.img_url }} />
             </View>
           )}
           <View style={styles.footer}>
-            <View style={styles.like}>
+            <View>
               <LikeButton />
             </View>
             <View style={styles.comment}>
@@ -40,9 +44,8 @@ export default function Post({ post }: PostProps) {
 
 const styles = StyleSheet.create({
   timeStamp: {
-    position: "absolute",
-    left: 275,
-    top: 15,
+    paddingBottom: 10,
+    width: 110,
   },
   userProfile: {
     flexDirection: "row",
@@ -51,7 +54,6 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     aspectRatio: 1 * 1,
-    left: 12,
     height: 45,
     width: 45,
     borderRadius: 50,
@@ -59,7 +61,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
-    top: 7,
   },
   pfpImg: {
     height: 45,
@@ -67,36 +68,39 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   userName: {
-    left: 15,
-    top: 15,
+    marginLeft: 15,
+    marginTop: 15,
     color: "#FFFFFFE0",
     fontSize: 14,
     fontStyle: "italic",
+    borderWidth: 1,
   },
   mainPost: {
     height: "auto",
-    width: "auto",
-    marginLeft: 65,
-    marginRight: 20,
-    right: 5,
+    width: "90%",
+    marginLeft: 19,
+    marginTop: 8,
   },
   postImgContainer: {
-    marginTop: 20,
+    marginTop: 12,
+    borderWidth: 0.8,
+    width: "100%",
+    borderRadius: 8,
   },
   postImg: {
-    height: 150,
-    width: 250,
+    height: 190,
+    width: "100%",
+    borderRadius: 8,
   },
   footer: {
     flexDirection: "row",
-    height: 50,
-    top: 23,
-    marginLeft: 1,
-  },
-  like: {
-    left: 55,
+    height: 40,
+    marginTop: 15,
+    marginRight: 155,
+    paddingRight: 25,
+    marginBottom: 10,
   },
   comment: {
-    left: 80,
+    marginLeft: 40,
   },
 });
