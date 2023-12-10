@@ -8,13 +8,20 @@ import COLORS from "../../common/colors";
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const onRefresh = () => {
+    setIsRefreshing(true);
+    fetchPosts().then(() => {
+      setIsRefreshing(false);
+    });
+  };
+  const fetchPosts = async () => {
+    await getPosts().then((result) => {
+      setPosts(result.reverse());
+    });
+  };
   useEffect(() => {
-    const fetchPosts = async () => {
-      await getPosts().then((result) => {
-        setPosts(result);
-      });
-    };
     fetchPosts();
   }, []);
 
@@ -27,15 +34,16 @@ export default function Community() {
   };
 
   return (
-    <View style={{backgroundColor: COLORS.commonBackground}}>
-    <FlatList
-        data={posts.reverse()}
+    <View style={{ backgroundColor: COLORS.commonBackground }}>
+      <FlatList
+        onRefresh={onRefresh}
+        refreshing={isRefreshing}
+        data={posts}
         renderItem={({ item }) => <Post post={item} />}
         ItemSeparatorComponent={itemSeparator}
         keyExtractor={(item) => item.id}
       />
       <AddPost />
     </View>
-    
   );
 }

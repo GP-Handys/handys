@@ -12,11 +12,11 @@ interface PostProps {
 export default function Post({ post }: PostProps) {
   return (
     <View>
-      <View style={{ flexDirection: "row" }}>
-        <View style={styles.timeStamp}>
+      <View style={styles.userProfile}>
+        <View>
           <PostOwnerHeader userId={post.userId} />
         </View>
-        <View style={{ marginLeft: 150, marginTop: 15 }}>
+        <View style={{ marginTop: 15, marginRight: 10 }}>
           <TimeStamp time={post.createdAt} />
         </View>
       </View>
@@ -43,17 +43,12 @@ export default function Post({ post }: PostProps) {
 }
 
 const styles = StyleSheet.create({
-  timeStamp: {
-    paddingBottom: 10,
-    width: 110,
-  },
   userProfile: {
     flexDirection: "row",
-    alignSelf: "flex-start",
-    alignContent: "space-around",
+    justifyContent: "space-between",
+    paddingRight: 10,
   },
   imgContainer: {
-    aspectRatio: 1 * 1,
     height: 45,
     width: 45,
     borderRadius: 50,
@@ -88,7 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   postImg: {
-    height: 190,
+    height: 250,
     width: "100%",
     borderRadius: 8,
   },
