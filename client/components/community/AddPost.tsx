@@ -20,13 +20,16 @@ import { getProfile } from "../../api/UserApi";
 export default function AddPost() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const handleModalDismiss = () => setIsModalVisible(!isModalVisible);
-  const [postImagUrl, setPostImagUrl] = useState();
+  const [postImageUrl, setPostImageUrl] = useState<any | null>(null);
   const [postImgPicked, setPostImgPicked] = useState(false);
   const [postText, setPostText] = useState("");
   const [user, setUser] = useState({} as any);
   const handleAddPost = async () => {
-    await addPost({ content: postText, img_url: postImagUrl });
-    handleModalDismiss();
+    await addPost({ content: postText, img_url: postImageUrl }).then(() => {
+      setPostImageUrl(null);
+      setPostText("");
+      handleModalDismiss();
+    });
   };
   useEffect(() => {
     const fetchProfile = async () => {
@@ -74,7 +77,7 @@ export default function AddPost() {
                 onPress={async () => {
                   const imgId = await pickImageAndStore(
                     "posts",
-                    setPostImagUrl
+                    setPostImageUrl
                   );
                   if (imgId) {
                     setPostImgPicked(true);
@@ -95,7 +98,7 @@ export default function AddPost() {
           </View>
           {postImgPicked && (
             <Image
-              source={{ uri: postImagUrl }}
+              source={{ uri: postImageUrl }}
               style={styles.postImgUploaded}
             />
           )}
