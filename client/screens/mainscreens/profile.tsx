@@ -41,7 +41,6 @@ export default function Profile({ navigation }: StackProps) {
       await getShops(id)
         .then((result) => {
           setShops(result);
-          console.log(result);
         })
         .finally(() => {
           setLoading(false);
@@ -156,7 +155,13 @@ export default function Profile({ navigation }: StackProps) {
           </View>
         </View>
 
-        <Pressable style={style.logout}>
+        <Pressable style={style.logout} onPress={()=>{
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'OnboardingScreensContainer' }]
+       })
+          
+          }}>
           <MaterialIcons
             name="logout"
             size={28}
