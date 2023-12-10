@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingRight: 10,
+    paddingBottom: 10,
   },
   imgContainer: {
     height: 45,
