@@ -17,6 +17,7 @@ import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ActivityIndicator } from "react-native-paper";
 import { getProfile } from "../../api/UserApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type StackProps = NativeStackScreenProps<StackParamList>;
 
@@ -155,13 +156,13 @@ export default function Profile({ navigation }: StackProps) {
         </View>
 
         <Pressable
-          onPress={() => {
+          onPress={async () => {
+            await AsyncStorage.removeItem("Authorization");
             navigation.reset({
               index: 0,
               routes: [{ name: "OnboardingScreensContainer" }],
             });
           }}
-
           style={({ pressed }) => {
             return [
               style.logout,
