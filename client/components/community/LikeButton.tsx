@@ -25,7 +25,7 @@ export default function LikeButton() {
           setIcon(toggleLikeIcon(icon));
         }}
       >
-        <MaterialIcons name={icon.iconName} size={20} color="#FFFFFFBF" />
+        <MaterialIcons name={icon.iconName} size={23} color="#FFFFFFBF" />
       </TouchableOpacity>
     </View>
   );
