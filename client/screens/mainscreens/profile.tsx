@@ -1,13 +1,13 @@
 import { CommonScrollableBackground } from "../../common/background";
-import {
-  Image,
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { Image, View, Text, StyleSheet, Pressable } from "react-native";
 import COLORS from "../../common/colors";
-import { Entypo, Feather, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {
+  Entypo,
+  Feather,
+  FontAwesome5,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
 import { getShops } from "../../api/ShopApi";
@@ -41,7 +41,6 @@ export default function Profile({ navigation }: StackProps) {
       await getShops(id)
         .then((result) => {
           setShops(result);
-          console.log(result);
         })
         .finally(() => {
           setLoading(false);
@@ -56,7 +55,7 @@ export default function Profile({ navigation }: StackProps) {
       });
     };
 
-    navigation.addListener("focus",fetchProfile)
+    navigation.addListener("focus", fetchProfile);
   }, []);
 
   if (loading) {
@@ -116,7 +115,6 @@ export default function Profile({ navigation }: StackProps) {
             </Pressable>
           </View>
 
-
           <View
             style={{ marginTop: 5, marginBottom: 18, alignSelf: "stretch" }}
           >
@@ -156,7 +154,23 @@ export default function Profile({ navigation }: StackProps) {
           </View>
         </View>
 
-        <Pressable style={style.logout}>
+        <Pressable
+          onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "OnboardingScreensContainer" }],
+            });
+          }}
+
+          style={({ pressed }) => {
+            return [
+              style.logout,
+              {
+                opacity: pressed ? 0.6 : 1,
+              },
+            ];
+          }}
+        >
           <MaterialIcons
             name="logout"
             size={28}
