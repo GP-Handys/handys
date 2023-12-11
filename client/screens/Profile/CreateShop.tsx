@@ -66,14 +66,12 @@ export default function CreateShop({ navigation }: StackProps) {
           </View>
         )}
 
-        <View style={{ marginTop: 5, marginBottom: 10, alignSelf: "stretch" }}>
+        <View style={{ marginTop: 5, marginBottom: 20, alignSelf: "stretch" }}>
           <ThematicBreak />
         </View>
 
-        <View>
-          <Text style={[style.font, { marginTop: 15, marginBottom: 10 }]}>
-            Shop name
-          </Text>
+        <View style={{ gap: 10 }}>
+          <Text style={style.font}>Shop name</Text>
           <CustomTextInput
             placeholder={"Enter shop name"}
             onChangeText={(text) => setName(text)}
@@ -90,7 +88,7 @@ export default function CreateShop({ navigation }: StackProps) {
             onChangeText={(text: any) => setLink(text)}
           />
         </View>
-        <View style={{ marginTop: 15, gap: 15 }}>
+        <View style={{ marginTop: 15, gap: 10 }}>
           <Text style={style.font}>Shop description</Text>
           <CustomTextInput
             placeholder={"Your Shop desciption"}
@@ -121,7 +119,6 @@ const style = StyleSheet.create({
     color: "#FFFFFF80",
     fontSize: 15,
     alignSelf: "flex-end",
-    
   },
   ConfirmButton: {
     backgroundColor: COLORS.CTAButtonBackground,
