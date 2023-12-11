@@ -42,19 +42,22 @@ export default function CreateShop({ navigation }: StackProps) {
 
   return (
     <CommonScrollableBackground>
-      <View style={{ marginHorizontal: 15 }}>
+      <View style={{ margin: 15 }}>
         <Text style={style.font}>Upload image</Text>
 
         {shopImageUrlPicked ? (
-          <TouchableOpacity
+          <View
             style={{
               alignItems: "center",
+              marginVertical: 10,
             }}
-            onPress={handlePickImage}
           >
             <Image source={{ uri: shopImageUrl }} style={style.uploadedIMG} />
-            <Text style={style.font}>Click on Image to change it</Text>
-          </TouchableOpacity>
+
+            <TouchableOpacity style={style.changeIMG} onPress={handlePickImage}>
+              <Text style={style.blackFont}>Change image</Text>
+            </TouchableOpacity>
+          </View>
         ) : (
           <View>
             <TouchableOpacity style={style.uploadIMG} onPress={handlePickImage}>
@@ -105,7 +108,7 @@ export default function CreateShop({ navigation }: StackProps) {
           onPress={handleCreateShop}
           style={style.ConfirmButton}
         >
-          <Text style={style.confirm}>confirm</Text>
+          <Text style={style.blackFont}>Confirm</Text>
         </TouchableOpacity>
       </View>
     </CommonScrollableBackground>
@@ -118,13 +121,13 @@ const style = StyleSheet.create({
     color: "#FFFFFF80",
     fontSize: 15,
     alignSelf: "flex-end",
-    marginTop: 10,
+    
   },
   ConfirmButton: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 10,
     height: 60,
     borderRadius: 8,
     marginBottom: 40,
@@ -140,6 +143,20 @@ const style = StyleSheet.create({
     justifyContent: "center",
     margin: 30,
   },
-  confirm: { color: "black", fontWeight: "bold", fontSize: 18.44 },
-  uploadedIMG:{width:300 , height:300 , resizeMode:"contain"}
+  blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
+  uploadedIMG: {
+    width: 150,
+    height: 150,
+    resizeMode: "contain",
+    borderRadius: 300,
+  },
+  changeIMG: {
+    height: 40,
+    backgroundColor: COLORS.CTAButtonBackground,
+    marginTop: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+  },
 });
