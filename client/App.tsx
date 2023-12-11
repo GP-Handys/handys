@@ -33,7 +33,7 @@ export default function App() {
           name="CreateShopScreen"
           component={CreateShop}
           options={{
-            title:"Create new Shop",
+            title:"Create Shop",
             headerTitleStyle:{color:"white"},
             headerStyle:{backgroundColor:COLORS.commonBackground},
             headerTintColor:"white",
