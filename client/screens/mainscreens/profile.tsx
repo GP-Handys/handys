@@ -12,32 +12,21 @@ import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
 import { getShops } from "../../api/ShopApi";
 import React, { useState, useEffect } from "react";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ActivityIndicator } from "react-native-paper";
 import { getProfile } from "../../api/UserApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TouchableOpacity } from "react-native";
 
 type StackProps = NativeStackScreenProps<StackParamList>;
 
 export default function Profile({ navigation }: StackProps) {
   const [user, setUser]: any = useState({});
-  const [url, setUrl] = useState();
   const [shops, setShops] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProfileImg = async (link: any) => {
-      const storage = getStorage();
-      const storageRef = ref(storage, "users/" + link);
-
-      if (link != null)
-        await getDownloadURL(storageRef).then((url: any) => {
-          setUrl(url);
-        });
-    };
-
     const fetchShops = async (id: any) => {
       await getShops(id)
         .then((result) => {
@@ -51,7 +40,6 @@ export default function Profile({ navigation }: StackProps) {
     const fetchProfile = async () => {
       await getProfile().then(async (result) => {
         setUser(result);
-        fetchProfileImg(result.pfp_url);
         fetchShops(result.id);
       });
     };
@@ -78,7 +66,7 @@ export default function Profile({ navigation }: StackProps) {
               style={style.profileIMG}
             />
           ) : (
-            <Image source={{ uri: url }} style={style.profileIMG} />
+            <Image source={{ uri: user.pfp_url }} style={style.profileIMG} />
           )}
 
           <Text style={style.font}>{user.name}</Text>
@@ -106,14 +94,14 @@ export default function Profile({ navigation }: StackProps) {
               <UserShop key={shop.id} shop={shop} />
             ))}
 
-            <Pressable
+            <TouchableOpacity
               style={style.createShop}
               onPress={() => {
                 navigation.navigate("CreateShopScreen");
               }}
             >
               <Text style={style.createNewShopFont}>+ Create new Shop</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
 
           <View
@@ -155,7 +143,7 @@ export default function Profile({ navigation }: StackProps) {
           </View>
         </View>
 
-        <Pressable
+        <TouchableOpacity
           onPress={async () => {
             await AsyncStorage.removeItem("Authorization");
             navigation.reset({
@@ -163,14 +151,7 @@ export default function Profile({ navigation }: StackProps) {
               routes: [{ name: "OnboardingScreensContainer" }],
             });
           }}
-          style={({ pressed }) => {
-            return [
-              style.logout,
-              {
-                opacity: pressed ? 0.6 : 1,
-              },
-            ];
-          }}
+          style={style.logout}
         >
           <MaterialIcons
             name="logout"
@@ -179,7 +160,7 @@ export default function Profile({ navigation }: StackProps) {
             style={{ paddingTop: 11 }}
           />
           <Text style={style.font}>Logout</Text>
-        </Pressable>
+        </TouchableOpacity>
       </CommonScrollableBackground>
     );
 }

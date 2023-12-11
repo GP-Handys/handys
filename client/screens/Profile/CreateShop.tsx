@@ -1,4 +1,11 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { Feather } from "@expo/vector-icons";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -7,6 +14,8 @@ import COLORS from "../../common/colors";
 import CreateShopHelper from "../../helpers/Profile/CreateShop";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StackParamList } from "../../components/navigation/NavigationStack";
+import pickImageAndStore from "../../storage/store";
+import ThematicBreak from "../../components/ThematicBreak";
 
 type StackProps = NativeStackScreenProps<StackParamList>;
 
@@ -17,18 +26,51 @@ export default function CreateShop({ navigation }: StackProps) {
   const ShopNameLength = 30;
   const descLength = 300;
 
+  const [shopImageUrl, setShopImageUrl]: any = useState(null);
+  const [shopImageUrlPicked, setShopImageUrlPicked] = useState(false);
+
   async function handleCreateShop() {
-    CreateShopHelper(name, link, bio, null, navigation);
+    CreateShopHelper(name, link, bio, shopImageUrl, navigation);
   }
+
+  async function handlePickImage() {
+    const shopId = await pickImageAndStore("shops", setShopImageUrl);
+    if (shopId) {
+      setShopImageUrlPicked(true);
+    }
+  }
+
   return (
     <CommonScrollableBackground>
-      <View style={{ marginHorizontal: 30 }}>
+      <View style={{ marginHorizontal: 15 }}>
         <Text style={style.font}>Upload image</Text>
-        <Pressable style={style.uploadIMG}>
-          <Feather name="upload" size={30} color="white" />
-        </Pressable>
-        <Text style={style.font}>Shop name</Text>
-        <View style={{ marginTop: 15 }}>
+
+        {shopImageUrlPicked ? (
+          <TouchableOpacity
+            style={{
+              alignItems: "center",
+            }}
+            onPress={handlePickImage}
+          >
+            <Image source={{ uri: shopImageUrl }} style={{width:300 , height:400 , resizeMode:"contain"}}/>
+            <Text style={style.font}>Click on Image to change it</Text>
+          </TouchableOpacity>
+        ) : (
+          <View>
+            <TouchableOpacity style={style.uploadIMG} onPress={handlePickImage}>
+              <Feather name="upload" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        )}
+
+        <View style={{ marginTop: 5, marginBottom: 10, alignSelf: "stretch" }}>
+          <ThematicBreak />
+        </View>
+
+        <View>
+          <Text style={[style.font, { marginTop: 15, marginBottom: 10 }]}>
+            Shop name
+          </Text>
           <CustomTextInput
             placeholder={"Enter shop name"}
             onChangeText={(text) => setName(text)}
@@ -59,17 +101,12 @@ export default function CreateShop({ navigation }: StackProps) {
         </View>
       </View>
       <View style={{ marginHorizontal: 38 }}>
-        <Pressable
+        <TouchableOpacity
           onPress={handleCreateShop}
-          style={({ pressed }) => [
-            style.ConfirmButton,
-            {
-              opacity: pressed ? 0.6 : 1,
-            },
-          ]}
+          style={style.ConfirmButton}
         >
           <Text style={style.confirm}>confirm</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </CommonScrollableBackground>
   );
