@@ -97,10 +97,20 @@ export default function AddPost() {
             />
           </View>
           {postImgPicked && (
-            <Image
+            <TouchableOpacity onPress={async () => {
+              const imgId = await pickImageAndStore(
+                "posts",
+                setPostImageUrl
+              );
+              if (imgId) {
+                setPostImgPicked(true);
+              }
+            }} > 
+            <Image 
               source={{ uri: postImageUrl }}
               style={styles.postImgUploaded}
-            />
+              />
+              </TouchableOpacity>
           )}
         </CommonBackgroundWithSafeArea>
       </Modal>
