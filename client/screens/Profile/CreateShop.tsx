@@ -52,7 +52,7 @@ export default function CreateShop({ navigation }: StackProps) {
             }}
             onPress={handlePickImage}
           >
-            <Image source={{ uri: shopImageUrl }} style={{width:300 , height:null , resizeMode:"contain"}} />
+            <Image source={{ uri: shopImageUrl }} style={style.uploadedIMG} />
             <Text style={style.font}>Click on Image to change it</Text>
           </TouchableOpacity>
         ) : (
@@ -141,4 +141,5 @@ const style = StyleSheet.create({
     margin: 30,
   },
   confirm: { color: "black", fontWeight: "bold", fontSize: 18.44 },
+  uploadedIMG:{width:300 , height:300 , resizeMode:"contain"}
 });
