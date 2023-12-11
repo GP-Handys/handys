@@ -52,7 +52,7 @@ export default function CreateShop({ navigation }: StackProps) {
             }}
             onPress={handlePickImage}
           >
-            <Image source={{ uri: shopImageUrl }} style={{width:300 , height:400 , resizeMode:"contain"}}/>
+            <Image source={{ uri: shopImageUrl }} style={{width:300 , height:null , resizeMode:"contain"}} />
             <Text style={style.font}>Click on Image to change it</Text>
           </TouchableOpacity>
         ) : (
