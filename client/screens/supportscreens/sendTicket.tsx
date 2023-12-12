@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  Pressable,
+  TouchableOpacity,
   Text,
   StyleSheet,
   ScrollView,
@@ -15,6 +15,8 @@ import COLORS from "../../common/colors";
 import validator from "validator"; // For email validation
 
 export default function SendTicket() {
+
+  
   const [inputValues, setInputValues] = useState({
     email: "",
     subject: "",
@@ -31,7 +33,7 @@ export default function SendTicket() {
     setInputValues({ ...inputValues, [key]: value });
   };
 
-  const isValidEmail = validator.isEmail(inputValues.email) && inputValues.email.trim()!== null;
+  const isValidEmail = validator.isEmail(inputValues.email) || inputValues.email.trim().length < 1;
 
   return (
     <CommonBackgroundWithNoSafeArea>
@@ -87,28 +89,21 @@ export default function SendTicket() {
 
           <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
             {!isButtonEnabled ? (
-              <Pressable disabled={true} style={styles.signUpPressableDisabled}>
+              <TouchableOpacity disabled={true} style={styles.confirmPressableDisabled}>
                 <Text
                   style={{ color: "black", fontWeight: "600", fontSize: 16 }}
                 >
                   Confirm
                 </Text>
-              </Pressable>
+              </TouchableOpacity>
             ) : (
-              <Pressable
-                style={({ pressed }) => [
-                  styles.signUpPressable,
-                  {
-                    opacity: pressed ? 0.6 : 1
-                  }
-                ]}
-              >
+              <TouchableOpacity style={styles.confirmPressable}>
                 <Text
-                  style={{ color: "black", fontWeight: "600", fontSize: 16 }}
+                  style={{ color: "black", fontWeight: "500", fontSize: 16 }}
                 >
                   Confirm
                 </Text>
-              </Pressable>
+              </TouchableOpacity>
             )}
           </View>
         </ScrollView>
@@ -116,6 +111,7 @@ export default function SendTicket() {
     </CommonBackgroundWithNoSafeArea>
   );
 }
+
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1
@@ -135,14 +131,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center"
   },
-  signUpPressable: {
+  confirmPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 50,
     borderRadius: 8
   },
-  signUpPressableDisabled: {
+  confirmPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
