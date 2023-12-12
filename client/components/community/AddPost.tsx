@@ -60,7 +60,8 @@ export default function AddPost() {
 
               <TouchableOpacity
                 onPress={handleAddPost}
-                style={styles.PostButton}
+                style={[styles.PostButton, { opacity: postText ? 1 : 0.5 }]}
+                disabled={!postText}
               >
                 <Text style={styles.InnerPostButton}>Post</Text>
               </TouchableOpacity>
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     paddingRight: 25,
   },
   PostButton: {
-    borderWidth: 2,
+    borderWidth: 1,
     borderRadius: 20,
     width: 86,
     alignItems: "center",
@@ -162,8 +163,9 @@ const styles = StyleSheet.create({
   InnerPostButton: {
     color: "black",
     alignItems: "center",
-    fontWeight: "800",
+    fontWeight: "700",
     marginTop: 5,
+    fontSize: 15,
   },
   postImgUploaded: {
     width: 350,
