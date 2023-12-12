@@ -55,7 +55,9 @@ export default function AddPost() {
               >
                 <MaterialIcons name="close" size={23} color="white" />
               </TouchableOpacity>
-              <Text style={styles.HeaderText}>Create post</Text>
+
+              <Text style={styles.HeaderText}> Create post</Text>
+
               <TouchableOpacity
                 onPress={handleAddPost}
                 style={styles.PostButton}
@@ -65,11 +67,13 @@ export default function AddPost() {
             </View>
             <ThematicBreak />
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center", top: 7 }}>
-            <View style={{ top: -4 }}>
+          <View
+            style={{ flexDirection: "row", alignItems: "center", marginTop: 7 }}
+          >
+            <View style={{ marginBottom: 4, width: 120, marginLeft: 10 }}>
               <PostOwnerHeader userId={user.id} />
             </View>
-            <TouchableOpacity style={{ left: 200 }}>
+            <TouchableOpacity style={{ marginLeft: 295, position: "absolute" }}>
               <MaterialIcons
                 name="insert-photo"
                 size={28}
@@ -86,7 +90,7 @@ export default function AddPost() {
               />
             </TouchableOpacity>
           </View>
-          <View style={{ top: 10, paddingLeft: 10 }}>
+          <View style={{ marginTop: 5, paddingLeft: 10 }}>
             <CustomTextInput
               placeholder={"Share your thoughts!"}
               multiline={true}
@@ -97,20 +101,19 @@ export default function AddPost() {
             />
           </View>
           {postImgPicked && (
-            <TouchableOpacity onPress={async () => {
-              const imgId = await pickImageAndStore(
-                "posts",
-                setPostImageUrl
-              );
-              if (imgId) {
-                setPostImgPicked(true);
-              }
-            }} > 
-            <Image 
-              source={{ uri: postImageUrl }}
-              style={styles.postImgUploaded}
+            <TouchableOpacity
+              onPress={async () => {
+                const imgId = await pickImageAndStore("posts", setPostImageUrl);
+                if (imgId) {
+                  setPostImgPicked(true);
+                }
+              }}
+            >
+              <Image
+                source={{ uri: postImageUrl }}
+                style={styles.postImgUploaded}
               />
-              </TouchableOpacity>
+            </TouchableOpacity>
           )}
         </CommonBackgroundWithSafeArea>
       </Modal>
@@ -133,19 +136,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    top: -20,
-    left: 10,
+    marginTop: -25,
+    marginBottom: 10,
   },
   CloseButton: {
     width: 30,
-    left: 10,
+    marginLeft: 20,
   },
   HeaderText: {
     fontSize: 20,
     width: 150,
     color: "white",
     marginLeft: 50,
-    left: 15,
+    paddingRight: 25,
   },
   PostButton: {
     borderWidth: 2,
@@ -154,18 +157,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 38,
     backgroundColor: "#F6977F",
-    left: 20,
-    top: 5,
+    marginLeft: 20,
   },
   InnerPostButton: {
     color: "black",
-    top: 5,
+    alignItems: "center",
     fontWeight: "800",
+    marginTop: 5,
   },
   postImgUploaded: {
     width: 350,
     height: 250,
     marginTop: 8,
-    left: 5,
+    marginLeft: 5,
   },
 });
