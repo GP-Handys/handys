@@ -4,22 +4,13 @@ import PostModal from "../../components/community/PostModal";
 import { useState, useEffect } from "react";
 import { getPosts } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
-import COLORS from "../../common/colors";
 import { MaterialIcons } from "@expo/vector-icons";
+import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isPostModalVisible, setPostModalVisible] = useState(false);
-
-  const handleDismiss = () => {
-    setPostModalVisible(false);
-  };
-
-  const handlePress = () => {
-    console.log("Button pressed");
-    setPostModalVisible(true);
-  };
 
   const onRefresh = () => {
     setIsRefreshing(true);
@@ -45,7 +36,7 @@ export default function Community() {
   };
 
   return (
-    <View style={{ backgroundColor: COLORS.commonBackground }}>
+    <CommonBackgroundWithNoSafeArea>
       <FlatList
         onRefresh={onRefresh}
         refreshing={isRefreshing}
@@ -55,21 +46,24 @@ export default function Community() {
         keyExtractor={(item) => item.id}
       />
       {isPostModalVisible && (
-        <PostModal isVisible={isPostModalVisible} onDismiss={handleDismiss} />
+        <PostModal
+          isVisible={isPostModalVisible}
+          onDismiss={() => setPostModalVisible(false)}
+        />
       )}
-      <TouchableOpacity style={styles.Iconbutton} onPress={handlePress}>
+      <TouchableOpacity
+        style={styles.Iconbutton}
+        onPress={() => setPostModalVisible(true)}
+      >
         <MaterialIcons name="add-circle" size={50} color="#F6977F" />
       </TouchableOpacity>
-    </View>
+    </CommonBackgroundWithNoSafeArea>
   );
 }
 const styles = StyleSheet.create({
   Iconbutton: {
-    position: "absolute",
-    width: 48,
-    height: 48,
     bottom: 25,
     right: 20,
-    alignItems: "center",
+    position: "absolute",
   },
 });
