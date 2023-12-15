@@ -15,7 +15,7 @@ export function UserShop({ shop }: Props) {
 
         {shop.pfp_url === null ? (
             <Image
-              source={require("../../assets/default_profile_img.jpg")}
+              source={require("../../assets/default_shop_img.png")}
               style={styles.shopIMG}
             />
           ) : (

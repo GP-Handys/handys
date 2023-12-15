@@ -3,6 +3,7 @@ import SignIn from "../../screens/onboarding/signin";
 import SignUp from "../../screens/onboarding/signup";
 import COLORS from "../../common/colors";
 import { Stack } from "./NavigationStack";
+import Search from "../../screens/mainscreens/search";
 
 export default function OnboardingNavigationContainer() {
   return (

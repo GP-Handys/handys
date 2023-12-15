@@ -33,3 +33,20 @@ export const createShop = async (data: any) => {
     return error.message;
   }
 };
+
+export const shopSearch = async (data:any)=>{
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/shop/search?search="+data, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });    
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+
+}
