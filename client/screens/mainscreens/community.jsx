@@ -1,14 +1,25 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import ThematicBreak from "../../components/ThematicBreak";
-import AddPost from "../../components/community/AddPost";
+import PostModal from "../../components/community/PostModal";
 import { useState, useEffect } from "react";
 import { getPosts } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
 import COLORS from "../../common/colors";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isPostModalVisible, setPostModalVisible] = useState(false);
+
+  const handleDismiss = () => {
+    setPostModalVisible(false);
+  };
+
+  const handlePress = () => {
+    console.log("Button pressed");
+    setPostModalVisible(true);
+  };
 
   const onRefresh = () => {
     setIsRefreshing(true);
@@ -43,7 +54,22 @@ export default function Community() {
         ItemSeparatorComponent={itemSeparator}
         keyExtractor={(item) => item.id}
       />
-      <AddPost />
+      {isPostModalVisible && (
+        <PostModal isVisible={isPostModalVisible} onDismiss={handleDismiss} />
+      )}
+      <TouchableOpacity style={styles.Iconbutton} onPress={handlePress}>
+        <MaterialIcons name="add-circle" size={50} color="#F6977F" />
+      </TouchableOpacity>
     </View>
   );
 }
+const styles = StyleSheet.create({
+  Iconbutton: {
+    position: "absolute",
+    width: 48,
+    height: 48,
+    bottom: 25,
+    right: 20,
+    alignItems: "center",
+  },
+});
