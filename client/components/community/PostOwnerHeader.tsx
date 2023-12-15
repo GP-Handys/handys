@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   userName: {
     color: "#FFFFFFE0",
-    fontSize: 20,
-    paddingLeft:10
+    fontSize: 18,
+    paddingLeft:6
   },
 });

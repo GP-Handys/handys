@@ -16,6 +16,7 @@ import CustomTextInput from "../CustomTextInput";
 import pickImageAndStore from "../../storage/store";
 import { addPost } from "../../api/CommunityApi";
 import { getProfile } from "../../api/UserApi";
+import { Dimensions } from "react-native";
 
 interface PostModalProps {
   isVisible: boolean;
@@ -52,7 +53,7 @@ export default function PostModal({
         <CommonBackgroundWithSafeArea>
           <View style={{ backgroundColor: COLORS.commonBackground }}>
             <View style={styles.ModalHeader}>
-              <View style={{ flex: 1 }}>
+              <View style={{ width:Dimensions.get('window').width/3}}>
                 <TouchableOpacity
                   onPress={onDismiss}
                   style={styles.CloseButton}
@@ -61,11 +62,11 @@ export default function PostModal({
                 </TouchableOpacity>
               </View>
 
-              <View style={{ flex: 1 }}>
+              <View style={{ width:Dimensions.get('window').width/3}}>
                 <Text style={styles.HeaderText}> Create post</Text>
               </View>
 
-              <View style={{ flex: 1, alignItems: "flex-end" }}>
+              <View style={{ width:Dimensions.get('window').width/3,alignItems:"center"}}>
                 <TouchableOpacity
                   onPress={handleAddPost}
                   style={[styles.PostButton, { opacity: postText ? 1 : 0.5 }]}

@@ -29,7 +29,7 @@ export default function Community() {
 
   const itemSeparator = () => {
     return (
-      <View style={{marginVertical:10}}>
+      <View style={{marginVertical:20}}>
         <ThematicBreak />
       </View>
     );
@@ -72,6 +72,6 @@ const styles = StyleSheet.create({
   Iconbutton: {
     position: "absolute",
     right:20,
-    bottom:25
+    bottom:20
   },
 });

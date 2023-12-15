@@ -28,12 +28,8 @@ export default function Post({ post }: PostProps) {
               <Image style={styles.postImg} source={{ uri: post.img_url }} />
           )}
           <View style={styles.footer}>
-            <View>
               <LikeButton />
-            </View>
-            <View style={styles.comment}>
               <CommentButton />
-            </View>
           </View>
         </View>
       </View>
@@ -45,15 +41,6 @@ const styles = StyleSheet.create({
   userProfile: {
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  imgContainer: {
-    height: 45,
-    width: 45,
-    borderRadius: 50,
-    borderWidth: 0.5,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
   },
   pfpImg: {
     height: 45,
@@ -68,14 +55,15 @@ const styles = StyleSheet.create({
     marginTop: 12,
     width: Dimensions.get('window').width-20,
     height:400,
-    borderRadius: 8,
-    resizeMode:"contain"
+    resizeMode:"contain",
   },
   footer: {
     flexDirection: "row",
-    height: 40,
-    paddingRight: 25,
-    marginTop:15
+    alignItems:"baseline",
+    marginTop:15,
+    gap:20,
+    marginLeft:10
+    
   },
   comment: {
     marginLeft: 40,
