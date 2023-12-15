@@ -53,28 +53,23 @@ export default function PostModal({
         <CommonBackgroundWithSafeArea>
           <View style={{ backgroundColor: COLORS.commonBackground }}>
             <View style={styles.ModalHeader}>
-              <View style={{ width:Dimensions.get('window').width/3}}>
+            
                 <TouchableOpacity
                   onPress={onDismiss}
                   style={styles.CloseButton}
                 >
                   <MaterialIcons name="close" size={23} color="white" />
                 </TouchableOpacity>
-              </View>
-
-              <View style={{ width:Dimensions.get('window').width/3}}>
+              
                 <Text style={styles.HeaderText}> Create post</Text>
-              </View>
-
-              <View style={{ width:Dimensions.get('window').width/3,alignItems:"center"}}>
+              
                 <TouchableOpacity
                   onPress={handleAddPost}
-                  style={[styles.PostButton, { opacity: postText ? 1 : 0.5 }]}
+                  style={[styles.PostButton, { opacity: postText ? 1 : 0.5 ,position:"absolute",right:0},]}
                   disabled={!postText}
                 >
                   <Text style={styles.InnerPostButton}>Post</Text>
                 </TouchableOpacity>
-              </View>
             </View>
             <ThematicBreak />
           </View>
@@ -141,18 +136,18 @@ export default function PostModal({
 }
 const styles = StyleSheet.create({
   ModalHeader: {
+    justifyContent:"center",
     alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 10,
+    marginBottom: 15,
     marginHorizontal: 15,
   },
   CloseButton: {
     width: 30,
+    position:"absolute",
+    left:0
   },
   HeaderText: {
     fontSize: 20,
-    width: 150,
     color: "white",
   },
   PostButton: {
