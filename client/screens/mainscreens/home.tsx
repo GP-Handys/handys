@@ -3,7 +3,7 @@ import { CommonScrollableBackground } from "../../common/background";
 import { View } from "react-native";
 import STRINGS from "../../strings/strings";
 import CategoryCard from "../../components/home/CategoryCard";
-import RecommendedShopCard from "../../components/home/RecommendedShopCard";
+import ShopCard from "../../components/home/ShopCard";
 import MostPopularItem from "../../components/home/MostPopularItem";
 
 export default function Home() {
@@ -61,39 +61,6 @@ export default function Home() {
         showsHorizontalScrollIndicator={false}
         style={styles.categorySv}
       >
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <RecommendedShopCard />
-        </View>
       </ScrollView>
 
       <Text style={styles.sectionTitle}>Most Popular Items</Text>

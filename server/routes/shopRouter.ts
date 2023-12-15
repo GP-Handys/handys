@@ -90,7 +90,7 @@ export const searchShop = async (req: Request, res: Response) => {
     const search = req.query.search;
     const query = `SELECT * FROM shops WHERE name LIKE '%${search}%' OR bio LIKE '%${search}%';`;
     const searchResult = await DB.query(query);
-    res.status(200).json(searchResult);
+    res.status(200).json(searchResult[0]);
   } catch (error) {
     res.status(500).json(error);
   }
