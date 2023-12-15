@@ -19,15 +19,19 @@ export default function PostOwnerHeader({
     };
     fetchUser();
   }, []);
+
   return (
     <View style={styles.userData}>
-      <View style={styles.imgContainer}>
-        {/* source={{uri:user?.pfp_url} */}
+      <Text></Text>
+      {user?.pfp_url === null ? (
         <Image
           style={styles.pfpImg}
-          source={require("../../assets/pic1.jpg")}
+          source={require("../../assets/default_profile_img.jpg")}
         />
-      </View>
+      ) : (
+        <Image source={{ uri: user?.pfp_url }} style={styles.pfpImg} />
+      )}
+
       <Text style={styles.userName}> {user?.name} </Text>
     </View>
   );
@@ -35,30 +39,16 @@ export default function PostOwnerHeader({
 const styles = StyleSheet.create({
   userData: {
     flexDirection: "row",
-    alignSelf: "flex-start",
-    alignContent: "space-around",
-  },
-  imgContainer: {
-    aspectRatio: 1 * 1,
-    left: 12,
-    height: 45,
-    width: 45,
-    borderRadius: 50,
-    borderWidth: 0.5,
     alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    top: 7,
   },
   pfpImg: {
     height: 45,
     width: 45,
-    borderRadius: 50,
+    borderRadius: 45,
   },
   userName: {
-    left: 15,
-    top: 15,
     color: "#FFFFFFE0",
-    fontSize: 16,
+    fontSize: 20,
+    paddingLeft:10
   },
 });

@@ -5,7 +5,7 @@ export default function CommentButton() {
   return (
     <View>
       <TouchableOpacity>
-        <MaterialIcons name="comment" size={23} color={"#FFFFFFBF"} />
+        <MaterialIcons name="comment" size={30} color={"#FFFFFFBF"} />
       </TouchableOpacity>
     </View>
   );

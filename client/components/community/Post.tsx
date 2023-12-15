@@ -4,6 +4,7 @@ import TimeStamp from "../../components/community/TimeStamp";
 import LikeButton from "../../components/community/LikeButton";
 import CommentButton from "../../components/community/CommentButton";
 import { PostModel } from "../../models/Post";
+import { Dimensions } from "react-native";
 
 interface PostProps {
   post: PostModel;
@@ -22,11 +23,9 @@ export default function Post({ post }: PostProps) {
       </View>
       <View>
         <View style={styles.mainPost}>
-          <Text style={{ color: "white", fontSize: 12.5 }}>{post.content}</Text>
+          <Text style={{ color: "white", fontSize: 15 }}>{post.content}</Text>
           {post.img_url && (
-            <View style={styles.postImgContainer}>
               <Image style={styles.postImg} source={{ uri: post.img_url }} />
-            </View>
           )}
           <View style={styles.footer}>
             <View>
@@ -46,8 +45,6 @@ const styles = StyleSheet.create({
   userProfile: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingRight: 10,
-    paddingBottom: 10,
   },
   imgContainer: {
     height: 45,
@@ -63,38 +60,22 @@ const styles = StyleSheet.create({
     width: 45,
     borderRadius: 50,
   },
-  userName: {
-    marginLeft: 15,
-    marginTop: 15,
-    color: "#FFFFFFE0",
-    fontSize: 14,
-    fontStyle: "italic",
-    borderWidth: 1,
-  },
   mainPost: {
     height: "auto",
-    width: "90%",
-    marginLeft: 19,
-    marginTop: 8,
-  },
-  postImgContainer: {
-    marginTop: 12,
-    borderWidth: 0.8,
-    width: "100%",
-    borderRadius: 8,
+    marginTop: 10,
   },
   postImg: {
-    height: 250,
-    width: "100%",
+    marginTop: 12,
+    width: Dimensions.get('window').width-20,
+    height:400,
     borderRadius: 8,
+    resizeMode:"contain"
   },
   footer: {
     flexDirection: "row",
     height: 40,
-    marginTop: 15,
-    marginRight: 155,
     paddingRight: 25,
-    marginBottom: 10,
+    marginTop:15
   },
   comment: {
     marginLeft: 40,

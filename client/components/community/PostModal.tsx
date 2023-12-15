@@ -47,37 +47,52 @@ export default function PostModal({
   }, []);
 
   return (
-    <View style={styles.Iconbutton}>
+    <View>
       <Modal animationType="slide" transparent={false} visible={isVisible}>
         <CommonBackgroundWithSafeArea>
-          <View style={styles.ModalBackGround}>
-            <View style={styles.ModalHeadrer}>
-              <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
-                <MaterialIcons name="close" size={23} color="white" />
-              </TouchableOpacity>
+          <View style={{ backgroundColor: COLORS.commonBackground }}>
+            <View style={styles.ModalHeader}>
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  onPress={onDismiss}
+                  style={styles.CloseButton}
+                >
+                  <MaterialIcons name="close" size={23} color="white" />
+                </TouchableOpacity>
+              </View>
 
-              <Text style={styles.HeaderText}> Create post</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.HeaderText}> Create post</Text>
+              </View>
 
-              <TouchableOpacity
-                onPress={handleAddPost}
-                style={[styles.PostButton, { opacity: postText ? 1 : 0.5 }]}
-                disabled={!postText}
-              >
-                <Text style={styles.InnerPostButton}>Post</Text>
-              </TouchableOpacity>
+              <View style={{ flex: 1, alignItems: "flex-end" }}>
+                <TouchableOpacity
+                  onPress={handleAddPost}
+                  style={[styles.PostButton, { opacity: postText ? 1 : 0.5 }]}
+                  disabled={!postText}
+                >
+                  <Text style={styles.InnerPostButton}>Post</Text>
+                </TouchableOpacity>
+              </View>
             </View>
             <ThematicBreak />
           </View>
+
           <View
-            style={{ flexDirection: "row", alignItems: "center", marginTop: 7 }}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginHorizontal: 20,
+              marginTop: 15,
+            }}
           >
-            <View style={{ marginBottom: 4, width: 120, marginLeft: 10 }}>
-              <PostOwnerHeader userId={user.id} />
-            </View>
-            <TouchableOpacity style={{ marginLeft: 295, position: "absolute" }}>
+            <PostOwnerHeader userId={user.id} />
+
+            <TouchableOpacity>
               <MaterialIcons
                 name="insert-photo"
-                size={30}
+                size={40}
                 color="#FFFFFF83"
                 onPress={async () => {
                   const imgId = await pickImageAndStore(
@@ -91,6 +106,7 @@ export default function PostModal({
               />
             </TouchableOpacity>
           </View>
+
           <View style={{ marginTop: 5, paddingLeft: 10 }}>
             <CustomTextInput
               placeholder={"Share your thoughts!"}
@@ -101,6 +117,7 @@ export default function PostModal({
               }}
             />
           </View>
+
           {postImgPicked && (
             <TouchableOpacity
               onPress={async () => {
@@ -122,55 +139,40 @@ export default function PostModal({
   );
 }
 const styles = StyleSheet.create({
-  Iconbutton: {
-    position: "absolute",
-    width: 48,
-    height: 48,
-    bottom: 25,
-    right: 20,
+  ModalHeader: {
     alignItems: "center",
-  },
-  ModalBackGround: {
-    backgroundColor: COLORS.commonBackground,
-  },
-  ModalHeadrer: {
-    alignItems: "center",
-    display: "flex",
     flexDirection: "row",
-    marginTop: -25,
+    justifyContent: "space-between",
     marginBottom: 10,
+    marginHorizontal: 15,
   },
   CloseButton: {
     width: 30,
-    marginLeft: 20,
   },
   HeaderText: {
     fontSize: 20,
     width: 150,
     color: "white",
-    marginLeft: 50,
-    paddingRight: 25,
   },
   PostButton: {
     borderWidth: 1,
     borderRadius: 20,
     width: 86,
     alignItems: "center",
-    height: 38,
+    height: 40,
     backgroundColor: "#F6977F",
-    marginLeft: 20,
+    justifyContent: "center",
   },
   InnerPostButton: {
     color: "black",
     alignItems: "center",
     fontWeight: "700",
-    marginTop: 5,
-    fontSize: 15,
+    fontSize: 18,
   },
   postImgUploaded: {
     width: 350,
     height: 250,
-    marginTop: 8,
-    marginLeft: 5,
+    resizeMode: "contain",
+    alignSelf:"center"
   },
 });
