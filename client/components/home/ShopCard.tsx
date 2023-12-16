@@ -1,4 +1,4 @@
-import { View, Pressable, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Shop } from "../../models/Shop";
 import { StackProps } from "../navigation/NavigationStack";
 import { useNavigation } from "@react-navigation/native";
@@ -11,7 +11,7 @@ export default function ShopCard({ shop }: Props) {
   const navigation = useNavigation<StackProps["navigation"]>();
   return (
     <View style={styles.shopCardContainer}>
-      <Pressable onPress={() => {
+      <TouchableOpacity onPress={() => {
         navigation.navigate("ShopScreen", {
           shopId: shop.id,
           shopName: shop.name,
@@ -25,7 +25,7 @@ export default function ShopCard({ shop }: Props) {
         ) : (
           <Image source={{ uri: shop.pfp_url }} style={styles.shopImg} />
         )}
-      </Pressable>
+      </TouchableOpacity>
       <Text style={styles.shopName}>{shop.name}</Text>
     </View>
   );
