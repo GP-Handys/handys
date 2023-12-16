@@ -100,7 +100,7 @@ export default function Profile({ navigation }: StackProps) {
                 navigation.navigate("CreateShopScreen");
               }}
             >
-              <Text style={style.createNewShopFont}>+ Create new Shop</Text>
+              <Text style={style.createNewShopFont}>+ Create shop</Text>
             </TouchableOpacity>
           </View>
 

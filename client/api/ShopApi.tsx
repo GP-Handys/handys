@@ -50,3 +50,19 @@ export const shopSearch = async (data:any)=>{
   }
 
 }
+
+export const getRecommendedShops = async () => { 
+  const token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/shop/recommended", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token
+      },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+}

@@ -211,7 +211,7 @@ export const getRecommendedShops = async (req: Request, res: Response) => {
     const userId = extractUserFromJwt(jwt);
     const user = await User.findByPk(userId);
     if(user!=null){
-      let shops = Shop.findAll({ order:[Sequelize.fn('RAND')],limit:8})
+      let shops = await Shop.findAll({ order:Sequelize.literal('RAND()'), limit:8})
       return res.send(shops)
     }
     else{
