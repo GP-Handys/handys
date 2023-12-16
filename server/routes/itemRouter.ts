@@ -6,8 +6,6 @@ import { ItemReview } from "../models/ItemReview";
 import { connection as DB } from "../database/database";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Sequelize } from "sequelize";
-import { Category } from "../models/Category";
-import { addCategory } from "./categoryRouter";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -220,7 +218,7 @@ export const getReviews = async (req: Request, res: Response) => {
 
 export const getRandomItems = async (req: Request, res: Response) => {
   try{
-    let result = Item.findAll({ order:[Sequelize.fn('RAND')],limit:10},)
+    let result = Item.findAll({ order:[Sequelize.fn('RAND')],limit:10})
     res.status(200).json(result)
   } catch (error) {
     res.status(500).json(error);

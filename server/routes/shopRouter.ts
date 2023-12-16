@@ -5,6 +5,7 @@ import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Shop } from "../models/Shop";
 import { connection as DB } from "../database/database";
 import { ShopReview } from "../models/ShopReview";
+import { Sequelize } from "sequelize";
 
 dotenv.config();
 
@@ -194,6 +195,23 @@ export const getUserShops = async (req: Request, res: Response) => {
     
     if(user!=null){
       let shops =await Shop.findAll({where:{userId:userId}});
+      return res.send(shops)
+    }
+    else{
+      res.sendStatus(403);  
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export const getRecommendedShops = async (req: Request, res: Response) => { 
+  try {
+    const jwt: string = req.get("Authorization")?.toString()!;
+    const userId = extractUserFromJwt(jwt);
+    const user = await User.findByPk(userId);
+    if(user!=null){
+      let shops = Shop.findAll({ order:[Sequelize.fn('RAND')],limit:8})
       return res.send(shops)
     }
     else{
