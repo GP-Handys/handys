@@ -6,7 +6,7 @@ export default async function pickImageAndStore(basePath: string, setUrl: any): 
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
-    quality: 1,
+    quality: 0,
   });
   if (!result.canceled) {
     const imgId = extractImageId(result.assets[0].uri);
