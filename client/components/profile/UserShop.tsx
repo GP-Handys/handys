@@ -1,34 +1,27 @@
 import { Pressable, StyleSheet, Text, Image, View } from "react-native";
 import COLORS from "../../common/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
-
-class Shop {
-  public id!: number;
-  public name!: string;
-  public rating!: number;
-  public is_premium!: boolean;
-  public is_deleted!: boolean;
-  public is_approved!: boolean;
-  public pfp_url?: string | null;
-  public bio!: string;
-  public socialMediaLink!: string;
-  public userId!: number;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
+import { Shop } from "../../models/Shop";
 
 interface Props {
   shop: Shop;
 }
 
 export function UserShop({ shop }: Props) {
-
   
-  let imageUrl = require("../../assets/logo.png")
   return (
     <Pressable key={shop.id} style={styles.shop}>
       <View style={styles.shopDetails}>
-        <Image source={imageUrl} style={styles.shopIMG} />
+
+        {shop.pfp_url === null ? (
+            <Image
+              source={require("../../assets/default_shop_img.png")}
+              style={styles.shopIMG}
+            />
+          ) : (
+            <Image source={{ uri: shop.pfp_url }} style={styles.shopIMG} />
+          )}
+
         <Text style={styles.shopName}>{shop.name!}</Text>
       </View>
       {shop.is_premium && (

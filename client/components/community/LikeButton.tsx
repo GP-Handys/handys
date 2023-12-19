@@ -6,7 +6,6 @@ interface IButton {
   iconName: any;
 }
 
-
 export default function LikeButton() {
   const toggleLikeIcon = (currentIcon: IButton): IButton => {
     return {
@@ -26,7 +25,7 @@ export default function LikeButton() {
           setIcon(toggleLikeIcon(icon));
         }}
       >
-        <MaterialIcons name={icon.iconName} size={20} color="#FFFFFFBF" />
+        <MaterialIcons name={icon.iconName} size={30} color="#FFFFFFBF" />
       </TouchableOpacity>
     </View>
   );

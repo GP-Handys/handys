@@ -1,20 +1,19 @@
 import { Pressable, View, Text, Image, StyleSheet } from "react-native";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useEffect, useState } from "react";
+import retrieveImageUrlWithPathAndSet from "../../storage/retrieve";
 
 export default function CategoryCard() {
-  const [url, setUrl] = useState();
-  
+  const [categoryImgUrl, setCategoryImgUrl] = useState<any | undefined>(undefined);
+
   useEffect(() => {
     const func = async () => {
-      const storage = getStorage();
-      const storageRef = ref(storage, "categories/bags-category.jpg");
-      await getDownloadURL(storageRef).then((url: any) => {
-        setUrl(url);
-      });
+      await retrieveImageUrlWithPathAndSet(
+        "categories/bags-category.jpg",
+        setCategoryImgUrl
+      );
     };
 
-    if (url === undefined) {
+    if (categoryImgUrl === undefined) {
       func();
     }
   }, []);
@@ -22,16 +21,12 @@ export default function CategoryCard() {
   return (
     <View>
       <Pressable>
-        <Image
-          style={styles.categoryImg}
-          source={{uri: url}}
-        />
+        <Image style={styles.categoryImg} source={{ uri: categoryImgUrl }} />
       </Pressable>
       <Text style={styles.categoryName}>Wood</Text>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   categoryName: {
     color: "white",

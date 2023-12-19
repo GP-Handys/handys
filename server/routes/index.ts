@@ -31,7 +31,7 @@ router.get("/api/shop/getReviews", tokenValidate, shopRouter.getShopReviews)
 router.get("/api/shop/pendingShops", tokenValidate,shopRouter.pendingShops)
 router.put("/api/shop/approveShop/:shopId", tokenValidate,shopRouter.approveShop)
 router.get("/api/shop/getUserShops/:userId", tokenValidate,shopRouter.getUserShops)
-
+router.get("/api/shop/recommended", tokenValidate, shopRouter.getRecommendedShops)
 
 //item routes
 router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
@@ -75,6 +75,5 @@ router.get("/api/ticket/getTickets" , tokenValidate , ticketRouter.getTickets)
 router.get("/api/ticket/getTicket/:ticketId",tokenValidate,ticketRouter.getTicketById)
 router.post("/api/ticket/submitTicket" , tokenValidate , ticketRouter.submitTicket)
 router.get("/api/ticket/resolve/:ticketId",tokenValidate ,ticketRouter.resolveTicket)
-
 
 export {router}

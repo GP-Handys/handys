@@ -5,7 +5,7 @@ import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Shop } from "../models/Shop";
 import { connection as DB } from "../database/database";
 import { ShopReview } from "../models/ShopReview";
-import { log } from "console";
+import { Sequelize } from "sequelize";
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ export const createShop = async (req: Request, res: Response) => {
 
     res.status(200).json("Shop is created");
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json("something went wrong");    
   }
 };
 
@@ -91,7 +91,7 @@ export const searchShop = async (req: Request, res: Response) => {
     const search = req.query.search;
     const query = `SELECT * FROM shops WHERE name LIKE '%${search}%' OR bio LIKE '%${search}%';`;
     const searchResult = await DB.query(query);
-    res.status(200).json(searchResult);
+    res.status(200).json(searchResult[0]);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -195,6 +195,23 @@ export const getUserShops = async (req: Request, res: Response) => {
     
     if(user!=null){
       let shops =await Shop.findAll({where:{userId:userId}});
+      return res.send(shops)
+    }
+    else{
+      res.sendStatus(403);  
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export const getRecommendedShops = async (req: Request, res: Response) => { 
+  try {
+    const jwt: string = req.get("Authorization")?.toString()!;
+    const userId = extractUserFromJwt(jwt);
+    const user = await User.findByPk(userId);
+    if(user!=null){
+      let shops = await Shop.findAll({ order:Sequelize.literal('RAND()'), limit:8})
       return res.send(shops)
     }
     else{

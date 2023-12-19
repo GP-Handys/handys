@@ -1,4 +1,7 @@
-import { NativeStackScreenProps, createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from "@react-navigation/native-stack";
 
 export type StackParamList = {
   Landing: undefined;
@@ -9,6 +12,8 @@ export type StackParamList = {
   SendTicketScreen:undefined;
   DoneScreen: undefined;
   Profile: undefined;
+  CreateShopScreen: undefined;
+  ShopScreen: {shopId: number, shopName: string};
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

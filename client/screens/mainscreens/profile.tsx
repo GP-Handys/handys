@@ -1,137 +1,172 @@
 import { CommonScrollableBackground } from "../../common/background";
-import {
-  Image,
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  TouchableOpacity
-} from "react-native";
+import { Image, View, Text, StyleSheet, Pressable } from "react-native";
 import COLORS from "../../common/colors";
-import { Feather } from "@expo/vector-icons";
+import {
+  Entypo,
+  Feather,
+  FontAwesome5,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Entypo } from "@expo/vector-icons";
-import { getProfile } from "../../api/UserApi";
-import React, { useState } from "react";
+import { getShops } from "../../api/ShopApi";
+import React, { useState, useEffect } from "react";
 import { StackParamList } from "../../components/navigation/NavigationStack";
-import SendTicketScreen from "../SupportScreens/SendTicketScreen";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ActivityIndicator } from "react-native-paper";
+import { getProfile } from "../../api/UserApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TouchableOpacity } from "react-native";
+
 type StackProps = NativeStackScreenProps<StackParamList>;
 
 export default function Profile({ navigation }: StackProps) {
-  let shops: any = [
-    {
-      name: "Innovative crafts",
-      pfp_url: "../../assets/logo.png",
-      is_premium: false,
-      id: 1
-    },
-    {
-      name: "Raqi store",
-      pfp_url: "../../assets/logo.png",
-      is_premium: true,
-      id: 2
-    }
-  ];
+  const [user, setUser]: any = useState({});
+  const [shops, setShops] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  let user: any = getProfile();
+  useEffect(() => {
+    const fetchShops = async (id: any) => {
+      await getShops(id)
+        .then((result) => {
+          setShops(result);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
 
-  return (
-    <CommonScrollableBackground>
-      {/* page container */}
-      <View style={{ paddingHorizontal: 40, alignItems: "center" }}>
-        {/* user information */}
-        <Image
-          source={require("../../assets/default_profile_img.jpg")}
-          style={style.profileIMG}
-        />
-        <Text style={style.font}>Assem musallam</Text>
+    const fetchProfile = async () => {
+      await getProfile().then(async (result) => {
+        setUser(result);
+        fetchShops(result.id);
+      });
+    };
 
-        <View style={{ marginTop: 17, marginBottom: 20, alignSelf: "stretch" }}>
-          <ThematicBreak />
-        </View>
+    navigation.addListener("focus", fetchProfile);
+  }, []);
 
-        <Pressable style={style.editProfile}>
-          <Feather name="edit" size={32} color={"white"} />
-          <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
-            Edit Profile
-          </Text>
-        </Pressable>
-
-        {/*user shops */}
-        <View style={style.lable}>
-          <Text style={style.lableFont}>Your shops</Text>
-        </View>
-
-        <View style={{ gap: 20, paddingVertical: 15 }}>
-          {shops.map((shop: any) => (
-            <UserShop key={shop.id} shop={shop} />
-          ))}
-
-          <Pressable style={style.createShop}>
-            <Text style={style.createNewShopFont}>+ Create new Shop</Text>
-          </Pressable>
-        </View>
-
-        <View style={{ marginTop: 5, marginBottom: 18, alignSelf: "stretch" }}>
-          <ThematicBreak />
-        </View>
-
-        {/* Other */}
-        <View style={style.lable}>
-          <Text style={style.lableFont}>Other</Text>
-        </View>
+  if (loading) {
+    return (
+      <View style={style.loadingPage}>
+        <ActivityIndicator size={"large"} color="white" />
       </View>
+    );
+  } else
+    return (
+      <CommonScrollableBackground>
+        {/* page container */}
+        <View style={{ paddingHorizontal: 40, alignItems: "center" }}>
+          {/* user informations */}
 
-      <View style={style.cardsContainer}>
-        <TouchableOpacity style={style.card}>
-          <MaterialCommunityIcons
-            name="note-text-outline"
-            size={28}
-            color="white"
-          />
-          <Text style={style.cardFont}>My Posts</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={style.card}>
-          <Entypo name="shopping-bag" size={24} color="white" />
-          <Text style={style.cardFont}>Orders</Text>
-        </TouchableOpacity>
+          {user.pfp_url === null ? (
+            <Image
+              source={require("../../assets/default_profile_img.jpg")}
+              style={style.profileIMG}
+            />
+          ) : (
+            <Image source={{ uri: user.pfp_url }} style={style.profileIMG} />
+          )}
 
-        <TouchableOpacity style={style.card}>
-          <FontAwesome5 name="heart" size={24} color="white" />
-          <Text style={style.cardFont}>Favorites</Text>
-        </TouchableOpacity>
+          <Text style={style.font}>{user.name}</Text>
+
+          <View
+            style={{ marginTop: 17, marginBottom: 20, alignSelf: "stretch" }}
+          >
+            <ThematicBreak />
+          </View>
+
+          <Pressable style={style.editProfile}>
+            <Feather name="edit" size={32} color={"white"} />
+            <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
+              Edit Profile
+            </Text>
+          </Pressable>
+
+          {/*user shops */}
+          <View style={style.lable}>
+            <Text style={style.lableFont}>Your shops</Text>
+          </View>
+
+          <View style={{ gap: 20, paddingVertical: 15 }}>
+            {shops.map((shop: any) => (
+              <UserShop key={shop.id} shop={shop} />
+            ))}
+
+            <TouchableOpacity
+              style={style.createShop}
+              onPress={() => {
+                navigation.navigate("CreateShopScreen");
+              }}
+            >
+              <Text style={style.createNewShopFont}>+ Create shop</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{ marginTop: 5, marginBottom: 18, alignSelf: "stretch" }}
+          >
+            <ThematicBreak />
+          </View>
+
+          {/* Other */}
+          <View style={style.lable}>
+            <Text style={style.lableFont}>Other</Text>
+          </View>
+        </View>
+
+        <View style={style.cardsContainer}>
+          <View style={style.otherGrid}>
+            <View style={style.card}>
+              <MaterialCommunityIcons
+                name="note-text-outline"
+                size={28}
+                color="white"
+              />
+              <Text style={style.cardFont}>My Posts</Text>
+            </View>
+            <View style={style.card}>
+              <Entypo name="shopping-bag" size={24} color="white" />
+              <Text style={style.cardFont}>Orders</Text>
+            </View>
+          </View>
+          <View style={style.otherGrid}>
+            <View style={style.card}>
+              <FontAwesome5 name="heart" size={24} color="white" />
+              <Text style={style.cardFont}>Favorites</Text>
+            </View>
+            <View style={style.card}>
+              <MaterialIcons name="headset-mic" size={24} color="white" />
+              <Text style={style.cardFont}>Support</Text>
+            </View>
+          </View>
+        </View>
 
         <TouchableOpacity
-          style={style.card}
-          onPress={() => {
-            navigation.navigate("SendTicketScreen");
+          onPress={async () => {
+            await AsyncStorage.removeItem("Authorization");
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "OnboardingScreensContainer" }],
+            });
           }}
+          style={style.logout}
         >
-          <MaterialIcons name="headset-mic" size={24} color="white" />
-          <Text style={style.cardFont}>Support</Text>
+          <MaterialIcons
+            name="logout"
+            size={28}
+            color={"white"}
+            style={{ paddingTop: 11 }}
+          />
+          <Text style={style.font}>Logout</Text>
         </TouchableOpacity>
-      </View>
-
-      <Pressable style={style.logout}>
-        <MaterialIcons
-          name="logout"
-          size={28}
-          color={"white"}
-          style={{ paddingTop: 11 }}
-        />
-        <Text style={style.font}>Logout</Text>
-      </Pressable>
-    </CommonScrollableBackground>
-  );
+      </CommonScrollableBackground>
+    );
 }
 
 const style = StyleSheet.create({
-  font: { fontSize: 24, color: "white", fontWeight: "600", paddingTop: 7 },
+  font: { fontSize: 24, color: "white", fontWeight: "600", paddingTop: 10 },
   profileIMG: { width: 120, height: 120, borderRadius: 120 },
   editProfile: {
     flexDirection: "row",
@@ -143,7 +178,7 @@ const style = StyleSheet.create({
     borderRadius: 9,
     gap: 12,
     paddingLeft: 15,
-    marginBottom: 15
+    marginBottom: 15,
   },
   createShop: {
     height: 60,
@@ -154,20 +189,21 @@ const style = StyleSheet.create({
     borderColor: COLORS.handysGrey,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   createNewShopFont: {
     fontSize: 18,
     fontWeight: "500",
-    color: "rgba(255, 255, 255, 0.75)"
+    color: "rgba(255, 255, 255, 0.75)",
   },
   lableFont: {
     fontSize: 24,
     fontWeight: "500",
-    color: "white"
+    color: "white",
   },
   lable: {
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
+    paddingLeft: 15,
   },
   card: {
     width: 140,
@@ -176,30 +212,39 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
-    backgroundColor: COLORS.handysGrey
+    backgroundColor: COLORS.handysGrey,
   },
+  otherGrid: { flexDirection: "row", gap: 30 },
   logout: {
-    width: "85%",
+    width: 316,
     height: 50,
     backgroundColor: "#BA1200",
     borderRadius: 5,
     alignSelf: "center",
     marginVertical: 20,
     paddingLeft: 30,
-    gap: 25,
-    flexDirection: "row"
+    gap: 27,
+    flexDirection: "row",
   },
   cardFont: {
     fontSize: 19,
     color: "white",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   cardsContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+    alignItems: "center",
     gap: 25,
-    paddingTop: 10
-  }
+    paddingTop: 10,
+  },
+  loadingPage: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
+  },
 });

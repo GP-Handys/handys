@@ -1,10 +1,4 @@
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import React, { useState } from "react";
@@ -66,54 +60,54 @@ export default function cartItem({ items }: Props) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   footer: {
-    borderColor: "rgba(255, 255, 255, 1)"
+    borderColor: "rgba(255, 255, 255, 1)",
   },
   title: {
     color: "rgba(255, 255, 255, 1)",
-    fontSize: 16
+    fontSize: 16,
   },
   customize: {
     color: "rgba(246, 151, 127, 1)",
     fontSize: 14,
-    textDecorationLine: "underline"
+    textDecorationLine: "underline",
   },
   image: {
     position: "absolute",
     right: 20,
     width: 130,
     height: 130,
-    borderRadius: 6
+    borderRadius: 6,
   },
   info: {
     marginLeft: 15,
-    width: 175
+    width: 175,
   },
   description: {
     fontSize: 12,
     color: "rgba(255, 255, 255, 1)",
     marginTop: 5,
     width: 206,
-    height: 70
+    height: 70,
   },
   price: {
     position: "absolute",
     color: "rgba(255, 255, 255, 1)",
     fontSize: 16,
     fontWeight: "bold",
-    marginLeft: 85
+    marginLeft: 85,
   },
   quantity: {
     marginLeft: 2,
     color: "rgba(255, 255, 255, 1)",
     width: 60,
     flexDirection: "row-reverse",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   counter: {
     fontSize: 16,
-    color: "white"
-  }
+    color: "white",
+  },
 });
