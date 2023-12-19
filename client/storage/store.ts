@@ -1,12 +1,13 @@
 import * as ImagePicker from "expo-image-picker";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import extractImageId from "../helpers/imageIdExtractor";
+import {Platform} from "react-native";
 
 export default async function pickImageAndStore(basePath: string, setUrl: any): Promise<string | null> { 
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
-    quality: 0,
+    quality: Platform.OS === "ios" ? 0 : 1,
   });
   if (!result.canceled) {
     const imgId = extractImageId(result.assets[0].uri);
