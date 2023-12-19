@@ -30,16 +30,17 @@
     "react-native-paper": "^5.11.1",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
-    "validator": "^13.11.0"
     "react-native-segmented-control-tab": "^4.0.0",
     "react-native-star-rating-widget": "^1.7.3",
-    "react-native-vector-icons": "^10.0.2"
+    "react-native-vector-icons": "^10.0.2",
+    "validator": "^13.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/react": "~18.2.14",
     "@types/react-native-vector-icons": "^6.4.17",
+    "@types/validator": "^13.11.7",
     "react-native-dotenv": "^3.4.9",
     "typescript": "^5.1.3"
   },

@@ -118,28 +118,28 @@ export default function Profile({ navigation }: StackProps) {
 
         <View style={style.cardsContainer}>
           <View style={style.otherGrid}>
-            <View style={style.card}>
+            <TouchableOpacity style={style.card}>
               <MaterialCommunityIcons
                 name="note-text-outline"
                 size={28}
                 color="white"
               />
               <Text style={style.cardFont}>My Posts</Text>
-            </View>
-            <View style={style.card}>
+            </TouchableOpacity>
+            <TouchableOpacity style={style.card}>
               <Entypo name="shopping-bag" size={24} color="white" />
               <Text style={style.cardFont}>Orders</Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={style.otherGrid}>
-            <View style={style.card}>
+            <TouchableOpacity style={style.card}>
               <FontAwesome5 name="heart" size={24} color="white" />
               <Text style={style.cardFont}>Favorites</Text>
-            </View>
-            <View style={style.card}>
+            </TouchableOpacity>
+            <TouchableOpacity style={style.card} onPress={()=>navigation.navigate("SendTicketScreen")}>
               <MaterialIcons name="headset-mic" size={24} color="white" />
               <Text style={style.cardFont}>Support</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
 

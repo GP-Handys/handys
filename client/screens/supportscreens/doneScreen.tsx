@@ -5,8 +5,6 @@ import {
     StyleSheet,
     Image
   } from "react-native";
-  import { MaterialIcons } from "@expo/vector-icons";
-  import { FontAwesome5 } from '@expo/vector-icons';
   import { CommonBackgroundWithNoSafeArea } from "../../common/background";
   import COLORS from "../../common/colors";
   import { StackProps } from "../../components/navigation/NavigationStack";

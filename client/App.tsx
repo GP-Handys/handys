@@ -5,10 +5,9 @@ import { Stack } from "./components/navigation/NavigationStack";
 import { firebaseConfig } from "./storage/firebase";
 import { initializeApp } from "firebase/app";
 import SendTicketScreen from "./screens/SupportScreens/SendTicketScreen";
-import DoneScreen from "./screens/SupportScreens/DoneScreen";
+import DoneScreen from "./screens/SupportScreens/DoneScreen"
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
-import COLORS from "./common/colors";
 import ShopScreen from "./screens/shop/ShopScreen";
 
 export default function App() {
