@@ -4,8 +4,8 @@ import OnboardingNavigationContainer from "./components/navigation/OnboardingNav
 import { Stack } from "./components/navigation/NavigationStack";
 import { firebaseConfig } from "./storage/firebase";
 import { initializeApp } from "firebase/app";
-import SendTicketScreen from "./screens/SupportScreens/SendTicketScreen";
-import DoneScreen from "./screens/SupportScreens/DoneScreen"
+import SendTicketScreen from "./screens/support/SendTicket";
+import DoneScreen from "./screens/support/Done"
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
 import ShopScreen from "./screens/shop/ShopScreen";
