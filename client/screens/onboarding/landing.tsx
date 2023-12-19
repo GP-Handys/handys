@@ -1,10 +1,10 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, Pressable } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Logo from "../../components/HandysLogo";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StackParamList } from "../../components/navigation/NavigationStack";
 
 type StackProps = NativeStackScreenProps<StackParamList>;

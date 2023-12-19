@@ -9,8 +9,9 @@ import {
   import { FontAwesome5 } from '@expo/vector-icons';
   import { CommonBackgroundWithNoSafeArea } from "../../common/background";
   import COLORS from "../../common/colors";
-  
-  export default function doneScreen() {
+  import { StackProps } from "../../components/navigation/NavigationStack";
+
+  export default function DoneScreen({ navigation }: StackProps) {
     return (
       <CommonBackgroundWithNoSafeArea>
   
@@ -26,7 +27,7 @@ import {
 
         <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
             <Pressable
-              onPress={() => {}}
+              onPress={() => {navigation.navigate("Profile")}}
               style={({ pressed }) => [
                 styles.signUpPressable,
                 {

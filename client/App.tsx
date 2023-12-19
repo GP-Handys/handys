@@ -4,7 +4,9 @@ import OnboardingNavigationContainer from "./components/navigation/OnboardingNav
 import { Stack } from "./components/navigation/NavigationStack";
 import { firebaseConfig } from "./storage/firebase";
 import { initializeApp } from "firebase/app";
-
+import SendTicketScreen from "./screens/SupportScreens/SendTicketScreen";
+import DoneScreen from "./screens/SupportScreens/DoneScreen";
+import COLORS from "./common/colors";
 export default function App() {
   initializeApp(firebaseConfig);
 
@@ -15,7 +17,7 @@ export default function App() {
           name="OnboardingScreensContainer"
           component={OnboardingNavigationContainer}
           options={{
-            headerShown: false,
+            headerShown: false
           }}
         />
         <Stack.Screen
@@ -23,7 +25,29 @@ export default function App() {
           component={TabBarNavigationContainer}
           options={{
             headerShown: false,
-            gestureEnabled: false,
+            gestureEnabled: false
+          }}
+        />
+        <Stack.Screen
+          name="SendTicketScreen"
+          component={SendTicketScreen}
+          options={{
+            title: "Send Ticket",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center"
+          }}
+        />
+        <Stack.Screen
+          name="DoneScreen"
+          component={DoneScreen}
+          options={{
+            title: "Done!",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center"
           }}
         />
       </Stack.Navigator>

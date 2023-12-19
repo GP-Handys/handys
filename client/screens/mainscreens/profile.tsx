@@ -1,5 +1,12 @@
 import { CommonScrollableBackground } from "../../common/background";
-import { Image, View, Text, StyleSheet, Pressable } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity
+} from "react-native";
 import COLORS from "../../common/colors";
 import { Feather } from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
@@ -7,35 +14,40 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Entypo } from "@expo/vector-icons";
 import { getProfile } from "../../api/UserApi";
-import React, {useState} from "react";{  }
+import React, { useState } from "react";
+import { StackParamList } from "../../components/navigation/NavigationStack";
+import SendTicketScreen from "../SupportScreens/SendTicketScreen";
+type StackProps = NativeStackScreenProps<StackParamList>;
 
-export default function Profile() {
+export default function Profile({ navigation }: StackProps) {
   let shops: any = [
     {
       name: "Innovative crafts",
       pfp_url: "../../assets/logo.png",
       is_premium: false,
-      id: 1,
+      id: 1
     },
     {
       name: "Raqi store",
       pfp_url: "../../assets/logo.png",
       is_premium: true,
-      id: 2,
-    },
+      id: 2
+    }
   ];
 
-  let user :any= getProfile()
-  
+  let user: any = getProfile();
 
   return (
     <CommonScrollableBackground>
       {/* page container */}
       <View style={{ paddingHorizontal: 40, alignItems: "center" }}>
-        {/* user informations */}
-        <Image source={require("../../assets/default_profile_img.jpg")} style={style.profileIMG}
+        {/* user information */}
+        <Image
+          source={require("../../assets/default_profile_img.jpg")}
+          style={style.profileIMG}
         />
         <Text style={style.font}>Assem musallam</Text>
 
@@ -75,34 +87,34 @@ export default function Profile() {
         </View>
       </View>
 
-      <View
-        style={style.cardsContainer}
-      >
-        <View style={style.otherGrid}>
-          <View style={style.card}>
-            <MaterialCommunityIcons
-              name="note-text-outline"
-              size={28}
-              color="white"
-            />
-            <Text style={style.cardFont}>My Posts</Text>
-          </View>
-          <View style={style.card}>
-            <Entypo name="shopping-bag" size={24} color="white" />
-            <Text style={style.cardFont}>Orders</Text>
-          </View>
-        </View>
-        
-        <View style={style.otherGrid}>
-          <View style={style.card}>
-            <FontAwesome5 name="heart" size={24} color="white" />
-            <Text style={style.cardFont}>Favorites</Text>
-          </View>
-          <View style={style.card}>
-            <MaterialIcons name="headset-mic" size={24} color="white" />
-            <Text style={style.cardFont}>Support</Text>
-          </View>
-        </View>
+      <View style={style.cardsContainer}>
+        <TouchableOpacity style={style.card}>
+          <MaterialCommunityIcons
+            name="note-text-outline"
+            size={28}
+            color="white"
+          />
+          <Text style={style.cardFont}>My Posts</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.card}>
+          <Entypo name="shopping-bag" size={24} color="white" />
+          <Text style={style.cardFont}>Orders</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={style.card}>
+          <FontAwesome5 name="heart" size={24} color="white" />
+          <Text style={style.cardFont}>Favorites</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={style.card}
+          onPress={() => {
+            navigation.navigate("SendTicketScreen");
+          }}
+        >
+          <MaterialIcons name="headset-mic" size={24} color="white" />
+          <Text style={style.cardFont}>Support</Text>
+        </TouchableOpacity>
       </View>
 
       <Pressable style={style.logout}>
@@ -119,7 +131,7 @@ export default function Profile() {
 }
 
 const style = StyleSheet.create({
-  font: { fontSize: 24, color: "white", fontWeight: "600", paddingTop: 10 },
+  font: { fontSize: 24, color: "white", fontWeight: "600", paddingTop: 7 },
   profileIMG: { width: 120, height: 120, borderRadius: 120 },
   editProfile: {
     flexDirection: "row",
@@ -131,7 +143,7 @@ const style = StyleSheet.create({
     borderRadius: 9,
     gap: 12,
     paddingLeft: 15,
-    marginBottom: 15,
+    marginBottom: 15
   },
   createShop: {
     height: 60,
@@ -142,21 +154,20 @@ const style = StyleSheet.create({
     borderColor: COLORS.handysGrey,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center",
+    alignSelf: "center"
   },
   createNewShopFont: {
     fontSize: 18,
     fontWeight: "500",
-    color: "rgba(255, 255, 255, 0.75)",
+    color: "rgba(255, 255, 255, 0.75)"
   },
   lableFont: {
     fontSize: 24,
     fontWeight: "500",
-    color: "white",
+    color: "white"
   },
   lable: {
-    alignSelf: "flex-start",
-    paddingLeft: 15,
+    alignSelf: "flex-start"
   },
   card: {
     width: 140,
@@ -165,32 +176,30 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: COLORS.handysGrey
   },
-  otherGrid: { flexDirection: "row", gap: 30 },
   logout: {
-    width: 316,
+    width: "85%",
     height: 50,
     backgroundColor: "#BA1200",
     borderRadius: 5,
     alignSelf: "center",
     marginVertical: 20,
     paddingLeft: 30,
-    gap: 27,
-    flexDirection: "row",
+    gap: 25,
+    flexDirection: "row"
   },
   cardFont: {
     fontSize: 19,
     color: "white",
-    fontWeight: "500",
+    fontWeight: "500"
   },
-  cardsContainer:{
+  cardsContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    alignItems: "center",
     gap: 25,
-    paddingTop: 10,
+    paddingTop: 10
   }
 });

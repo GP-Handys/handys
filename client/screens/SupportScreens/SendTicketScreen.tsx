@@ -13,8 +13,10 @@ import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 import validator from "validator"; // For email validation
+import { StackProps } from "../../components/navigation/NavigationStack";
 
-export default function SendTicket() {
+
+export default function SendTicketScreen({ navigation }: StackProps) {
 
   
   const [inputValues, setInputValues] = useState({
@@ -97,7 +99,7 @@ export default function SendTicket() {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.confirmPressable}>
+              <TouchableOpacity style={styles.confirmPressable} onPress={()=>{navigation.navigate("DoneScreen")}}>
                 <Text
                   style={{ color: "black", fontWeight: "500", fontSize: 16 }}
                 >
