@@ -21,7 +21,7 @@ export default function MostPopularItem({}) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 40
+    
   },
   itemName: {
     marginTop: 7,

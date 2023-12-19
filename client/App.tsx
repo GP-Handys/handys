@@ -8,7 +8,6 @@ import SendTicketScreen from "./screens/SupportScreens/SendTicketScreen";
 import DoneScreen from "./screens/SupportScreens/DoneScreen";
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
-import { Title } from "react-native-paper";
 import COLORS from "./common/colors";
 import ShopScreen from "./screens/shop/ShopScreen";
 
