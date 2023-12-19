@@ -11,27 +11,36 @@ import {
   TouchableOpacity,
 } from "react-native";
 import COLORS from "../../common/colors";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 export default function ShopScreen({ route }: any) {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const { shopId } = route.params;
   return (
-    <Text>SHOP ID IS {shopId}</Text>
-    // <CommonScrollableBackground>
-    //   <CommonBackgroundWithSafeArea>
-    //     <View style={styles.shopHeader}>
-    //       <Text style={styles.shopNameHeader}>Crafter's Store</Text>
-    //       <TouchableOpacity style={styles.addItemButton}>
-    //         <Text style={{ fontSize: 16, fontWeight: "500" }}>Add item</Text>
-    //       </TouchableOpacity>
-    //     </View>
-    //   </CommonBackgroundWithSafeArea>
-    //   <Image
-    //     source={require("../../assets/crafter.png")}
-    //     style={styles.shopImage}
-    //   />
-    //   <View></View>
-    //   {/* <FlatList/> */}
-    // </CommonScrollableBackground>
+    <CommonScrollableBackground>
+      <CommonBackgroundWithSafeArea>
+        <View style={styles.shopHeader}>
+          <Text style={styles.shopNameHeader}>Crafter's Store</Text>
+          <TouchableOpacity
+            style={styles.addItemButton}
+            onPress={() => {
+              navigation.navigate("AddItemScreen", {
+                shopId: shopId,
+              });
+            }}
+          >
+            <Text style={{ fontSize: 16, fontWeight: "500" }}>Add item</Text>
+          </TouchableOpacity>
+        </View>
+      </CommonBackgroundWithSafeArea>
+      <Image
+        source={require("../../assets/crafter.png")}
+        style={styles.shopImage}
+      />
+      <View></View>
+      {/* <FlatList/> */}
+    </CommonScrollableBackground>
   );
 }
 

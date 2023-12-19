@@ -7,7 +7,7 @@ import pickImageAndStore from "../../storage/store";
 import { useState } from "react";
 import React from "react";
 
-export default function AddItem() {
+export default function AddItemScreen() {
   const [itemImageUrl, setItemImageUrl] = useState();
   const [itemImagePicked, setItemImagePicked] = useState(false);
 

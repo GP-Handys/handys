@@ -9,11 +9,12 @@ export type StackParamList = {
   SignUp: undefined;
   MainScreensContainer: undefined;
   OnboardingScreensContainer: undefined;
-  SendTicketScreen:undefined;
+  SendTicketScreen: undefined;
   DoneScreen: undefined;
   Profile: undefined;
   CreateShopScreen: undefined;
-  ShopScreen: {shopId: number, shopName: string};
+  ShopScreen: { shopId: number; shopName: string };
+  AddItemScreen: { shopId: number };
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

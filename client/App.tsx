@@ -5,10 +5,11 @@ import { Stack } from "./components/navigation/NavigationStack";
 import { firebaseConfig } from "./storage/firebase";
 import { initializeApp } from "firebase/app";
 import SendTicketScreen from "./screens/support/SendTicket";
-import DoneScreen from "./screens/support/Done"
+import DoneScreen from "./screens/support/Done";
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
 import ShopScreen from "./screens/shop/ShopScreen";
+import AddItem from "./screens/item/AddItem";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -20,7 +21,7 @@ export default function App() {
           name="OnboardingScreensContainer"
           component={OnboardingNavigationContainer}
           options={{
-            headerShown: false
+            headerShown: false,
           }}
         />
         <Stack.Screen
@@ -28,7 +29,7 @@ export default function App() {
           component={TabBarNavigationContainer}
           options={{
             headerShown: false,
-            gestureEnabled: false
+            gestureEnabled: false,
           }}
         />
         <Stack.Screen
@@ -39,7 +40,7 @@ export default function App() {
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
-            headerTitleAlign: "center"
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen
@@ -50,7 +51,7 @@ export default function App() {
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
-            headerTitleAlign: "center"
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen
@@ -67,13 +68,24 @@ export default function App() {
         <Stack.Screen
           name="ShopScreen"
           component={ShopScreen}
-          options={({route}) => ({
+          options={({ route }) => ({
             title: route.params.shopName,
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
           })}
+        />
+        <Stack.Screen
+          name="AddItemScreen"
+          component={AddItem}
+          options={{
+            title: "Add Item",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
