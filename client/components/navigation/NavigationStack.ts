@@ -9,6 +9,9 @@ export type StackParamList = {
   SignUp: undefined;
   MainScreensContainer: undefined;
   OnboardingScreensContainer: undefined;
+  SendTicketScreen:undefined;
+  DoneScreen: undefined;
+  Profile: undefined;
   CreateShopScreen: undefined;
   ShopScreen: {shopId: number, shopName: string};
 };
