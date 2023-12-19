@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <CommonScrollableBackground>
-      <View style={styles.bannerContainer}>
+      <View>
         <ImageBackground
           source={require("../../assets/homeBanner.png")}
           style={styles.banner}
@@ -59,104 +59,101 @@ export default function Home() {
           </Text>
         </ImageBackground>
       </View>
-      <Text style={styles.sectionTitle}>Categories</Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.categorySv}
-      >
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-        <View style={{ marginRight: 23 }}>
-          <CategoryCard />
-        </View>
-      </ScrollView>
 
-      <Text style={styles.sectionTitle}>Recommended Shops</Text>
-      <FlatList
-        data={recommendedShops}
-        renderItem={({ item }) => <ShopCard shop={item} />}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-      />
+      <View style={styles.pageContainer}>
+        <Text style={styles.sectionTitle}>Categories</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.sectionTitle}
+        >
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+          <View style={{ marginRight: 23 }}>
+            <CategoryCard />
+          </View>
+        </ScrollView>
 
-      <Text style={styles.sectionTitle}>Most Popular Items</Text>
-      <View style={styles.mostPopularContainer}>
-        <MostPopularItem />
-        <MostPopularItem />
-        <MostPopularItem />
-        <MostPopularItem />
-        <MostPopularItem />
-        <MostPopularItem />
-        <MostPopularItem />
-        <MostPopularItem />
-        <MostPopularItem />
+        <Text style={styles.sectionTitle}>Recommended Shops</Text>
+        <FlatList
+          data={recommendedShops}
+          renderItem={({ item }) => <ShopCard shop={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+        />
+
+        <Text style={styles.sectionTitle}>Most Popular Items</Text>
+        <View style={styles.mostPopularContainer}>
+          <MostPopularItem />
+          <MostPopularItem />
+          <MostPopularItem />
+          <MostPopularItem />
+          <MostPopularItem />
+          <MostPopularItem />
+          <MostPopularItem />
+          <MostPopularItem />
+          <MostPopularItem />
+        </View>
       </View>
     </CommonScrollableBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  bannerContainer: {},
   banner: {
     width: "100%",
     paddingBottom: 24,
+    alignContent:"center",
+    alignItems:"center",
+    justifyContent:"center"
   },
   homeBannerTitleContainer: {
     fontWeight: "bold",
     color: "white",
-    paddingLeft: 16,
     fontSize: 35,
     marginTop: 46,
   },
   homeBannerSubtitleContainer: {
     color: "white",
-    paddingLeft: 16,
     marginTop: 17,
-    paddingRight: 10,
+    paddingHorizontal: 5,
     fontSize: 15,
   },
   sectionTitle: {
-    marginTop: 35,
+    marginVertical:10,
     fontWeight: "bold",
     fontSize: 20,
-    marginLeft: 27,
     color: "white",
   },
-  categorySv: {
-    marginTop: 12,
-    paddingLeft: 27,
-  },
-  categoryScrollViewContent: {
-    paddingRight: 23,
-  },
+  
   mostPopularContainer: {
-    marginLeft: 30,
-    marginTop: 20,
-    marginRight: 30,
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
+  pageContainer:{
+    marginHorizontal: 30,
+  }
 });

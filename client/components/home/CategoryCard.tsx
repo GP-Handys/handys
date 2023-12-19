@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   categoryName: {
     color: "white",
     fontSize: 11,
-    marginTop: 12,
     textAlign: "center",
   },
   categoryImg: {

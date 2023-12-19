@@ -1,6 +1,5 @@
 import { View, Text } from "react-native";
 import {
-  CommonBackgroundWithSafeArea,
   CommonScrollableBackground,
 } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -10,7 +9,7 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 import { useState } from "react";
 import COLORS from "../../common/colors";
 import { shopSearch } from "../../api/ShopApi";
-import ShopCard from "../../components/home/ShopCard";
+import SearchShopCard from "../../components/search/SearchShopCard";
 
 
 export default function Search(this: any) {
@@ -18,7 +17,6 @@ export default function Search(this: any) {
   const [searchQuery , setSearchQuery] = useState("")
   const [shops,setShops]=useState([])
   const [items,setItems]=useState([])
-
 
   async function handleSearch(){
     setShops(await shopSearch(searchQuery))
@@ -74,9 +72,9 @@ export default function Search(this: any) {
       </View>
         
       ) : (
-        <View style={{display:"flex", flexWrap:"wrap" ,flexDirection:"row", justifyContent:"center",gap:40}}>
+        <View style={{gap:40}}>
           {shops.map((shop: any) => (
-              <ShopCard key={shop.id} shop={shop} />
+              <SearchShopCard key={shop.id} shop={shop} />
             ))}
 
         </View>
