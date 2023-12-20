@@ -14,7 +14,7 @@ export default function Post({ post }: Readonly<PostProps>) {
     <View>
       <View style={styles.userProfile}>
         <View>
-          <PostOwnerHeader userId={post.userId} />
+          <PostOwnerHeader />
         </View>
         <View style={{ marginTop: 15, marginRight: 10 }}>
           <TimeStamp time={post.createdAt} />
