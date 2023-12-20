@@ -1,4 +1,11 @@
-import { View, FlatList, StyleSheet, TouchableOpacity ,Text} from "react-native";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image
+} from "react-native";
 import ThematicBreak from "../../components/ThematicBreak";
 import PostModal from "../community/AddPostModal";
 import { useState, useEffect } from "react";
@@ -29,49 +36,81 @@ export default function Community() {
 
   const itemSeparator = () => {
     return (
-      <View style={{marginVertical:20}}>
+      <View style={{ marginVertical: 20 }}>
         <ThematicBreak />
       </View>
     );
   };
 
   return (
-    <View style={{ backgroundColor: COLORS.commonBackground ,flex:1,paddingHorizontal:15}}>
-
-        {posts.length==0 && (
-          <Text style={{fontSize:25,alignSelf:"center",fontWeight:"400",marginTop:30,color:"white"}}>There are no post yet...</Text>
-        )}
-
-        <FlatList
-          onRefresh={onRefresh}
-          refreshing={isRefreshing}
-          data={posts}
-          renderItem={({ item }) => <Post post={item} />}
-          ItemSeparatorComponent={itemSeparator}
-          keyExtractor={(item) => item.id}
-        />
-
-        {isPostModalVisible && (
-          <PostModal
-            isVisible={isPostModalVisible}
-            onDismiss={() => setIsPostModalVisible(false)}
+    <View
+      style={{
+        backgroundColor: COLORS.commonBackground,
+        flex: 1,
+        paddingHorizontal: 15
+      }}
+    >
+      {posts.length == 0 && (
+        <View style={styles.centered}>
+          <Image
+            source={require("../../assets/content-creation-monochromatic.png")}
+            style={styles.image}
           />
-        )}
+          <Text
+            style={{
+              fontSize: 16,
+              alignSelf: "center",
+              fontWeight: "500",
+              marginTop: 30,
+              color: "white"
+            }}
+          >
+            There are no post yet...
+          </Text>
+        </View>
+      )}
 
-        
+      <FlatList
+        onRefresh={onRefresh}
+        refreshing={isRefreshing}
+        data={posts}
+        renderItem={({ item }) => <Post post={item} />}
+        ItemSeparatorComponent={itemSeparator}
+        keyExtractor={(item) => item.id}
+      />
+
+      {isPostModalVisible && (
+        <PostModal
+          isVisible={isPostModalVisible}
+          onDismiss={() => setIsPostModalVisible(false)}
+        />
+      )}
+
       <TouchableOpacity
-          style={styles.Iconbutton}
-          onPress={() => setIsPostModalVisible(true)}
-        >
-          <MaterialIcons name="add-circle" size={55} color="#F6977F" />
-        </TouchableOpacity>
+        style={styles.Iconbutton}
+        onPress={() => setIsPostModalVisible(true)}
+      >
+        <MaterialIcons name="add-circle" size={55} color="#F6977F" />
+      </TouchableOpacity>
     </View>
   );
 }
 const styles = StyleSheet.create({
   Iconbutton: {
     position: "absolute",
-    right:20,
-    bottom:20
+    right: 20,
+    bottom: 20
   },
+  image: {
+    width: 260,
+    height: 250,
+    alignSelf: "center"
+  },
+  centered: {
+    position:'absolute',
+    top:130,
+    left:40,
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });
