@@ -107,9 +107,7 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   centered: {
-    position:'absolute',
-    top:130,
-    left:40,
+    marginTop:"50%",
     justifyContent: "center",
     alignItems: "center"
   }
