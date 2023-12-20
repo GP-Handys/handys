@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   RefreshControl,
+  Dimensions
 } from "react-native";
 import ThematicBreak from "../../components/ThematicBreak";
 import PostModal from "../community/AddPostModal";
@@ -85,6 +86,7 @@ export default function Community() {
             renderItem={({ item }) => <Post post={item} />}
             ItemSeparatorComponent={itemSeparator}
             keyExtractor={(item) => item.id}
+            style={{minHeight:Dimensions.get("window").height}}
           />
         </View>
       )}
