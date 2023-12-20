@@ -1,7 +1,5 @@
-import { View, Text } from "react-native";
-import {
-  CommonScrollableBackground,
-} from "../../common/background";
+import { View, Text, Dimensions, Keyboard } from "react-native";
+import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { TextInput } from "react-native-paper";
@@ -10,23 +8,44 @@ import { useState } from "react";
 import COLORS from "../../common/colors";
 import { shopSearch } from "../../api/ShopApi";
 import SearchShopCard from "../../components/search/SearchShopCard";
-
+import { ActivityIndicator } from "react-native-paper";
 
 export default function Search(this: any) {
   const [index, setIndex] = useState(0);
-  const [searchQuery , setSearchQuery] = useState("")
-  const [shops,setShops]=useState([])
-  const [items,setItems]=useState([])
+  const [searchQuery, setSearchQuery] = useState("");
+  const [shops, setShops] = useState([]);
+  const [items, setItems] = useState([]);
+  const [loadingShops, setLoadingShops] = useState(false);
+  const [loadingItems, setLoadingItems] = useState(false);
 
-  async function handleSearch(){
-    setShops(await shopSearch(searchQuery))
+  async function handleSearch() {
+    setLoadingShops(true);
+    //setLoadingItems(true)
+
+    await shopSearch(searchQuery).then((result) => {
+      setShops(result);
+      setLoadingShops(false);
+    });
+
+    // await itemsSearch(searchQuery).then((result)=>{
+    //   setItems(result)
+    //   setLoadingItems(false)
+    // })
   }
+
+  // if (loadingItems || loadingShops) {
+  //   return (
+  //
+  //   );
+  // } else
 
   return (
     <CommonScrollableBackground>
-      <View style={{ margin: 15}}>
+      <View
+        style={{ margin: 15}}
+      >
         <CustomTextInput
-          onChangeText={(query)=>setSearchQuery(query)}
+          onChangeText={(query) => setSearchQuery(query)}
           placeholder="search for shop , item or category"
           multiline={false}
           left={
@@ -35,10 +54,13 @@ export default function Search(this: any) {
             />
           }
           right={
-            <TextInput.Icon 
-              onPress={handleSearch}
+            <TextInput.Icon
+              onPress={() => {
+                Keyboard.dismiss();
+                handleSearch();
+              }}
               icon={() => (
-                <FontAwesome5 name="arrow-right" size={30} color="grey"/>
+                <FontAwesome5 name="arrow-right" size={30} color="grey" />
               )}
               style={{ marginRight: 15 }}
             />
@@ -64,21 +86,34 @@ export default function Search(this: any) {
           borderRadius={10}
           activeTabTextStyle={{ color: "black", fontWeight: "bold" }}
         />
-      
 
-      {index === 0 ? (
-        <View>
-        <Text>items</Text>
-      </View>
-        
-      ) : (
-        <View style={{gap:40}}>
-          {shops.map((shop: any) => (
-              <SearchShopCard key={shop.id} shop={shop} />
-            ))}
-
-        </View>
-      )}
+        {loadingItems || loadingShops ? (
+          <View
+            style={{
+              backgroundColor: COLORS.commonBackground,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              flex: 1,
+            }}
+          >
+            <ActivityIndicator size={"large"} color="white" />
+          </View>
+        ) : (
+          <View>
+            {index === 0 ? (
+              <View>
+                <Text>items</Text>
+              </View>
+            ) : (
+              <View style={{ gap: 40 }}>
+                {shops.map((shop: any) => (
+                  <SearchShopCard key={shop.id} shop={shop} />
+                ))}
+              </View>
+            )}
+          </View>
+        )}
       </View>
     </CommonScrollableBackground>
   );
