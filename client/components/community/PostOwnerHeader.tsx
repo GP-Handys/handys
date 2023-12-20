@@ -18,7 +18,6 @@ export default function PostOwnerHeader() {
 
   return (
     <View style={styles.userData}>
-      <Text></Text>
       {user?.pfp_url === null ? (
         <Image
           style={styles.pfpImg}

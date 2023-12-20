@@ -1,6 +1,6 @@
 import { View, FlatList, StyleSheet, TouchableOpacity ,Text} from "react-native";
 import ThematicBreak from "../../components/ThematicBreak";
-import PostModal from "../../components/community/PostModal";
+import PostModal from "../community/AddPostModal";
 import { useState, useEffect } from "react";
 import { getPosts } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
@@ -10,7 +10,7 @@ import COLORS from "../../common/colors";
 export default function Community() {
   const [posts, setPosts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isPostModalVisible, setPostModalVisible] = useState(false);
+  const [isPostModalVisible, setIsPostModalVisible] = useState(false);
 
   const onRefresh = () => {
     setIsRefreshing(true);
@@ -54,14 +54,14 @@ export default function Community() {
         {isPostModalVisible && (
           <PostModal
             isVisible={isPostModalVisible}
-            onDismiss={() => setPostModalVisible(false)}
+            onDismiss={() => setIsPostModalVisible(false)}
           />
         )}
 
         
       <TouchableOpacity
           style={styles.Iconbutton}
-          onPress={() => setPostModalVisible(true)}
+          onPress={() => setIsPostModalVisible(true)}
         >
           <MaterialIcons name="add-circle" size={55} color="#F6977F" />
         </TouchableOpacity>
