@@ -4,7 +4,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  Image
+  Image,
+  ScrollView,
+  RefreshControl,
 } from "react-native";
 import ThematicBreak from "../../components/ThematicBreak";
 import PostModal from "../community/AddPostModal";
@@ -47,37 +49,45 @@ export default function Community() {
       style={{
         backgroundColor: COLORS.commonBackground,
         flex: 1,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
       }}
     >
-      {posts.length == 0 && (
-        <View style={styles.centered}>
-          <Image
-            source={require("../../assets/content-creation-monochromatic.png")}
-            style={styles.image}
+      {posts.length == 0 ? (
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+          }
+        >
+          <View style={styles.centered}>
+            <Image
+              source={require("../../assets/content-creation-monochromatic.png")}
+              style={styles.image}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                alignSelf: "center",
+                fontWeight: "500",
+                marginTop: 30,
+                color: "white",
+              }}
+            >
+              There are no post yet...
+            </Text>
+          </View>
+        </ScrollView>
+      ) : (
+        <View>
+          <FlatList
+            onRefresh={onRefresh}
+            refreshing={isRefreshing}
+            data={posts}
+            renderItem={({ item }) => <Post post={item} />}
+            ItemSeparatorComponent={itemSeparator}
+            keyExtractor={(item) => item.id}
           />
-          <Text
-            style={{
-              fontSize: 16,
-              alignSelf: "center",
-              fontWeight: "500",
-              marginTop: 30,
-              color: "white"
-            }}
-          >
-            There are no post yet...
-          </Text>
         </View>
       )}
-
-      <FlatList
-        onRefresh={onRefresh}
-        refreshing={isRefreshing}
-        data={posts}
-        renderItem={({ item }) => <Post post={item} />}
-        ItemSeparatorComponent={itemSeparator}
-        keyExtractor={(item) => item.id}
-      />
 
       {isPostModalVisible && (
         <PostModal
@@ -99,16 +109,16 @@ const styles = StyleSheet.create({
   Iconbutton: {
     position: "absolute",
     right: 20,
-    bottom: 20
+    bottom: 20,
   },
   image: {
     width: 260,
     height: 250,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   centered: {
-    marginTop:"50%",
+    marginTop: "50%",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
