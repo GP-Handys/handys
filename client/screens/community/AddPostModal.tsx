@@ -82,7 +82,7 @@ export default function PostModal({
               marginTop: 15,
             }}
           >
-            <PostOwnerHeader userId={user.id} />
+            <PostOwnerHeader />
             <TouchableOpacity>
               <MaterialIcons
                 name="insert-photo"

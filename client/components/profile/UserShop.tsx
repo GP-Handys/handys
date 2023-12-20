@@ -2,15 +2,23 @@ import { Pressable, StyleSheet, Text, Image, View } from "react-native";
 import COLORS from "../../common/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Shop } from "../../models/Shop";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackParamList, StackProps } from "../navigation/NavigationStack";
+import { useNavigation } from "@react-navigation/native";
+
 
 interface Props {
   shop: Shop;
 }
 
 export function UserShop({ shop }: Props) {
-  
+  const navigation = useNavigation<StackProps["navigation"]>();
+
   return (
-    <Pressable key={shop.id} style={styles.shop}>
+    <Pressable key={shop.id} style={styles.shop} onPress={()=>navigation.navigate("ShopScreen",{
+      shopId:shop.id,
+      shopName:shop.name
+    })}>
       <View style={styles.shopDetails}>
 
         {shop.pfp_url === null ? (
