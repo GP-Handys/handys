@@ -42,7 +42,7 @@ export default function Search(this: any) {
   return (
     <CommonScrollableBackground>
       <View
-        style={{ margin: 15}}
+        style={{ margin: 15,minHeight:"100%"}}
       >
         <CustomTextInput
           onChangeText={(query) => setSearchQuery(query)}
@@ -90,23 +90,21 @@ export default function Search(this: any) {
         {loadingItems || loadingShops ? (
           <View
             style={{
-              backgroundColor: COLORS.commonBackground,
-              flexDirection: "row",
-              justifyContent: "center",
               alignItems: "center",
               flex: 1,
+              marginTop:"50%"
             }}
           >
             <ActivityIndicator size={"large"} color="white" />
           </View>
         ) : (
-          <View>
+          <View style={{marginTop:15}}>
             {index === 0 ? (
               <View>
                 <Text>items</Text>
               </View>
             ) : (
-              <View style={{ gap: 40 }}>
+              <View style={{ gap: 15 }}>
                 {shops.map((shop: any) => (
                   <SearchShopCard key={shop.id} shop={shop} />
                 ))}
