@@ -9,14 +9,14 @@ export default function Cart() {
       name: "Metal Handcraft",
       price: 199.5,
       img: "../../assets/pic1.jpg",
-      description: "bla bla bla cats :3",
+      description: "bla bla bla cats :3"
     },
     {
       name: "wood",
       price: 122,
       img: "../../assets/pic1.jpg",
-      description: "bla bla bla cats :3",
-    },
+      description: "bla bla bla cats :3"
+    }
   ];
   return (
     <CommonBackgroundWithNoSafeArea>
