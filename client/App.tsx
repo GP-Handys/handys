@@ -46,11 +46,8 @@ export default function App() {
           name="DoneScreen"
           component={DoneScreen}
           options={{
-            title: "Done!",
-            headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
-            headerTintColor: "white",
-            headerTitleAlign: "center"
+            headerShown: false,
+            gestureEnabled: false
           }}
         />
         <Stack.Screen

@@ -14,6 +14,8 @@ export type StackParamList = {
   Profile: undefined;
   CreateShopScreen: undefined;
   ShopScreen: {shopId: number, shopName: string};
+  ItemScreen: undefined;
+  AddCustomization: undefined;
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

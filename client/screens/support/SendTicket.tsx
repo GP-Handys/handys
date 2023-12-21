@@ -15,10 +15,7 @@ import COLORS from "../../common/colors";
 import validator from "validator"; // For email validation
 import { StackProps } from "../../components/navigation/NavigationStack";
 
-
 export default function SendTicketScreen({ navigation }: StackProps) {
-
-  
   const [inputValues, setInputValues] = useState({
     email: "",
     subject: "",
@@ -26,8 +23,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
   });
 
   const isButtonEnabled =
-    inputValues.email.trim().length > 0 &&
-    validator.isEmail(inputValues.email) &&
     inputValues.subject.trim().length > 0 &&
     inputValues.message.trim().length > 0;
 
@@ -35,8 +30,21 @@ export default function SendTicketScreen({ navigation }: StackProps) {
     setInputValues({ ...inputValues, [key]: value });
   };
 
-  const isValidEmail = validator.isEmail(inputValues.email) || inputValues.email.trim().length < 1;
+  const isValidEmail =
+    validator.isEmail(inputValues.email) || inputValues.email.trim().length < 1;
 
+  const emailCheck = () => {
+    if (inputValues.email.trim().length == 0) {
+      navigation.navigate("DoneScreen");
+    } else if (inputValues.email.trim().length >= 1) {
+      if (validator.isEmail(inputValues.email)) {
+        navigation.navigate("DoneScreen");
+      } else {
+        alert("Your Email in Invalid or Empty");
+      }
+    }
+  };
+  
   return (
     <CommonBackgroundWithNoSafeArea>
       <KeyboardAvoidingView
@@ -66,9 +74,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               }
               keyboardType="email-address"
             />
-            {isValidEmail ? null : (
-              <Text style={styles.emailError}>*Invalid email address</Text>
-            )}
             <TextInput
               style={styles.input}
               placeholder="Subject"
@@ -91,7 +96,10 @@ export default function SendTicketScreen({ navigation }: StackProps) {
 
           <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
             {!isButtonEnabled ? (
-              <TouchableOpacity disabled={true} style={styles.confirmPressableDisabled}>
+              <TouchableOpacity
+                disabled={true}
+                style={styles.confirmPressableDisabled}
+              >
                 <Text
                   style={{ color: "black", fontWeight: "600", fontSize: 16 }}
                 >
@@ -99,7 +107,10 @@ export default function SendTicketScreen({ navigation }: StackProps) {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.confirmPressable} onPress={()=>{navigation.navigate("DoneScreen")}}>
+              <TouchableOpacity
+                style={styles.confirmPressable}
+                onPress={emailCheck}
+              >
                 <Text
                   style={{ color: "black", fontWeight: "500", fontSize: 16 }}
                 >
