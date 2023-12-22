@@ -11,12 +11,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async (email: string) => {
+export const sendEmail = async (email: string , content : string) => {
   const mailOptions = {
     from: EMAIL,
     to: email,
     subject: "Email Subject",
-    text: "hello, fuck you for contacting us, if you have any  ",
+    text: "hello, thank you for contacting us , we well repley to you in few days \n \n your massege is : \n "+content,
   };
 
    transporter.sendMail(mailOptions, (error, info) => {
