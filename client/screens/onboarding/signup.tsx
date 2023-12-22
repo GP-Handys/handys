@@ -1,5 +1,5 @@
-import { StyleSheet, View, Text, Pressable, Keyboard } from "react-native";
-import { CommonBackgroundWithSafeArea } from "../../common/background";
+import { StyleSheet, View, Text, Pressable, Keyboard, KeyboardAvoidingView } from "react-native";
+import { CommonBackgroundWithSafeArea, CommonScrollableBackground } from "../../common/background";
 import STRINGS from "../../strings/strings";
 import COLORS from "../../common/colors";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -14,16 +14,19 @@ import { StackProps } from "../../components/navigation/NavigationStack";
 export default function SignUp({ navigation }: StackProps) {
   const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState("eye-off");
+  const [isSecureTextEntry2, setIsSecureTextEntry2] = useState(true);
+  const [icon2, setIcon2] = useState("eye-off");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
 
   function handleSignUp() {
-    signup(email, password, name, navigation);
+    signup(email, password,ConfirmPassword, name, navigation);
   }
 
   return (
-    <CommonBackgroundWithSafeArea>
+    <CommonScrollableBackground>
       <OnboardingHeader />
       <View style={{ marginTop: 31, marginHorizontal: 30 }}>
         <CustomTextInput
@@ -63,6 +66,29 @@ export default function SignUp({ navigation }: StackProps) {
           }
         />
       </View>
+      <View style={{ marginTop: 14, marginHorizontal: 30 }}>
+        <CustomTextInput
+          placeholder="Confirm Password"
+          isSecureTextEntry={isSecureTextEntry2}
+          value={ConfirmPassword}
+          onChangeText={(text) => setConfirmPassword(text)}
+          left={<TextInput.Icon icon="lock" color={"white"} />}
+          right={
+            <TextInput.Icon
+              icon={icon2}
+              color={"white"}
+              onPress={() => {
+                Keyboard.dismiss();
+                setIsSecureTextEntry2(
+                  toggleIsSecureTextEntry(isSecureTextEntry2)
+                );
+                setIcon2(toggleEyeIcon(icon2));
+              }}
+            />
+          }
+        />
+      </View>
+
       <View style={{ marginHorizontal: 38 }}>
         <Pressable
           onPress={handleSignUp}
@@ -78,7 +104,7 @@ export default function SignUp({ navigation }: StackProps) {
           </Text>
         </Pressable>
       </View>
-    </CommonBackgroundWithSafeArea>
+    </CommonScrollableBackground>
   );
 }
 

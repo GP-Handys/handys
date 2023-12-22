@@ -77,12 +77,14 @@ export default function Profile({ navigation }: StackProps) {
             <ThematicBreak />
           </View>
 
-          <Pressable style={style.editProfile}>
+          <TouchableOpacity style={style.editProfile} onPress={() => {
+                navigation.navigate("EditProfile");
+              }}>
             <Feather name="edit" size={32} color={"white"} />
             <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
               Edit Profile
             </Text>
-          </Pressable>
+          </TouchableOpacity>
 
           {/*user shops */}
           <View style={style.lable}>
@@ -90,9 +92,9 @@ export default function Profile({ navigation }: StackProps) {
           </View>
 
           <View style={{ gap: 20, paddingVertical: 15 }}>
-            {shops.map((shop: any) => (
+            {/* {shops.map((shop: any) => (
               <UserShop key={shop.id} shop={shop} />
-            ))}
+            ))} */}
 
             <TouchableOpacity
               style={style.createShop}

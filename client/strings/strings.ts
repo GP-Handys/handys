@@ -11,7 +11,8 @@ let STRINGS = {
   emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   InvalidCredentials: "Invalid credentials",
   homeBannerTitle: "Products Made With Love",
-  homeBannerSubtitle: "Handys offers a wide variety of handicrafts made with love by skilled artisans."
+  homeBannerSubtitle: "Handys offers a wide variety of handicrafts made with love by skilled artisans.",
+  passwordDontMatch: "Passwords do NOT match"
 };
 
 export default STRINGS;
