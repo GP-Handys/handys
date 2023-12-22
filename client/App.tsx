@@ -9,6 +9,7 @@ import DoneScreen from "./screens/support/Done"
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
 import ShopScreen from "./screens/shop/ShopScreen";
+import EditProfile from "./screens/profile/EditProfile";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -74,6 +75,17 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
           })}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{
+            title: "Edit profile",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

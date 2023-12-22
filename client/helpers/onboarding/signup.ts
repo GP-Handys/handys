@@ -7,8 +7,10 @@ import { StackParamList } from "../../components/navigation/NavigationStack";
 export default function signup(
   email: string,
   password: string,
+  ConfirmPassword:string,
   name: string,
   navigation: NativeStackNavigationProp<StackParamList>
+  
 ) {
   email = email.toLowerCase();
   let emailReg = STRINGS.emailRegex;
@@ -19,7 +21,9 @@ export default function signup(
     Alert.alert(STRINGS.failPopUp, STRINGS.invalidEmail);
   } else if (password.length < 8) {
     Alert.alert(STRINGS.failPopUp, STRINGS.invalidPassword);
-  } else {
+  } else if (password!=ConfirmPassword) {
+    Alert.alert(STRINGS.failPopUp, STRINGS.passwordDontMatch);
+  }else {
     signupUser({
       name: name,
       email: email,
