@@ -33,15 +33,12 @@ export default function EditProfileHelper(
     if (Password == "") {
       delete data.password;
     }
-    console.log("hi");
     
     EditProfile(
       data,
       userId
     )
       .then((result: any) => {
-        console.log("hi");
-
         const message = result.data;
         const title = result.status == 200 ? "Yay!" : "Oops";
         Alert.alert(title, message);
