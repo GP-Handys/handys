@@ -92,9 +92,9 @@ export default function Profile({ navigation }: StackProps) {
           </View>
 
           <View style={{ gap: 20, paddingVertical: 15 }}>
-            {/* {shops.map((shop: any) => (
+            {shops.map((shop: any) => (
               <UserShop key={shop.id} shop={shop} />
-            ))} */}
+            ))}
 
             <TouchableOpacity
               style={style.createShop}
