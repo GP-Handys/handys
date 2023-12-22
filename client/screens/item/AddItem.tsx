@@ -6,10 +6,40 @@ import COLORS from "../../common/colors";
 import pickImageAndStore from "../../storage/store";
 import { useState } from "react";
 import React from "react";
+import { addItemForShopId } from "../../api/ItemApi";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
-export default function AddItemScreen() {
+export default function AddItemScreen({route}: any) {
+  const shopId = route.params.shopId;
+  const navigation = useNavigation<StackProps["navigation"]>();
   const [itemImageUrl, setItemImageUrl] = useState();
   const [itemImagePicked, setItemImagePicked] = useState(false);
+  const [itemName, setItemName] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
+  const [itemDiscount, setItemDiscount] = useState("");
+  const [itemQuantity, setItemQuantity] = useState("");
+  const [itemDescription, setItemDescription] = useState("");
+
+  const addItem = async () => {
+    await addItemForShopId(shopId, {
+      name: itemName,
+      base_price: itemPrice,
+      discount: itemDiscount,
+      quantity: itemQuantity,
+      description: itemDescription,
+      img_url: itemImageUrl
+    }).then((res) => {
+      if(res.status === 200){
+        alert("Item added successfully");
+        navigation.pop();
+      }
+    })
+  };
+
+  const handleAddItem = () => {
+    addItem();  
+  };
 
   return (
     <CommonScrollableBackground>
@@ -54,32 +84,33 @@ export default function AddItemScreen() {
         )}
       </Pressable>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Item name</Text>
-        <CustomTextInput placeholder="Enter item name here" />
+        <Text style={styles.textLabel}>Name</Text>
+        <CustomTextInput placeholder="Enter item name here" onChangeText={(text) => {setItemName(text)}}/>
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Item name</Text>
-        <CustomTextInput placeholder="Enter percentage discount here" />
+        <Text style={styles.textLabel}>Price</Text>
+        <CustomTextInput placeholder="Enter base price here" onChangeText={(text) => {setItemPrice(text)}}/>
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Item name</Text>
-        <CustomTextInput placeholder="Enter quantity here" />
+        <Text style={styles.textLabel}>Discount</Text>
+        <CustomTextInput placeholder="Enter percentage discount here" onChangeText={(text) => {setItemDiscount(text)}}/>
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Item name</Text>
-        <CustomTextInput placeholder="Enter base price here" />
+        <Text style={styles.textLabel}>Quantity</Text>
+        <CustomTextInput placeholder="Enter quantity here" onChangeText={(text) => {setItemQuantity(text)}}/>
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Item description</Text>
+        <Text style={styles.textLabel}>Description</Text>
         <CustomTextInput
           placeholder="Enter item description here"
           multiline={true}
           minHeight={100}
+          onChangeText={(text) => {setItemDescription(text)}}
         />
       </View>
       <View style={styles.confirmPressableContainer}>
         <Pressable
-          // onPress={handleLogin}
+          onPress={handleAddItem}
           style={({ pressed }) => [
             styles.confirmPressable,
             {
@@ -88,7 +119,7 @@ export default function AddItemScreen() {
           ]}
         >
           <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
-            Confirm
+            Add
           </Text>
         </Pressable>
       </View>
