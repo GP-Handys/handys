@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Keyboard } from "react-native";
+import { View, Text, Dimensions, Keyboard, FlatList } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -9,41 +9,37 @@ import COLORS from "../../common/colors";
 import { shopSearch } from "../../api/ShopApi";
 import SearchShopCard from "../../components/search/SearchShopCard";
 import { ActivityIndicator } from "react-native-paper";
+import { ItemSearch } from "../../api/ItemApi";
+import ItemCard from "../../components/home/ItemCard";
+import { Item } from "../../models/Item";
+import { Shop } from "../../models/Shop";
 
 export default function Search(this: any) {
   const [index, setIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [shops, setShops] = useState([]);
-  const [items, setItems] = useState([]);
+  const [shops, setShops] = useState<Shop[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [loadingShops, setLoadingShops] = useState(false);
   const [loadingItems, setLoadingItems] = useState(false);
 
   async function handleSearch() {
     setLoadingShops(true);
-    //setLoadingItems(true)
+    setLoadingItems(true);
 
     await shopSearch(searchQuery).then((result) => {
       setShops(result);
       setLoadingShops(false);
     });
 
-    // await itemsSearch(searchQuery).then((result)=>{
-    //   setItems(result)
-    //   setLoadingItems(false)
-    // })
+    await ItemSearch(searchQuery).then((result) => {
+      setItems(result);
+      setLoadingItems(false);
+    });
   }
-
-  // if (loadingItems || loadingShops) {
-  //   return (
-  //
-  //   );
-  // } else
 
   return (
     <CommonScrollableBackground>
-      <View
-        style={{ margin: 15,minHeight:"100%"}}
-      >
+      <View style={{ margin: 15, minHeight: "100%" }}>
         <CustomTextInput
           onChangeText={(query) => setSearchQuery(query)}
           placeholder="search for shop , item or category"
@@ -92,23 +88,33 @@ export default function Search(this: any) {
             style={{
               alignItems: "center",
               flex: 1,
-              marginTop:"50%"
+              marginTop: "50%",
             }}
           >
             <ActivityIndicator size={"large"} color="white" />
           </View>
         ) : (
-          <View style={{marginTop:15}}>
+          <View style={{ marginTop: 15 }}>
             {index === 0 ? (
-              <View>
-                <Text>items</Text>
-              </View>
+              <FlatList
+                key={"_"}
+                keyExtractor={(item) => "_" + item.id}
+                data={items}
+                renderItem={({ item }) => <ItemCard item={item} />}
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                scrollEnabled={false}
+              />
             ) : (
-              <View style={{ gap: 15 }}>
-                {shops.map((shop: any) => (
-                  <SearchShopCard key={shop.id} shop={shop} />
-                ))}
-              </View>
+              <FlatList
+                key={"#"}
+                keyExtractor={(item) => "#" + item.id}
+                data={shops}
+                renderItem={({ item }) => <SearchShopCard shop={item} />}
+                ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+                scrollEnabled={false}
+                numColumns={1}
+              />
             )}
           </View>
         )}

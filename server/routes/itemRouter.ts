@@ -187,10 +187,10 @@ export const searchItem = async (req: Request, res: Response) => {
     const search = req.query.search;
     const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
      OR id LIKE (select itemId from item_category where categoryId Like 
-      (select categoryId from categories where category_name LIKE '%${search}%' and is_approved LIKE 1));`;
+      (select categoryId from categories where category_name LIKE '%${search}%'));`;
 
     const searchResult = await DB.query(query);
-    res.status(200).json(searchResult);
+    res.status(200).json(searchResult[0]);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -232,10 +232,9 @@ export const getbyCategory = async (req: Request, res: Response) => {
 
     const query = `SELECT * FROM items WHERE id LIKE (select itemId from item_category where categoryId Like ${categoryId});`;
     const searchResult = await DB.query(query);
-    res.status(200).json(searchResult)
+    res.status(200).json(searchResult[0])
   } catch (error) {
     res.status(500).json(error);
   }
-
 }
 
