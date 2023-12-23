@@ -12,7 +12,7 @@ export default function DoneScreen({ navigation }: StackProps) {
             fontSize: 40,
             color: "white",
             fontWeight: "600",
-            marginBottom: 20
+            marginBottom: 20,
           }}
         >
           Done!
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "white",
     fontWeight: "500",
-    fontSize: 20
+    fontSize: 20,
   },
   container: {
     flex: 1,
     marginTop: 80,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   okay: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -59,10 +59,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    marginTop: 15
+    marginTop: 15,
   },
   image: {
     width: 300,
-    height: 300
-  }
+    height: 300,
+  },
 });

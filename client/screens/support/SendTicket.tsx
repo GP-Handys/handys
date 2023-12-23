@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -7,7 +7,7 @@ import {
   ScrollView,
   TextInput,
   KeyboardAvoidingView,
-  Platform
+  Platform,
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import { Entypo } from "@expo/vector-icons";
@@ -20,12 +20,16 @@ export default function SendTicketScreen({ navigation }: StackProps) {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   const isButtonEnabled =
     email.trim().length > 0 &&
     validator.isEmail(email) &&
     subject.trim().length > 0 &&
     message.trim().length > 0;
+
 
   const handleSendticket = () => {
     if (email.trim().length == 0) {
@@ -49,6 +53,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
       >
         <ScrollView>
+        <ScrollView>
           <View style={styles.upperContainer}>
             <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
@@ -62,12 +67,14 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               placeholder="Your Email"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) => setEmail(inputValue)}
+              onChangeText={(inputValue) => setEmail(inputValue)}
               keyboardType="email-address"
             />
             <TextInput
               style={styles.input}
               placeholder="Subject"
               placeholderTextColor={COLORS.textInputPlaceholder}
+              onChangeText={(inputValue) => setSubject(inputValue)}
               onChangeText={(inputValue) => setSubject(inputValue)}
             />
 
@@ -76,10 +83,12 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               placeholder="Message"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) => setMessage(inputValue)}
+              onChangeText={(inputValue) => setMessage(inputValue)}
               multiline={true}
             />
           </View>
 
+          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
           <View style={{ marginHorizontal: 10, marginTop: 10 }}>
             {!isButtonEnabled ? (
               <TouchableOpacity
@@ -94,7 +103,9 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
+              <TouchableOpacity
                 style={styles.confirmPressable}
+                onPress={handleSendticket}
                 onPress={handleSendticket}
               >
                 <Text
@@ -113,7 +124,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1
+    flex: 1,
   },
   upperContainer: {
     width: 300,
@@ -128,7 +139,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontWeight: "500",
     fontSize: 20,
-    textAlign: "center"
+    textAlign: "center",
   },
   confirmPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -136,6 +147,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8
+
   },
   confirmPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -156,7 +168,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginHorizontal: 20,
     marginBottom: 12,
-    marginTop: 1
+    marginTop: 1,
   },
   textArea: {
     color: "#ABABAB",
@@ -168,7 +180,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontSize: 15,
     fontWeight: "600",
-    textAlignVertical: "top"
+    textAlignVertical: "top",
   },
   inputsContainer: {
     marginTop: 10,
