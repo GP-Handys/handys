@@ -27,7 +27,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
     subject.trim().length > 0 &&
     message.trim().length > 0;
 
-
   const handleSendticket = () => {
     if (email.trim().length == 0) {
       submitTicket({ content: message });
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     textAlign: "left",
     alignSelf: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   textTitle: {
     color: "white",
@@ -136,8 +135,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 50,
-    borderRadius: 8
-
+    borderRadius: 8,
   },
   confirmPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -145,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    opacity: 0.5
+    opacity: 0.5,
   },
   input: {
     color: "#ABABAB",
@@ -174,6 +172,6 @@ const styles = StyleSheet.create({
   },
   inputsContainer: {
     marginTop: 10,
-    marginBottom: 60
-  }
+    marginBottom: 60,
+  },
 });
