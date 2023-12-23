@@ -13,9 +13,7 @@ export default function CategoryItemsScreen({ route }: any) {
   useEffect(() => {
     async function handleSearch() {
       setLoadingItems(true);
-      await GetItemsBycategory(category.id).then((result) => {
-        console.log(result);
-        
+      await GetItemsBycategory(category.id).then((result) => {        
         setItems(result);
         setLoadingItems(false);
       });
