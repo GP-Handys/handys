@@ -10,7 +10,7 @@ import { View } from "react-native";
 import STRINGS from "../../strings/strings";
 import CategoryCard from "../../components/home/CategoryCard";
 import ShopCard from "../../components/home/ShopCard";
-import MostPopularItem from "../../components/home/MostPopularItem";
+import MostPopularItem from "../../components/home/ItemCard";
 import { Shop } from "../../models/Shop";
 import { useEffect, useState } from "react";
 import { Item } from "../../models/Item";
@@ -103,7 +103,7 @@ export default function Home() {
           ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
         />
 
-        <Text style={styles.sectionTitle}>Most Popular Items</Text>
+        {/* <Text style={styles.sectionTitle}>Most Popular Items</Text>
         <View style={styles.mostPopularContainer}>
           <MostPopularItem />
           <MostPopularItem />
@@ -114,7 +114,7 @@ export default function Home() {
           <MostPopularItem />
           <MostPopularItem />
           <MostPopularItem />
-        </View>
+        </View> */}
       </View>
     </CommonScrollableBackground>
   );
@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
   banner: {
     width: "100%",
     paddingBottom: 24,
-    alignContent:"center",
-    alignItems:"center",
-    justifyContent:"center"
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   homeBannerTitleContainer: {
     fontWeight: "bold",
@@ -141,19 +141,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   sectionTitle: {
-    marginVertical:10,
+    marginVertical: 10,
     fontWeight: "bold",
     fontSize: 20,
     color: "white",
   },
-  
+
   mostPopularContainer: {
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
-  pageContainer:{
+  pageContainer: {
     marginHorizontal: 30,
-  }
+  },
 });

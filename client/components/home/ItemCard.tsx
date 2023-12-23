@@ -1,28 +1,39 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Item } from "../../models/Item";
 
-export default function MostPopularItem({}) {
+interface ItemCardProps {
+  item: Item;
+}
+
+export default function ItemCard({ item }: ItemCardProps) {
   return (
-    <View style={styles.container}>
-      <Pressable>
-        <Image source={require("../../assets/popular.png")} />
-      </Pressable>
-      <Text style={styles.itemName}>Embroidery</Text>
+    <TouchableOpacity style={styles.container}>
+      <Image
+        style={{ width: 150, height: 100, borderRadius: 8}}
+        source={{ uri: item.img_url ?? "" }}
+      />
+      <Text style={styles.itemName}>{item.name}</Text>
       <View style={styles.ratingContainer}>
         <MaterialIcons name="star-half" size={15} color="white" />
-        <Text style={styles.rating}>4</Text>
+        <Text style={styles.rating}>{item.rating}</Text>
       </View>
       <View style={styles.priceIconContainer}>
-        <Text style={styles.price}>JOD 118</Text>
+        <Text style={styles.price}>{item.base_price} JOD</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    
-  },
+  container: {},
   itemName: {
     marginTop: 7,
     color: "white",

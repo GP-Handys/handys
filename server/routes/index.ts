@@ -34,7 +34,7 @@ router.get("/api/shop/getUserShops/:userId", tokenValidate,shopRouter.getUserSho
 router.get("/api/shop/recommended", tokenValidate, shopRouter.getRecommendedShops)
 
 //item routes
-router.post("/api/items/addItem",tokenValidate,itemRouter.addItem)
+router.post("/api/items/addItem/:shopId",tokenValidate,itemRouter.addItem)
 router.put("/api/items/updateItem/:itemId",tokenValidate,itemRouter.updateItem)
 router.delete("/api/items/deleteItem/:itemId",tokenValidate,itemRouter.deleteItem)
 router.get("/api/items/getItem/:itemId",tokenValidate,itemRouter.getItem)

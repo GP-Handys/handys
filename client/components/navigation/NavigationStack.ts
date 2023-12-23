@@ -2,6 +2,7 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
+import { User } from "../../models/User";
 
 export type StackParamList = {
   Landing: undefined;
@@ -9,11 +10,13 @@ export type StackParamList = {
   SignUp: undefined;
   MainScreensContainer: undefined;
   OnboardingScreensContainer: undefined;
-  SendTicketScreen:undefined;
+  SendTicketScreen: undefined;
   DoneScreen: undefined;
   Profile: undefined;
   CreateShopScreen: undefined;
-  ShopScreen: {shopId: number, shopName: string};
+  ShopScreen: { shopId: number; shopName: string };
+  AddItemScreen: { shopId: number };
+  EditProfile: undefined
   ItemScreen: undefined;
   AddCustomization: undefined;
 };
