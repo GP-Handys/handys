@@ -1,20 +1,19 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
-import { getProfile, getUserById } from "../../api/UserApi";
+import { getUserById } from "../../api/UserApi";
 import { User } from "../../models/User";
 
 
-export default function PostOwnerHeader() {
+export default function PostOwnerHeader({userId}: {userId: number}) {
 
   const [user, setUser] = useState<User>();
   useEffect(() => {
     const fetchUser = async () => {
-      await getProfile().then((result) => {
-        setUser(result);
-      });
+      const result = await getUserById(userId);
+      setUser(result);
     };
     fetchUser();
-  }, []);
+  }, [userId]);
 
   return (
     <View style={styles.userData}>
