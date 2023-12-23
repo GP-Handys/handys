@@ -14,28 +14,27 @@ import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 import validator from "validator"; // For email validation
 import { StackProps } from "../../components/navigation/NavigationStack";
+import { submitTicket } from "../../api/TicketApi";
 
 
 export default function SendTicketScreen({ navigation }: StackProps) {
 
-  
-  const [inputValues, setInputValues] = useState({
-    email: "",
-    subject: "",
-    message: ""
-  });
+  const [email , setEmail] = useState("")
+  const [subject , setSubject] = useState("")
+  const [message , setMessage] = useState("")
 
   const isButtonEnabled =
-    inputValues.email.trim().length > 0 &&
-    validator.isEmail(inputValues.email) &&
-    inputValues.subject.trim().length > 0 &&
-    inputValues.message.trim().length > 0;
+    email.trim().length > 0 &&
+    validator.isEmail(email) &&
+    subject.trim().length > 0 &&
+    message.trim().length > 0;
 
-  const handleInputChange = (key: any, value: any) => {
-    setInputValues({ ...inputValues, [key]: value });
-  };
+  const isValidEmail = validator.isEmail(email) || email.trim().length < 1;
 
-  const isValidEmail = validator.isEmail(inputValues.email) || inputValues.email.trim().length < 1;
+  function handleSendticket(){
+    submitTicket({content:message})
+    navigation.navigate("DoneScreen")
+  }
 
   return (
     <CommonBackgroundWithNoSafeArea>
@@ -62,7 +61,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               placeholder="E-mail (optional)"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) =>
-                handleInputChange("email", inputValue)
+                setEmail(inputValue)
               }
               keyboardType="email-address"
             />
@@ -74,7 +73,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               placeholder="Subject"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) =>
-                handleInputChange("subject", inputValue)
+                setSubject(inputValue)
               }
             />
 
@@ -83,13 +82,13 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               placeholder="Message"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) =>
-                handleInputChange("message", inputValue)
+                setMessage(inputValue)
               }
               multiline={true}
             />
           </View>
 
-          <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
+          <View style={{ marginBottom: 40, marginHorizontal: 10 }}>
             {!isButtonEnabled ? (
               <TouchableOpacity disabled={true} style={styles.confirmPressableDisabled}>
                 <Text
@@ -99,7 +98,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.confirmPressable} onPress={()=>{navigation.navigate("DoneScreen")}}>
+              <TouchableOpacity style={styles.confirmPressable} onPress={handleSendticket}>
                 <Text
                   style={{ color: "black", fontWeight: "500", fontSize: 16 }}
                 >

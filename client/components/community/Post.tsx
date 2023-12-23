@@ -1,8 +1,8 @@
 import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
-import PostOwnerHeader from "../../components/community/PostOwnerHeader";
-import TimeStamp from "../../components/community/TimeStamp";
-import LikeButton from "../../components/community/LikeButton";
-import CommentButton from "../../components/community/CommentButton";
+import PostOwnerHeader from "./PostOwnerHeader";
+import TimeStamp from "./TimeStamp";
+import LikeButton from "./LikeButton";
+import CommentButton from "./CommentButton";
 import { PostModel } from "../../models/Post";
 
 interface PostProps {
@@ -14,7 +14,7 @@ export default function Post({ post }: Readonly<PostProps>) {
     <View>
       <View style={styles.userProfile}>
         <View>
-          <PostOwnerHeader userId={post.userId} />
+          <PostOwnerHeader />
         </View>
         <View style={{ marginTop: 15, marginRight: 10 }}>
           <TimeStamp time={post.createdAt} />

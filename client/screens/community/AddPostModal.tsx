@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
-import ThematicBreak from "../ThematicBreak";
+import ThematicBreak from "../../components/ThematicBreak";
 import COLORS from "../../common/colors";
-import PostOwnerHeader from "./PostOwnerHeader";
-import CustomTextInput from "../CustomTextInput";
+import PostOwnerHeader from "../../components/community/PostOwnerHeader";
+import CustomTextInput from "../../components/CustomTextInput";
 import pickImageAndStore from "../../storage/store";
 import { addPost } from "../../api/CommunityApi";
 import { getProfile } from "../../api/UserApi";
@@ -26,7 +26,7 @@ export default function PostModal({
   isVisible,
   onDismiss,
 }: Readonly<PostModalProps>) {
-  const [postImageUrl, setPostImageUrl] = useState<any | null>(null);
+  const [postImageUrl, setPostImageUrl] = useState<any>(null);
   const [postImgPicked, setPostImgPicked] = useState(false);
   const [postText, setPostText] = useState("");
   const [user, setUser] = useState({} as any);
@@ -82,7 +82,7 @@ export default function PostModal({
               marginTop: 15,
             }}
           >
-            <PostOwnerHeader userId={user.id} />
+            <PostOwnerHeader />
             <TouchableOpacity>
               <MaterialIcons
                 name="insert-photo"

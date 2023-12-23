@@ -10,6 +10,7 @@ import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
 import ShopScreen from "./screens/shop/ShopScreen";
 import AddItem from "./screens/item/AddItem";
+import EditProfile from "./screens/profile/EditProfile";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -81,6 +82,17 @@ export default function App() {
           component={AddItem}
           options={{
             title: "Add Item",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{
+            title: "Edit profile",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",

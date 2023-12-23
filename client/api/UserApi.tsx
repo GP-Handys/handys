@@ -61,3 +61,21 @@ export const getUserById = async (userId: number) => {
     return error.message;
   }
 };
+
+export const EditProfile = async (data:any,userId:number) => {
+  try {    
+    let token = await AsyncStorage.getItem("Authorization");
+    const result = await ApiManager("/users/updateUser/"+userId, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+      data:data
+    });
+    return result;
+  } catch (error: any) {
+    console.log(error);
+    return error.message;
+  }
+};

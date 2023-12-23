@@ -3,7 +3,9 @@ import {
     Pressable,
     Text,
     StyleSheet,
-    Image
+    Image,
+    Touchable,
+    TouchableOpacity
   } from "react-native";
   import { CommonBackgroundWithNoSafeArea } from "../../common/background";
   import COLORS from "../../common/colors";
@@ -23,20 +25,15 @@ import {
         </View>
 
 
-        <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
-            <Pressable
+        <View style={{ marginBottom: 40, marginHorizontal: 10 }}>
+            <TouchableOpacity
               onPress={() => {navigation.navigate("Profile")}}
-              style={({ pressed }) => [
-                styles.signUpPressable,
-                {
-                  opacity: pressed ? 0.6 : 1,
-                },
-              ]}
+             style={styles.Okay}
             >
               <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
                 Okay! 
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
       </CommonBackgroundWithNoSafeArea>
     );
@@ -54,7 +51,7 @@ import {
       marginTop: 80,
       alignItems: "center"
     },
-    signUpPressable: {
+    Okay: {
       backgroundColor: COLORS.CTAButtonBackground,
       alignItems: "center",
       justifyContent: "center",
