@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -7,35 +7,30 @@ import {
   ScrollView,
   TextInput,
   KeyboardAvoidingView,
-  Platform
+  Platform,
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 import validator from "validator"; // For email validation
 import { StackProps } from "../../components/navigation/NavigationStack";
-
+import { submitTicket } from "../../api/TicketApi";
 
 export default function SendTicketScreen({ navigation }: StackProps) {
-
-  
-  const [inputValues, setInputValues] = useState({
-    email: "",
-    subject: "",
-    message: ""
-  });
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   const isButtonEnabled =
-    inputValues.email.trim().length > 0 &&
-    validator.isEmail(inputValues.email) &&
-    inputValues.subject.trim().length > 0 &&
-    inputValues.message.trim().length > 0;
+    email.trim().length > 0 &&
+    validator.isEmail(email) &&
+    subject.trim().length > 0 &&
+    message.trim().length > 0;
 
-  const handleInputChange = (key: any, value: any) => {
-    setInputValues({ ...inputValues, [key]: value });
-  };
-
-  const isValidEmail = validator.isEmail(inputValues.email) || inputValues.email.trim().length < 1;
+  function handleSendticket() {
+    submitTicket({ content: message });
+    navigation.navigate("DoneScreen");
+  }
 
   return (
     <CommonBackgroundWithNoSafeArea>
@@ -44,7 +39,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
       >
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ScrollView>
           <View style={styles.upperContainer}>
             <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
@@ -61,37 +56,31 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               style={styles.input}
               placeholder="E-mail (optional)"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              onChangeText={(inputValue) =>
-                handleInputChange("email", inputValue)
-              }
+              onChangeText={(inputValue) => setEmail(inputValue)}
               keyboardType="email-address"
             />
-            {isValidEmail ? null : (
-              <Text style={styles.emailError}>*Invalid email address</Text>
-            )}
             <TextInput
               style={styles.input}
               placeholder="Subject"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              onChangeText={(inputValue) =>
-                handleInputChange("subject", inputValue)
-              }
+              onChangeText={(inputValue) => setSubject(inputValue)}
             />
 
             <TextInput
               style={styles.textArea}
               placeholder="Message"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              onChangeText={(inputValue) =>
-                handleInputChange("message", inputValue)
-              }
+              onChangeText={(inputValue) => setMessage(inputValue)}
               multiline={true}
             />
           </View>
 
-          <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
+          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
             {!isButtonEnabled ? (
-              <TouchableOpacity disabled={true} style={styles.confirmPressableDisabled}>
+              <TouchableOpacity
+                disabled={true}
+                style={styles.confirmPressableDisabled}
+              >
                 <Text
                   style={{ color: "black", fontWeight: "600", fontSize: 16 }}
                 >
@@ -99,7 +88,10 @@ export default function SendTicketScreen({ navigation }: StackProps) {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.confirmPressable} onPress={()=>{navigation.navigate("DoneScreen")}}>
+              <TouchableOpacity
+                style={styles.confirmPressable}
+                onPress={handleSendticket}
+              >
                 <Text
                   style={{ color: "black", fontWeight: "500", fontSize: 16 }}
                 >
@@ -116,7 +108,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1
+    flex: 1,
   },
   upperContainer: {
     width: 300,
@@ -124,21 +116,21 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     textAlign: "left",
     alignSelf: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   textTitle: {
     color: "white",
     marginTop: 10,
     fontWeight: "500",
     fontSize: 20,
-    textAlign: "center"
+    textAlign: "center",
   },
   confirmPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 50,
-    borderRadius: 8
+    borderRadius: 8,
   },
   confirmPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -146,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    opacity: 0.5
+    opacity: 0.5,
   },
   input: {
     color: "#ABABAB",
@@ -159,7 +151,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginHorizontal: 20,
     marginBottom: 12,
-    marginTop: 1
+    marginTop: 1,
   },
   textArea: {
     color: "#ABABAB",
@@ -171,25 +163,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontSize: 15,
     fontWeight: "600",
-    textAlignVertical: "top"
+    textAlignVertical: "top",
   },
   inputsContainer: {
     marginTop: 10,
-    flex: 1
+    marginBottom: 60,
   },
   note: {
     alignSelf: "center",
     fontSize: 11.5,
     fontWeight: "600",
     color: COLORS.textInputPlaceholder,
-    alignItems: "center"
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: "space-between"
+    alignItems: "center",
   },
   emailError: {
     color: "red",
-    marginLeft: 20
-  }
+    marginLeft: 20,
+  },
 });

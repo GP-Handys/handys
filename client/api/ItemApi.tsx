@@ -8,8 +8,41 @@ export const getMostPopularItems = async () => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token
+        "Authorization": token,
       },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+export const getItemsForShopId = async (shopId: any) => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/items/getByShop/" + shopId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+export const addItemForShopId = async (shopId: number, data: any) => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/items/addItem/" + shopId, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+      data: data,
     });
     return result;
   } catch (error: any) {

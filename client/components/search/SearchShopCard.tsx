@@ -37,7 +37,7 @@ export default function SearchShopCard({ shop }: Props) {
         <Image source={{ uri: shop.pfp_url }} style={styles.shopImg} />
       )}
 
-      <View style={{ flexDirection: "column" }}>
+      <View style={{flex:1}}>
         <View style={styles.header}>
           <Text style={styles.shopName}>{shop.name}</Text>
           <View style={styles.rating}>
@@ -56,7 +56,7 @@ export default function SearchShopCard({ shop }: Props) {
             )}
           </View>
         </View>
-        <Text>sadsdsa</Text>
+        <Text style={styles.bio}>{shop.bio}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -67,9 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.handysGrey,
     padding: 6,
     borderRadius: 10,
-    flexDirection: "row",
-    maxWidth: Dimensions.get("window").width,
-    Width: Dimensions.get("window").width,
+    flexDirection:"row"
   },
   shopImg: {
     borderRadius: 8,
@@ -80,23 +78,29 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%",
   },
   shopName: {
     color: "white",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "600",
     marginVertical: 5,
-    marginLeft: 5,
+    marginLeft: 10,
   },
   rating: {
     gap: 4,
     alignItems: "center",
+    marginRight:10
   },
   ratingCount: {
-    fontSize: 9,
+    fontSize: 10,
     color: "#fffffa",
     opacity: 0.5,
     marginLeft: 10,
   },
+  bio:{
+    marginTop:9,
+    marginLeft:10,
+    color:"#FFF",
+    fontSize:12
+  }
 });

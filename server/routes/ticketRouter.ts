@@ -28,7 +28,7 @@ export const submitTicket = async (req: Request, res: Response) => {
   try {
     const user: User | null = await User.findByPk(userId);
     const ticket = await Ticket.create({ userId, content });
-    await sendEmail(user!.email);
+    await sendEmail(user!.email , content);
     res.status(200).json(ticket);
   } catch (error) {
     res.status(500).json(error);

@@ -16,11 +16,11 @@ export const addItem = async (req: Request, res: Response) => {
       discount,
       quantity,
       is_customizable,
-      shopId,
-      category,
+      img_url,
     } = req.body;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
+    const shopId = req.params.shopId;
     const shop = await Shop.findByPk(shopId);
     const user = await User.findByPk(userId);
     if (user!.is_sys_admin || shop!.userId == userId) {
@@ -32,7 +32,7 @@ export const addItem = async (req: Request, res: Response) => {
         quantity,
         is_customizable,
         shopId,
-        category,
+        img_url,
       });
 
       res.status(200).json("Item created successfully");
