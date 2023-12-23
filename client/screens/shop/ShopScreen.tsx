@@ -107,6 +107,7 @@ export default function ShopScreen({ route }: any) {
       </View>
       <Text style={styles.bio}>{shop?.bio}</Text>
       <ThematicBreak />
+      <Text style={styles.shopItems}>Shop's handicrafts</Text>
       <FlatList
         data={items}
         renderItem={({ item }) => {
@@ -180,4 +181,11 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginVertical: 17,
   },
+  shopItems: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    marginLeft: 15,
+    marginTop: 20,
+  }
 });

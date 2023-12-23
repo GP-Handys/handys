@@ -17,7 +17,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   return (
     <TouchableOpacity style={styles.container}>
       <Image
-        style={{ width: 150, height: 100, borderRadius: 8}}
+        style={{ width: 140, height: 162, borderRadius: 8}}
         source={{ uri: item.img_url ?? "" }}
       />
       <Text style={styles.itemName}>{item.name}</Text>
@@ -33,7 +33,10 @@ export default function ItemCard({ item }: ItemCardProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginHorizontal: 30,
+    marginBottom: 30,
+  },
   itemName: {
     marginTop: 7,
     color: "white",
