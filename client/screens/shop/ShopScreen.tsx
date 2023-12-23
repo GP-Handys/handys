@@ -1,8 +1,5 @@
 import { Image } from "react-native-elements";
-import {
-  CommonBackgroundWithSafeArea,
-  CommonScrollableBackground,
-} from "../../common/background";
+import { CommonScrollableBackground } from "../../common/background";
 import {
   FlatList,
   StyleSheet,
@@ -15,10 +12,8 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Item } from "../../models/Item";
 import { useEffect, useState } from "react";
-import { Shop } from "../../models/Shop";
 import { getItemsForShopId } from "../../api/ItemApi";
 import { getShopById } from "../../api/ShopApi";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getProfile } from "../../api/UserApi";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -107,6 +102,7 @@ export default function ShopScreen({ route }: any) {
       </View>
       <Text style={styles.bio}>{shop?.bio}</Text>
       <ThematicBreak />
+      <Text style={styles.shopItems}>Shop's handicrafts</Text>
       <FlatList
         data={items}
         renderItem={({ item }) => {
@@ -179,5 +175,12 @@ const styles = StyleSheet.create({
     opacity: 0.5,
     marginLeft: 15,
     marginVertical: 17,
+  },
+  shopItems: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    marginLeft: 15,
+    marginTop: 20,
   },
 });

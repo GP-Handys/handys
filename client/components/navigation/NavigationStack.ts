@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 import { User } from "../../models/User";
 import { Category } from "../../models/Category";
+import { PostModel } from "../../models/Post";
 
 export type StackParamList = {
   Landing: undefined;
@@ -16,8 +17,11 @@ export type StackParamList = {
   Profile: undefined;
   CreateShopScreen: undefined;
   ShopScreen: { shopId: number; shopName: string };
+  Comments: {post: PostModel}
   AddItemScreen: { shopId: number };
-  EditProfile: undefined;
+  EditProfile: undefined
+  ItemScreen: undefined;
+  AddCustomization: undefined;
   CategoryItemsScreen:{category:Category}
 
 };

@@ -9,6 +9,7 @@ import DoneScreen from "./screens/support/Done";
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
 import ShopScreen from "./screens/shop/ShopScreen";
+import Comments from "./screens/community/Comments";
 import AddItem from "./screens/item/AddItem";
 import EditProfile from "./screens/profile/EditProfile";
 import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
@@ -49,10 +50,8 @@ export default function App() {
           name="DoneScreen"
           component={DoneScreen}
           options={{
-            title: "Done!",
-            headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
-            headerTintColor: "white",
+            headerShown: false,
+            gestureEnabled: false,
             headerTitleAlign: "center",
           }}
         />
@@ -79,6 +78,17 @@ export default function App() {
           })}
         />
         <Stack.Screen
+          name="Comments"
+          component={Comments}
+          options={{
+            title: "Comments",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
           name="AddItemScreen"
           component={AddItem}
           options={{
@@ -87,8 +97,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-          }}
-        />
+          }}/>
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}

@@ -4,31 +4,32 @@ import TimeStamp from "./TimeStamp";
 import LikeButton from "./LikeButton";
 import CommentButton from "./CommentButton";
 import { PostModel } from "../../models/Post";
-
 interface PostProps {
   post: PostModel;
 }
 
-export default function Post({ post }: Readonly<PostProps>) {
+export default function Post({ post }: PostProps) {
   return (
     <View>
       <View style={styles.userProfile}>
         <View>
-          <PostOwnerHeader />
+          <PostOwnerHeader userId={post.userId} />
         </View>
         <View style={{ marginTop: 15, marginRight: 10 }}>
           <TimeStamp time={post.createdAt} />
         </View>
       </View>
       <View>
-        <View style={styles.mainPost}>
-          <Text style={{ color: "white", fontSize: 15 }}>{post.content}</Text>
+      <View style={styles.mainPost}>
+          <Text style={{ color: "white", fontSize: 12.5 }}>{post.content}</Text>
           {post.img_url && (
-            <Image style={styles.postImg} source={{ uri: post.img_url }} />
+            <View style={styles.postImgContainer}>
+              <Image style={styles.postImg} source={{ uri: post.img_url }} />
+            </View>
           )}
           <View style={styles.footer}>
             <LikeButton />
-            <CommentButton />
+            <CommentButton post={post} />
           </View>
         </View>
       </View>
@@ -47,20 +48,23 @@ const styles = StyleSheet.create({
   },
   mainPost: {
     height: "auto",
-    marginTop: 10,
+    marginTop: 8,
+    width: "90%",
+    borderRadius: 8,
+  },
+  postImgContainer: {
+    marginTop: 8,
   },
   postImg: {
-    marginTop: 12,
     width: Dimensions.get("window").width - 20,
-    height: 400,
-    resizeMode: "contain",
+    height: Dimensions.get("window").width - 20,
   },
   footer: {
     flexDirection: "row",
     alignItems: "baseline",
-    marginTop: 15,
     gap: 20,
     marginLeft: 10,
+    marginTop: 12,
   },
   comment: {
     marginLeft: 40,
