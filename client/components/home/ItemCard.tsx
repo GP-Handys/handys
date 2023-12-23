@@ -26,7 +26,7 @@ export default function ItemCard({ item }: ItemCardProps) {
         <Text style={styles.rating}>{item.rating}</Text>
       </View>
       <View style={styles.priceIconContainer}>
-        <Text style={styles.price}>{item.base_price} JOD</Text>
+        <Text style={styles.price}>JOD {item.base_price}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -34,7 +34,6 @@ export default function ItemCard({ item }: ItemCardProps) {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 30,
     marginBottom: 30,
   },
   itemName: {

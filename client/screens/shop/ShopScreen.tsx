@@ -103,15 +103,18 @@ export default function ShopScreen({ route }: any) {
       <Text style={styles.bio}>{shop?.bio}</Text>
       <ThematicBreak />
       <Text style={styles.shopItems}>Shop's handicrafts</Text>
-      <FlatList
-        data={items}
-        renderItem={({ item }) => {
-          return <ItemCard item={item} />;
-        }}
-        numColumns={2}
-        scrollEnabled={false}
-        style={{ marginTop: 20 }}
-      />
+      <View style={{marginLeft: 20, marginRight: 20}}>
+        <FlatList
+          data={items}
+          renderItem={({ item }) => {
+            return <ItemCard item={item} />;
+          }}
+          numColumns={2}
+          scrollEnabled={false}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+          style={{ marginTop: 20 }}
+        />
+      </View>
     </CommonScrollableBackground>
   );
 }

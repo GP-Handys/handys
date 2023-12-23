@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { Item } from "../../models/Item";
 import { getRecommendedShops } from "../../api/ShopApi";
 import { getMostPopularItems } from "../../api/ItemApi";
+import ItemCard from "../../components/home/ItemCard";
 
 export default function Home() {
   const [recommendedShops, setRecommendedShops] = useState<Shop[]>([]);
@@ -103,18 +104,16 @@ export default function Home() {
           ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
         />
 
-        {/* <Text style={styles.sectionTitle}>Most Popular Items</Text>
-        <View style={styles.mostPopularContainer}>
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-        </View> */}
+        <Text style={styles.sectionTitle}>Most Popular Items</Text>
+        <FlatList
+          data={mostPopularItems}
+          renderItem={({ item }) => {
+            return <ItemCard item={item} />;
+          }}
+          numColumns={2}
+          scrollEnabled={false}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+        />
       </View>
     </CommonScrollableBackground>
   );
@@ -145,13 +144,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: "white",
-  },
-
-  mostPopularContainer: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
   },
   pageContainer: {
     marginHorizontal: 30,
