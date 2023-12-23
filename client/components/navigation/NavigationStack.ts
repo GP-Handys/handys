@@ -3,6 +3,7 @@ import {
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { User } from "../../models/User";
+import { Category } from "../../models/Category";
 import { PostModel } from "../../models/Post";
 
 export type StackParamList = {
@@ -21,6 +22,8 @@ export type StackParamList = {
   EditProfile: undefined
   ItemScreen: undefined;
   AddCustomization: undefined;
+  CategoryItemsScreen:{category:Category}
+
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

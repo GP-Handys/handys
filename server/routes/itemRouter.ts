@@ -185,7 +185,7 @@ export const removeReview = async (req: Request, res: Response) => {
 export const searchItem = async (req: Request, res: Response) => {
   try {
     const search = req.query.search;
-    const query = `SELECT id FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
+    const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
      OR id LIKE (select itemId from item_category where categoryId Like 
       (select categoryId from categories where category_name LIKE '%${search}%' and is_approved LIKE 1));`;
 
@@ -225,3 +225,17 @@ export const getRandomItems = async (req: Request, res: Response) => {
   }
 
 }
+
+export const getbyCategory = async (req: Request, res: Response) => {
+  try{
+    const categoryId = req.params.categoryId;
+
+    const query = `SELECT * FROM items WHERE id LIKE (select itemId from item_category where categoryId Like ${categoryId});`;
+    const searchResult = await DB.query(query);
+    res.status(200).json(searchResult)
+  } catch (error) {
+    res.status(500).json(error);
+  }
+
+}
+
