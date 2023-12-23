@@ -10,7 +10,7 @@ import {
 } from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
-import { getShops } from "../../api/ShopApi";
+import { getShopsForUserId } from "../../api/ShopApi";
 import React, { useState, useEffect } from "react";
 import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -28,7 +28,7 @@ export default function Profile({ navigation }: StackProps) {
 
   useEffect(() => {
     const fetchShops = async (id: any) => {
-      await getShops(id)
+      await getShopsForUserId(id)
         .then((result) => {
           setShops(result);
         })
