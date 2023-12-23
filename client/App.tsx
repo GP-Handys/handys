@@ -96,7 +96,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-          }}
+          }}/>
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
