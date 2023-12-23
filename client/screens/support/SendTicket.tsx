@@ -17,9 +17,9 @@ import { StackProps } from "../../components/navigation/NavigationStack";
 import { submitTicket } from "../../api/TicketApi";
 
 export default function SendTicketScreen({ navigation }: StackProps) {
-  const [email , setEmail] = useState("")
-  const [subject , setSubject] = useState("")
-  const [message , setMessage] = useState("")
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   const isButtonEnabled =
     email.trim().length > 0 &&
@@ -27,25 +27,20 @@ export default function SendTicketScreen({ navigation }: StackProps) {
     subject.trim().length > 0 &&
     message.trim().length > 0;
 
-  const isValidEmail = validator.isEmail(email) || email.trim().length < 1;
-
-  function handleSendticket(){
-    submitTicket({content:message})
-    navigation.navigate("DoneScreen")
-  }
-
-  const emailCheck = () => {
-    if (inputValues.email.trim().length == 0) {
+  const handleSendticket = () => {
+    if (email.trim().length == 0) {
+      submitTicket({ content: message });
       navigation.navigate("DoneScreen");
-    } else if (inputValues.email.trim().length >= 1) {
-      if (validator.isEmail(inputValues.email)) {
+    } else if (email.trim().length >= 1) {
+      if (validator.isEmail(email)) {
+        submitTicket({ content: message });
         navigation.navigate("DoneScreen");
       } else {
         alert("Your Email in Invalid or Empty");
       }
     }
   };
-  
+
   return (
     <CommonBackgroundWithNoSafeArea>
       <KeyboardAvoidingView
@@ -53,7 +48,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
       >
-        <ScrollView >
+        <ScrollView>
           <View style={styles.upperContainer}>
             <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
@@ -62,40 +57,30 @@ export default function SendTicketScreen({ navigation }: StackProps) {
           </View>
 
           <View style={styles.inputsContainer}>
-            <Text style={styles.note}>
-              *We will use your Handy's email if you leave this field empty.
-            </Text>
-
             <TextInput
               style={styles.input}
-              placeholder="E-mail (optional)"
+              placeholder="Your Email"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              onChangeText={(inputValue) =>
-                setEmail(inputValue)
-              }
+              onChangeText={(inputValue) => setEmail(inputValue)}
               keyboardType="email-address"
             />
             <TextInput
               style={styles.input}
               placeholder="Subject"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              onChangeText={(inputValue) =>
-                setSubject(inputValue)
-              }
+              onChangeText={(inputValue) => setSubject(inputValue)}
             />
 
             <TextInput
               style={styles.textArea}
               placeholder="Message"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              onChangeText={(inputValue) =>
-                setMessage(inputValue)
-              }
+              onChangeText={(inputValue) => setMessage(inputValue)}
               multiline={true}
             />
           </View>
 
-          <View style={{  marginHorizontal: 10, marginTop:10, }}>
+          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
             {!isButtonEnabled ? (
               <TouchableOpacity
                 disabled={true}
@@ -108,9 +93,9 @@ export default function SendTicketScreen({ navigation }: StackProps) {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.confirmPressable} onPress={handleSendticket}>
+              <TouchableOpacity
                 style={styles.confirmPressable}
-                onPress={emailCheck}
+                onPress={handleSendticket}
               >
                 <Text
                   style={{ color: "black", fontWeight: "500", fontSize: 16 }}
@@ -136,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     textAlign: "left",
     alignSelf: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   textTitle: {
     color: "white",
@@ -151,7 +136,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8
-    
   },
   confirmPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -159,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    opacity: 0.5,
+    opacity: 0.5
   },
   input: {
     color: "#ABABAB",
@@ -188,17 +172,6 @@ const styles = StyleSheet.create({
   },
   inputsContainer: {
     marginTop: 10,
-    marginBottom:60,
-  },
-  note: {
-    alignSelf: "center",
-    fontSize: 11.5,
-    fontWeight: "600",
-    color: COLORS.textInputPlaceholder,
-    alignItems: "center"
-  },
-  emailError: {
-    color: "red",
-    marginLeft: 20
+    marginBottom: 60
   }
 });

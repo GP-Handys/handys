@@ -1,8 +1,4 @@
-
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-    Image,
-    Touchable,
-    TouchableOpacity
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import COLORS from "../../common/colors";
 import { StackProps } from "../../components/navigation/NavigationStack";
