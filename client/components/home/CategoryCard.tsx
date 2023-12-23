@@ -1,37 +1,39 @@
-import { Pressable, View, Text, Image, StyleSheet } from "react-native";
-import { useEffect, useState } from "react";
-import retrieveImageUrlWithPathAndSet from "../../storage/retrieve";
+import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../navigation/NavigationStack";
+import { Category } from "../../models/Category";
 
-export default function CategoryCard() {
-  const [categoryImgUrl, setCategoryImgUrl] = useState<any | undefined>(undefined);
+interface Props {
+  category: Category;
+}
 
-  useEffect(() => {
-    const func = async () => {
-      await retrieveImageUrlWithPathAndSet(
-        "categories/bags-category.jpg",
-        setCategoryImgUrl
-      );
-    };
-
-    if (categoryImgUrl === undefined) {
-      func();
-    }
-  }, []);
+export default function CategoryCard({category}:Props) {
+  const navigation = useNavigation<StackProps["navigation"]>();
 
   return (
-    <View>
-      <Pressable>
-        <Image style={styles.categoryImg} source={{ uri: categoryImgUrl }} />
-      </Pressable>
-      <Text style={styles.categoryName}>Wood</Text>
-    </View>
+    <TouchableOpacity onPress={()=>navigation.navigate("CategoryItemsScreen",{
+      category:category
+    })}>
+
+      {category.category_pfp === null ? (
+          <Image
+            source={require("../../assets/default_shop_img.png")}
+            style={styles.categoryImg}
+          />
+        ) : (
+          <Image source={{ uri: category.category_pfp }} style={styles.categoryImg} />
+        )}
+
+      <Text style={styles.categoryName}>{category.category_name}</Text>
+    </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({
   categoryName: {
     color: "white",
-    fontSize: 11,
+    fontSize: 15,
     textAlign: "center",
+    marginTop:5
   },
   categoryImg: {
     borderRadius: 8,

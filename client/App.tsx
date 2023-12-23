@@ -11,6 +11,7 @@ import CreateShop from "./screens/shop/CreateShop";
 import ShopScreen from "./screens/shop/ShopScreen";
 import AddItem from "./screens/item/AddItem";
 import EditProfile from "./screens/profile/EditProfile";
+import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -98,6 +99,17 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
           }}
+        />
+        <Stack.Screen
+          name="CategoryItemsScreen"
+          component={CategoryItemsScreen}
+          options={({ route }) => ({
+            title: route.params.category.category_name,
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

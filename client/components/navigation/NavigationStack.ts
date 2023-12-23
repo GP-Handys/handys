@@ -3,6 +3,7 @@ import {
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { User } from "../../models/User";
+import { Category } from "../../models/Category";
 
 export type StackParamList = {
   Landing: undefined;
@@ -16,7 +17,9 @@ export type StackParamList = {
   CreateShopScreen: undefined;
   ShopScreen: { shopId: number; shopName: string };
   AddItemScreen: { shopId: number };
-  EditProfile: undefined
+  EditProfile: undefined;
+  CategoryItemsScreen:{category:Category}
+
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
