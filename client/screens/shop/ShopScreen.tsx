@@ -23,12 +23,13 @@ import { getProfile } from "../../api/UserApi";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
 import { FontAwesome5 } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
+import ItemCard from "../../components/home/ItemCard";
 
 export default function ShopScreen({ route }: any) {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const [items, setItems] = useState<Item[]>([]);
   const [shop, setShop] = useState<any>();
   const [userId, setUserId] = useState<number>();
-  const navigation = useNavigation<StackProps["navigation"]>();
   const { shopId } = route.params;
 
   const fetchItemsForShopId = async () => {
@@ -106,6 +107,15 @@ export default function ShopScreen({ route }: any) {
       </View>
       <Text style={styles.bio}>{shop?.bio}</Text>
       <ThematicBreak />
+      <FlatList
+        data={items}
+        renderItem={({ item }) => {
+          return <ItemCard item={item} />;
+        }}
+        numColumns={2}
+        scrollEnabled={false}
+        style={{ marginTop: 20 }}
+      />
     </CommonScrollableBackground>
   );
 }
