@@ -1,3 +1,4 @@
+
 import { ScrollView } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import CartItem from "../../components/cart/cartItem";
