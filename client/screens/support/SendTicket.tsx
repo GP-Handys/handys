@@ -53,7 +53,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
       >
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ScrollView >
           <View style={styles.upperContainer}>
             <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
@@ -95,7 +95,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
             />
           </View>
 
-          <View style={{ marginBottom: 40, marginHorizontal: 10 }}>
+          <View style={{  marginHorizontal: 10, marginTop:10, }}>
             {!isButtonEnabled ? (
               <TouchableOpacity
                 disabled={true}
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     textAlign: "left",
     alignSelf: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   textTitle: {
     color: "white",
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8
+    
   },
   confirmPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    opacity: 0.5
+    opacity: 0.5,
   },
   input: {
     color: "#ABABAB",
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
   },
   inputsContainer: {
     marginTop: 10,
-    flex: 1
+    marginBottom:60,
   },
   note: {
     alignSelf: "center",
@@ -195,10 +196,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: COLORS.textInputPlaceholder,
     alignItems: "center"
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: "space-between"
   },
   emailError: {
     color: "red",
