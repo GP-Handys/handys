@@ -49,7 +49,7 @@ export default function App() {
           component={DoneScreen}
           options={{
             headerShown: false,
-            gestureEnabled: false
+            gestureEnabled: false,
             headerTitleAlign: "center",
           }}
         />
