@@ -20,9 +20,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
 
   const isButtonEnabled =
     email.trim().length > 0 &&
@@ -53,7 +50,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
       >
         <ScrollView>
-        <ScrollView>
           <View style={styles.upperContainer}>
             <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
@@ -67,14 +63,12 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               placeholder="Your Email"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) => setEmail(inputValue)}
-              onChangeText={(inputValue) => setEmail(inputValue)}
               keyboardType="email-address"
             />
             <TextInput
               style={styles.input}
               placeholder="Subject"
               placeholderTextColor={COLORS.textInputPlaceholder}
-              onChangeText={(inputValue) => setSubject(inputValue)}
               onChangeText={(inputValue) => setSubject(inputValue)}
             />
 
@@ -83,12 +77,10 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               placeholder="Message"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) => setMessage(inputValue)}
-              onChangeText={(inputValue) => setMessage(inputValue)}
               multiline={true}
             />
           </View>
 
-          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
           <View style={{ marginHorizontal: 10, marginTop: 10 }}>
             {!isButtonEnabled ? (
               <TouchableOpacity
@@ -103,9 +95,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
-              <TouchableOpacity
                 style={styles.confirmPressable}
-                onPress={handleSendticket}
                 onPress={handleSendticket}
               >
                 <Text
