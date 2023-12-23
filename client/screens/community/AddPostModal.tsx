@@ -25,7 +25,7 @@ interface PostModalProps {
 export default function PostModal({
   isVisible,
   onDismiss,
-}: Readonly<PostModalProps>) {
+}: PostModalProps) {
   const [postImageUrl, setPostImageUrl] = useState<any>(null);
   const [postImgPicked, setPostImgPicked] = useState(false);
   const [postText, setPostText] = useState("");
@@ -82,7 +82,7 @@ export default function PostModal({
               marginTop: 15,
             }}
           >
-            <PostOwnerHeader />
+            <PostOwnerHeader  userId={user.id} />
             <TouchableOpacity>
               <MaterialIcons
                 name="insert-photo"
@@ -135,16 +135,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 15,
-    marginHorizontal: 15,
   },
   CloseButton: {
     width: 30,
     position: "absolute",
-    left: 0,
+    left: 15,
   },
   HeaderText: {
     fontSize: 20,
     color: "white",
+    marginEnd: 25,
   },
   PostButton: {
     borderWidth: 1,
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: "#F6977F",
     justifyContent: "center",
+    marginEnd: 10,
   },
   InnerPostButton: {
     color: "black",
