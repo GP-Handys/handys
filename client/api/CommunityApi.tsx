@@ -34,3 +34,18 @@ export const getPosts = async () => {
     return error.message;
   }
 };
+export const getComments = async (postId:number) => {
+  const token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("community/comment/"+postId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
