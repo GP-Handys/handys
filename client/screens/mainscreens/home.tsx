@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
 } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { View } from "react-native";
@@ -18,30 +19,41 @@ import { getRecommendedShops } from "../../api/ShopApi";
 import { getMostPopularItems } from "../../api/ItemApi";
 import ItemCard from "../../components/home/ItemCard";
 import { Category } from "../../models/Category";
+import { getWishList } from "../../api/WishlistApi";
 
 export default function Home() {
   const [recommendedShops, setRecommendedShops] = useState<Shop[]>([]);
   const [mostPopularItems, setMostPopularItems] = useState<Item[]>([]);
+  const [favItems, setFavItems] = useState<any[]>([]);
   const [Categories, setCategories] = useState<Category[]>([{id:1,category_name:"hi",category_pfp:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"}]);
 
-  const fetcRecommendedShops = async () => {
+  const fetchRecommendedShops = async () => {
     await getRecommendedShops().then((result) => {
       if (result.status === 200) {
         setRecommendedShops(result.data);
       }
     });
   };
+
+  const fetchFavItems = async () => {
+    await getWishList().then((result) => {
+        setFavItems(result);
+    });
+  };
+
   const fetchMostPopularItems = async () => {
-    await getMostPopularItems().then((result) => {
+    await getMostPopularItems().then(async (result) => {
       if (result.status === 200) {
         setMostPopularItems(result.data);
       }
     });
   };
+
   useEffect(() => {
     const fetchScreenData = async () => {
+      await fetchFavItems();
+      await fetchRecommendedShops();
       await fetchMostPopularItems();
-      await fetcRecommendedShops();
     };
 
     fetchScreenData();
@@ -88,7 +100,7 @@ export default function Home() {
         <FlatList
           data={mostPopularItems}
           renderItem={({ item }) => {
-            return <ItemCard item={item} />;
+            return <ItemCard item={item} isFavorite={favItems.includes(item.id)}/>;
           }}
           numColumns={2}
           scrollEnabled={false}
