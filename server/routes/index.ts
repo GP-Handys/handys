@@ -61,8 +61,8 @@ router.delete("/api/community/deletePost/:postId", tokenValidate, communityRoute
 router.put("/api/community/updatePost/:postId", tokenValidate, communityRouter.editPost)
 
 //wishlist routes
-router.post("/api/wishlist/add", tokenValidate,wishlistRouter.addToWishList)
-router.delete("/api/wishlist/delete", tokenValidate,wishlistRouter.removeFromWishList)
+router.post("/api/wishlist/add/:itemId", tokenValidate,wishlistRouter.addToWishList)
+router.delete("/api/wishlist/delete/:itemId", tokenValidate,wishlistRouter.removeFromWishList)
 router.get("/api/wishlist/get", tokenValidate,wishlistRouter.getWishList)
 
 // Category routes 

@@ -13,6 +13,7 @@ import { ItemSearch } from "../../api/ItemApi";
 import ItemCard from "../../components/home/ItemCard";
 import { Item } from "../../models/Item";
 import { Shop } from "../../models/Shop";
+import { getWishList } from "../../api/WishlistApi";
 
 export default function Search(this: any) {
   const [index, setIndex] = useState(0);
@@ -21,10 +22,18 @@ export default function Search(this: any) {
   const [items, setItems] = useState<Item[]>([]);
   const [loadingShops, setLoadingShops] = useState(false);
   const [loadingItems, setLoadingItems] = useState(false);
+  const [loadingFav, setLoadingFav] = useState(false);
+  const [favItems, setFavItems] = useState<any[]>([]);
 
   async function handleSearch() {
     setLoadingShops(true);
     setLoadingItems(true);
+    setLoadingFav(true)
+
+    await getWishList().then((result)=>{
+      setFavItems(result)
+      setLoadingFav(false)
+    })
 
     await shopSearch(searchQuery).then((result) => {
       setShops(result);
@@ -35,6 +44,9 @@ export default function Search(this: any) {
       setItems(result);
       setLoadingItems(false);
     });
+
+    
+
   }
 
   return (
@@ -100,7 +112,7 @@ export default function Search(this: any) {
                 key={"_"}
                 keyExtractor={(item) => "_" + item.id}
                 data={items}
-                renderItem={({ item }) => <ItemCard item={item} />}
+                renderItem={({ item }) => <ItemCard item={item} isFavorite={favItems.includes(item.id)}/>}
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: "space-between" }}
                 scrollEnabled={false}
