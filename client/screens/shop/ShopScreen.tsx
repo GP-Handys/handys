@@ -19,13 +19,23 @@ import { StarRatingDisplay } from "react-native-star-rating-widget";
 import { FontAwesome5 } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
 import ItemCard from "../../components/home/ItemCard";
+import { getWishList } from "../../api/WishlistApi";
 
 export default function ShopScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
   const [items, setItems] = useState<Item[]>([]);
   const [shop, setShop] = useState<any>();
+  const [favoriteItems, setFavoriteItems] = useState<any[]>([]);
   const [userId, setUserId] = useState<number>();
   const { shopId } = route.params;
+
+  const fetchFavItems = async () => {
+    await getWishList("ids").then((res) => {
+      if (res.status === 200) {
+        setFavoriteItems(res.data);
+      }
+    });
+  };
 
   const fetchItemsForShopId = async () => {
     await getItemsForShopId(shopId).then((res) => {
@@ -47,6 +57,7 @@ export default function ShopScreen({ route }: any) {
     });
   };
   useEffect(() => {
+    fetchFavItems();
     fetchItemsForShopId();
     fetchShopDataById();
     getProfileByToken();
@@ -107,7 +118,7 @@ export default function ShopScreen({ route }: any) {
         <FlatList
           data={items}
           renderItem={({ item }) => {
-            return <ItemCard item={item} />;
+            return <ItemCard item={item} isFavorite={favoriteItems.includes(item.id)}/>;
           }}
           numColumns={2}
           scrollEnabled={false}

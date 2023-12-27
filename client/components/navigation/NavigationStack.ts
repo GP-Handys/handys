@@ -23,7 +23,7 @@ export type StackParamList = {
   ItemScreen: undefined;
   AddCustomization: undefined;
   CategoryItemsScreen:{category:Category}
-
+  WishlistScreen:undefined
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

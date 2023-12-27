@@ -30,7 +30,7 @@ export default function Search(this: any) {
     setLoadingItems(true);
     setLoadingFav(true)
 
-    await getWishList().then((result)=>{
+    await getWishList("ids").then((result)=>{
       setFavItems(result)
       setLoadingFav(false)
     })
@@ -95,7 +95,7 @@ export default function Search(this: any) {
           activeTabTextStyle={{ color: "black", fontWeight: "bold" }}
         />
 
-        {loadingItems || loadingShops ? (
+        {(loadingItems || loadingShops || loadingFav)? (
           <View
             style={{
               alignItems: "center",
