@@ -13,6 +13,7 @@ import Comments from "./screens/community/Comments";
 import AddItem from "./screens/item/AddItem";
 import EditProfile from "./screens/profile/EditProfile";
 import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
+import WishlistScreen from "./screens/profile/WishlistScreen";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -119,6 +120,17 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
           })}
+        />
+        <Stack.Screen
+          name="WishlistScreen"
+          component={WishlistScreen}
+          options={{
+            title: "Wishlist",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

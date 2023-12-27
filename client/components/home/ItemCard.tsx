@@ -10,27 +10,32 @@ interface ItemCardProps {
   isFavorite: boolean;
 }
 
-export default function ItemCard({ item,isFavorite }: ItemCardProps) {
-  const [favorite,setFavorite] = useState(isFavorite);
-  
-  async function handleFavorite() { 
-    if(favorite){
+export default function ItemCard({ item, isFavorite }: ItemCardProps) {
+  const [favorite, setFavorite] = useState(isFavorite);
+
+  async function handleFavorite() {
+    if (favorite) {
       setFavorite(false);
       await removeFromWishList(item.id);
-    }
-    else{
+    } else {
       setFavorite(true);
       await addToWishList(item.id);
     }
-    
   }
   return (
     <View style={styles.container}>
       <TouchableOpacity>
-        <Image
-          style={{ width: 140, height: 162, borderRadius: 8 }}
-          source={{ uri: item.img_url ?? "" }}
-        />
+        {item.img_url === null ? (
+          <Image
+            source={require("../../assets/logo.png")}
+            style={{ width: 140, height: 162, borderRadius: 8 }}
+          />
+        ) : (
+          <Image
+            source={{ uri: item.img_url }}
+            style={{ width: 140, height: 162, borderRadius: 8 }}
+          />
+        )}
         <Text style={styles.itemName}>{item.name}</Text>
         <View style={styles.ratingContainer}>
           <MaterialIcons name="star-half" size={15} color="white" />
@@ -49,9 +54,19 @@ export default function ItemCard({ item,isFavorite }: ItemCardProps) {
         </View>
         <TouchableOpacity>
           {favorite ? (
-            <FontAwesome name="heart" size={24} color="red" onPress={handleFavorite}/>
+            <FontAwesome
+              name="heart"
+              size={24}
+              color="red"
+              onPress={handleFavorite}
+            />
           ) : (
-            <FontAwesome name="heart-o" size={24} color="white" onPress={handleFavorite}/>
+            <FontAwesome
+              name="heart-o"
+              size={24}
+              color="white"
+              onPress={handleFavorite}
+            />
           )}
         </TouchableOpacity>
       </View>

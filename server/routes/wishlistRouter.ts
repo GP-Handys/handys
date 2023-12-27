@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Wishlist } from "../models/Wishlist";
+import { Item } from "../models/Item";
+import { connection as DB } from "../database/database";
 
 export const addToWishList = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
@@ -8,8 +10,8 @@ export const addToWishList = async (req: Request, res: Response) => {
   const itemId = req.params.itemId;
   try {
     await Wishlist.create({
-      item_id:itemId,
-      user_id:userId,
+      item_id: itemId,
+      user_id: userId,
     });
     // 201 = resource created. better convention :)
     res.sendStatus(201);
@@ -40,11 +42,23 @@ export const removeFromWishList = async (req: Request, res: Response) => {
 export const getWishList = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
-  try {
-    const result =await Wishlist.findAll({ where:{ user_id: userId },attributes:["item_id"]},);
-    const idsOnly = result.map(obj => obj.item_id);
+  const data = req.params.data;
 
-    res.status(200).json(idsOnly);
+  try {
+    if (data == "ids") {
+      const result = await Wishlist.findAll({
+        where: { user_id: userId },
+        attributes: ["item_id"],
+      });
+      const idsOnly = result.map((obj) => obj.item_id);
+
+      res.status(200).json(idsOnly);
+    } else {
+      const query = `SELECT * FROM items WHERE id LIKE (select item_id from wishlists where user_id Like ${userId} and id like item_id);`;
+      const searchResult = await DB.query(query);
+      res.status(200).json(searchResult);
+    }
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });

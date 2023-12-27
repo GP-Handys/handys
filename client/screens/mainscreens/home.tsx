@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   const fetchFavItems = async () => {
-    await getWishList().then((result) => {
+    await getWishList("ids").then((result) => {
         setFavItems(result);
     });
   };
