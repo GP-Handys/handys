@@ -1,45 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
-import { CommonBackgroundWithNoSafeArea } from "../../common/background";
+import {
+  CommonBackgroundWithNoSafeArea,
+  CommonScrollableBackground,
+} from "../../common/background";
 import COLORS from "../../common/colors";
-import { StackProps } from "../../components/navigation/NavigationStack";
 import { AntDesign } from "@expo/vector-icons";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
 import ThematicBreak from "../../components/ThematicBreak";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { getShopById } from "../../api/ShopApi";
+import { Shop } from "../../models/Shop";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
+import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
 
-interface IButton {
-  buttonName: any;
-}
+export default function ItemScreen({ route }: any) {
+  const navigation = useNavigation<StackProps["navigation"]>();
+  const { item, favorite } = route.params;
+  const [shop, setShop] = useState<Shop>();
+  const [isFavorite, setIsFavorite] = useState(favorite);
 
-const toggleLikeIcon = (currentIcon: IButton): IButton => {
-  return {
-    buttonName: currentIcon.buttonName === "hearto" ? "heart" : "hearto"
+  const fetchShopDataById = async () => {
+    await getShopById(item.shopId).then((res) => {
+      if (res.status === 200) {
+        setShop(res.data);
+      }
+    });
   };
-};
-export default function ItemScreen({ navigation }: StackProps, props: any) {
-  const [icon, setIcon] = useState<IButton>({ buttonName: "hearto" });
+
+  const handleFavorite = async() => {
+    if (isFavorite) {
+      setIsFavorite(false);
+      await removeFromWishList(item.id);
+    } else {
+      setIsFavorite(true);
+      await addToWishList(item.id);
+    }
+  }
+
+  useEffect(() => {
+    fetchShopDataById();
+  }, []);
+
   return (
-    <CommonBackgroundWithNoSafeArea>
-      <View style={{ flex:1}}>
-        <Image
-          source={require("../../assets/crafter.png")}
-          style={styles.image}
-        />
+    <CommonScrollableBackground>
+      <View style={{ flex: 1 }}>
+        <Image source={{ uri: item.img_url }} style={styles.image} />
         <View style={styles.mainContainer}>
           <View style={styles.itemNameRow}>
-            <Text style={styles.itemNameText}>Elon mask</Text>
+            <Text style={styles.itemNameText}>{item.name}</Text>
             <TouchableOpacity
               style={styles.circle}
               onPress={() => {
-                setIcon(toggleLikeIcon(icon));
+                handleFavorite();
               }}
             >
-              {icon.buttonName == "hearto" ? (
-                <AntDesign name="hearto" size={16} color="white" />
-              ) : (
+              {isFavorite ? (
                 <AntDesign name="heart" size={16} color="red" />
+              ) : (
+                <AntDesign name="hearto" size={16} color="white" />
               )}
             </TouchableOpacity>
           </View>
@@ -48,47 +69,49 @@ export default function ItemScreen({ navigation }: StackProps, props: any) {
             <View style={styles.rectangle}>
               <View style={styles.rating}>
                 <StarRatingDisplay
-                  rating={1.5}
+                  rating={item.rating}
                   starSize={18}
                   color={"white"}
                   starStyle={{ width: 5 }}
-                  style={{}}
                 />
 
-                {2000 < 1000 ? (
-                  <Text style={styles.ratingCount}>(100 Reviews)</Text>
+                {item.rating < 1000 ? (
+                  <Text style={styles.ratingCount}>{item.rating} Reviews</Text>
                 ) : (
                   <Text style={styles.ratingCount}>
-                    ({2000 / 1000}k Reviews)
+                    ({item.rating / 1000}k Reviews)
                   </Text>
                 )}
               </View>
             </View>
             <View style={styles.rectangle}>
-              <Text style={styles.price}>182.80 JOD</Text>
+              <Text style={styles.price}>JOD {item.base_price} </Text>
             </View>
           </View>
           <ThematicBreak />
           <View>
             <Text style={styles.Description}>Description</Text>
-            <Text style={styles.itemDesc}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took printer took
-              printer took printer took printer took.
-            </Text>
+            <Text style={styles.itemDesc}>{item.description}</Text>
           </View>
 
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.shopButton}>
+            <TouchableOpacity
+              style={styles.shopButton}
+              onPress={() =>
+                navigation.navigate("ShopScreen", {
+                  shopId: shop?.id,
+                  shopName: shop?.name,
+                })
+              }
+            >
               <View style={styles.rowContainer}>
                 <View style={styles.shop}>
-                <Text style={styles.madeBy}>Made by:</Text>
+                  <Text style={styles.madeBy}>Made by:</Text>
                   <Image
-                    source={require("../../assets/wood.png")}
+                    source={{ uri: shop?.pfp_url ?? "facebook.com" }}
                     style={styles.shopPic}
                   />
-                  <Text style={styles.shopName}>Wood Crafters</Text>
+                  <Text style={styles.shopName}>{shop?.name}</Text>
                 </View>
                 <MaterialIcons
                   name="keyboard-arrow-right"
@@ -111,7 +134,7 @@ export default function ItemScreen({ navigation }: StackProps, props: any) {
                   fontSize: 16,
                   color: "black",
                   fontWeight: "500",
-                  marginLeft: 10
+                  marginLeft: 10,
                 }}
               >
                 Add to Cart
@@ -120,31 +143,31 @@ export default function ItemScreen({ navigation }: StackProps, props: any) {
           </View>
         </View>
       </View>
-    </CommonBackgroundWithNoSafeArea>
+    </CommonScrollableBackground>
   );
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 0.75,
-    marginHorizontal: 25
+    marginHorizontal: 25,
   },
   image: {
     width: "100%",
-    height: 200,
-    resizeMode: "cover"
+    height: 300,
+    resizeMode: "cover",
   },
   itemNameRow: {
     flexDirection: "row",
     marginTop: 10,
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   itemNameText: {
     color: "white",
     fontWeight: "500",
     paddingVertical: 10,
-    fontSize: 24
+    fontSize: 24,
   },
   circle: {
     backgroundColor: COLORS.handysGrey,
@@ -152,12 +175,12 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 100,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   infoRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 12
+    marginBottom: 12,
   },
   rectangle: {
     width: 145,
@@ -165,37 +188,37 @@ const styles = StyleSheet.create({
     borderRadius: 7.5,
     backgroundColor: COLORS.handysGrey,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   rating: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10
+    gap: 10,
   },
   ratingCount: {
     fontSize: 8,
     color: "#fffffa",
-    opacity: 0.5
+    opacity: 0.5,
   },
   price: {
     color: "white",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   Description: {
     color: "white",
     marginVertical: 10,
     fontSize: 20,
-    fontWeight: "500"
+    fontWeight: "500",
   },
   itemDesc: {
     color: "white",
     fontSize: 14,
     lineHeight: 20,
-    height: 175
   },
   buttonsContainer: {
     marginTop: 70,
-    bottom:0
+    bottom: 0,
+    paddingBottom: 40,
   },
   cartButton: {
     flexDirection: "row",
@@ -204,7 +227,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    marginTop: 15
+    marginTop: 15,
   },
   button: {
     backgroundColor: COLORS.handysGrey,
@@ -212,7 +235,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 45,
     borderRadius: 8,
-    marginBottom: 10
+    marginBottom: 10,
   },
   shopButton: {
     flexDirection: "row",
@@ -221,36 +244,35 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 8,
     marginBottom: 10,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   madeBy: {
     fontSize: 12,
     color: "#A2A4A1",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   shopPic: {
     width: 35,
     height: 35,
     borderRadius: 100,
-    marginLeft:10,
+    marginLeft: 10,
   },
   shopName: {
     fontSize: 14,
     width: 130,
     marginLeft: 10,
     fontWeight: "500",
-    color: "white"
+    color: "white",
   },
-
   rowContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:'space-between'
+    justifyContent: "space-between",
   },
   shop: {
     flexDirection: "row",
     alignItems: "center",
     marginLeft: 10,
-    marginRight: 20
-  }
+    marginRight: 20,
+  },
 });

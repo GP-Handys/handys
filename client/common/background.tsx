@@ -36,7 +36,9 @@ export function CommonBackgroundWithSafeArea({ children }: Props) {
 export function CommonScrollableBackground({ children }: Props) {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <KeyboardAwareScrollView style={styles.commonContainer}>{children}</KeyboardAwareScrollView>
+      <KeyboardAwareScrollView style={styles.commonContainer}>
+        {children}
+      </KeyboardAwareScrollView>
     </TouchableWithoutFeedback>
   );
 }

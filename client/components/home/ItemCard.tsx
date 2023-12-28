@@ -4,6 +4,8 @@ import { Item } from "../../models/Item";
 import { FontAwesome } from "@expo/vector-icons";
 import { useState } from "react";
 import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../navigation/NavigationStack";
 
 interface ItemCardProps {
   item: Item;
@@ -12,6 +14,7 @@ interface ItemCardProps {
 
 export default function ItemCard({ item, isFavorite }: ItemCardProps) {
   const [favorite, setFavorite] = useState(isFavorite);
+  const navigation = useNavigation<StackProps["navigation"]>();
 
   async function handleFavorite() {
     if (favorite) {
@@ -24,7 +27,7 @@ export default function ItemCard({ item, isFavorite }: ItemCardProps) {
   }
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("ItemScreen", {item: item, favorite: favorite})}>
         {item.img_url === null ? (
           <Image
             source={require("../../assets/logo.png")}
