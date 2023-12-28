@@ -20,8 +20,11 @@ import { getMostPopularItems } from "../../api/ItemApi";
 import ItemCard from "../../components/home/ItemCard";
 import { Category } from "../../models/Category";
 import { getWishList } from "../../api/WishlistApi";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 export default function Home() {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const [recommendedShops, setRecommendedShops] = useState<Shop[]>([]);
   const [mostPopularItems, setMostPopularItems] = useState<Item[]>([]);
   const [favItems, setFavItems] = useState<any[]>([]);
@@ -57,6 +60,8 @@ export default function Home() {
     };
 
     fetchScreenData();
+
+    navigation.addListener("focus", fetchScreenData);
   }, []);
 
   return (

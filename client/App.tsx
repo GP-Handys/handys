@@ -14,6 +14,7 @@ import AddItem from "./screens/item/AddItem";
 import EditProfile from "./screens/profile/EditProfile";
 import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
 import WishlistScreen from "./screens/profile/WishlistScreen";
+import ItemScreen from "./screens/item/ItemScreen";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -98,7 +99,8 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-          }}/>
+          }}
+        />
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
@@ -131,6 +133,17 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
           }}
+        />
+        <Stack.Screen
+          name="ItemScreen"
+          component={ItemScreen}
+          options={({ route }) => ({
+            title: route.params.item.name,
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
