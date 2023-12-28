@@ -6,9 +6,10 @@ import CommentButton from "./CommentButton";
 import { PostModel } from "../../models/Post";
 interface PostProps {
   post: PostModel;
+  isComment?: boolean;
 }
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, isComment }: PostProps) {
   return (
     <View>
       <View style={styles.userProfile}>
@@ -29,7 +30,7 @@ export default function Post({ post }: PostProps) {
           )}
           <View style={styles.footer}>
             <LikeButton />
-            <CommentButton post={post} />
+            {!isComment && <CommentButton post={post} />}
           </View>
         </View>
       </View>

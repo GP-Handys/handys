@@ -6,6 +6,7 @@ import {
   Modal,
   Text,
   Image,
+  Platform,
 } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -132,6 +133,7 @@ export default function PostModal({
 }
 const styles = StyleSheet.create({
   ModalHeader: {
+    paddingTop: Platform.OS === "android" ? 15 : 0,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 15,
