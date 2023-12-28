@@ -43,10 +43,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
   return (
     <View style={styles.mainContainer}>
       <CommonScrollableBackground>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
-        >
           <View style={styles.upperContainer}>
             <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
@@ -89,7 +85,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
               )}
             </View>
           </View>
-        </KeyboardAvoidingView>
       </CommonScrollableBackground>
     </View>
   );
