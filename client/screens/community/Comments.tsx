@@ -1,32 +1,26 @@
-import {
-  FlatList,
-  StyleSheet,
-  View,
-  Text,
-  Touchable,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Post from "../../components/community/Post";
 import {
   CommonBackgroundWithSafeArea,
   CommonScrollableBackground,
 } from "../../common/background";
 import ThematicBreak from "../../components/ThematicBreak";
-import { getComments } from "../../api/CommunityApi";
-import { useEffect } from "react";
+import { addComment, getComments } from "../../api/CommunityApi";
 import { TextInput } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Comments({ route }: any) {
   const { post } = route.params;
-  const [comments, setComments] = useState("");
-  const [submittedComments, setSubmittedComments] = useState("");
+  const [comment, setComment] = useState("");
+  const [Comments, setComments] = useState([]);
 
-  const handleAddComment = () => {
-    setSubmittedComments(comments);
-    setComments("");
+  const handleAddComment = async () => {
+    await addComment(post.id, { content: comment }).then(() => {
+      setComment("");
+      console.log(comment);
+    });
   };
 
   const fetchComments = async () => {
@@ -45,12 +39,20 @@ export default function Comments({ route }: any) {
         <View style={{ marginTop: 10 }}>
           <ThematicBreak />
         </View>
-        <Text>{submittedComments}</Text>
+        <View style={{ marginHorizontal: 18, marginTop: 5 }}>
+          <FlatList
+            data={Comments}
+            renderItem={({ item }) => <Post post={item} isComment={true} />}
+            scrollEnabled={false}
+            ItemSeparatorComponent={() => <ThematicBreak />}
+            refreshing={true}
+          />
+        </View>
       </CommonScrollableBackground>
 
       <CustomTextInput
-        onChangeText={(text) => setComments(text)}
-        value={comments}
+        onChangeText={(text) => setComment(text)}
+        value={comment}
         placeholder="Add a comment"
         multiline={true}
         right={

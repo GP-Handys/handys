@@ -54,6 +54,7 @@ router.get("/api/orders/user/:userId",tokenValidate, orderRouter.getOrderForUser
 router.post("/api/community/addPost", tokenValidate, communityRouter.addPost)
 router.post("/api/community/comment/:postId", tokenValidate, communityRouter.addCommentOnPost)
 router.get("/api/community/posts", tokenValidate, communityRouter.getPosts)
+router.get("/api/community/comments/:postId", tokenValidate, communityRouter.getCommentsByPostId)
 router.get("api/community/resolve/:postId", tokenValidate, communityRouter.resolvePost)
 router.get("/api/community/vote/:voteType", tokenValidate, communityRouter.votePost)
 router.delete("/api/community/deletePost/:postId", tokenValidate, communityRouter.deletePost)

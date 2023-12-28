@@ -28,7 +28,7 @@ export const addCommentOnPost = async (req: Request, res: Response) => {
 
   const jwt = req.get("Authorization")?.toString()!;
   const userId = extractUserFromJwt(jwt);
-  const parentId: number = Number(req.params.parentId);
+  const postId: number = Number(req.params.postId);
 
   try {
     const comment = await Post.create({
@@ -36,7 +36,7 @@ export const addCommentOnPost = async (req: Request, res: Response) => {
       img_url: img_url,
       is_first_post: false,
       userId: userId,
-      parentId: parentId,
+      parentId: postId,
     });
     res.status(201).json(comment);
   } catch (error) {
@@ -46,7 +46,12 @@ export const addCommentOnPost = async (req: Request, res: Response) => {
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({
+      where: {
+        parentId: null,
+      }
+    }
+    );
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json(error);
@@ -203,4 +208,26 @@ export const editPost = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json(error);
   }
+};
+
+export const getCommentsByPostId = async (req: Request, res: Response) => {
+  const postId: number = Number(req.params.postId);
+  let post: Post[] | null;
+  try {
+    post = await Post.findAll({
+      where: {
+        parentId: postId,
+      },
+    });
+  } catch (error) {
+    res.status(500).json(error);
+    return;
+  }
+
+  if (post == null) {
+    res.sendStatus(404);
+    return;
+  }
+
+  res.status(200).json(post);
 };
