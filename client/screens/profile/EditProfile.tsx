@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { Feather } from "@expo/vector-icons";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -21,17 +14,24 @@ import { getProfile } from "../../api/UserApi";
 export default function EditProfile() {
   const navigation = useNavigation<StackProps["navigation"]>();
 
-  const [user , setUser]:any = useState()
+  const [user, setUser]: any = useState();
   const [name, setName] = useState("");
-  const [password, setPassword] = useState("");  
-  const [Confirmassword, setConfirmPassword] = useState("");  
+  const [password, setPassword] = useState("");
+  const [Confirmassword, setConfirmPassword] = useState("");
   const UserNameLength = 25;
 
   const [userImageUrl, setUserImageUrl]: any = useState(null);
   const [userImageUrlPicked, setUserImageUrlPicked] = useState(false);
 
   async function handleEditProfile() {
-    EditProfileHelper(name,password,Confirmassword,userImageUrl,1 ,navigation);
+    EditProfileHelper(
+      name,
+      password,
+      Confirmassword,
+      userImageUrl,
+      1,
+      navigation
+    );
   }
 
   async function handlePickImage() {
@@ -41,21 +41,20 @@ export default function EditProfile() {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchProfile = async () => {
       await getProfile().then(async (result) => {
         setUser(result);
-        setName(result.name)
-        setUserImageUrl(result.pfp_url)
-        if(result.php_url!=null){
-            setUserImageUrlPicked(true)
+        setName(result.name);
+        setUserImageUrl(result.pfp_url);
+        if (result.php_url != null) {
+          setUserImageUrlPicked(true);
         }
       });
     };
 
-    fetchProfile()
-
-  },[])
+    fetchProfile();
+  }, []);
 
   return (
     <CommonScrollableBackground>

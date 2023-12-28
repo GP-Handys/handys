@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { Feather } from "@expo/vector-icons";
 import CustomTextInput from "../../components/CustomTextInput";

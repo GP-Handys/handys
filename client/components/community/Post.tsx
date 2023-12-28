@@ -21,7 +21,7 @@ export default function Post({ post, isComment }: PostProps) {
         </View>
       </View>
       <View>
-        <View style={styles.mainPost}>
+      <View style={styles.mainPost}>
           <Text style={{ color: "white", fontSize: 12.5 }}>{post.content}</Text>
           {post.img_url && (
             <View style={styles.postImgContainer}>

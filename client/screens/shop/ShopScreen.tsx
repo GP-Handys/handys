@@ -1,8 +1,5 @@
 import { Image } from "react-native-elements";
-import {
-  CommonBackgroundWithSafeArea,
-  CommonScrollableBackground,
-} from "../../common/background";
+import { CommonScrollableBackground } from "../../common/background";
 import {
   FlatList,
   StyleSheet,
@@ -15,22 +12,30 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Item } from "../../models/Item";
 import { useEffect, useState } from "react";
-import { Shop } from "../../models/Shop";
 import { getItemsForShopId } from "../../api/ItemApi";
 import { getShopById } from "../../api/ShopApi";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getProfile } from "../../api/UserApi";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
 import { FontAwesome5 } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
 import ItemCard from "../../components/home/ItemCard";
+import { getWishList } from "../../api/WishlistApi";
 
 export default function ShopScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
   const [items, setItems] = useState<Item[]>([]);
   const [shop, setShop] = useState<any>();
+  const [favoriteItems, setFavoriteItems] = useState<any[]>([]);
   const [userId, setUserId] = useState<number>();
   const { shopId } = route.params;
+
+  const fetchFavItems = async () => {
+    await getWishList("ids").then((res) => {
+      if (res.status === 200) {
+        setFavoriteItems(res.data);
+      }
+    });
+  };
 
   const fetchItemsForShopId = async () => {
     await getItemsForShopId(shopId).then((res) => {
@@ -52,6 +57,7 @@ export default function ShopScreen({ route }: any) {
     });
   };
   useEffect(() => {
+    fetchFavItems();
     fetchItemsForShopId();
     fetchShopDataById();
     getProfileByToken();
@@ -107,15 +113,19 @@ export default function ShopScreen({ route }: any) {
       </View>
       <Text style={styles.bio}>{shop?.bio}</Text>
       <ThematicBreak />
-      <FlatList
-        data={items}
-        renderItem={({ item }) => {
-          return <ItemCard item={item} />;
-        }}
-        numColumns={2}
-        scrollEnabled={false}
-        style={{ marginTop: 20 }}
-      />
+      <Text style={styles.shopItems}>Shop's handicrafts</Text>
+      <View style={{marginLeft: 20, marginRight: 20}}>
+        <FlatList
+          data={items}
+          renderItem={({ item }) => {
+            return <ItemCard item={item} isFavorite={favoriteItems.includes(item.id)}/>;
+          }}
+          numColumns={2}
+          scrollEnabled={false}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+          style={{ marginTop: 20 }}
+        />
+      </View>
     </CommonScrollableBackground>
   );
 }
@@ -179,5 +189,12 @@ const styles = StyleSheet.create({
     opacity: 0.5,
     marginLeft: 15,
     marginVertical: 17,
+  },
+  shopItems: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    marginLeft: 15,
+    marginTop: 20,
   },
 });

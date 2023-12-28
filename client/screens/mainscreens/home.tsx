@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
 } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { View } from "react-native";
@@ -16,29 +17,43 @@ import { useEffect, useState } from "react";
 import { Item } from "../../models/Item";
 import { getRecommendedShops } from "../../api/ShopApi";
 import { getMostPopularItems } from "../../api/ItemApi";
+import ItemCard from "../../components/home/ItemCard";
+import { Category } from "../../models/Category";
+import { getWishList } from "../../api/WishlistApi";
 
 export default function Home() {
   const [recommendedShops, setRecommendedShops] = useState<Shop[]>([]);
   const [mostPopularItems, setMostPopularItems] = useState<Item[]>([]);
+  const [favItems, setFavItems] = useState<any[]>([]);
+  const [Categories, setCategories] = useState<Category[]>([{id:1,category_name:"hi",category_pfp:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"}]);
 
-  const fetcRecommendedShops = async () => {
+  const fetchRecommendedShops = async () => {
     await getRecommendedShops().then((result) => {
       if (result.status === 200) {
         setRecommendedShops(result.data);
       }
     });
   };
+
+  const fetchFavItems = async () => {
+    await getWishList("ids").then((result) => {
+        setFavItems(result);
+    });
+  };
+
   const fetchMostPopularItems = async () => {
-    await getMostPopularItems().then((result) => {
+    await getMostPopularItems().then(async (result) => {
       if (result.status === 200) {
         setMostPopularItems(result.data);
       }
     });
   };
+
   useEffect(() => {
     const fetchScreenData = async () => {
+      await fetchFavItems();
+      await fetchRecommendedShops();
       await fetchMostPopularItems();
-      await fetcRecommendedShops();
     };
 
     fetchScreenData();
@@ -62,36 +77,14 @@ export default function Home() {
 
       <View style={styles.pageContainer}>
         <Text style={styles.sectionTitle}>Categories</Text>
-        <ScrollView
-          horizontal
+        <FlatList
+          data={Categories}
+          renderItem={({ item }) => <CategoryCard category={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
           showsHorizontalScrollIndicator={false}
-          style={styles.sectionTitle}
-        >
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-          <View style={{ marginRight: 23 }}>
-            <CategoryCard />
-          </View>
-        </ScrollView>
+          ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+        />
 
         <Text style={styles.sectionTitle}>Recommended Shops</Text>
         <FlatList
@@ -103,18 +96,16 @@ export default function Home() {
           ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
         />
 
-        {/* <Text style={styles.sectionTitle}>Most Popular Items</Text>
-        <View style={styles.mostPopularContainer}>
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-          <MostPopularItem />
-        </View> */}
+        <Text style={styles.sectionTitle}>Most Popular Items</Text>
+        <FlatList
+          data={mostPopularItems}
+          renderItem={({ item }) => {
+            return <ItemCard item={item} isFavorite={favItems.includes(item.id)}/>;
+          }}
+          numColumns={2}
+          scrollEnabled={false}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+        />
       </View>
     </CommonScrollableBackground>
   );
@@ -145,13 +136,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: "white",
-  },
-
-  mostPopularContainer: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
   },
   pageContainer: {
     marginHorizontal: 30,

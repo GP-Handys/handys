@@ -27,10 +27,19 @@ export default function SendTicketScreen({ navigation }: StackProps) {
     subject.trim().length > 0 &&
     message.trim().length > 0;
 
-  function handleSendticket() {
-    submitTicket({ content: message });
-    navigation.navigate("DoneScreen");
-  }
+  const handleSendticket = () => {
+    if (email.trim().length == 0) {
+      submitTicket({ content: message });
+      navigation.navigate("DoneScreen");
+    } else if (email.trim().length >= 1) {
+      if (validator.isEmail(email)) {
+        submitTicket({ content: message });
+        navigation.navigate("DoneScreen");
+      } else {
+        alert("Your Email in Invalid or Empty");
+      }
+    }
+  };
 
   return (
     <CommonBackgroundWithNoSafeArea>
@@ -48,13 +57,9 @@ export default function SendTicketScreen({ navigation }: StackProps) {
           </View>
 
           <View style={styles.inputsContainer}>
-            <Text style={styles.note}>
-              *We will use your Handy's email if you leave this field empty.
-            </Text>
-
             <TextInput
               style={styles.input}
-              placeholder="E-mail (optional)"
+              placeholder="Your Email"
               placeholderTextColor={COLORS.textInputPlaceholder}
               onChangeText={(inputValue) => setEmail(inputValue)}
               keyboardType="email-address"
@@ -168,16 +173,5 @@ const styles = StyleSheet.create({
   inputsContainer: {
     marginTop: 10,
     marginBottom: 60,
-  },
-  note: {
-    alignSelf: "center",
-    fontSize: 11.5,
-    fontWeight: "600",
-    color: COLORS.textInputPlaceholder,
-    alignItems: "center",
-  },
-  emailError: {
-    color: "red",
-    marginLeft: 20,
   },
 });

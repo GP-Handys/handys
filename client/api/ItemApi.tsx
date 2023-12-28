@@ -49,3 +49,39 @@ export const addItemForShopId = async (shopId: number, data: any) => {
     return error.message;
   }
 };
+
+export const GetItemsBycategory= async (categoryId:number)=> {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/items/getByCategory/" + categoryId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+}
+
+export const ItemSearch = async (data:any)=>{
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/items/search?search="+data, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });    
+    
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+
+}
+
+

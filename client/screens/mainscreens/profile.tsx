@@ -134,7 +134,7 @@ export default function Profile({ navigation }: StackProps) {
             </TouchableOpacity>
           </View>
           <View style={style.otherGrid}>
-            <TouchableOpacity style={style.card}>
+            <TouchableOpacity style={style.card} onPress={()=>navigation.navigate("WishlistScreen")}>
               <FontAwesome5 name="heart" size={24} color="white" />
               <Text style={style.cardFont}>Favorites</Text>
             </TouchableOpacity>

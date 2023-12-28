@@ -44,6 +44,7 @@ router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.remov
 router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
 router.get("/api/items/getByShop/:shopId" , tokenValidate,itemRouter.getByShop)
 router.get("/api/item/getRandomItems",tokenValidate,itemRouter.getRandomItems)
+router.get("/api/items/getByCategory/:categoryId" , tokenValidate,itemRouter.getbyCategory)
 
 //order routes
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
@@ -61,9 +62,10 @@ router.delete("/api/community/deletePost/:postId", tokenValidate, communityRoute
 router.put("/api/community/updatePost/:postId", tokenValidate, communityRouter.editPost)
 
 //wishlist routes
-router.post("/api/wishlist/add", tokenValidate,wishlistRouter.addToWishList)
-router.delete("/api/wishlist/delete", tokenValidate,wishlistRouter.removeFromWishList)
-router.get("/api/wishlist/get", tokenValidate,wishlistRouter.getWishList)
+router.post("/api/wishlist/add/:itemId", tokenValidate,wishlistRouter.addToWishList)
+router.delete("/api/wishlist/delete/:itemId", tokenValidate,wishlistRouter.removeFromWishList)
+router.get("/api/wishlist/get/:data", tokenValidate,wishlistRouter.getWishList)
+
 
 // Category routes 
 router.get("/api/category/get", tokenValidate,categoryRouter.getAllCategories)

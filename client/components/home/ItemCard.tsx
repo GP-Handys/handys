@@ -1,39 +1,83 @@
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Item } from "../../models/Item";
+import { FontAwesome } from "@expo/vector-icons";
+import { useState } from "react";
+import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
 
 interface ItemCardProps {
   item: Item;
+  isFavorite: boolean;
 }
 
-export default function ItemCard({ item }: ItemCardProps) {
+export default function ItemCard({ item, isFavorite }: ItemCardProps) {
+  const [favorite, setFavorite] = useState(isFavorite);
+
+  async function handleFavorite() {
+    if (favorite) {
+      setFavorite(false);
+      await removeFromWishList(item.id);
+    } else {
+      setFavorite(true);
+      await addToWishList(item.id);
+    }
+  }
   return (
-    <TouchableOpacity style={styles.container}>
-      <Image
-        style={{ width: 150, height: 100, borderRadius: 8}}
-        source={{ uri: item.img_url ?? "" }}
-      />
-      <Text style={styles.itemName}>{item.name}</Text>
-      <View style={styles.ratingContainer}>
-        <MaterialIcons name="star-half" size={15} color="white" />
-        <Text style={styles.rating}>{item.rating}</Text>
+    <View style={styles.container}>
+      <TouchableOpacity>
+        {item.img_url === null ? (
+          <Image
+            source={require("../../assets/logo.png")}
+            style={{ width: 140, height: 162, borderRadius: 8 }}
+          />
+        ) : (
+          <Image
+            source={{ uri: item.img_url }}
+            style={{ width: 140, height: 162, borderRadius: 8 }}
+          />
+        )}
+        <Text style={styles.itemName}>{item.name}</Text>
+        <View style={styles.ratingContainer}>
+          <MaterialIcons name="star-half" size={15} color="white" />
+          <Text style={styles.rating}>{item.rating}</Text>
+        </View>
+      </TouchableOpacity>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <View style={styles.priceIconContainer}>
+          <Text style={styles.price}>JOD {item.base_price}</Text>
+        </View>
+        <TouchableOpacity>
+          {favorite ? (
+            <FontAwesome
+              name="heart"
+              size={24}
+              color="red"
+              onPress={handleFavorite}
+            />
+          ) : (
+            <FontAwesome
+              name="heart-o"
+              size={24}
+              color="white"
+              onPress={handleFavorite}
+            />
+          )}
+        </TouchableOpacity>
       </View>
-      <View style={styles.priceIconContainer}>
-        <Text style={styles.price}>{item.base_price} JOD</Text>
-      </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginBottom: 30,
+  },
   itemName: {
     marginTop: 7,
     color: "white",
