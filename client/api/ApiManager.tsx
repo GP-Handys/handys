@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "http://8ebx83-ip-91-186-242-209.tunnelmole.net";
+const BACKEND_URL = "https://6443-109-107-231-214.ngrok-free.app";
 const ApiManager = axios.create({
   baseURL: `${BACKEND_URL}/api`,
   responseType: "json",

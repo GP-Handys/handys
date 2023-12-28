@@ -19,7 +19,6 @@ export default function Comments({ route }: any) {
   const handleAddComment = async () => {
     await addComment(post.id, { content: comment }).then(() => {
       setComment("");
-      console.log(comment);
     });
   };
 
