@@ -24,11 +24,15 @@ export const getTickets = async (req: Request, res: Response) => {
 export const submitTicket = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
-  const { content } = req.body;
+  const { email, subject, content } = req.body;
   try {
     const user: User | null = await User.findByPk(userId);
-    const ticket = await Ticket.create({ userId, content });
-    await sendEmail(user!.email , content);
+    const ticket = await Ticket.create({ userId, subject, content });
+    if (email.length==0) {
+      await sendEmail(user!.email, subject, content);
+    } else {
+      await sendEmail(email, subject, content);
+    }
     res.status(200).json(ticket);
   } catch (error) {
     res.status(500).json(error);
@@ -54,7 +58,7 @@ export const resolveTicket = async (req: Request, res: Response) => {
   }
 };
 
-export const getTicketById =async (req: Request, res: Response) => {
+export const getTicketById = async (req: Request, res: Response) => {
   try {
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId: number = extractUserFromJwt(jwt);
@@ -63,11 +67,10 @@ export const getTicketById =async (req: Request, res: Response) => {
     let ticket = await Ticket.findByPk(ticketId);
     if (user?.is_sys_admin || ticket?.userId == userId) {
       res.status(200).json(ticket);
-    }
-    else {
+    } else {
       res.sendStatus(403);
     }
   } catch (error) {
     res.status(500).json(error);
   }
-}
+};

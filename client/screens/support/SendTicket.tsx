@@ -9,12 +9,16 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { CommonBackgroundWithNoSafeArea } from "../../common/background";
+import {
+  CommonBackgroundWithNoSafeArea,
+  CommonScrollableBackground,
+} from "../../common/background";
 import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 import validator from "validator"; // For email validation
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { submitTicket } from "../../api/TicketApi";
+import CustomTextInput from "../../components/CustomTextInput";
 
 export default function SendTicketScreen({ navigation }: StackProps) {
   const [email, setEmail] = useState("");
@@ -22,33 +26,27 @@ export default function SendTicketScreen({ navigation }: StackProps) {
   const [message, setMessage] = useState("");
 
   const isButtonEnabled =
-    email.trim().length > 0 &&
-    validator.isEmail(email) &&
+    (email.trim().length == 0 || validator.isEmail(email)) &&
     subject.trim().length > 0 &&
     message.trim().length > 0;
 
   const handleSendticket = () => {
-    if (email.trim().length == 0) {
-      submitTicket({ content: message });
-      navigation.navigate("DoneScreen");
-    } else if (email.trim().length >= 1) {
-      if (validator.isEmail(email)) {
-        submitTicket({ content: message });
-        navigation.navigate("DoneScreen");
-      } else {
-        alert("Your Email in Invalid or Empty");
-      }
-    }
+    let data = {
+      email: email,
+      subject: subject,
+      content: message,
+    };
+    submitTicket(data);
+    navigation.navigate("DoneScreen");
   };
 
   return (
-    <CommonBackgroundWithNoSafeArea>
-      <KeyboardAvoidingView
-        style={styles.mainContainer}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
-      >
-        <ScrollView>
+    <View style={styles.mainContainer}>
+      <CommonScrollableBackground>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 150}
+        >
           <View style={styles.upperContainer}>
             <Entypo name="ticket" size={100} color="white" />
             <Text style={styles.textTitle}>
@@ -57,57 +55,43 @@ export default function SendTicketScreen({ navigation }: StackProps) {
           </View>
 
           <View style={styles.inputsContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Your Email"
-              placeholderTextColor={COLORS.textInputPlaceholder}
+            <CustomTextInput
+              placeholder={"Your Email"}
               onChangeText={(inputValue) => setEmail(inputValue)}
-              keyboardType="email-address"
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Subject"
-              placeholderTextColor={COLORS.textInputPlaceholder}
+
+            <CustomTextInput
+              placeholder={"subject"}
               onChangeText={(inputValue) => setSubject(inputValue)}
             />
 
-            <TextInput
-              style={styles.textArea}
-              placeholder="Message"
-              placeholderTextColor={COLORS.textInputPlaceholder}
+            <CustomTextInput
+              placeholder={"Message"}
               onChangeText={(inputValue) => setMessage(inputValue)}
               multiline={true}
+              minHeight={200}
             />
-          </View>
-
-          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
-            {!isButtonEnabled ? (
-              <TouchableOpacity
-                disabled={true}
-                style={styles.confirmPressableDisabled}
-              >
-                <Text
-                  style={{ color: "black", fontWeight: "600", fontSize: 16 }}
+            <View>
+              {!isButtonEnabled ? (
+                <TouchableOpacity
+                  disabled={true}
+                  style={styles.confirmPressableDisabled}
                 >
-                  Confirm
-                </Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                style={styles.confirmPressable}
-                onPress={handleSendticket}
-              >
-                <Text
-                  style={{ color: "black", fontWeight: "500", fontSize: 16 }}
+                  <Text style={styles.confirm}>Confirm</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.confirmPressable}
+                  onPress={handleSendticket}
                 >
-                  Confirm
-                </Text>
-              </TouchableOpacity>
-            )}
+                  <Text style={styles.confirm}>Confirm</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </CommonBackgroundWithNoSafeArea>
+        </KeyboardAvoidingView>
+      </CommonScrollableBackground>
+    </View>
   );
 }
 
@@ -127,7 +111,7 @@ const styles = StyleSheet.create({
     color: "white",
     marginTop: 10,
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 25,
     textAlign: "center",
   },
   confirmPressable: {
@@ -145,33 +129,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     opacity: 0.5,
   },
-  input: {
-    color: "#ABABAB",
-    padding: 15,
-    fontSize: 15,
-    fontWeight: "600",
-    backgroundColor: COLORS.handysGrey,
-    alignItems: "center",
-    height: 50,
-    borderRadius: 6,
-    marginHorizontal: 20,
-    marginBottom: 12,
-    marginTop: 1,
-  },
-  textArea: {
-    color: "#ABABAB",
-    padding: 15,
-    backgroundColor: COLORS.handysGrey,
-    height: 100,
-    borderRadius: 6,
-    marginTop: 2,
-    marginHorizontal: 20,
-    fontSize: 15,
-    fontWeight: "600",
-    textAlignVertical: "top",
-  },
   inputsContainer: {
     marginTop: 10,
-    marginBottom: 60,
+    gap: 15,
+    marginHorizontal: 20,
+  },
+  confirm: {
+    color: "black",
+    fontWeight: "500",
+    fontSize: 20,
   },
 });
