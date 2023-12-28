@@ -4,6 +4,7 @@ import { User } from "./User";
 
 class Ticket extends Model {
   public id!: number;
+  public subject!: string;
   public content!: string;
   public is_resolved!: boolean;
   public userId!: number;
@@ -17,6 +18,9 @@ Ticket.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+    },
+    subject: {
+      type: DataTypes.STRING,
     },
     content: {
       type: DataTypes.STRING,

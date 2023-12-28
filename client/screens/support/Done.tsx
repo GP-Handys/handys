@@ -24,7 +24,7 @@ export default function DoneScreen({ navigation }: StackProps) {
         <Text style={styles.textIcon}>We’ll reply to you in your mail.</Text>
       </View>
 
-      <View style={{ marginBottom: 10, marginHorizontal: 10 }}>
+      <View style={{ marginBottom: 40, marginHorizontal: 10 }}>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Profile");
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    marginTop: 15,
+    
   },
   image: {
     width: 300,
