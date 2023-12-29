@@ -43,48 +43,53 @@ export default function SendTicketScreen({ navigation }: StackProps) {
   return (
     <View style={styles.mainContainer}>
       <CommonScrollableBackground>
-          <View style={styles.upperContainer}>
-            <Entypo name="ticket" size={100} color="white" />
-            <Text style={styles.textTitle}>
-              Fill the form below and we will get back to you soon :)
-            </Text>
-          </View>
+        <View style={styles.upperContainer}>
+          <Entypo name="ticket" size={100} color="white" />
+          <Text style={styles.textTitle}>
+            Fill the form below and we will get back to you soon :)
+          </Text>
+        </View>
 
-          <View style={styles.inputsContainer}>
+        <View style={styles.inputsContainer}>
+          <View>
+            <Text style={styles.defaultEmail}>
+              *We will use your Handy's email if you leave this field empty.
+            </Text>
             <CustomTextInput
-              placeholder={"Your Email"}
+              placeholder={"Email (optinal)"}
               onChangeText={(inputValue) => setEmail(inputValue)}
             />
-
-            <CustomTextInput
-              placeholder={"subject"}
-              onChangeText={(inputValue) => setSubject(inputValue)}
-            />
-
-            <CustomTextInput
-              placeholder={"Message"}
-              onChangeText={(inputValue) => setMessage(inputValue)}
-              multiline={true}
-              minHeight={200}
-            />
-            <View>
-              {!isButtonEnabled ? (
-                <TouchableOpacity
-                  disabled={true}
-                  style={styles.confirmPressableDisabled}
-                >
-                  <Text style={styles.confirm}>Confirm</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={styles.confirmPressable}
-                  onPress={handleSendticket}
-                >
-                  <Text style={styles.confirm}>Confirm</Text>
-                </TouchableOpacity>
-              )}
-            </View>
           </View>
+
+          <CustomTextInput
+            placeholder={"subject"}
+            onChangeText={(inputValue) => setSubject(inputValue)}
+          />
+
+          <CustomTextInput
+            placeholder={"Message"}
+            onChangeText={(inputValue) => setMessage(inputValue)}
+            multiline={true}
+            minHeight={200}
+          />
+          <View>
+            {!isButtonEnabled ? (
+              <TouchableOpacity
+                disabled={true}
+                style={styles.confirmPressableDisabled}
+              >
+                <Text style={styles.confirm}>Confirm</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.confirmPressable}
+                onPress={handleSendticket}
+              >
+                <Text style={styles.confirm}>Confirm</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
       </CommonScrollableBackground>
     </View>
   );
@@ -133,5 +138,11 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "500",
     fontSize: 20,
+  },
+  defaultEmail: {
+    alignSelf: "center",
+    color: COLORS.handysGrey,
+    fontSize: 13,
+    marginBottom: 3,
   },
 });

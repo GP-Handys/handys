@@ -11,11 +11,11 @@ dotenv.config();
 
 export const createShop = async (req: Request, res: Response) => {
   try {
-    const { name, pfp_url, bio, socialMediaLink } = req.body;
+    const { name, pfp_url, bio, socialMediaLink ,phone_number} = req.body;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
 
-    await Shop.create({ name, pfp_url, bio, socialMediaLink, userId });
+    await Shop.create({ name, pfp_url, bio, socialMediaLink, phone_number,userId});
 
     res.status(200).json("Shop is created");
   } catch (error) {

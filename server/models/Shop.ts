@@ -12,6 +12,7 @@ class Shop extends Model {
   public pfp_url?: string | null;
   public bio!: string;
   public socialMediaLink!: string;
+  public phone_number!: number;
   public userId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -30,9 +31,9 @@ Shop.init(
     },
     rating: {
       type: DataTypes.INTEGER,
-      defaultValue: 1,
+      defaultValue: 0,
       validate: {
-        min: 1,
+        min: 0,
         max: 5,
       },
     },
@@ -60,7 +61,14 @@ Shop.init(
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
+        isNull: true,
         isUrl: true,
+      },
+    },
+    phone_number: {
+      type: DataTypes.STRING,
+      validate: {
+        is: /^(07[789]\d{7})$/,
       },
     },
   },

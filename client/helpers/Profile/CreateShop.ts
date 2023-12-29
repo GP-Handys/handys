@@ -8,17 +8,23 @@ export default function CreateShop(
   name: string,
   socialMediaLink: string | null,
   bio: string | null,
-  pfp_url:string | null,
-  navigation: NativeStackNavigationProp<StackParamList>
+  pfp_url: string | null,
+  navigation: NativeStackNavigationProp<StackParamList>,
+  phone_number: any
 ) {
-  if (name.length==0) {
+  let PhoneReg = STRINGS.phoneValidator;
+
+  if (name.length == 0) {
     Alert.alert(STRINGS.failPopUp, "You should enter name");
+  } else if (!PhoneReg.test(String(phone_number))) {
+    Alert.alert(STRINGS.failPopUp, "You should valid phone number");
   } else {
     createShop({
       name: name,
       socialMediaLink: socialMediaLink,
       bio: bio,
-      pfp_url:pfp_url
+      pfp_url: pfp_url,
+      phone_number: phone_number,
     })
       .then((result: any) => {
         const message = result.data;

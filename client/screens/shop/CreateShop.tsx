@@ -16,6 +16,7 @@ export default function CreateShop({ navigation }: StackProps) {
   const [name, setName] = useState("");
   const [link, setLink] = useState(null);
   const [bio, setBio] = useState("");
+  const [phone_number, setPhone_number] = useState("null");
   const ShopNameLength = 30;
   const descLength = 300;
 
@@ -23,7 +24,7 @@ export default function CreateShop({ navigation }: StackProps) {
   const [shopImageUrlPicked, setShopImageUrlPicked] = useState(false);
 
   async function handleCreateShop() {
-    CreateShopHelper(name, link, bio, shopImageUrl, navigation);
+    CreateShopHelper(name, link, bio, shopImageUrl, navigation,phone_number);
   }
 
   async function handlePickImage() {
@@ -73,6 +74,15 @@ export default function CreateShop({ navigation }: StackProps) {
           <Text style={style.lengthCounterFont}>
             {name.length}/{ShopNameLength}
           </Text>
+        </View>
+        <View style={{ gap: 10,marginBottom:10 }}>
+          <Text style={style.font}>Phone number</Text>
+          <CustomTextInput
+            placeholder={"07********"}
+            onChangeText={(text) => setPhone_number((text))}
+            maxLength={10}
+            mode={"tel"}
+          />
         </View>
         <View style={{ gap: 10 }}>
           <Text style={style.font}>Social Media link</Text>

@@ -14,6 +14,7 @@ interface Props {
   minHeight?: number;
   maxHeight?: number;
   bgColor?: string;
+  mode?: any;
 }
 
 export default function CustomTextInput({
@@ -28,6 +29,7 @@ export default function CustomTextInput({
   minHeight = 44,
   maxHeight = 440,
   bgColor = "#464949",
+  mode="text"
   
 }: Props) {
   return (
@@ -52,6 +54,7 @@ export default function CustomTextInput({
       onChangeText={onChangeText}
       maxLength={maxLength}
       multiline={multiline}
+      inputMode={mode}
     />
   );
 }

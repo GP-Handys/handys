@@ -34,11 +34,10 @@ export default function ShopCard({ shop }: Props) {
 
       <View style={styles.rating}>
         <StarRatingDisplay
-          rating={1.5}
+          rating={shop.rating}
           starSize={13}
           color={"white"}
           starStyle={{ width: 2 }}
-          style={{}}
         />
 
         {2000 < 1000 ? (
