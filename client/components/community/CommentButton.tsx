@@ -5,9 +5,10 @@ import { StackProps } from "../navigation/NavigationStack";
 import { PostModel } from "../../models/Post";
 interface Props {
   post: PostModel;
+  isLiked:boolean;
 }
 
-export default function CommentButton({ post }: Props) {
+export default function CommentButton({ post,isLiked }: Props) {
   const navigation = useNavigation<StackProps["navigation"]>();
 
   return (
@@ -15,6 +16,7 @@ export default function CommentButton({ post }: Props) {
       <TouchableOpacity 
       onPress={() => {navigation.navigate("Comments", {
         post: post,
+        isLiked:isLiked
       })}
       }
       >

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Post } from "../models/Post";
 import { User } from "../models/User";
 import { extractUserFromJwt } from "../utils/tokenUtils";
+import { PostLike } from "../models/PostLike";
 
 export const addPost = async (req: Request, res: Response) => {
   const { title, content, img_url } = req.body;
@@ -230,4 +231,56 @@ export const getCommentsByPostId = async (req: Request, res: Response) => {
   }
 
   res.status(200).json(post);
+};
+
+export const LikePost = async (req: Request, res: Response) => {
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId: number = extractUserFromJwt(jwt);
+  const post_id = req.params.postId;
+  try {
+    await PostLike.create({
+      post_id: post_id,
+      user_id: userId,
+    });
+    // 201 = resource created. better convention :)
+    res.sendStatus(201);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
+};
+
+export const removeLikePost = async (req: Request, res: Response) => {
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const user_id: number = extractUserFromJwt(jwt);
+  const post_id = req.params.postId;
+  try {
+    await PostLike.destroy({
+      where: {
+        user_id,
+        post_id,
+      },
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
+};
+
+export const getLikedPosts = async (req: Request, res: Response) => {
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId: number = extractUserFromJwt(jwt);
+
+  try {
+      const result = await PostLike.findAll({
+        where: { user_id: userId },
+        attributes: ["post_id"],
+      });
+      const idsOnly = result.map((obj) => obj.post_id);
+      res.status(200).json(idsOnly);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
 };

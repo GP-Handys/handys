@@ -8,4 +8,5 @@ import "./Ticket";
 import "./Shop";
 import "./Order";
 import "./Category";
+import "./PostLike";
 

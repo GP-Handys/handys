@@ -61,7 +61,6 @@ Shop.init(
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-        isNull: true,
         isUrl: true,
       },
     },

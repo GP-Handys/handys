@@ -60,6 +60,9 @@ router.get("api/community/resolve/:postId", tokenValidate, communityRouter.resol
 router.get("/api/community/vote/:voteType", tokenValidate, communityRouter.votePost)
 router.delete("/api/community/deletePost/:postId", tokenValidate, communityRouter.deletePost)
 router.put("/api/community/updatePost/:postId", tokenValidate, communityRouter.editPost)
+router.post("/api/community/addlike/:postId", tokenValidate,communityRouter.LikePost)
+router.delete("/api/community/removeLike/:postId", tokenValidate,communityRouter.removeLikePost)
+router.get("/api/community/getLikedPosts", tokenValidate,communityRouter.getLikedPosts)
 
 //wishlist routes
 router.post("/api/wishlist/add/:itemId", tokenValidate,wishlistRouter.addToWishList)
