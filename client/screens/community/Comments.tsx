@@ -1,10 +1,16 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  ScrollView,
+  RefreshControl,
+  Keyboard,
+} from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
 import { useState, useEffect } from "react";
 import Post from "../../components/community/Post";
 import {
   CommonBackgroundWithSafeArea,
-  CommonScrollableBackground,
 } from "../../common/background";
 import ThematicBreak from "../../components/ThematicBreak";
 import { addComment, getComments } from "../../api/CommunityApi";
@@ -15,13 +21,20 @@ export default function Comments({ route }: any) {
   const { post } = route.params;
   const [comment, setComment] = useState("");
   const [Comments, setComments] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleAddComment = async () => {
     await addComment(post.id, { content: comment }).then(() => {
       setComment("");
+      Keyboard.dismiss();
     });
   };
-
+  const onRefresh = () => {
+    setIsRefreshing(true);
+    fetchComments().then(() => {
+      setIsRefreshing(false);
+    });
+  };
   const fetchComments = async () => {
     await getComments(post.id).then((result) => {
       setComments(result.reverse());
@@ -33,22 +46,31 @@ export default function Comments({ route }: any) {
 
   return (
     <CommonBackgroundWithSafeArea>
-      <CommonScrollableBackground>
-        <Post post={post} isComment={false} />
-        <View style={{ marginTop: 10 }}>
-          <ThematicBreak />
-        </View>
-        <View style={{ marginHorizontal: 18, marginTop: 5 }}>
-          <FlatList
-            data={Comments}
-            renderItem={({ item }) => <Post post={item} isComment={true} />}
-            scrollEnabled={false}
-            ItemSeparatorComponent={() => <ThematicBreak />}
-            refreshing={true}
-          />
-        </View>
-      </CommonScrollableBackground>
-
+      
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+          }
+        >
+          <Post post={post} isComment={false}  />
+          <View style={{ marginTop: 10 }}>
+            <ThematicBreak />
+          </View>
+          <View style={{ marginHorizontal: 18, marginTop: 5 }}>
+            <FlatList
+              data={Comments}
+              renderItem={({ item }) => <Post post={item} isComment={true} 
+              mainPostStyle={{marginRight:25,borderWidth:1,borderColor:"black"}} 
+              userProfileStyle={{marginRight:25,borderWidth:1,borderColor:"black"}} 
+              footerStyle={{borderWidth:1}} 
+              
+              />}
+              scrollEnabled={false}
+              ItemSeparatorComponent={() => <ThematicBreak />}
+            />
+          </View>
+        </ScrollView>
+  
       <CustomTextInput
         onChangeText={(text) => setComment(text)}
         value={comment}

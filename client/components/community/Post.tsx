@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
+import { View, StyleSheet, Text, Image, Dimensions, StyleProp, ViewStyle } from "react-native";
 import PostOwnerHeader from "./PostOwnerHeader";
 import TimeStamp from "./TimeStamp";
 import LikeButton from "./LikeButton";
@@ -7,12 +7,16 @@ import { PostModel } from "../../models/Post";
 interface PostProps {
   post: PostModel;
   isComment?: boolean;
+  userProfileStyle?: StyleProp<ViewStyle>;
+  mainPostStyle?: StyleProp<ViewStyle>;
+  postImgContainerStyle?: StyleProp<ViewStyle>;
+  footerStyle?: StyleProp<ViewStyle>;
 }
 
-export default function Post({ post, isComment }: PostProps) {
+export default function Post({ post, isComment, userProfileStyle, mainPostStyle, footerStyle }: PostProps) {
   return (
     <View>
-      <View style={styles.userProfile}>
+      <View style={[styles.userProfile,userProfileStyle ]}>
         <View>
           <PostOwnerHeader userId={post.userId} />
         </View>
@@ -21,14 +25,14 @@ export default function Post({ post, isComment }: PostProps) {
         </View>
       </View>
       <View>
-      <View style={styles.mainPost}>
+      <View style={[styles.mainPost, mainPostStyle]}>
           <Text style={{ color: "white", fontSize: 12.5 }}>{post.content}</Text>
           {post.img_url && (
             <View style={styles.postImgContainer}>
               <Image style={styles.postImg} source={{ uri: post.img_url }} />
             </View>
           )}
-          <View style={styles.footer}>
+          <View style={[styles.footer, footerStyle]}>
             <LikeButton />
             {!isComment && <CommentButton post={post} />}
           </View>
