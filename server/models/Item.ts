@@ -51,9 +51,9 @@ Item.init(
     },
     rating: {
       type: DataTypes.INTEGER,
-      defaultValue: 1,
+      defaultValue: 0,
       validate: {
-        min: 1,
+        min: 0,
         max: 5,
       },
     },

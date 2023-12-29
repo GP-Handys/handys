@@ -46,12 +46,10 @@ export default function WishlistScreen() {
                 renderItem={({ item }) => <ItemCard item={item} isFavorite={true}/>}
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: "space-between" }}
-                scrollEnabled={false}
               />
           </View>
         )}
       </View>
-      
     </CommonBackgroundWithNoSafeArea>
   );
 }
