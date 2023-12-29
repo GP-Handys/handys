@@ -19,6 +19,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Comments({ route }: any) {
   const { post } = route.params;
+  const { isLiked } = route.params;
   const [comment, setComment] = useState("");
   const [Comments, setComments] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -52,14 +53,14 @@ export default function Comments({ route }: any) {
             <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
           }
         >
-          <Post post={post} isComment={false}  />
+          <Post post={post} isComment={false} isLiked={isLiked}  />
           <View style={{ marginTop: 10 }}>
             <ThematicBreak />
           </View>
           <View style={{ marginHorizontal: 18, marginTop: 5 }}>
             <FlatList
               data={Comments}
-              renderItem={({ item }) => <Post post={item} isComment={true} 
+              renderItem={({ item }) => <Post post={item} isComment={true} isLiked={false}
               mainPostStyle={{marginRight:25,borderWidth:1,borderColor:"black"}} 
               userProfileStyle={{marginRight:25,borderWidth:1,borderColor:"black"}} 
               footerStyle={{borderWidth:1}} 

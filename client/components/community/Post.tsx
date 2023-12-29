@@ -11,9 +11,10 @@ interface PostProps {
   mainPostStyle?: StyleProp<ViewStyle>;
   postImgContainerStyle?: StyleProp<ViewStyle>;
   footerStyle?: StyleProp<ViewStyle>;
+  isLiked:boolean;
 }
 
-export default function Post({ post, isComment, userProfileStyle, mainPostStyle, footerStyle }: PostProps) {
+export default function Post({ post, isComment,isLiked, userProfileStyle, mainPostStyle, footerStyle }: PostProps) {
   return (
     <View>
       <View style={[styles.userProfile,userProfileStyle ]}>
@@ -33,8 +34,8 @@ export default function Post({ post, isComment, userProfileStyle, mainPostStyle,
             </View>
           )}
           <View style={[styles.footer, footerStyle]}>
-            <LikeButton />
-            {!isComment && <CommentButton post={post} />}
+            <LikeButton postId={post.id} isLiked={isLiked}/>
+            {!isComment && <CommentButton post={post} isLiked={isLiked}/>}
           </View>
         </View>
       </View>

@@ -1,32 +1,34 @@
 import { View, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { addLike, removeLike } from "../../api/CommunityApi";
 
-interface IButton {
-  iconName: any;
+interface props {
+  postId:number
+  isLiked: boolean;
 }
 
-export default function LikeButton() {
-  const toggleLikeIcon = (currentIcon: IButton): IButton => {
-    return {
-      iconName:
-        currentIcon.iconName === "thumb-up-off-alt"
-          ? "thumb-up-alt"
-          : "thumb-up-off-alt",
-    };
-  };
+export default function LikeButton({ isLiked,postId }: props) {
+  const [liked, setLiked] = useState(isLiked);
 
-  const [icon, setIcon] = useState<IButton>({ iconName: "thumb-up-off-alt" });
+  function handleLike(){
+    if(liked){
+      removeLike(postId);
+      setLiked(false);
+    }
+    else{
+      addLike(postId);
+      setLiked(true);
+    } 
+  }
 
   return (
-    <View>
-      <TouchableOpacity
-        onPress={() => {
-          setIcon(toggleLikeIcon(icon));
-        }}
-      >
-        <MaterialIcons name={icon.iconName} size={26} color="#FFFFFFBF" />
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={handleLike}>
+      {liked ? (
+        <MaterialIcons name={"thumb-up-alt"} size={26} color="#FFFFFFBF"/>
+      ) : (
+        <MaterialIcons name={"thumb-up-off-alt"} size={26} color="#FFFFFFBF" />
+      )}
+    </TouchableOpacity>
   );
 }

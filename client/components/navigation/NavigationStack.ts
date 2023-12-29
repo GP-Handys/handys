@@ -17,7 +17,7 @@ export type StackParamList = {
   Profile: undefined;
   CreateShopScreen: undefined;
   ShopScreen: { shopId: number | undefined; shopName: string | undefined };
-  Comments: {post: PostModel}
+  Comments: {post: PostModel,isLiked:boolean}
   AddItemScreen: { shopId: number };
   EditProfile: undefined
   ItemScreen: {item: Item, favorite: boolean};

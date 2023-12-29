@@ -66,3 +66,53 @@ export const addComment = async (postId: number, data: any) => {
     return error.message;
   }
 };
+
+export const getLikedPosts = async () => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/community/getLikedPosts", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+export const addLike = async (postId: number) => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/community/addLike/" + postId, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+export const removeLike = async (postId: number) => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/community/removeLike/" + postId, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
