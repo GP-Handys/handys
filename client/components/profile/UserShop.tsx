@@ -1,11 +1,9 @@
-import { Pressable, StyleSheet, Text, Image, View } from "react-native";
+import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import COLORS from "../../common/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Shop } from "../../models/Shop";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StackParamList, StackProps } from "../navigation/NavigationStack";
 import { useNavigation } from "@react-navigation/native";
-
+import { StackProps } from "../navigation/NavigationStack";
 
 interface Props {
   shop: Shop;
@@ -15,20 +13,25 @@ export function UserShop({ shop }: Props) {
   const navigation = useNavigation<StackProps["navigation"]>();
 
   return (
-    <Pressable key={shop.id} style={styles.shop} onPress={()=>navigation.navigate("ShopScreen",{
-      shopId:shop.id,
-      shopName:shop.name
-    })}>
+    <TouchableOpacity
+      key={shop.id}
+      style={styles.shop}
+      onPress={() =>
+        navigation.navigate("ShopScreen", {
+          shopId: shop.id,
+          shopName: shop.name,
+        })
+      }
+    >
       <View style={styles.shopDetails}>
-
         {shop.pfp_url === null ? (
-            <Image
-              source={require("../../assets/default_shop_img.png")}
-              style={styles.shopIMG}
-            />
-          ) : (
-            <Image source={{ uri: shop.pfp_url }} style={styles.shopIMG} />
-          )}
+          <Image
+            source={require("../../assets/default_shop_img.png")}
+            style={styles.shopIMG}
+          />
+        ) : (
+          <Image source={{ uri: shop.pfp_url }} style={styles.shopIMG} />
+        )}
 
         <Text style={styles.shopName}>{shop.name!}</Text>
       </View>
@@ -37,7 +40,7 @@ export function UserShop({ shop }: Props) {
           <FontAwesome5 name="crown" size={22} color="black" />
         </View>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
