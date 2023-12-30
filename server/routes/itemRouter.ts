@@ -40,8 +40,8 @@ export const addItem = async (req: Request, res: Response) => {
       categories.forEach(async (categoryId: number) => {
         let category = Category.findByPk(categoryId);
         if (category != null) {
-          let query=`insert into item_category (itemId , categoryId) values (${item.id},${categoryId})`
-          await DB.query(query)
+          let query = `insert into item_category (itemId , categoryId) values (${item.id},${categoryId})`;
+          await DB.query(query);
         }
       });
 
@@ -63,7 +63,7 @@ export const updateItem = async (req: Request, res: Response) => {
       discount,
       quantity,
       is_customizable,
-      categories
+      categories,
     } = req.body;
     const itemId = req.params.itemId;
     const shopId = Number(req.query.shopId);
@@ -89,19 +89,20 @@ export const updateItem = async (req: Request, res: Response) => {
         discount,
         quantity,
         is_customizable,
-        shopId,
       });
 
       categories.forEach(async (categoryId: number) => {
-        await DB.query("DELETE FROM item_category WHERE itemId="+itemId)
-        
+        await DB.query("DELETE FROM item_category WHERE itemId=" + itemId);
+
         let category = Category.findByPk(categoryId);
         if (category != null) {
-          let query=`insert into item_category (itemId , categoryId) values (${item!.id},${categoryId})`
-          await DB.query(query)
+          let query = `insert into item_category (itemId , categoryId) values (${
+            item!.id
+          },${categoryId})`;
+          await DB.query(query);
         }
       });
-      
+
       res.status(200).json("item modified");
     }
   } catch (error) {
