@@ -29,9 +29,11 @@ export default function CustomTextInput({
   multiline,
   minHeight = 44,
   maxHeight = 440,
+
   bgColor = COLORS.handysGrey,
   mode = "text",
   style,
+
 }: Props) {
   return (
     <TextInput
