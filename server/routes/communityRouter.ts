@@ -47,13 +47,13 @@ export const addCommentOnPost = async (req: Request, res: Response) => {
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await Post.findAll({
+    const posts: Post[] = await Post.findAll({
       where: {
         parentId: null,
       }
     }
     );
-    res.status(200).json(posts);
+    res.status(200).json(posts.reverse());
   } catch (error) {
     res.status(500).json(error);
   }
@@ -213,7 +213,7 @@ export const editPost = async (req: Request, res: Response) => {
 
 export const getCommentsByPostId = async (req: Request, res: Response) => {
   const postId: number = Number(req.params.postId);
-  let post: Post[] | null;
+  let post: Post[];
   try {
     post = await Post.findAll({
       where: {
@@ -230,7 +230,7 @@ export const getCommentsByPostId = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(200).json(post);
+  res.status(200).json(post.reverse());
 };
 
 export const LikePost = async (req: Request, res: Response) => {
