@@ -38,7 +38,7 @@ export default function Comments({ route }: any) {
   };
   const fetchComments = async () => {
     await getComments(post.id).then((result) => {
-      setComments(result.reverse());
+      setComments(result);
     });
   };
   useEffect(() => {
