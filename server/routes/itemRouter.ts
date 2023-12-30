@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, query } from "express";
 import { User } from "../models/User";
 import { Item } from "../models/Item";
 import { Shop } from "../models/Shop";
@@ -6,6 +6,7 @@ import { ItemReview } from "../models/ItemReview";
 import { connection as DB } from "../database/database";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Sequelize } from "sequelize";
+import { Category } from "../models/Category";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -17,6 +18,7 @@ export const addItem = async (req: Request, res: Response) => {
       quantity,
       is_customizable,
       img_url,
+      categories,
     } = req.body;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
@@ -33,6 +35,14 @@ export const addItem = async (req: Request, res: Response) => {
         is_customizable,
         shopId,
         img_url,
+      });
+
+      categories.forEach(async (categoryID) => {
+        let category = Category.findByPk(categoryID);
+        if (category != null) {
+          let query=`insert into item_category (itemId , categoryId) values (${item.id},${categoryID})`
+          await DB.query(query)
+        }
       });
 
       res.status(200).json("Item created successfully");
@@ -53,6 +63,7 @@ export const updateItem = async (req: Request, res: Response) => {
       discount,
       quantity,
       is_customizable,
+      categories
     } = req.body;
     const itemId = req.params.itemId;
     const shopId = Number(req.query.shopId);
@@ -80,6 +91,17 @@ export const updateItem = async (req: Request, res: Response) => {
         is_customizable,
         shopId,
       });
+
+      categories.forEach(async (categoryID) => {
+        await DB.query("DELETE FROM item_category WHERE itemId="+itemId)
+        
+        let category = Category.findByPk(categoryID);
+        if (category != null) {
+          let query=`insert into item_category (itemId , categoryId) values (${item!.id},${categoryID})`
+          await DB.query(query)
+        }
+      });
+      
       res.status(200).json("item modified");
     }
   } catch (error) {
@@ -217,24 +239,25 @@ export const getReviews = async (req: Request, res: Response) => {
 };
 
 export const getRandomItems = async (req: Request, res: Response) => {
-  try{
-    let result = await Item.findAll({ order:[Sequelize.fn('RAND')],limit:10})
-    res.status(200).json(result)
+  try {
+    let result = await Item.findAll({
+      order: [Sequelize.fn("RAND")],
+      limit: 10,
+    });
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
   }
-
-}
+};
 
 export const getbyCategory = async (req: Request, res: Response) => {
-  try{
+  try {
     const categoryId = req.params.categoryId;
 
     const query = `SELECT * FROM items WHERE id LIKE (select itemId from item_category where categoryId Like ${categoryId});`;
     const searchResult = await DB.query(query);
-    res.status(200).json(searchResult[0])
+    res.status(200).json(searchResult[0]);
   } catch (error) {
     res.status(500).json(error);
   }
-}
-
+};
