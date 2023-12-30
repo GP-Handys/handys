@@ -34,7 +34,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
 
         <View style={styles.inputContainer}>
           <CustomTextInput
-            placeholder={"Message"}
+            placeholder={"Type Your Prompt Here.."}
             onChangeText={(inputValue) => setPrompt(inputValue)}
             multiline={true}
             minHeight={200}
