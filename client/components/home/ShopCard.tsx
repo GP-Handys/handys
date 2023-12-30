@@ -40,10 +40,10 @@ export default function ShopCard({ shop }: Props) {
           starStyle={{ width: 2 }}
         />
 
-        {2000 < 1000 ? (
-          <Text style={styles.ratingCount}>(100 Reviews)</Text>
+        {shop.rating < 1000 ? (
+          <Text style={styles.ratingCount}>{shop.rating} Reviews</Text>
         ) : (
-          <Text style={styles.ratingCount}>({2000 / 1000}k Reviews)</Text>
+          <Text style={styles.ratingCount}>({shop.rating / 1000}k Reviews)</Text>
         )}
       </View>
     </TouchableOpacity>
