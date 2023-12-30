@@ -5,17 +5,17 @@ import {
   ScrollView,
   RefreshControl,
   Keyboard,
+  SafeAreaView,
 } from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
 import { useState, useEffect } from "react";
 import Post from "../../components/community/Post";
-import {
-  CommonBackgroundWithSafeArea,
-} from "../../common/background";
+import { CommonBackgroundWithSafeArea , CommonScrollableBackground} from "../../common/background";
 import ThematicBreak from "../../components/ThematicBreak";
 import { addComment, getComments } from "../../api/CommunityApi";
 import { TextInput } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
+
 
 export default function Comments({ route }: any) {
   const { post } = route.params;
@@ -46,33 +46,35 @@ export default function Comments({ route }: any) {
   }, []);
 
   return (
-    <CommonBackgroundWithSafeArea>
-      
-        <ScrollView
-          refreshControl={
-            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
-          }
-        >
-          <Post post={post} isComment={false} isLiked={isLiked}  />
-          <View style={{ marginTop: 10 }}>
-            <ThematicBreak />
-          </View>
-          <View style={{ marginHorizontal: 18, marginTop: 5 }}>
-            <FlatList
-              data={Comments}
-              renderItem={({ item }) => <Post post={item} isComment={true} isLiked={false}
-              mainPostStyle={{marginRight:25,borderWidth:1,borderColor:"black"}} 
-              userProfileStyle={{marginRight:25,borderWidth:1,borderColor:"black"}} 
-              footerStyle={{borderWidth:1}} 
-              
-              />}
-              scrollEnabled={false}
-              ItemSeparatorComponent={() => <ThematicBreak />}
-            />
-          </View>
-        </ScrollView>
-  
-      <CustomTextInput
+    <>
+    <CommonScrollableBackground>
+        <View style={{ marginLeft: 10 }}>
+          <Post post={post} isComment={false} isLiked={isLiked} />
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <ThematicBreak />
+        </View>
+        <View style={{ marginHorizontal: 7, marginTop: 7 }}>
+          <FlatList
+            data={Comments}
+            renderItem={({ item }) => (
+              <Post
+                post={item}
+                isComment={true}
+                isLiked={false}
+                mainPostStyle={styles.mainPostStyle}
+                userProfileStyle={styles.userProfileStyle}     
+                userDataStyle={styles.userDataStyle}
+                pfpImgStyle={styles.pfpImgStyle}
+                userNameStyle={styles.userNameStyle}
+              />
+            )}
+            scrollEnabled={false}
+            ItemSeparatorComponent={() => <ThematicBreak />}
+          />
+        </View>
+     </CommonScrollableBackground>
+     <CustomTextInput
         onChangeText={(text) => setComment(text)}
         value={comment}
         placeholder="Add a comment"
@@ -85,6 +87,34 @@ export default function Comments({ route }: any) {
           />
         }
       />
-    </CommonBackgroundWithSafeArea>
+     </>
+     
   );
 }
+
+const styles = StyleSheet.create({
+  pfpImgStyle: {
+    height: 27,
+    width: 27,
+    borderRadius: 27,
+  },
+  userDataStyle: {
+    marginLeft: 10,
+  },
+
+  userProfileStyle: {
+    marginTop: 5,
+  },
+  userNameStyle: {
+    fontSize: 11.5,
+  },
+  mainPostStyle: {
+    flex: 1,
+    marginLeft: 18,
+    backgroundColor: "#FFFFFF10",
+    borderRadius: 16,
+    paddingHorizontal: 10,
+    marginTop: 5,
+    paddingBottom: 5,
+  },
+});
