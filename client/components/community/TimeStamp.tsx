@@ -11,7 +11,7 @@ export default function TimeStamp({ time }: TimeStampProps) {
 
   return (
     <View>
-      <Text style={{ color: "#FFFFFA80", fontSize: 13.11 }}>
+      <Text style={{ color: "#FFFFFA80", fontSize: 12.11 }}>
         {formattedTime}
       </Text>
     </View>
