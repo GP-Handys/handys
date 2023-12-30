@@ -6,6 +6,7 @@ import { Shop } from "../models/Shop";
 import { connection as DB } from "../database/database";
 import { ShopReview } from "../models/ShopReview";
 import { Sequelize } from "sequelize";
+import { Item } from "../models/Item";
 
 dotenv.config();
 
@@ -62,7 +63,8 @@ export const deleteShop = async (req: Request, res: Response) => {
 
     if (user?.is_sys_admin || shop?.userId == userId) {
       await shop?.destroy();
-      res.status(200).json("Shop is deleted");
+      await Item.destroy({ where: { shopId: shopId } });
+      res.status(200).json("Your shop has been deleted successfully!");
     } else {
       res.sendStatus(403);
     }
