@@ -51,7 +51,11 @@ export default function Comments({ route }: any) {
 
   return (
     <>
-      <CommonScrollableBackground>
+      <CommonScrollableBackground
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={{ marginLeft: 10 }}>
           <Post post={post} isComment={false} isLiked={isLiked} />
         </View>
@@ -98,7 +102,11 @@ export default function Comments({ route }: any) {
                   <MaterialIcons name="send" size={23} color="white" />
                 )}
                 color={"white"}
-                onPress={handleAddComment}
+                onPress={() => {
+                  if (comment.trim() !== "") {
+                    handleAddComment();
+                  }
+                }}
                 style={{ borderWidth: 1 }}
               />
             }
@@ -120,8 +128,16 @@ export default function Comments({ route }: any) {
             <TextInput.Icon
               icon={() => <MaterialIcons name="send" size={23} color="white" />}
               color={"white"}
-              onPress={handleAddComment}
-              style={{ borderWidth: 1 }}
+              style={[
+                { opacity: comment.trim() === "" ? 0.5 : 1 },
+                { borderWidth: 1 },
+              ]}
+              onPress={() => {
+                if (comment.trim() !== "") {
+                  handleAddComment();
+                }
+              }}
+              disabled={comment.trim() === ""}
             />
           }
         />
