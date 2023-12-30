@@ -37,10 +37,10 @@ export const addItem = async (req: Request, res: Response) => {
         img_url,
       });
 
-      categories.forEach(async (categoryID) => {
-        let category = Category.findByPk(categoryID);
+      categories.forEach(async (categoryId: number) => {
+        let category = Category.findByPk(categoryId);
         if (category != null) {
-          let query=`insert into item_category (itemId , categoryId) values (${item.id},${categoryID})`
+          let query=`insert into item_category (itemId , categoryId) values (${item.id},${categoryId})`
           await DB.query(query)
         }
       });
@@ -92,12 +92,12 @@ export const updateItem = async (req: Request, res: Response) => {
         shopId,
       });
 
-      categories.forEach(async (categoryID) => {
+      categories.forEach(async (categoryId: number) => {
         await DB.query("DELETE FROM item_category WHERE itemId="+itemId)
         
-        let category = Category.findByPk(categoryID);
+        let category = Category.findByPk(categoryId);
         if (category != null) {
-          let query=`insert into item_category (itemId , categoryId) values (${item!.id},${categoryID})`
+          let query=`insert into item_category (itemId , categoryId) values (${item!.id},${categoryId})`
           await DB.query(query)
         }
       });
