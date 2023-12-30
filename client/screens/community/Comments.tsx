@@ -14,6 +14,7 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { addComment, getComments } from "../../api/CommunityApi";
 import { TextInput } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
+import COLORS from "../../common/colors";
 
 export default function Comments({ route }: any) {
   const { post } = route.params;
@@ -44,7 +45,11 @@ export default function Comments({ route }: any) {
   }, []);
 
   return (
-    <CommonBackgroundWithSafeArea>
+    <View
+      style={{
+        backgroundColor: COLORS.commonBackground,
+      }}
+    >
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
@@ -66,7 +71,6 @@ export default function Comments({ route }: any) {
                 isLiked={false}
                 mainPostStyle={styles.mainPostStyle}
                 userProfileStyle={styles.userProfileStyle}
-                // footerStyle={}
                 userDataStyle={styles.userDataStyle}
                 pfpImgStyle={styles.pfpImgStyle}
                 userNameStyle={styles.userNameStyle}
@@ -77,7 +81,6 @@ export default function Comments({ route }: any) {
           />
         </View>
       </ScrollView>
-
       <CustomTextInput
         onChangeText={(text) => setComment(text)}
         value={comment}
@@ -91,7 +94,7 @@ export default function Comments({ route }: any) {
           />
         }
       />
-    </CommonBackgroundWithSafeArea>
+    </View>
   );
 }
 
@@ -104,7 +107,6 @@ const styles = StyleSheet.create({
   userDataStyle: {
     marginLeft: 10,
   },
-
   userProfileStyle: {
     marginTop: 5,
   },
