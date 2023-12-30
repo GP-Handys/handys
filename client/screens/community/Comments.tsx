@@ -7,6 +7,7 @@ import {
   Keyboard,
   SafeAreaView,
   InputAccessoryView,
+  Platform,
 } from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
 import { useState, useEffect } from "react";
@@ -78,7 +79,32 @@ export default function Comments({ route }: any) {
         </View>
       </CommonScrollableBackground>
 
-      <InputAccessoryView>
+      {Platform.OS === "ios" ? (
+        <InputAccessoryView>
+          <CustomTextInput
+            onChangeText={(text) => setComment(text)}
+            value={comment}
+            placeholder="Share your thoughts..."
+            multiline={true}
+            style={{
+              borderRadius: 0,
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              borderBottomLeftRadius: 0,
+            }}
+            right={
+              <TextInput.Icon
+                icon={() => (
+                  <MaterialIcons name="send" size={23} color="white" />
+                )}
+                color={"white"}
+                onPress={handleAddComment}
+                style={{ borderWidth: 1 }}
+              />
+            }
+          />
+        </InputAccessoryView>
+      ) : (
         <CustomTextInput
           onChangeText={(text) => setComment(text)}
           value={comment}
@@ -99,7 +125,7 @@ export default function Comments({ route }: any) {
             />
           }
         />
-      </InputAccessoryView>
+      )}
     </>
   );
 }
