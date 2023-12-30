@@ -5,16 +5,17 @@ import {
   ScrollView,
   RefreshControl,
   Keyboard,
+  SafeAreaView,
 } from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
 import { useState, useEffect } from "react";
 import Post from "../../components/community/Post";
-import { CommonBackgroundWithSafeArea } from "../../common/background";
+import { CommonBackgroundWithSafeArea , CommonScrollableBackground} from "../../common/background";
 import ThematicBreak from "../../components/ThematicBreak";
 import { addComment, getComments } from "../../api/CommunityApi";
 import { TextInput } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import COLORS from "../../common/colors";
+
 
 export default function Comments({ route }: any) {
   const { post } = route.params;
@@ -45,16 +46,8 @@ export default function Comments({ route }: any) {
   }, []);
 
   return (
-    <View
-      style={{
-        backgroundColor: COLORS.commonBackground,
-      }}
-    >
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
-        }
-      >
+    <>
+    <CommonScrollableBackground>
         <View style={{ marginLeft: 10 }}>
           <Post post={post} isComment={false} isLiked={isLiked} />
         </View>
@@ -70,7 +63,7 @@ export default function Comments({ route }: any) {
                 isComment={true}
                 isLiked={false}
                 mainPostStyle={styles.mainPostStyle}
-                userProfileStyle={styles.userProfileStyle}
+                userProfileStyle={styles.userProfileStyle}     
                 userDataStyle={styles.userDataStyle}
                 pfpImgStyle={styles.pfpImgStyle}
                 userNameStyle={styles.userNameStyle}
@@ -80,8 +73,8 @@ export default function Comments({ route }: any) {
             ItemSeparatorComponent={() => <ThematicBreak />}
           />
         </View>
-      </ScrollView>
-      <CustomTextInput
+     </CommonScrollableBackground>
+     <CustomTextInput
         onChangeText={(text) => setComment(text)}
         value={comment}
         placeholder="Add a comment"
@@ -94,7 +87,8 @@ export default function Comments({ route }: any) {
           />
         }
       />
-    </View>
+     </>
+     
   );
 }
 
@@ -107,6 +101,7 @@ const styles = StyleSheet.create({
   userDataStyle: {
     marginLeft: 10,
   },
+
   userProfileStyle: {
     marginTop: 5,
   },
