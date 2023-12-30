@@ -6,6 +6,7 @@ import { useState } from "react";
 import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../navigation/NavigationStack";
+import COLORS from "../../common/colors";
 
 interface ItemCardProps {
   item: Item;
@@ -73,6 +74,9 @@ export default function ItemCard({ item, isFavorite }: ItemCardProps) {
           )}
         </TouchableOpacity>
       </View>
+      <TouchableOpacity style={styles.editButton}>
+        <Text style={{color: "white", fontWeight: "bold"}}>Edit</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -109,4 +113,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
+  editButton: {
+    borderRadius: 5,
+    backgroundColor: COLORS.handysGrey,
+    width: "100%",
+    height: 25,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  }
 });
