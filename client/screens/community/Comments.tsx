@@ -82,7 +82,7 @@ export default function Comments({ route }: any) {
         value={comment}
         placeholder="Add a comment"
         multiline={true}
-        stytle={{
+        style={{
           borderRadius: 0,
           borderTopLeftRadius: 0,
           borderTopRightRadius: 0,

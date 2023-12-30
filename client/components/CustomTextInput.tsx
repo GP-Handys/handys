@@ -15,7 +15,7 @@ interface Props {
   maxHeight?: number;
   bgColor?: string;
   mode?: any;
-  stytle?: StyleProp<TextStyle>;
+  style?: StyleProp<TextStyle>;
 }
 
 export default function CustomTextInput({
@@ -31,13 +31,13 @@ export default function CustomTextInput({
   maxHeight = 440,
   bgColor = "#464949",
   mode = "text",
-  stytle,
+  style,
 }: Props) {
   return (
     <TextInput
       style={[
         styles.commonStyle,
-        stytle,
+        style,
         {
           minHeight: minHeight,
           maxHeight: maxHeight,
