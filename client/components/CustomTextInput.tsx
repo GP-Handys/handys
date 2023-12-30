@@ -29,7 +29,7 @@ export default function CustomTextInput({
   minHeight = 44,
   maxHeight = 440,
   bgColor = "#464949",
-  mode="text"
+  mode="text",
   
 }: Props) {
   return (
