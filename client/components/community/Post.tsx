@@ -19,7 +19,6 @@ interface PostProps {
   isComment?: boolean;
   userProfileStyle?: StyleProp<ViewStyle>;
   mainPostStyle?: StyleProp<ViewStyle>;
-  postImgContainerStyle?: StyleProp<ViewStyle>;
   footerStyle?: StyleProp<ViewStyle>;
   isLiked: boolean;
   userDataStyle?: StyleProp<ViewStyle>;
