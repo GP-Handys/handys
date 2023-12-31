@@ -8,7 +8,7 @@ import SendTicketScreen from "./screens/support/SendTicket";
 import DoneScreen from "./screens/support/Done";
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
-import ShopScreen from "./screens/shop/ShopScreen";
+import ShopScreen from "./screens/shop/Shop";
 import Comments from "./screens/community/Comments";
 import AddItem from "./screens/item/AddItem";
 import EditProfile from "./screens/profile/EditProfile";
