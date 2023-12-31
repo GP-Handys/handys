@@ -15,7 +15,7 @@ import EditProfile from "./screens/profile/EditProfile";
 import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
 import WishlistScreen from "./screens/profile/Wishlist";
 import ItemScreen from "./screens/item/ItemScreen";
-import MyPostsScreen from "./screens/profile/MyPosts";
+import MyPostsScreen from "./screens/community/MyPosts";
 
 export default function App() {
   initializeApp(firebaseConfig);
