@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   mainPost: {
     height: "auto",
     marginTop: 8,
-    width: "90%",
     borderRadius: 8,
   },
   postImgContainer: {
