@@ -8,7 +8,7 @@ export const addPost = async (data: any) => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
       data: data,
     });
@@ -26,7 +26,7 @@ export const getPosts = async () => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
     return result.data;
@@ -41,7 +41,7 @@ export const getComments = async (postId: number) => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
     return result.data;
@@ -57,7 +57,7 @@ export const addComment = async (postId: number, data: any) => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
       data: data,
     });
@@ -112,6 +112,22 @@ export const removeLike = async (postId: number) => {
     });
 
     return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+export const getPostsForUserId = async () => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/community/myposts", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return result;
   } catch (error: any) {
     return error.message;
   }

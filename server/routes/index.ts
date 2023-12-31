@@ -63,6 +63,7 @@ router.put("/api/community/updatePost/:postId", tokenValidate, communityRouter.e
 router.post("/api/community/addlike/:postId", tokenValidate,communityRouter.LikePost)
 router.delete("/api/community/removeLike/:postId", tokenValidate,communityRouter.removeLikePost)
 router.get("/api/community/getLikedPosts", tokenValidate,communityRouter.getLikedPosts)
+router.get("/api/community/myposts/", tokenValidate, communityRouter.getPostsForUserId)
 
 //wishlist routes
 router.post("/api/wishlist/add/:itemId", tokenValidate,wishlistRouter.addToWishList)

@@ -284,3 +284,20 @@ export const getLikedPosts = async (req: Request, res: Response) => {
     res.status(500).json({ error: error });
   }
 };
+
+export const getPostsForUserId = async (req: Request, res: Response) => { 
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId: number = extractUserFromJwt(jwt);
+
+  try {
+    const posts: Post[] = await Post.findAll({
+      where: {
+        userId: userId,
+        parentId: null,
+      },
+    });
+    res.status(200).json(posts.reverse());
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};

@@ -17,13 +17,14 @@ export type StackParamList = {
   Profile: undefined;
   CreateShopScreen: undefined;
   ShopScreen: { shopId: number | undefined; shopName: string | undefined };
-  Comments: {post: PostModel,isLiked:boolean}
+  Comments: { post: PostModel; isLiked: boolean };
   AddItemScreen: { shopId: number };
-  EditProfile: undefined
-  ItemScreen: {item: Item, favorite: boolean};
+  EditProfile: undefined;
+  ItemScreen: { item: Item; favorite: boolean };
   AddCustomization: undefined;
-  CategoryItemsScreen:{category:Category}
-  WishlistScreen:undefined
+  CategoryItemsScreen: { category: Category };
+  WishlistScreen: undefined;
+  MyPostsScreen: undefined;
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

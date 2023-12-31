@@ -13,8 +13,9 @@ import Comments from "./screens/community/Comments";
 import AddItem from "./screens/item/AddItem";
 import EditProfile from "./screens/profile/EditProfile";
 import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
-import WishlistScreen from "./screens/profile/WishlistScreen";
+import WishlistScreen from "./screens/profile/Wishlist";
 import ItemScreen from "./screens/item/ItemScreen";
+import MyPostsScreen from "./screens/profile/MyPosts";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -88,6 +89,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -144,6 +146,17 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
           })}
+        />
+        <Stack.Screen
+          name="MyPostsScreen"
+          component={MyPostsScreen}
+          options={{
+            title: "My Posts",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
