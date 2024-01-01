@@ -75,13 +75,11 @@ export default function Profile() {
           >
             <ThematicBreak />
           </View>
-
-          <TouchableOpacity
-            style={style.editProfile}
-            onPress={() => {
-              navigation.navigate("EditProfile");
-            }}
-          >
+          <TouchableOpacity style={style.editProfile} onPress={() => {
+                navigation.navigate("EditProfile",{
+                  user:user
+                });
+              }}>
             <Feather name="edit" size={32} color={"white"} />
             <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
               Edit Profile

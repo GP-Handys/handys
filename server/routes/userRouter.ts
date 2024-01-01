@@ -90,17 +90,27 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
+    interface Profile {
+      name: string;
+      password?: string;
+      pfp_url: string | null;
+    }
+    
     const jwtToken: string = req.get("Authorization")?.toString()!;
     const userIdToken = extractUserFromJwt(jwtToken);
     const userId = req.params.id;
     let user = await User.findByPk(userId);
-    const { name, email, password, phone_number } = req.body;
-    const data = {
+    const { name, password, phone_number,pfp_url } = req.body;
+    const data :Profile= {
       name,
-      email,
-      password: await bcrypt.hash(password, 10),
-      phone_number,
+      pfp_url,
     };
+
+  
+    if(password!=undefined){
+      data['password']= await bcrypt.hash(password, 10);
+    }
+
 
     if (user == null) {
       res.sendStatus(404);

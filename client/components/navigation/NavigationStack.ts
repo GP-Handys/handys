@@ -5,6 +5,7 @@ import {
 import { Category } from "../../models/Category";
 import { PostModel } from "../../models/Post";
 import { Item } from "../../models/Item";
+import { User } from "../../models/User";
 
 export type StackParamList = {
   Landing: undefined;
@@ -19,8 +20,8 @@ export type StackParamList = {
   ShopScreen: { shopId: number | undefined; shopName: string | undefined };
   Comments: { post: PostModel; isLiked: boolean };
   AddItemScreen: { shopId: number };
-  EditProfile: undefined;
-  ItemScreen: { item: Item; favorite: boolean };
+  EditProfile: {user:User}
+  ItemScreen: {item: Item, favorite: boolean};
   AddCustomization: undefined;
   CategoryItemsScreen: { category: Category };
   WishlistScreen: undefined;
