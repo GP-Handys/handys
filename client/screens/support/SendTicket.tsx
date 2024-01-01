@@ -42,8 +42,8 @@ export default function App() {
     mapRegion = {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421
+      latitudeDelta: 1,
+      longitudeDelta: 1
     };
   }
 
