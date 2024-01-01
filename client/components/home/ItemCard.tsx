@@ -11,9 +11,14 @@ import COLORS from "../../common/colors";
 interface ItemCardProps {
   item: Item;
   isFavorite: boolean;
+  isEditable: boolean;
 }
 
-export default function ItemCard({ item, isFavorite }: ItemCardProps) {
+export default function ItemCard({
+  item,
+  isFavorite,
+  isEditable,
+}: ItemCardProps) {
   const [favorite, setFavorite] = useState(isFavorite);
   const navigation = useNavigation<StackProps["navigation"]>();
 
@@ -28,7 +33,11 @@ export default function ItemCard({ item, isFavorite }: ItemCardProps) {
   }
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate("ItemScreen", {item: item, favorite: favorite})}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("ItemScreen", { item: item, favorite: favorite })
+        }
+      >
         {item.img_url === null ? (
           <Image
             source={require("../../assets/logo.png")}
@@ -74,9 +83,19 @@ export default function ItemCard({ item, isFavorite }: ItemCardProps) {
           )}
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.editButton}>
-        <Text style={{color: "white", fontWeight: "bold"}}>Edit</Text>
-      </TouchableOpacity>
+      {isEditable && (
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => {
+            navigation.navigate("EditItemScreen", {
+              shopId: item.shopId,
+              item: item,
+            });
+          }}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>Edit</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -121,5 +140,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: "center",
     alignItems: "center",
-  }
+  },
 });

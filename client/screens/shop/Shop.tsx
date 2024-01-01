@@ -118,7 +118,7 @@ export default function ShopScreen({ route }: any) {
         <FlatList
           data={items}
           renderItem={({ item }) => {
-            return <ItemCard item={item} isFavorite={favoriteItems.includes(item.id)}/>;
+            return <ItemCard item={item} isFavorite={favoriteItems.includes(item.id)} isEditable={shop?.userId === userId}/>;
           }}
           numColumns={2}
           scrollEnabled={false}

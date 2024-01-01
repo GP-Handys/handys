@@ -8,7 +8,7 @@ export const getMostPopularItems = async () => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
     return result;
@@ -24,7 +24,7 @@ export const getItemsForShopId = async (shopId: any) => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
     return result;
@@ -40,7 +40,7 @@ export const addItemForShopId = async (shopId: number, data: any) => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
       data: data,
     });
@@ -50,38 +50,52 @@ export const addItemForShopId = async (shopId: number, data: any) => {
   }
 };
 
-export const GetItemsBycategory= async (categoryId:number)=> {
+export const GetItemsBycategory = async (categoryId: number) => {
   let token = await AsyncStorage.getItem("Authorization");
   try {
     const result = await ApiManager("/items/getByCategory/" + categoryId, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
     return result.data;
   } catch (error: any) {
     return error.message;
   }
-}
+};
 
-export const ItemSearch = async (data:any)=>{
+export const ItemSearch = async (data: any) => {
   let token = await AsyncStorage.getItem("Authorization");
   try {
-    const result = await ApiManager("/items/search?search="+data, {
+    const result = await ApiManager("/items/search?search=" + data, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
-    });    
-    
+    });
+
     return result.data;
   } catch (error: any) {
     return error.message;
   }
+};
 
-}
-
-
+export const updateItemById = async (itemId: number, data: any) => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/items/update/" + itemId, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+      data: data,
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+};
