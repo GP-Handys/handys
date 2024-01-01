@@ -62,7 +62,7 @@ export default function Post({
           )}
         </View>
         <View style={[styles.footer, footerStyle]}>
-          {!isComment && <LikeButton postId={post.id} isLiked={isLiked} />}
+          {!isComment && <LikeButton postId={post.id} isLiked={isLiked} likeCount={post.votes}/>}
           {!isComment && <CommentButton post={post} isLiked={isLiked} />}
         </View>
       </View>
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
     alignItems: "baseline",
-    gap: 20,
+    gap: 15,
     marginLeft: 10,
     marginTop: 12,
   },
