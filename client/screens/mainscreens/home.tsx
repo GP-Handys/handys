@@ -1,10 +1,8 @@
 import {
   FlatList,
   ImageBackground,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
 } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { View } from "react-native";
@@ -105,7 +103,7 @@ export default function Home() {
         <FlatList
           data={mostPopularItems}
           renderItem={({ item }) => {
-            return <ItemCard item={item} isFavorite={favItems.includes(item.id)}/>;
+            return <ItemCard item={item} isFavorite={favItems.includes(item.id)} isEditable={false}/>;
           }}
           numColumns={2}
           scrollEnabled={false}

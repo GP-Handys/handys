@@ -16,6 +16,7 @@ import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
 import WishlistScreen from "./screens/profile/Wishlist";
 import ItemScreen from "./screens/item/Item";
 import MyPostsScreen from "./screens/community/MyPosts";
+import EditItemScreen from "./screens/item/EditItem";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -47,6 +48,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -67,6 +69,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -78,6 +81,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           })}
         />
         <Stack.Screen
@@ -101,6 +105,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -112,6 +117,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -123,6 +129,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           })}
         />
         <Stack.Screen
@@ -134,6 +141,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -156,6 +164,19 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="EditItemScreen"
+          component={EditItemScreen}
+          options={{
+            title: "Edit Item",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
       </Stack.Navigator>

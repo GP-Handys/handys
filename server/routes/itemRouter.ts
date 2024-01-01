@@ -64,14 +64,14 @@ export const updateItem = async (req: Request, res: Response) => {
       quantity,
       is_customizable,
       categories,
+      img_url
     } = req.body;
-    const itemId = req.params.itemId;
-    const shopId = Number(req.query.shopId);
+    const itemId: number = Number(req.params.itemId);
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
-    const shop = await Shop.findByPk(shopId);
     const user = await User.findByPk(userId);
     let item = await Item.findByPk(itemId);
+    const shop = await Shop.findByPk(item?.shopId);
 
     if (item == null || shop == null) {
       res.sendStatus(404);
@@ -80,7 +80,7 @@ export const updateItem = async (req: Request, res: Response) => {
 
     if (
       user!.is_sys_admin ||
-      (shop.userId == userId && shopId == item.shopId)
+      (shop.userId == userId && shop.id == item.shopId)
     ) {
       item = await item.update({
         name,
@@ -89,23 +89,25 @@ export const updateItem = async (req: Request, res: Response) => {
         discount,
         quantity,
         is_customizable,
+        img_url
       });
 
-      categories.forEach(async (categoryId: number) => {
-        await DB.query("DELETE FROM item_category WHERE itemId=" + itemId);
+      // categories.forEach(async (categoryId: number) => {
+      //   await DB.query("DELETE FROM item_category WHERE itemId=" + itemId);
 
-        let category = Category.findByPk(categoryId);
-        if (category != null) {
-          let query = `insert into item_category (itemId , categoryId) values (${
-            item!.id
-          },${categoryId})`;
-          await DB.query(query);
-        }
-      });
+      //   let category = Category.findByPk(categoryId);
+      //   if (category != null) {
+      //     let query = `insert into item_category (itemId , categoryId) values (${
+      //       item!.id
+      //     },${categoryId})`;
+      //     await DB.query(query);
+      //   }
+      // });
 
       res.status(200).json("item modified");
     }
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 };
