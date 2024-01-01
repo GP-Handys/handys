@@ -35,7 +35,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
       email: email,
       subject: subject,
       content: message
-
     };
     submitTicket(data);
     navigation.navigate("DoneScreen");
