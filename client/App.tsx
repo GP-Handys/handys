@@ -19,6 +19,8 @@ import MyPostsScreen from "./screens/community/MyPosts";
 import EditItemScreen from "./screens/item/EditItem";
 import ShopSettingsScreen from "./screens/shop/Settings";
 
+import Map from './screens/checkout/map';
+import AddressScreen from './screens/checkout/addressScreen'
 export default function App() {
   initializeApp(firebaseConfig);
 
@@ -190,6 +192,17 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{
+            title: "My Posts",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
       </Stack.Navigator>

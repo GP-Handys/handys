@@ -29,6 +29,12 @@ export type StackParamList = {
   MyPostsScreen: undefined;
   EditItemScreen: { item: Item, shopId: number };
   ShopSettingsScreen: {shop: Shop}
+  Cart:undefined;
+  Map: undefined;
+  Address:undefined;
+  CardDetails:undefined;
+  PlaceOrder:undefined;
+  DonePlaceOrder:undefined;
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
