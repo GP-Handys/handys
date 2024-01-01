@@ -16,7 +16,8 @@ import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
 import WishlistScreen from "./screens/profile/Wishlist";
 import ItemScreen from "./screens/item/Item";
 import MyPostsScreen from "./screens/community/MyPosts";
-
+import Map from './screens/checkout/map';
+import AddressScreen from './screens/checkout/addressScreen'
 export default function App() {
   initializeApp(firebaseConfig);
 
@@ -150,6 +151,17 @@ export default function App() {
         <Stack.Screen
           name="MyPostsScreen"
           component={MyPostsScreen}
+          options={{
+            title: "My Posts",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
           options={{
             title: "My Posts",
             headerTitleStyle: { color: "white" },
