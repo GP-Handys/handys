@@ -10,18 +10,19 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { useNavigation } from "@react-navigation/native";
 import EditProfileHelper from "../../helpers/Profile/EditProfileHelper";
 import { getProfile } from "../../api/UserApi";
+import { User } from "../../models/User";
 
-export default function EditProfile() {
+export default function EditProfile({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
 
-  const [user, setUser]: any = useState();
-  const [name, setName] = useState("");
+  const user: User = route.params.user;
+  const [name, setName] = useState(user.name);
   const [password, setPassword] = useState("");
   const [Confirmassword, setConfirmPassword] = useState("");
   const UserNameLength = 25;
 
-  const [userImageUrl, setUserImageUrl]: any = useState(null);
-  const [userImageUrlPicked, setUserImageUrlPicked] = useState(false);
+  const [userImageUrl, setUserImageUrl]: any = useState(user.pfp_url);
+  const [userImageUrlPicked, setUserImageUrlPicked] = useState(()=>{return user.pfp_url?true:false});
 
   async function handleEditProfile() {
     EditProfileHelper(
@@ -29,7 +30,7 @@ export default function EditProfile() {
       password,
       Confirmassword,
       userImageUrl,
-      1,
+      user.id,
       navigation
     );
   }
@@ -40,21 +41,6 @@ export default function EditProfile() {
       setUserImageUrlPicked(true);
     }
   }
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      await getProfile().then(async (result) => {
-        setUser(result);
-        setName(result.name);
-        setUserImageUrl(result.pfp_url);
-        if (result.php_url != null) {
-          setUserImageUrlPicked(true);
-        }
-      });
-    };
-
-    fetchProfile();
-  }, []);
 
   return (
     <CommonScrollableBackground>
@@ -89,6 +75,7 @@ export default function EditProfile() {
         <View style={{ gap: 10 }}>
           <Text style={style.font}>Name</Text>
           <CustomTextInput
+            value={name}
             placeholder={"Enter your new name"}
             onChangeText={(text) => setName(text)}
             maxLength={UserNameLength}
