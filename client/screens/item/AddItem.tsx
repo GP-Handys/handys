@@ -2,7 +2,6 @@ import { Feather } from "@expo/vector-icons";
 import {
   View,
   Text,
-  Pressable,
   StyleSheet,
   Image,
   TouchableOpacity,
@@ -15,7 +14,6 @@ import { useState } from "react";
 import { addItemForShopId } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import Checkbox from "expo-checkbox";
 import CheckBoxItem from "../../components/CheckBoxItem";
 
 export default function AddItemScreen({ route }: any) {
@@ -79,7 +77,10 @@ export default function AddItemScreen({ route }: any) {
         </>
       ) : (
         <>
-<TouchableOpacity onPress={handleUploadPressed} style={[styles.uploadPressable, {marginBottom: 30}]}>
+          <TouchableOpacity
+            onPress={handleUploadPressed}
+            style={[styles.uploadPressable, { marginBottom: 30 }]}
+          >
             <Feather name="upload" size={52} color="white" />
           </TouchableOpacity>
         </>
@@ -134,12 +135,28 @@ export default function AddItemScreen({ route }: any) {
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Categories</Text>
         <View style={styles.checkboxRow}>
-          <CheckBoxItem label="Bags" state={isBagChecked} setState={setIsBagChecked}/>
-          <CheckBoxItem label="Bracelets" state={isBraceletChecked} setState={setIsBraceletChecked}/>
-          <CheckBoxItem label="Earrings" state={isEarringChecked} setState={setIsEarringChecked}/>
+          <CheckBoxItem
+            label="Bags"
+            state={isBagChecked}
+            setState={setIsBagChecked}
+          />
+          <CheckBoxItem
+            label="Bracelets"
+            state={isBraceletChecked}
+            setState={setIsBraceletChecked}
+          />
+          <CheckBoxItem
+            label="Earrings"
+            state={isEarringChecked}
+            setState={setIsEarringChecked}
+          />
         </View>
         <View style={styles.checkboxRow}>
-          <CheckBoxItem label="Rings" state={isRingsChecked} setState={setIsRingsChecked}/>
+          <CheckBoxItem
+            label="Rings"
+            state={isRingsChecked}
+            setState={setIsRingsChecked}
+          />
         </View>
       </View>
       <View style={styles.confirmPressableContainer}>
@@ -208,6 +225,6 @@ const styles = StyleSheet.create({
   categoryName: {
     marginRight: 5,
     color: "white",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
