@@ -4,7 +4,9 @@ import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import CartItem from "../../components/cart/cartItem";
 import CartTotal from "../../components/cart/cartTotal";
 
+
 export default function Cart() {
+
   const items: any = [
     {
       name: "Metal Handcraft",

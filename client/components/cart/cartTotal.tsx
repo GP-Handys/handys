@@ -1,8 +1,11 @@
 import { View, StyleSheet, Text, Alert, Pressable } from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 export default function cartTotal() {
   var [totalPrice, setTotalPrice] = useState(0);
+  const navigation = useNavigation<StackProps["navigation"]>();
 
   return (
     <View>
@@ -13,7 +16,9 @@ export default function cartTotal() {
         </View>
         <Pressable
           style={styles.pressable}
-          onPress={() => Alert.alert("Simple Button pressed")}
+          onPress={() => {
+            navigation.navigate("Map");
+          }}
         >
           <Text style={styles.button}>Checkout</Text>
         </Pressable>
@@ -26,23 +31,23 @@ const styles = StyleSheet.create({
   container: {
     margin: 20,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   text: {
     color: "white",
     fontSize: 12,
-    fontWeight: "normal",
+    fontWeight: "normal"
   },
   price: {
     color: "white",
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   button: {
     textAlignVertical: "center",
     color: "black",
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   pressable: {
     height: 40,
@@ -50,6 +55,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "rgba(246, 151, 127, 1)",
     alignItems: "center",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 });
