@@ -2,20 +2,15 @@ import {
   FlatList,
   StyleSheet,
   View,
-  ScrollView,
   RefreshControl,
   Keyboard,
-  SafeAreaView,
   InputAccessoryView,
   Platform,
 } from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
 import { useState, useEffect } from "react";
 import Post from "../../components/community/Post";
-import {
-  CommonBackgroundWithSafeArea,
-  CommonScrollableBackground,
-} from "../../common/background";
+import { CommonScrollableBackground } from "../../common/background";
 import ThematicBreak from "../../components/ThematicBreak";
 import { addComment, getComments } from "../../api/CommunityApi";
 import { TextInput } from "react-native-paper";
@@ -163,12 +158,16 @@ const styles = StyleSheet.create({
     fontSize: 11.5,
   },
   mainPostStyle: {
-    flex: 1,
-    marginLeft: 18,
+    marginLeft: 35,
     backgroundColor: "#FFFFFF10",
-    borderRadius: 16,
+    borderRadius: 10,
     paddingHorizontal: 10,
-    marginTop: 5,
+    marginTop: 4,
     paddingBottom: 5,
+    alignSelf: "flex-start",
+    width: "auto",
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 4,
   },
 });

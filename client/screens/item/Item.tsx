@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
-import {
-  CommonBackgroundWithNoSafeArea,
-  CommonScrollableBackground,
-} from "../../common/background";
+import { CommonScrollableBackground } from "../../common/background";
 import COLORS from "../../common/colors";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
 import ThematicBreak from "../../components/ThematicBreak";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 import { getShopById } from "../../api/ShopApi";
 import { Shop } from "../../models/Shop";
 import { useNavigation } from "@react-navigation/native";
@@ -30,7 +25,7 @@ export default function ItemScreen({ route }: any) {
     });
   };
 
-  const handleFavorite = async() => {
+  const handleFavorite = async () => {
     if (isFavorite) {
       setIsFavorite(false);
       await removeFromWishList(item.id);
@@ -38,7 +33,7 @@ export default function ItemScreen({ route }: any) {
       setIsFavorite(true);
       await addToWishList(item.id);
     }
-  }
+  };
 
   useEffect(() => {
     fetchShopDataById();

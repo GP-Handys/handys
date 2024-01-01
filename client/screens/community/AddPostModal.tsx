@@ -23,10 +23,7 @@ interface PostModalProps {
   onDismiss: () => void;
 }
 
-export default function PostModal({
-  isVisible,
-  onDismiss,
-}: PostModalProps) {
+export default function PostModal({ isVisible, onDismiss }: PostModalProps) {
   const [postImageUrl, setPostImageUrl] = useState<any>(null);
   const [postImgPicked, setPostImgPicked] = useState(false);
   const [postText, setPostText] = useState("");
@@ -83,7 +80,7 @@ export default function PostModal({
               marginTop: 15,
             }}
           >
-            <PostOwnerHeader  userId={user.id} />
+            <PostOwnerHeader userId={user.id} />
             <TouchableOpacity>
               <MaterialIcons
                 name="insert-photo"
@@ -134,9 +131,10 @@ export default function PostModal({
 const styles = StyleSheet.create({
   ModalHeader: {
     paddingTop: Platform.OS === "android" ? 15 : 0,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
     marginBottom: 15,
+    marginTop: 10,
   },
   CloseButton: {
     width: 30,
@@ -144,7 +142,7 @@ const styles = StyleSheet.create({
     left: 15,
   },
   HeaderText: {
-    fontSize: 20,
+    fontSize: 18,
     color: "white",
     marginEnd: 25,
   },
@@ -153,7 +151,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 86,
     alignItems: "center",
-    height: 40,
+    height: 30,
     backgroundColor: "#F6977F",
     justifyContent: "center",
     marginEnd: 10,
@@ -162,7 +160,7 @@ const styles = StyleSheet.create({
     color: "black",
     alignItems: "center",
     fontWeight: "700",
-    fontSize: 18,
+    fontSize: 14,
   },
   postImgUploaded: {
     width: 350,

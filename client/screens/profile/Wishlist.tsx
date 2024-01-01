@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, ActivityIndicator, FlatList } from "react-native";
+import { View, StyleSheet, ActivityIndicator, FlatList } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";

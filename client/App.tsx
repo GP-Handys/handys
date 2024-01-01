@@ -8,13 +8,14 @@ import SendTicketScreen from "./screens/support/SendTicket";
 import DoneScreen from "./screens/support/Done";
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
-import ShopScreen from "./screens/shop/ShopScreen";
+import ShopScreen from "./screens/shop/Shop";
 import Comments from "./screens/community/Comments";
 import AddItem from "./screens/item/AddItem";
 import EditProfile from "./screens/profile/EditProfile";
 import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
-import WishlistScreen from "./screens/profile/WishlistScreen";
-import ItemScreen from "./screens/item/ItemScreen";
+import WishlistScreen from "./screens/profile/Wishlist";
+import ItemScreen from "./screens/item/Item";
+import MyPostsScreen from "./screens/community/MyPosts";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -88,6 +89,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -144,6 +146,17 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
           })}
+        />
+        <Stack.Screen
+          name="MyPostsScreen"
+          component={MyPostsScreen}
+          options={{
+            title: "My Posts",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

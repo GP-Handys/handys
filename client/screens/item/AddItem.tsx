@@ -1,16 +1,15 @@
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import COLORS from "../../common/colors";
 import pickImageAndStore from "../../storage/store";
 import { useState } from "react";
-import React from "react";
 import { addItemForShopId } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 
-export default function AddItemScreen({route}: any) {
+export default function AddItemScreen({ route }: any) {
   const shopId = route.params.shopId;
   const navigation = useNavigation<StackProps["navigation"]>();
   const [itemImageUrl, setItemImageUrl] = useState();
@@ -28,17 +27,17 @@ export default function AddItemScreen({route}: any) {
       discount: itemDiscount,
       quantity: itemQuantity,
       description: itemDescription,
-      img_url: itemImageUrl
+      img_url: itemImageUrl,
     }).then((res) => {
-      if(res.status === 200){
+      if (res.status === 200) {
         alert("Item added successfully");
         navigation.pop();
       }
-    })
+    });
   };
 
   const handleAddItem = () => {
-    addItem();  
+    addItem();
   };
 
   return (
@@ -62,7 +61,7 @@ export default function AddItemScreen({route}: any) {
         {itemImagePicked ? (
           <View style={{ width: "100%", height: "100%" }}>
             <Image
-              style={{ width: "100%", height: "100%", borderRadius: 9}}
+              style={{ width: "100%", height: "100%", borderRadius: 9 }}
               source={{ uri: itemImageUrl }}
             />
             <Feather
@@ -85,19 +84,39 @@ export default function AddItemScreen({route}: any) {
       </Pressable>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Name</Text>
-        <CustomTextInput placeholder="Enter item name here" onChangeText={(text) => {setItemName(text)}}/>
+        <CustomTextInput
+          placeholder="Enter item name here"
+          onChangeText={(text) => {
+            setItemName(text);
+          }}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Price</Text>
-        <CustomTextInput placeholder="Enter base price here" onChangeText={(text) => {setItemPrice(text)}}/>
+        <CustomTextInput
+          placeholder="Enter base price here"
+          onChangeText={(text) => {
+            setItemPrice(text);
+          }}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Discount</Text>
-        <CustomTextInput placeholder="Enter percentage discount here" onChangeText={(text) => {setItemDiscount(text)}}/>
+        <CustomTextInput
+          placeholder="Enter percentage discount here"
+          onChangeText={(text) => {
+            setItemDiscount(text);
+          }}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Quantity</Text>
-        <CustomTextInput placeholder="Enter quantity here" onChangeText={(text) => {setItemQuantity(text)}}/>
+        <CustomTextInput
+          placeholder="Enter quantity here"
+          onChangeText={(text) => {
+            setItemQuantity(text);
+          }}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Description</Text>
@@ -105,7 +124,9 @@ export default function AddItemScreen({route}: any) {
           placeholder="Enter item description here"
           multiline={true}
           minHeight={100}
-          onChangeText={(text) => {setItemDescription(text)}}
+          onChangeText={(text) => {
+            setItemDescription(text);
+          }}
         />
       </View>
       <View style={styles.confirmPressableContainer}>

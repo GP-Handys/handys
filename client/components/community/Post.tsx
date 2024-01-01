@@ -19,7 +19,6 @@ interface PostProps {
   isComment?: boolean;
   userProfileStyle?: StyleProp<ViewStyle>;
   mainPostStyle?: StyleProp<ViewStyle>;
-  postImgContainerStyle?: StyleProp<ViewStyle>;
   footerStyle?: StyleProp<ViewStyle>;
   isLiked: boolean;
   userDataStyle?: StyleProp<ViewStyle>;
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
   mainPost: {
     height: "auto",
     marginTop: 8,
-    width: "90%",
     borderRadius: 8,
   },
   postImgContainer: {
