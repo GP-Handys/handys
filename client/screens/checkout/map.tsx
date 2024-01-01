@@ -48,34 +48,39 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      {errorMsg && <Text>{errorMsg}</Text>}
-      {location && (
-        <MapView
-          region={mapRegion}
-          showsMyLocationButton={true}
-          showsUserLocation={true}
-          style={styles.map}
-        >
-          <Marker coordinate={mapRegion as any} title="My Location" />
-        </MapView>
-      )}
-      <TouchableOpacity style={styles.confirmPressable}>
-        <Text style={styles.confirm}>Confirm</Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      <View style={styles.container}>
+        {errorMsg && <Text>{errorMsg}</Text>}
+        {location && (
+          <MapView
+            region={mapRegion}
+            showsMyLocationButton={true}
+            showsUserLocation={true}
+            style={styles.map}
+          >
+            <Marker coordinate={mapRegion as any} title="My Location" />
+          </MapView>
+        )}
+      </View>
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.confirmPressable}>
+          <Text style={styles.confirm}>Confirm</Text>
+        </TouchableOpacity>
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.commonBackground,
     alignItems: "center",
     justifyContent: "center"
   },
   map: {
-    ...StyleSheet.absoluteFillObject
+    width: "100%",
+    height: "100%"
   },
   confirm: {
     color: "black",
@@ -83,13 +88,17 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   confirmPressable: {
-    width: "90%",
+    width:"100%",
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 50,
-    borderRadius: 8,
-    bottom: 10,
-    position: "absolute"
+
+
+  },
+  footer: {
+    justifyContent:"center",
+    backgroundColor:COLORS.commonBackground,
+    alignItems:"center"
   }
 });
