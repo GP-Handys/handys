@@ -50,7 +50,7 @@ export default function Community() {
 
   const fetchPosts = async () => {
     await getPosts().then((result) => {
-      setPosts(result.reverse());
+      setPosts(result);
       setLoadingPosts(false);
     });
   };
@@ -116,8 +116,6 @@ export default function Community() {
                 <Post post={item} isLiked={likedPosts.includes(item.id)} />
               )}
               ItemSeparatorComponent={itemSeparator}
-              keyExtractor={(item) => item.id}
-              style={{ minHeight: Dimensions.get("window").height }}
             />
           </View>
         )}

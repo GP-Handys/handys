@@ -47,13 +47,13 @@ export const addCommentOnPost = async (req: Request, res: Response) => {
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await Post.findAll({
+    const posts: Post[] = await Post.findAll({
       where: {
         parentId: null,
       }
     }
     );
-    res.status(200).json(posts);
+    res.status(200).json(posts.reverse());
   } catch (error) {
     res.status(500).json(error);
   }
@@ -213,7 +213,7 @@ export const editPost = async (req: Request, res: Response) => {
 
 export const getCommentsByPostId = async (req: Request, res: Response) => {
   const postId: number = Number(req.params.postId);
-  let post: Post[] | null;
+  let post: Post[];
   try {
     post = await Post.findAll({
       where: {
@@ -230,7 +230,7 @@ export const getCommentsByPostId = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(200).json(post);
+  res.status(200).json(post.reverse());
 };
 
 export const LikePost = async (req: Request, res: Response) => {
@@ -238,6 +238,7 @@ export const LikePost = async (req: Request, res: Response) => {
   const userId: number = extractUserFromJwt(jwt);
   const post_id = req.params.postId;
   try {
+    await Post.increment("votes", { where: { id: post_id } });
     await PostLike.create({
       post_id: post_id,
       user_id: userId,
@@ -255,6 +256,7 @@ export const removeLikePost = async (req: Request, res: Response) => {
   const user_id: number = extractUserFromJwt(jwt);
   const post_id = req.params.postId;
   try {
+    await Post.decrement("votes", {  where: { id: post_id } });
     await PostLike.destroy({
       where: {
         user_id,
@@ -282,5 +284,22 @@ export const getLikedPosts = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
+  }
+};
+
+export const getPostsForUserId = async (req: Request, res: Response) => { 
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId: number = extractUserFromJwt(jwt);
+
+  try {
+    const posts: Post[] = await Post.findAll({
+      where: {
+        userId: userId,
+        parentId: null,
+      },
+    });
+    res.status(200).json(posts.reverse());
+  } catch (error) {
+    res.status(500).json(error);
   }
 };

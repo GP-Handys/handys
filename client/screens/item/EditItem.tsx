@@ -1,4 +1,4 @@
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -12,36 +12,30 @@ import CustomTextInput from "../../components/CustomTextInput";
 import COLORS from "../../common/colors";
 import pickImageAndStore from "../../storage/store";
 import { useState } from "react";
-import { addItemForShopId } from "../../api/ItemApi";
+import React from "react";
+import { addItemForShopId, updateItemById } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import Checkbox from "expo-checkbox";
-import CheckBoxItem from "../../components/CheckBoxItem";
+import { Item } from "../../models/Item";
 
-export default function AddItemScreen({ route }: any) {
-  const shopId = route.params.shopId;
+export default function EditItemScreen({ route }: any) {
+  const shopId: number = route.params.shopId;
+  const item: Item = route.params.item;
   const navigation = useNavigation<StackProps["navigation"]>();
   const [itemImageUrl, setItemImageUrl] = useState();
-  const [itemImagePicked, setItemImagePicked] = useState(false);
-  const [itemName, setItemName] = useState("");
-  const [itemPrice, setItemPrice] = useState("");
-  const [itemDiscount, setItemDiscount] = useState("");
-  const [itemQuantity, setItemQuantity] = useState("");
-  const [itemDescription, setItemDescription] = useState("");
-  const [isBagChecked, setIsBagChecked] = useState(false);
-  const [isBraceletChecked, setIsBraceletChecked] = useState(false);
-  const [isEarringChecked, setIsEarringChecked] = useState(false);
-  const [isRingsChecked, setIsRingsChecked] = useState(false);
+  const [itemImagePicked, setItemImagePicked] = useState(true);
+  const [itemName, setItemName] = useState(item.name);
+  const [itemPrice, setItemPrice] = useState(item.base_price);
+  const [itemDiscount, setItemDiscount] = useState(item.discount);
+  const [itemQuantity, setItemQuantity] = useState(item.quantity);
+  const [itemDescription, setItemDescription] = useState(item.description);
 
   const handleUploadPressed = async () => {
-    const itemId = await pickImageAndStore("items", setItemImageUrl);
-    if (itemId) {
-      setItemImagePicked(true);
-    }
+    await pickImageAndStore("items", setItemImageUrl);
   };
 
-  const addItem = async () => {
-    await addItemForShopId(shopId, {
+  const editItem = async () => {
+    await updateItemById(item.id, {
       name: itemName,
       base_price: itemPrice,
       discount: itemDiscount,
@@ -49,15 +43,15 @@ export default function AddItemScreen({ route }: any) {
       description: itemDescription,
       img_url: itemImageUrl,
     }).then((res) => {
-      if (res.status === 200) {
-        alert("Item added successfully");
-        navigation.pop();
-      }
+        if (res.status === 200) {
+          alert("Item edited successfully");
+          navigation.pop();
+        }
     });
   };
 
-  const handleAddItem = () => {
-    addItem();
+  const handleEditItem = () => {
+    editItem();
   };
 
   return (
@@ -67,7 +61,7 @@ export default function AddItemScreen({ route }: any) {
           <TouchableOpacity onPress={handleUploadPressed}>
             <Image
               style={styles.uploadPressable}
-              source={{ uri: itemImageUrl }}
+              source={{ uri: item.img_url ?? "" }}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -79,7 +73,7 @@ export default function AddItemScreen({ route }: any) {
         </>
       ) : (
         <>
-<TouchableOpacity onPress={handleUploadPressed} style={[styles.uploadPressable, {marginBottom: 30}]}>
+          <TouchableOpacity onPress={handleUploadPressed} style={[styles.uploadPressable, {marginBottom: 30}]}>
             <Feather name="upload" size={52} color="white" />
           </TouchableOpacity>
         </>
@@ -87,7 +81,7 @@ export default function AddItemScreen({ route }: any) {
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Name</Text>
         <CustomTextInput
-          placeholder="Enter item name here"
+          placeholder={item.name}
           onChangeText={(text) => {
             setItemName(text);
           }}
@@ -96,34 +90,34 @@ export default function AddItemScreen({ route }: any) {
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Price</Text>
         <CustomTextInput
-          placeholder="Enter base price here"
+          placeholder={"JOD " + item.base_price.toString()}
           onChangeText={(text) => {
-            setItemPrice(text);
+            setItemPrice(Number(text));
           }}
         />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Discount %</Text>
         <CustomTextInput
-          placeholder="Enter percentage discount here"
+          placeholder={item.discount.toString()}
           onChangeText={(text) => {
-            setItemDiscount(text);
+            setItemDiscount(Number(text));
           }}
         />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Quantity</Text>
         <CustomTextInput
-          placeholder="Enter quantity here"
+          placeholder={item.quantity.toString()}
           onChangeText={(text) => {
-            setItemQuantity(text);
+            setItemQuantity(Number(text));
           }}
         />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Description</Text>
         <CustomTextInput
-          placeholder="Enter item description here"
+          placeholder={item.description}
           multiline={true}
           minHeight={100}
           onChangeText={(text) => {
@@ -131,24 +125,13 @@ export default function AddItemScreen({ route }: any) {
           }}
         />
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Categories</Text>
-        <View style={styles.checkboxRow}>
-          <CheckBoxItem label="Bags" state={isBagChecked} setState={setIsBagChecked}/>
-          <CheckBoxItem label="Bracelets" state={isBraceletChecked} setState={setIsBraceletChecked}/>
-          <CheckBoxItem label="Earrings" state={isEarringChecked} setState={setIsEarringChecked}/>
-        </View>
-        <View style={styles.checkboxRow}>
-          <CheckBoxItem label="Rings" state={isRingsChecked} setState={setIsRingsChecked}/>
-        </View>
-      </View>
       <View style={styles.confirmPressableContainer}>
         <TouchableOpacity
-          onPress={handleAddItem}
+          onPress={handleEditItem}
           style={styles.confirmPressable}
         >
           <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
-            Add
+            Confirm Edit
           </Text>
         </TouchableOpacity>
       </View>
@@ -199,15 +182,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 100,
     marginBottom: 20,
   },
-  checkboxRow: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
-  categoryName: {
-    marginRight: 5,
-    color: "white",
-    fontWeight: "bold"
-  }
 });

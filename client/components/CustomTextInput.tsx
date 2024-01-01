@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { TextInput } from "react-native-paper";
 import COLORS from "../common/colors";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StyleProp, TextStyle } from "react-native";
 interface Props {
   placeholder: string;
   left?: ReactNode;
@@ -15,6 +15,7 @@ interface Props {
   maxHeight?: number;
   bgColor?: string;
   mode?: any;
+  style?: StyleProp<TextStyle>;
 }
 
 export default function CustomTextInput({
@@ -28,14 +29,17 @@ export default function CustomTextInput({
   multiline,
   minHeight = 44,
   maxHeight = 440,
-  bgColor = "#464949",
-  mode="text"
-  
+
+  bgColor = COLORS.handysGrey,
+  mode = "text",
+  style,
+
 }: Props) {
   return (
     <TextInput
       style={[
         styles.commonStyle,
+        style,
         {
           minHeight: minHeight,
           maxHeight: maxHeight,
@@ -65,5 +69,6 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     borderTopLeftRadius: 9,
     borderTopRightRadius: 9,
+    borderBottomLeftRadius: 9,
   },
 });

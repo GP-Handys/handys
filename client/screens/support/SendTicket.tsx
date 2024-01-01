@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import {
   View,
@@ -72,7 +74,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
             multiline={true}
             minHeight={200}
           />
-          <View>
+          <View style={{paddingBottom: 50}}>
             {!isButtonEnabled ? (
               <TouchableOpacity
                 disabled={true}

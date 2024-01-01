@@ -1,4 +1,14 @@
-import { View, StyleSheet, Text, Image, Dimensions, StyleProp, ViewStyle } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Dimensions,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
+  TextStyle,
+} from "react-native";
 import PostOwnerHeader from "./PostOwnerHeader";
 import TimeStamp from "./TimeStamp";
 import LikeButton from "./LikeButton";
@@ -9,34 +19,51 @@ interface PostProps {
   isComment?: boolean;
   userProfileStyle?: StyleProp<ViewStyle>;
   mainPostStyle?: StyleProp<ViewStyle>;
-  postImgContainerStyle?: StyleProp<ViewStyle>;
   footerStyle?: StyleProp<ViewStyle>;
-  isLiked:boolean;
+  isLiked: boolean;
+  userDataStyle?: StyleProp<ViewStyle>;
+  pfpImgStyle?: StyleProp<ImageStyle>;
+  userNameStyle?: StyleProp<TextStyle>;
 }
 
-export default function Post({ post, isComment,isLiked, userProfileStyle, mainPostStyle, footerStyle }: PostProps) {
+export default function Post({
+  post,
+  isComment,
+  isLiked,
+  userProfileStyle,
+  mainPostStyle,
+  footerStyle,
+  userDataStyle,
+  pfpImgStyle,
+  userNameStyle,
+}: PostProps) {
   return (
     <View>
-      <View style={[styles.userProfile,userProfileStyle ]}>
+      <View style={[styles.userProfile, userProfileStyle]}>
         <View>
-          <PostOwnerHeader userId={post.userId} />
+          <PostOwnerHeader
+            userId={post.userId}
+            userDataStyle={userDataStyle}
+            pfpImgStyle={pfpImgStyle}
+            userNameStyle={userNameStyle}
+          />
         </View>
-        <View style={{ marginTop: 15, marginRight: 10 }}>
+        <View style={{ marginTop: 10, marginRight: 10 }}>
           <TimeStamp time={post.createdAt} />
         </View>
       </View>
       <View>
-      <View style={[styles.mainPost, mainPostStyle]}>
+        <View style={[styles.mainPost, mainPostStyle]}>
           <Text style={{ color: "white", fontSize: 12.5 }}>{post.content}</Text>
           {post.img_url && (
             <View style={styles.postImgContainer}>
               <Image style={styles.postImg} source={{ uri: post.img_url }} />
             </View>
           )}
-          <View style={[styles.footer, footerStyle]}>
-            <LikeButton postId={post.id} isLiked={isLiked}/>
-            {!isComment && <CommentButton post={post} isLiked={isLiked}/>}
-          </View>
+        </View>
+        <View style={[styles.footer, footerStyle]}>
+          {!isComment && <LikeButton postId={post.id} isLiked={isLiked} likeCount={post.votes}/>}
+          {!isComment && <CommentButton post={post} isLiked={isLiked} />}
         </View>
       </View>
     </View>
@@ -55,7 +82,6 @@ const styles = StyleSheet.create({
   mainPost: {
     height: "auto",
     marginTop: 8,
-    width: "90%",
     borderRadius: 8,
   },
   postImgContainer: {
@@ -68,7 +94,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
     alignItems: "baseline",
-    gap: 20,
+    gap: 15,
     marginLeft: 10,
     marginTop: 12,
   },

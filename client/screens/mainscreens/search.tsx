@@ -112,7 +112,7 @@ export default function Search(this: any) {
                 key={"_"}
                 keyExtractor={(item) => "_" + item.id}
                 data={items}
-                renderItem={({ item }) => <ItemCard item={item} isFavorite={favItems.includes(item.id)}/>}
+                renderItem={({ item }) => <ItemCard item={item} isFavorite={favItems.includes(item.id)} isEditable={false}/>}
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: "space-between" }}
                 scrollEnabled={false}

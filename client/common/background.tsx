@@ -13,6 +13,7 @@ import COLORS from "./colors";
 
 interface Props {
   children: ReactNode;
+  refreshControl?: React.ReactElement;
 }
 
 export function CommonBackgroundWithNoSafeArea({ children }: Props) {
@@ -33,10 +34,16 @@ export function CommonBackgroundWithSafeArea({ children }: Props) {
   );
 }
 
-export function CommonScrollableBackground({ children }: Props) {
+export function CommonScrollableBackground({
+  children,
+  refreshControl,
+}: Props) {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <KeyboardAwareScrollView style={styles.commonContainer}>
+      <KeyboardAwareScrollView
+        refreshControl={refreshControl}
+        style={styles.commonContainer}
+      >
         {children}
       </KeyboardAwareScrollView>
     </TouchableWithoutFeedback>
@@ -50,6 +57,5 @@ const styles = StyleSheet.create({
   },
   androidSafeArea: {
     paddingTop: Platform.OS === "android" ? 0 : 0,
-
   },
 });

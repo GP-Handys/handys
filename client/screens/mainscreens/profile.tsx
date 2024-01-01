@@ -1,5 +1,5 @@
 import { CommonScrollableBackground } from "../../common/background";
-import { Image, View, Text, StyleSheet, Pressable } from "react-native";
+import { Image, View, Text, StyleSheet } from "react-native";
 import COLORS from "../../common/colors";
 import {
   Entypo,
@@ -12,16 +12,15 @@ import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
 import { getShopsForUserId } from "../../api/ShopApi";
 import React, { useState, useEffect } from "react";
-import { StackParamList } from "../../components/navigation/NavigationStack";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackProps } from "../../components/navigation/NavigationStack";
 import { ActivityIndicator } from "react-native-paper";
 import { getProfile } from "../../api/UserApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-type StackProps = NativeStackScreenProps<StackParamList>;
-
-export default function Profile({ navigation }: StackProps) {
+export default function Profile() {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const [user, setUser]: any = useState({});
   const [shops, setShops] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -76,9 +75,10 @@ export default function Profile({ navigation }: StackProps) {
           >
             <ThematicBreak />
           </View>
-
           <TouchableOpacity style={style.editProfile} onPress={() => {
-                navigation.navigate("EditProfile");
+                navigation.navigate("EditProfile",{
+                  user:user
+                });
               }}>
             <Feather name="edit" size={32} color={"white"} />
             <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
@@ -120,7 +120,10 @@ export default function Profile({ navigation }: StackProps) {
 
         <View style={style.cardsContainer}>
           <View style={style.otherGrid}>
-            <TouchableOpacity style={style.card}>
+            <TouchableOpacity
+              style={style.card}
+              onPress={() => navigation.navigate("MyPostsScreen")}
+            >
               <MaterialCommunityIcons
                 name="note-text-outline"
                 size={28}
@@ -134,11 +137,17 @@ export default function Profile({ navigation }: StackProps) {
             </TouchableOpacity>
           </View>
           <View style={style.otherGrid}>
-            <TouchableOpacity style={style.card} onPress={()=>navigation.navigate("WishlistScreen")}>
+            <TouchableOpacity
+              style={style.card}
+              onPress={() => navigation.navigate("WishlistScreen")}
+            >
               <FontAwesome5 name="heart" size={24} color="white" />
               <Text style={style.cardFont}>Favorites</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={style.card} onPress={()=>navigation.navigate("SendTicketScreen")}>
+            <TouchableOpacity
+              style={style.card}
+              onPress={() => navigation.navigate("SendTicketScreen")}
+            >
               <MaterialIcons name="headset-mic" size={24} color="white" />
               <Text style={style.cardFont}>Support</Text>
             </TouchableOpacity>

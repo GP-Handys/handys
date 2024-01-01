@@ -6,13 +6,19 @@ import { useState } from "react";
 import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../navigation/NavigationStack";
+import COLORS from "../../common/colors";
 
 interface ItemCardProps {
   item: Item;
   isFavorite: boolean;
+  isEditable: boolean;
 }
 
-export default function ItemCard({ item, isFavorite }: ItemCardProps) {
+export default function ItemCard({
+  item,
+  isFavorite,
+  isEditable,
+}: ItemCardProps) {
   const [favorite, setFavorite] = useState(isFavorite);
   const navigation = useNavigation<StackProps["navigation"]>();
 
@@ -27,7 +33,11 @@ export default function ItemCard({ item, isFavorite }: ItemCardProps) {
   }
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate("ItemScreen", {item: item, favorite: favorite})}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("ItemScreen", { item: item, favorite: favorite })
+        }
+      >
         {item.img_url === null ? (
           <Image
             source={require("../../assets/logo.png")}
@@ -73,6 +83,19 @@ export default function ItemCard({ item, isFavorite }: ItemCardProps) {
           )}
         </TouchableOpacity>
       </View>
+      {isEditable && (
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => {
+            navigation.navigate("EditItemScreen", {
+              shopId: item.shopId,
+              item: item,
+            });
+          }}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>Edit</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -108,5 +131,14 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 18,
+  },
+  editButton: {
+    borderRadius: 5,
+    backgroundColor: COLORS.handysGrey,
+    width: "100%",
+    height: 25,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

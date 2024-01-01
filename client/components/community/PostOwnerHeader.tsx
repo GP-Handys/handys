@@ -1,4 +1,12 @@
-import { View, Text, Image, StyleSheet, StyleProp, ViewStyle, ImageStyle } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { getUserById } from "../../api/UserApi";
 import { User } from "../../models/User";
@@ -10,8 +18,12 @@ interface PostOwnerHeaderProps {
   userNameStyle?: StyleProp<ViewStyle>;
 }
 
-export default function PostOwnerHeader({userId, userDataStyle, pfpImgStyle, userNameStyle}: PostOwnerHeaderProps) {
-
+export default function PostOwnerHeader({
+  userId,
+  userDataStyle,
+  pfpImgStyle,
+  userNameStyle,
+}: PostOwnerHeaderProps) {
   const [user, setUser] = useState<User>();
   useEffect(() => {
     const fetchUser = async () => {
@@ -29,7 +41,10 @@ export default function PostOwnerHeader({userId, userDataStyle, pfpImgStyle, use
           source={require("../../assets/default_profile_img.jpg")}
         />
       ) : (
-        <Image source={{ uri: user?.pfp_url }} style={[styles.pfpImg, pfpImgStyle]} />
+        <Image
+          source={{ uri: user?.pfp_url }}
+          style={[styles.pfpImg, pfpImgStyle]}
+        />
       )}
 
       <Text style={[styles.userName, userNameStyle]}> {user?.name} </Text>
@@ -43,14 +58,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pfpImg: {
-    height: 40,
-    width: 40,
+    height: 35,
+    width: 35,
     borderRadius: 40,
   },
   userName: {
     color: "#FFFFFFE0",
-    fontSize: 18,
-    paddingLeft:6,
+    fontSize: 16,
+    paddingLeft: 6,
     // borderWidth:1,
   },
 });
