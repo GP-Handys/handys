@@ -17,6 +17,7 @@ import { StackProps } from "../../components/navigation/NavigationStack";
 
 import { ActivityIndicator } from "react-native-paper";
 
+
 export default function Cart() {
   const navigation = useNavigation<StackProps["navigation"]>();
   const [itemPrices, setItemPrices] = useState<any>({});
