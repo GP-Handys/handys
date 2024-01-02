@@ -31,6 +31,7 @@ export default function App() {
       try {
         let locationData = await Location.getCurrentPositionAsync({});
         setLocation(locationData);
+        console.log(locationData);
       } catch (error) {
         setErrorMsg("Error fetching location");
       }
@@ -88,17 +89,15 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   confirmPressable: {
-    width:"100%",
+    width: "100%",
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
-    height: 50,
-
-
+    height: 50
   },
   footer: {
-    justifyContent:"center",
-    backgroundColor:COLORS.commonBackground,
-    alignItems:"center"
+    justifyContent: "center",
+    backgroundColor: COLORS.commonBackground,
+    alignItems: "center"
   }
 });
