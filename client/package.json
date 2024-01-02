@@ -22,6 +22,7 @@
     "expo-secure-store": "~12.3.1",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.6.0",
+    "google-maps": "^4.3.3",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.4",
     "react": "18.2.0",
