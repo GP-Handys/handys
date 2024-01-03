@@ -1,110 +1,103 @@
 import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Item } from "../../models/Item";
+import COLORS from "../../common/colors";
 
 interface Props {
-  items: any;
+  item: Item;
 }
 
-export default function cartItem({ items }: Props) {
-  const [counter, setCounter] = useState(0);
-  var [ItemTotal, setItemTotal] = useState(0);
+export default function cartItem({ item }: Props) {
+  const [counter, setCounter] = useState(1);
+  const [ItemTotalPrice, setItemTotalPrice] = useState(item.base_price);
 
-  const Plus = () => {
-    setCounter(counter + 1);
-    setItemTotal((items.price += items.price));
+  const plus = () => {
+    setCounter((prevCounter) => prevCounter + 1);
   };
 
-  const Minus = () => {
-    if (counter > 0) {
-      setCounter(counter - 1);
-      setItemTotal((items.price -= 1));
+  const minus = () => {
+    if (counter > 1) {
+      setCounter((prevCounter) => prevCounter - 1);
     }
   };
+
+  useEffect(() => {
+    setItemTotalPrice(counter * item.base_price);
+  }, [counter, item.base_price]);
 
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.info}>
-          <Text style={styles.title}>{items.name}</Text>
-          <Text style={styles.description}>{items.description}</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.itemName}>{item.name}</Text>
+            {item.is_customizable && (
+              <>
+                <Text style={styles.Customized}>Customized</Text>
+                <Text style={styles.details}>Details:</Text>
+              </>
+            )}
+          </View>
           <View style={styles.footer}>
-            <Text style={styles.price}>{items.price + "JOD"}</Text>
-            <View style={styles.quantity}>
-              <View>
-                <Pressable onPress={Plus}>
-                  <MaterialIcons name="add" size={18} color="#ffffff" />
-                </Pressable>
-              </View>
-              <View>
-                <Text style={styles.counter}>{"  " + counter + "  "}</Text>
-              </View>
-              <View>
-                <Pressable onPress={Minus}>
-                  <MaterialIcons name="remove" size={18} color="#ffffff" />
-                </Pressable>
-              </View>
+            <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
+            <View style={{ flexDirection: "row", gap: 15 }}>
+              <Pressable onPress={minus}>
+                <MaterialIcons name="remove" size={23} color="#ffffff" />
+              </Pressable>
+              <Text style={styles.counter}>{counter}</Text>
+              <Pressable onPress={plus}>
+                <MaterialIcons name="add" size={23} color="#ffffff" />
+              </Pressable>
             </View>
           </View>
         </View>
         <Image source={require("../../assets/pic1.jpg")} style={styles.image} />
       </View>
-      <View style={{ marginTop: 20 }}>
-        <ThematicBreak marginHorizontal={15} />
-      </View>
-    </View> // mainView
+      <ThematicBreak verticalHorizontal={20} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
   },
-  footer: {
-    borderColor: "rgba(255, 255, 255, 1)",
+  info: {
+    gap: 5,
+    flexGrow: 1,
   },
-  title: {
-    color: "rgba(255, 255, 255, 1)",
+  itemName: {
+    color: "white",
     fontSize: 16,
   },
-  customize: {
-    color: "rgba(246, 151, 127, 1)",
+  Customized: {
+    color: COLORS.CTAButtonBackground,
     fontSize: 14,
     textDecorationLine: "underline",
   },
+  details: {
+    fontSize: 12,
+    color: "grey",
+  },
   image: {
-    position: "absolute",
-    right: 20,
     width: 130,
     height: 130,
     borderRadius: 6,
   },
-  info: {
-    marginLeft: 15,
-    width: 175,
-  },
-  description: {
-    fontSize: 12,
-    color: "rgba(255, 255, 255, 1)",
-    marginTop: 5,
-    width: 206,
-    height: 70,
+  footer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginRight: 5,
   },
   price: {
-    position: "absolute",
-    color: "rgba(255, 255, 255, 1)",
     fontSize: 16,
-    fontWeight: "bold",
-    marginLeft: 85,
-  },
-  quantity: {
-    marginLeft: 2,
-    color: "rgba(255, 255, 255, 1)",
-    width: 60,
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    fontWeight: "500",
+    color: "white",
   },
   counter: {
     fontSize: 16,
