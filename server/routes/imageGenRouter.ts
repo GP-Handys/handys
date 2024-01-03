@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import { openai } from "../app";
 
 export const generateImage = async (req: Request, res: Response) => {
+  const prompt: any = req.query.prompt;
   const response = await openai.images.generate({
     model: "dall-e-2",
-    prompt: "i am a professional handicrafter. PLEASE design me a bracelet with a flower on it and a diamond in the middle",
+    prompt: prompt,
     n: 1,
     size: "1024x1024",
   });
