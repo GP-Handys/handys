@@ -24,9 +24,11 @@ export default function Comments({ route }: any) {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleAddComment = async () => {
-    await addComment(post.id, { content: comment }).then(() => {
-      setComment("");
-      Keyboard.dismiss();
+    let tempComment = comment;
+    setComment("");
+    Keyboard.dismiss();
+    await addComment(post.id, { content: tempComment }).then(() => {
+      
     });
   };
   const onRefresh = () => {

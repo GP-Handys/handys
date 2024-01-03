@@ -17,6 +17,8 @@ import CustomTextInput from "../../components/CustomTextInput";
 import pickImageAndStore from "../../storage/store";
 import { addPost } from "../../api/CommunityApi";
 import { getProfile } from "../../api/UserApi";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 interface PostModalProps {
   isVisible: boolean;
@@ -24,15 +26,16 @@ interface PostModalProps {
 }
 
 export default function PostModal({ isVisible, onDismiss }: PostModalProps) {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const [postImageUrl, setPostImageUrl] = useState<any>(null);
   const [postImgPicked, setPostImgPicked] = useState(false);
   const [postText, setPostText] = useState("");
   const [user, setUser] = useState({} as any);
   const handleAddPost = async () => {
+    onDismiss();
     await addPost({ content: postText, img_url: postImageUrl }).then(() => {
       setPostImageUrl(null);
       setPostText("");
-      onDismiss();
     });
   };
   useEffect(() => {
