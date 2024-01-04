@@ -163,7 +163,18 @@ export default function App() {
           name="Map"
           component={Map}
           options={{
-            title: "My Posts",
+            title: "Select Location",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="Address"
+          component={AddressScreen}
+          options={{
+            title: "Address",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
