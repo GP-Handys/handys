@@ -7,24 +7,35 @@ import COLORS from "../../common/colors";
 
 interface Props {
   item: Item;
+  updateTotal: any;
 }
 
-export default function cartItem({ item }: Props) {
+export default function cartItem({ item, updateTotal }: Props) {
   const [counter, setCounter] = useState(1);
-  const [ItemTotalPrice, setItemTotalPrice] = useState(item.base_price);
+  const [ItemTotalPrice, setItemTotalPrice] = useState(0);
 
   const plus = () => {
-    setCounter((prevCounter) => prevCounter + 1);
+    const newCounter = counter + 1;
+    setCounter(newCounter);
+    const newTotalPrice = newCounter * item.base_price;
+    setItemTotalPrice(newTotalPrice);
+    updateTotal(item.id, newTotalPrice);
   };
 
   const minus = () => {
     if (counter > 1) {
-      setCounter((prevCounter) => prevCounter - 1);
+      const newCounter = counter - 1;
+      setCounter(newCounter);
+      const newTotalPrice = newCounter * item.base_price;
+      setItemTotalPrice(newTotalPrice);
+      updateTotal(item.id, newTotalPrice);
     }
   };
 
   useEffect(() => {
-    setItemTotalPrice(counter * item.base_price);
+    const newTotalPrice = counter * item.base_price;
+    setItemTotalPrice(newTotalPrice);
+    updateTotal(item.id, newTotalPrice);
   }, [counter, item.base_price]);
 
   return (
