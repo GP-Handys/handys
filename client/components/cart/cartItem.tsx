@@ -1,19 +1,28 @@
-import { View, StyleSheet, Image, Text, Pressable } from "react-native";
+import { View, StyleSheet, Image, Text, Pressable, Alert } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import React, { useEffect, useState } from "react";
 import { Item } from "../../models/Item";
 import COLORS from "../../common/colors";
 import { Cart } from "../../models/Cart";
+import {
+  editQuantity,
+  removeFromcart as removeFromCart,
+} from "../../api/CartApi";
 
 interface Props {
-  cartItem:Cart;
+  cartItem: Cart;
   item: Item;
   updateTotal: any;
-  
+  removeItem: any;
 }
 
-export default function cartItem({cartItem, item, updateTotal }: Props) {
+export default function cartItem({
+  cartItem,
+  item,
+  updateTotal,
+  removeItem,
+}: Props) {
   const [counter, setCounter] = useState(1);
   const [ItemTotalPrice, setItemTotalPrice] = useState(0);
 
@@ -23,6 +32,7 @@ export default function cartItem({cartItem, item, updateTotal }: Props) {
     const newTotalPrice = newCounter * item.base_price;
     setItemTotalPrice(newTotalPrice);
     updateTotal(item.id, newTotalPrice);
+    editQuantity(cartItem.id, counter);
   };
 
   const minus = () => {
@@ -32,6 +42,17 @@ export default function cartItem({cartItem, item, updateTotal }: Props) {
       const newTotalPrice = newCounter * item.base_price;
       setItemTotalPrice(newTotalPrice);
       updateTotal(item.id, newTotalPrice);
+      editQuantity(cartItem.id, counter);
+    } else {
+      Alert.alert("Delete item from cart", "Are you sure?", [
+        {
+          text: "Yes",
+          onPress: () => removeItem(cartItem.id),
+        },
+        {
+          text: "Cancel",
+        },
+      ]);
     }
   };
 
@@ -41,7 +62,7 @@ export default function cartItem({cartItem, item, updateTotal }: Props) {
     
     
     const quantity = cartItem.quantity;
-    setCounter(quantity)
+    setCounter(quantity);
     const newTotalPrice = counter * item.base_price;
     setItemTotalPrice(newTotalPrice);
     updateTotal(item.id, newTotalPrice);
@@ -53,12 +74,7 @@ export default function cartItem({cartItem, item, updateTotal }: Props) {
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
             <Text style={styles.itemName}>{item.name}</Text>
-            {/* {item.is_customizable && (
-              <View>
-                <Text style={styles.Customized}>Customized</Text>
-                <Text style={styles.details}>Details:</Text>
-              <View/>
-            )} */}
+            
           </View>
           <View style={styles.footer}>
             <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
@@ -132,3 +148,9 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+{/* {item.is_customizable && (
+              <View>
+                <Text style={styles.Customized}>Customized</Text>
+                <Text style={styles.details}>Details:</Text>
+              <View/>
+            )} */}

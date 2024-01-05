@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Image, Alert } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import COLORS from "../../common/colors";
 import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
@@ -122,7 +122,9 @@ export default function ItemScreen({ route }: any) {
             </TouchableOpacity>
             <ThematicBreak />
 
-            <TouchableOpacity style={styles.cartButton} onPress={()=>{addToCart(item.id)}}>
+            <TouchableOpacity style={styles.cartButton} onPress={()=>{
+              Alert.alert("Item added to cart succefully")
+              addToCart(item.id)}}>
               <Feather name="shopping-cart" size={24} color="black" />
               <Text
                 style={{

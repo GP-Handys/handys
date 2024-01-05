@@ -2,6 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { connection } from "../database/database";
 
 class Cart extends Model {
+  public id!: number;
   public user_id!: number;
   public item_id!: number;
   public quantity!:number;
@@ -10,6 +11,11 @@ class Cart extends Model {
 
 Cart.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,

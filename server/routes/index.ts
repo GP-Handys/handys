@@ -8,7 +8,7 @@ import * as wishlistRouter from './wishlistRouter'
 import * as communityRouter from './communityRouter'
 import * as ticketRouter from "./ticketRouter"
 import * as categoryRouter from './categoryRouter'
-import * as cartRoute from './CartRouter'
+import * as cartRoute from './cartRouter'
 import * as imageGenRouter from './imageGenRouter'
 
 
@@ -75,8 +75,8 @@ router.get("/api/wishlist/get/:data", tokenValidate,wishlistRouter.getWishList)
 
 //cart routes
 router.post("/api/cart/add/:itemId", tokenValidate,cartRoute.addToCart)
-router.delete("/api/cart/delete/:itemId", tokenValidate,cartRoute.removeFromCart)
-router.put("/api/update/get/:itemId", tokenValidate,cartRoute.updateQuantity)
+router.delete("/api/cart/delete/:cartId", tokenValidate,cartRoute.removeFromCart)
+router.put("/api/cart/update/:cartId", tokenValidate,cartRoute.updateQuantity)
 router.get("/api/cart/get",tokenValidate , cartRoute.getCart)
 
 // Category routes 

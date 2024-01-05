@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -44,12 +45,7 @@ export default function AddItemScreen({ route }: any) {
       description: itemDescription,
       img_url: itemImageUrl,
     }).then((res) => {
-      if (res.status === 201) {
-        alert("Item added successfully");
-      }
-      else{
-        alert("Error with add item");
-      }
+      Alert.alert(res.data)
     });
   };
 
