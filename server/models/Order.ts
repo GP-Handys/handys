@@ -44,6 +44,7 @@ Order.init(
 
 class ItemOrder extends Model {
   public quantity!: number;
+  public customaization!: number;
 }
 
 ItemOrder.init(
@@ -51,6 +52,13 @@ ItemOrder.init(
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate:{
+        min:1
+      }
+    },
+    customization:{
+      type: DataTypes.STRING,
+      allowNull:true
     },
   },
   {

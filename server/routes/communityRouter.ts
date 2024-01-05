@@ -238,6 +238,7 @@ export const LikePost = async (req: Request, res: Response) => {
   const userId: number = extractUserFromJwt(jwt);
   const post_id = req.params.postId;
   try {
+    await Post.increment("votes", { where: { id: post_id } });
     await PostLike.create({
       post_id: post_id,
       user_id: userId,
@@ -255,6 +256,7 @@ export const removeLikePost = async (req: Request, res: Response) => {
   const user_id: number = extractUserFromJwt(jwt);
   const post_id = req.params.postId;
   try {
+    await Post.decrement("votes", {  where: { id: post_id } });
     await PostLike.destroy({
       where: {
         user_id,

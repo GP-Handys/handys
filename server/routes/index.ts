@@ -8,6 +8,7 @@ import * as wishlistRouter from './wishlistRouter'
 import * as communityRouter from './communityRouter'
 import * as ticketRouter from "./ticketRouter"
 import * as categoryRouter from './categoryRouter'
+import * as imageGenRouter from './imageGenRouter'
 
 const router = express.Router()
 
@@ -34,17 +35,17 @@ router.get("/api/shop/getUserShops/:userId", tokenValidate,shopRouter.getUserSho
 router.get("/api/shop/recommended", tokenValidate, shopRouter.getRecommendedShops)
 
 //item routes
-router.post("/api/items/addItem/:shopId",tokenValidate,itemRouter.addItem)
-router.put("/api/items/updateItem/:itemId",tokenValidate,itemRouter.updateItem)
-router.delete("/api/items/deleteItem/:itemId",tokenValidate,itemRouter.deleteItem)
-router.get("/api/items/getItem/:itemId",tokenValidate,itemRouter.getItem)
-router.get("/api/items/getReviews/:itemId" , tokenValidate,itemRouter.getReviews)
-router.post("/api/items/addReview/:itemId",tokenValidate,itemRouter.addReview)
+router.post("/api/items/addItem/:shopId", tokenValidate,itemRouter.addItem)
+router.put("/api/items/update/:itemId", tokenValidate,itemRouter.updateItem)
+router.delete("/api/items/deleteItem/:itemId", tokenValidate,itemRouter.deleteItem)
+router.get("/api/items/getItem/:itemId", tokenValidate,itemRouter.getItem)
+router.get("/api/items/getReviews/:itemId", tokenValidate,itemRouter.getReviews)
+router.post("/api/items/addReview/:itemId", tokenValidate,itemRouter.addReview)
 router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReview)
-router.get("/api/items/search" , tokenValidate,itemRouter.searchItem)
-router.get("/api/items/getByShop/:shopId" , tokenValidate,itemRouter.getByShop)
-router.get("/api/item/getRandomItems",tokenValidate,itemRouter.getRandomItems)
-router.get("/api/items/getByCategory/:categoryId" , tokenValidate,itemRouter.getbyCategory)
+router.get("/api/items/search", tokenValidate,itemRouter.searchItem)
+router.get("/api/items/getByShop/:shopId", tokenValidate,itemRouter.getByShop)
+router.get("/api/item/getRandomItems", tokenValidate,itemRouter.getRandomItems)
+router.get("/api/items/getByCategory/:categoryId", tokenValidate,itemRouter.getbyCategory)
 
 //order routes
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
@@ -82,5 +83,8 @@ router.get("/api/ticket/getTickets" , tokenValidate , ticketRouter.getTickets)
 router.get("/api/ticket/getTicket/:ticketId",tokenValidate,ticketRouter.getTicketById)
 router.post("/api/ticket/submitTicket" , tokenValidate , ticketRouter.submitTicket)
 router.get("/api/ticket/resolve/:ticketId",tokenValidate ,ticketRouter.resolveTicket)
+
+//AI
+router.post("/api/ai/generate", imageGenRouter.generateImage)
 
 export {router}
