@@ -1,10 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import MapScreen from "../../components/map/MapScreen";
 
-const AddressScreen = () => {
+const AddressScreen = ({ route }: any) => {
+  const { governorate, street } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text>Hello, React Native!</Text>
+      <View style={styles.map}>
+        <MapScreen />
+      </View>
     </View>
   );
 };
@@ -12,9 +17,9 @@ const AddressScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: "center"
   },
+  map: {}
 });
 
 export default AddressScreen;

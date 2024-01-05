@@ -97,6 +97,7 @@ export default function Cart() {
           <TouchableOpacity style={styles.button} onPress={() => {
             console.log(items);
             console.log(cartItems);
+            navigation.navigate("Map")
             
           }}>
             <Text style={styles.checkout}>Checkout</Text>

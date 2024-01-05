@@ -195,7 +195,7 @@ export default function App() {
           }}
         />
         <Stack.Screen
-          name="Address"
+          name="AddressScreen"
           component={AddressScreen}
           options={{
             title: "Address",

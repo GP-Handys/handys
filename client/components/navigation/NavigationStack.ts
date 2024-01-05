@@ -29,7 +29,7 @@ export type StackParamList = {
 
   Cart:undefined;
   Map: undefined;
-  Address:undefined;
+  AddressScreen:{governorate: any , street: any};
   CardDetails:undefined;
   PlaceOrder:undefined;
   DonePlaceOrder:undefined;
