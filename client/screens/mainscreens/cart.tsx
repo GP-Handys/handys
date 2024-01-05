@@ -11,7 +11,7 @@ import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import CartItem from "../../components/cart/CartItem";
 import { useEffect, useState } from "react";
 import COLORS from "../../common/colors";
-import { getCart } from "../../api/CartApi";
+import { getCart, removeFromcart } from "../../api/CartApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 
@@ -19,7 +19,6 @@ import { ActivityIndicator } from "react-native-paper";
 
 export default function Cart() {
   const navigation = useNavigation<StackProps["navigation"]>();
-
   const [itemPrices, setItemPrices] = useState<any>({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartItems, setCartItems] = useState<any>();
@@ -27,8 +26,8 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
+    setLoading(true)
     let data = await getCart();
-
     setCartItems(data[0]);
     setItems(data[1]);
     setLoading(false);
@@ -36,7 +35,6 @@ export default function Cart() {
 
   useEffect(() => {
     getData();
-    countTotal();
     navigation.addListener("focus", getData);
   }, []);
 
@@ -46,15 +44,24 @@ export default function Cart() {
     countTotal();
   };
 
+  const removeItem = (cartId: any) => {
+    removeFromcart(cartId);
+    let editedcartItems = cartItems.filter(
+      (obj: { id: any }) => obj.id !== cartId
+    );
+    setCartItems(editedcartItems);
+    countTotal();
+  };
+
   function countTotal() {
     let total = 0;
-    for (const itemId in itemPrices) {
-      if (Object.prototype.hasOwnProperty.call(itemPrices, itemId)) {
-        total += itemPrices[itemId];
-      }
-    }
+    cartItems.forEach((element:any) => {
+      total+= itemPrices[element.item_id]
+    });
     setTotalPrice(total);
   }
+
+  
 
   if (loading) {
     return (
@@ -65,11 +72,17 @@ export default function Cart() {
   } else
     return (
       <CommonBackgroundWithNoSafeArea>
-        <FlatList style={{marginHorizontal:30,marginTop:10}}
-        scrollEnabled
+        <FlatList
+          style={{ marginHorizontal: 30, marginTop: 10 }}
+          scrollEnabled
           data={cartItems}
           renderItem={({ item }) => (
-            <CartItem cartItem={item} item={items[item.item_id]} updateTotal={updateItemPrice} />
+            <CartItem
+              cartItem={item}
+              item={items[item.item_id]}
+              updateTotal={updateItemPrice}
+              removeItem={removeItem}
+            />
           )}
         />
 
@@ -78,11 +91,11 @@ export default function Cart() {
             <Text style={styles.TotalPriceLable}>Total Price</Text>
             <Text style={styles.price}>JOD {totalPrice}</Text>
           </View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-            }}
-          >
+          <TouchableOpacity style={styles.button} onPress={() => {
+            console.log(items);
+            console.log(cartItems);
+            
+          }}>
             <Text style={styles.checkout}>Checkout</Text>
           </TouchableOpacity>
         </View>

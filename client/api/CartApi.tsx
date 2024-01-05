@@ -28,17 +28,17 @@ export const addToCart = async (ItemId: number,customization="") => {
       },
       data:{customization}
     });
-
+    
     return result.data;
   } catch (error: any) {
     return error.message;
   }
 };
 
-export const removeFromcart = async (ItemId: number) => {
+export const removeFromcart = async (cartId: number) => {
   let token = await AsyncStorage.getItem("Authorization");
   try {
-    const result = await ApiManager("/get/delete/" + ItemId, {
+    const result = await ApiManager("/cart/delete/" + cartId, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -52,11 +52,11 @@ export const removeFromcart = async (ItemId: number) => {
   }
 };
 
-export const editQuantity = async(ItemId:number , quantity:number)=>{
+export const editQuantity = async(cartId:number , quantity:number)=>{
   let token = await AsyncStorage.getItem("Authorization");
   try {
-    const result = await ApiManager("/get/delete/" + ItemId, {
-      method: "delete",
+    const result = await ApiManager(`/cart/update/" + ${cartId}/${quantity}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
