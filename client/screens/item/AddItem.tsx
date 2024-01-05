@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -35,6 +36,7 @@ export default function AddItemScreen({ route }: any) {
   };
 
   const addItem = async () => {
+    navigation.pop();
     await addItemForShopId(shopId, {
       name: itemName,
       base_price: itemPrice,
@@ -43,10 +45,7 @@ export default function AddItemScreen({ route }: any) {
       description: itemDescription,
       img_url: itemImageUrl,
     }).then((res) => {
-      if (res.status === 200) {
-        alert("Item added successfully");
-        navigation.pop();
-      }
+      Alert.alert(res.data)
     });
   };
 
