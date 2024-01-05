@@ -26,8 +26,8 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
+    setLoading(true)
     let data = await getCart();
-
     setCartItems(data[0]);
     setItems(data[1]);
     setLoading(false);
@@ -35,7 +35,6 @@ export default function Cart() {
 
   useEffect(() => {
     getData();
-    countTotal();
     navigation.addListener("focus", getData);
   }, []);
 
@@ -56,13 +55,13 @@ export default function Cart() {
 
   function countTotal() {
     let total = 0;
-    for (const itemId in itemPrices) {
-      if (Object.prototype.hasOwnProperty.call(itemPrices, itemId)) {
-        total += itemPrices[itemId];
-      }
-    }
+    cartItems.forEach((element:any) => {
+      total+= itemPrices[element.item_id]
+    });
     setTotalPrice(total);
   }
+
+  
 
   if (loading) {
     return (

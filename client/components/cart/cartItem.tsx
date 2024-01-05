@@ -23,7 +23,7 @@ export default function cartItem({
   updateTotal,
   removeItem,
 }: Props) {
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(cartItem.quantity);
   const [ItemTotalPrice, setItemTotalPrice] = useState(0);
 
   const plus = () => {
@@ -56,11 +56,7 @@ export default function cartItem({
     }
   };
 
-  useEffect(() => {
-    console.log(cartItem);
-    console.log(item);
-    
-    
+  useEffect(() => {  
     const quantity = cartItem.quantity;
     setCounter(quantity);
     const newTotalPrice = counter * item.base_price;
