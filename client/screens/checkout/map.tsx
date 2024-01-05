@@ -4,18 +4,23 @@ import * as Location from "expo-location";
 import MapView, { Marker, Region } from "react-native-maps";
 import COLORS from "../../common/colors";
 import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 interface LocationObject {
   coords: {
     latitude: number;
     longitude: number;
   };
+  location:{
+    governorate: any,
+    street: any;
+  }
 }
 
 export default function App() {
-  const [location, setLocation] = useState<LocationObject | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const navigation = useNavigation();
+  const [location, setLocation] = useState<LocationObject | any>(null);
+  const [errorMsg, setErrorMsg] = useState<any | null>(null);
+  const navigation = useNavigation<StackProps["navigation"]>();
 
   const fetchAddress = async (latitude: number, longitude: number) => {
     const apiKey = "AIzaSyCxob-cVDq_N7Ct1DfMHjAW1v7mM5kelyU";
@@ -34,13 +39,13 @@ export default function App() {
       const data = await response.json();
 
       if (data.status === "OK") {
-        let Governorate = "";
-        let street = "";
+        let governorate = null;
+        let street = null;
 
         for (const result of data.results) {
           for (const component of result.address_components) {
             if (component.types.includes("administrative_area_level_1")) {
-              Governorate = component.long_name;
+              governorate = component.long_name;
             }
             if (component.types.includes("route")) {
               street = component.long_name;
@@ -48,7 +53,7 @@ export default function App() {
           }
         }
 
-        return { Governorate, street };
+        return { governorate, street };
       } else {
         return null;
       }
@@ -67,7 +72,7 @@ export default function App() {
 
       if (addressData) {
         navigation.navigate("AddressScreen", {
-          Governorate: addressData.Governorate,
+          governorate: addressData.governorate,
           street: addressData.street
         });
       } else {
@@ -111,7 +116,7 @@ export default function App() {
             region={mapRegion}
             showsMyLocationButton={true}
             showsUserLocation={true}
-            style={styles.map}
+            style={styles.map} 
           >
             <Marker coordinate={mapRegion as any} title="My Location" />
           </MapView>
@@ -205,7 +210,7 @@ const styles = StyleSheet.create({
 //       if (data.status === "OK") {
 //         const results = data.results;
 //         if (results && results.length > 0) {
-//           let Governorate = "";
+//           let governorate = "";
 //           let street = "";
 
 //           // Loop through address components to extract Governorate and street

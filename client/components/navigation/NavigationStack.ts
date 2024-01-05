@@ -31,7 +31,7 @@ export type StackParamList = {
   ShopSettingsScreen: {shop: Shop}
   Cart:undefined;
   Map: undefined;
-  Address:undefined;
+  AddressScreen:{governorate: any , street: any};
   CardDetails:undefined;
   PlaceOrder:undefined;
   DonePlaceOrder:undefined;
