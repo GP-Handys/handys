@@ -9,6 +9,8 @@ import * as communityRouter from './communityRouter'
 import * as ticketRouter from "./ticketRouter"
 import * as categoryRouter from './categoryRouter'
 import * as cartRoute from './CartRouter'
+import * as imageGenRouter from './imageGenRouter'
+
 
 const router = express.Router()
 
@@ -88,5 +90,8 @@ router.get("/api/ticket/getTickets" , tokenValidate , ticketRouter.getTickets)
 router.get("/api/ticket/getTicket/:ticketId",tokenValidate,ticketRouter.getTicketById)
 router.post("/api/ticket/submitTicket" , tokenValidate , ticketRouter.submitTicket)
 router.get("/api/ticket/resolve/:ticketId",tokenValidate ,ticketRouter.resolveTicket)
+
+//AI
+router.post("/api/ai/generate", imageGenRouter.generateImage)
 
 export {router}
