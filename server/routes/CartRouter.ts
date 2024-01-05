@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Cart } from "../models/Cart";
+import {Item} from "../models/Item"
 import { connection as DB } from "../database/database";
+import { it } from "node:test";
 
 export const addToCart = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
@@ -59,11 +61,17 @@ export const removeFromCart = async (req: Request, res: Response) => {
     const user_id: number = extractUserFromJwt(jwt);
 
     try {
-      let cart =Cart.findAll({where:{user_id:user_id}})
-      let query = `select * from items where id = (select item_id from cart where user_id = ${user_id})`
-      const items = await DB.query(query);
+      let cart =await Cart.findAll({where:{user_id:user_id}})
+  
+      let query = `select * from items where id = (select item_id from carts where user_id = ${user_id})`
+      const items = await DB.query(query) as Item[];
+
+      let itemsMap:any={}
+      items[0].forEach(element=>{
+        itemsMap[element.id]=element;
+      })
       
-      res.status(200).json([cart,items]);
+      res.status(200).json([cart,itemsMap]);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: error });

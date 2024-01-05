@@ -1,5 +1,12 @@
 import { CommonScrollableBackground } from "../../common/background";
-import { Image, View, Text, StyleSheet } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import COLORS from "../../common/colors";
 import {
   Entypo,
@@ -75,11 +82,14 @@ export default function Profile() {
           >
             <ThematicBreak />
           </View>
-          <TouchableOpacity style={style.editProfile} onPress={() => {
-                navigation.navigate("EditProfile",{
-                  user:user
-                });
-              }}>
+          <TouchableOpacity
+            style={style.editProfile}
+            onPress={() => {
+              navigation.navigate("EditProfile", {
+                user: user,
+              });
+            }}
+          >
             <Feather name="edit" size={32} color={"white"} />
             <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
               Edit Profile
@@ -91,11 +101,28 @@ export default function Profile() {
             <Text style={style.lableFont}>Your shops</Text>
           </View>
 
-          <View style={{ gap: 20, paddingVertical: 15 }}>
-            {shops.map((shop: any) => (
-              <UserShop key={shop.id} shop={shop} />
-            ))}
+          <ScrollView horizontal={true} scrollEnabled={false} contentContainerStyle={{width:"100%",justifyContent:"center"}}>
+            <View >
+            <FlatList
+            scrollEnabled={false}
+              style={{alignSelf:"center",marginTop:10}}
+              data={shops}
+              renderItem={({ item }) => (
+                <UserShop shop={item} />
+              )}
+              ItemSeparatorComponent={()=>{
+                return (
+                <View style={{marginVertical:5}} />
 
+                )
+              }}
+
+            />
+            </View>
+          </ScrollView>
+
+          <View style={{ gap: 20, paddingVertical: 15 }}>
+  
             <TouchableOpacity
               style={style.createShop}
               onPress={() => {

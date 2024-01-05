@@ -75,6 +75,7 @@ router.get("/api/wishlist/get/:data", tokenValidate,wishlistRouter.getWishList)
 router.post("/api/cart/add/:itemId", tokenValidate,cartRoute.addToCart)
 router.delete("/api/cart/delete/:itemId", tokenValidate,cartRoute.removeFromCart)
 router.put("/api/update/get/:itemId", tokenValidate,cartRoute.updateQuantity)
+router.get("/api/cart/get",tokenValidate , cartRoute.getCart)
 
 // Category routes 
 router.get("/api/category/get", tokenValidate,categoryRouter.getAllCategories)

@@ -4,13 +4,16 @@ import ThematicBreak from "../ThematicBreak";
 import React, { useEffect, useState } from "react";
 import { Item } from "../../models/Item";
 import COLORS from "../../common/colors";
+import { Cart } from "../../models/Cart";
 
 interface Props {
+  cartItem:Cart;
   item: Item;
   updateTotal: any;
+  
 }
 
-export default function cartItem({ item, updateTotal }: Props) {
+export default function cartItem({cartItem, item, updateTotal }: Props) {
   const [counter, setCounter] = useState(1);
   const [ItemTotalPrice, setItemTotalPrice] = useState(0);
 
@@ -33,10 +36,16 @@ export default function cartItem({ item, updateTotal }: Props) {
   };
 
   useEffect(() => {
+    console.log(cartItem);
+    console.log(item);
+    
+    
+    const quantity = cartItem.quantity;
+    setCounter(quantity)
     const newTotalPrice = counter * item.base_price;
     setItemTotalPrice(newTotalPrice);
     updateTotal(item.id, newTotalPrice);
-  }, [counter, item.base_price]);
+  }, []);
 
   return (
     <View>
@@ -44,12 +53,12 @@ export default function cartItem({ item, updateTotal }: Props) {
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
             <Text style={styles.itemName}>{item.name}</Text>
-            {item.is_customizable && (
-              <>
+            {/* {item.is_customizable && (
+              <View>
                 <Text style={styles.Customized}>Customized</Text>
                 <Text style={styles.details}>Details:</Text>
-              </>
-            )}
+              <View/>
+            )} */}
           </View>
           <View style={styles.footer}>
             <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
@@ -64,7 +73,15 @@ export default function cartItem({ item, updateTotal }: Props) {
             </View>
           </View>
         </View>
-        <Image source={require("../../assets/pic1.jpg")} style={styles.image} />
+
+        {item.img_url === null ? (
+          <Image
+            source={require("../../assets/default_shop_img.png")}
+            style={styles.image}
+          />
+        ) : (
+          <Image source={{ uri: item.img_url }} style={styles.image} />
+        )}
       </View>
       <ThematicBreak verticalHorizontal={20} />
     </View>

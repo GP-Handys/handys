@@ -11,9 +11,6 @@ export const getCart = async () => {
         Authorization: token,
       },
     });
-    console.log('====================================');
-    console.log(result.data);
-    console.log('====================================');
     return result.data;
   } catch (error: any) {
     return error.message;

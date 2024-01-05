@@ -4,6 +4,9 @@ import { connection } from "../database/database";
 import { Shop } from "./Shop";
 
 class Item extends Model {
+  forEach(arg0: (element: any) => void) {
+    throw new Error("Method not implemented.");
+  }
   public id!: number;
   public name!: string;
   public description!: string;
