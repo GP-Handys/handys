@@ -10,6 +10,7 @@ import { Shop } from "../../models/Shop";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
+import { addToCart } from "../../api/CartApi";
 
 export default function ItemScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -69,7 +70,6 @@ export default function ItemScreen({ route }: any) {
                   color={"white"}
                   starStyle={{ width: 5 }}
                 />
-
                 {item.rating < 1000 ? (
                   <Text style={styles.ratingCount}>{item.rating} Reviews</Text>
                 ) : (
@@ -122,7 +122,7 @@ export default function ItemScreen({ route }: any) {
             </TouchableOpacity>
             <ThematicBreak />
 
-            <TouchableOpacity style={styles.cartButton}>
+            <TouchableOpacity style={styles.cartButton} onPress={()=>{addToCart(item.id)}}>
               <Feather name="shopping-cart" size={24} color="black" />
               <Text
                 style={{

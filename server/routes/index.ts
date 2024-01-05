@@ -8,7 +8,9 @@ import * as wishlistRouter from './wishlistRouter'
 import * as communityRouter from './communityRouter'
 import * as ticketRouter from "./ticketRouter"
 import * as categoryRouter from './categoryRouter'
+import * as cartRoute from './CartRouter'
 import * as imageGenRouter from './imageGenRouter'
+
 
 const router = express.Router()
 
@@ -71,6 +73,11 @@ router.post("/api/wishlist/add/:itemId", tokenValidate,wishlistRouter.addToWishL
 router.delete("/api/wishlist/delete/:itemId", tokenValidate,wishlistRouter.removeFromWishList)
 router.get("/api/wishlist/get/:data", tokenValidate,wishlistRouter.getWishList)
 
+//cart routes
+router.post("/api/cart/add/:itemId", tokenValidate,cartRoute.addToCart)
+router.delete("/api/cart/delete/:itemId", tokenValidate,cartRoute.removeFromCart)
+router.put("/api/update/get/:itemId", tokenValidate,cartRoute.updateQuantity)
+router.get("/api/cart/get",tokenValidate , cartRoute.getCart)
 
 // Category routes 
 router.get("/api/category/get", tokenValidate,categoryRouter.getAllCategories)
