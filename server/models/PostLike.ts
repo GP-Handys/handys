@@ -19,7 +19,7 @@ PostLike.init(
   },
   {
     sequelize: connection,
-    modelName: "PostLike",
+    modelName: "post-like",
   }
 );
 

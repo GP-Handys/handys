@@ -4,12 +4,13 @@ import COLORS from "../common/colors";
 
 interface Props {
   marginHorizontal?: number;
+  verticalHorizontal?: number;
 }
 
-export default function ThematicBreak({ marginHorizontal }: Props) {
+export default function ThematicBreak({ marginHorizontal ,verticalHorizontal}: Props) {
   return (
     <Divider
-      style={[styles.line, { marginHorizontal: marginHorizontal }]}
+      style={[styles.line, { marginHorizontal: marginHorizontal ,marginVertical:verticalHorizontal}]}
     ></Divider>
   );
 }

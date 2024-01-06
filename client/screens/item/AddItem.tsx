@@ -1,5 +1,14 @@
 import { Feather } from "@expo/vector-icons";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import COLORS from "../../common/colors";
@@ -46,6 +55,7 @@ export default function AddItemScreen({ route }: any) {
   };
 
   const addItem = async () => {
+    navigation.pop();
     await addItemForShopId(shopId, {
       name: itemName,
       base_price: itemPrice,
@@ -56,10 +66,7 @@ export default function AddItemScreen({ route }: any) {
       customization: customization,
       categories:selectedCategories
     }).then((res) => {
-      if (res.status === 200) {
-        alert("Item added successfully");
-        navigation.pop();
-      }
+      Alert.alert(res.data)
     });
   };
 
