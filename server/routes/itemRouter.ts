@@ -16,7 +16,7 @@ export const addItem = async (req: Request, res: Response) => {
       base_price,
       discount,
       quantity,
-      is_customizable,
+      customization,
       img_url,
       categories,
     } = req.body;
@@ -32,7 +32,7 @@ export const addItem = async (req: Request, res: Response) => {
         base_price,
         discount,
         quantity,
-        is_customizable,
+        customization,
         shopId,
         img_url,
       });
@@ -62,7 +62,7 @@ export const updateItem = async (req: Request, res: Response) => {
       base_price,
       discount,
       quantity,
-      is_customizable,
+      customization,
       categories,
       img_url
     } = req.body;
@@ -88,7 +88,7 @@ export const updateItem = async (req: Request, res: Response) => {
         base_price,
         discount,
         quantity,
-        is_customizable,
+        customization,
         img_url
       });
 
