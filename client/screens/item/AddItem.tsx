@@ -15,6 +15,9 @@ import { addItemForShopId } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import CheckBoxItem from "../../components/CheckBoxItem";
+import { MaterialIcons } from "@expo/vector-icons";
+import AddCategoriesModal from "./AddCategoriesModal";
+
 
 export default function AddItemScreen({ route }: any) {
   const shopId = route.params.shopId;
@@ -30,6 +33,11 @@ export default function AddItemScreen({ route }: any) {
   const [isBraceletChecked, setIsBraceletChecked] = useState(false);
   const [isEarringChecked, setIsEarringChecked] = useState(false);
   const [isRingsChecked, setIsRingsChecked] = useState(false);
+  const [customization, setCustomization] = useState("");
+
+  const [isAddCategoriesModal, setIsAddCategoriesModal] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
 
   const handleUploadPressed = async () => {
     const itemId = await pickImageAndStore("items", setItemImageUrl);
@@ -46,6 +54,7 @@ export default function AddItemScreen({ route }: any) {
       quantity: itemQuantity,
       description: itemDescription,
       img_url: itemImageUrl,
+      customization: customization,
     }).then((res) => {
       if (res.status === 200) {
         alert("Item added successfully");
@@ -133,32 +142,44 @@ export default function AddItemScreen({ route }: any) {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Categories</Text>
-        <View style={styles.checkboxRow}>
-          <CheckBoxItem
-            label="Bags"
-            state={isBagChecked}
-            setState={setIsBagChecked}
-          />
-          <CheckBoxItem
-            label="Bracelets"
-            state={isBraceletChecked}
-            setState={setIsBraceletChecked}
-          />
-          <CheckBoxItem
-            label="Earrings"
-            state={isEarringChecked}
-            setState={setIsEarringChecked}
-          />
-        </View>
-        <View style={styles.checkboxRow}>
-          <CheckBoxItem
-            label="Rings"
-            state={isRingsChecked}
-            setState={setIsRingsChecked}
-          />
-        </View>
+        <Text style={styles.textLabel}>Customization</Text>
+        <CustomTextInput
+          placeholder="What can the customer customize with your creation?"
+          multiline={true}
+          minHeight={100}
+          onChangeText={(text) => {
+            setCustomization(text);
+          }}
+        />
       </View>
+
+      
+      <View style={{paddingTop:10}}>
+          <TouchableOpacity style={
+            {borderWidth:1,  
+              backgroundColor: COLORS.handysGrey, 
+              borderRadius: 8,
+              flexDirection: "row",
+              height: 45,
+              marginHorizontal: 33,
+              marginBottom: 10,
+              display: "flex",
+              gap: 150,
+          }
+          }
+          onPress={() => {setModalVisible(true)}}
+          >
+  <Text style={{color: "white", marginTop:8, fontSize: 15, marginRight:10, paddingLeft:10}}> 
+    Category
+  </Text>
+          <MaterialIcons name="keyboard-arrow-right" size={22} color="white" style={{marginTop:8,paddingLeft:20}} />           
+          </TouchableOpacity>
+      </View>
+      <AddCategoriesModal
+        isVisible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+        />
+
       <View style={styles.confirmPressableContainer}>
         <TouchableOpacity
           onPress={handleAddItem}
