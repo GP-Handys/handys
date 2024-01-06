@@ -2,7 +2,6 @@ import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   View,
   Text,
-  Pressable,
   StyleSheet,
   Image,
   TouchableOpacity,
@@ -13,13 +12,12 @@ import COLORS from "../../common/colors";
 import pickImageAndStore from "../../storage/store";
 import { useState } from "react";
 import React from "react";
-import { addItemForShopId, updateItemById } from "../../api/ItemApi";
+import { updateItemById } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Item } from "../../models/Item";
 
 export default function EditItemScreen({ route }: any) {
-  const shopId: number = route.params.shopId;
   const item: Item = route.params.item;
   const navigation = useNavigation<StackProps["navigation"]>();
   const [itemImageUrl, setItemImageUrl] = useState();

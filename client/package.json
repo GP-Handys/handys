@@ -38,7 +38,8 @@
     "react-native-segmented-control-tab": "^4.0.0",
     "react-native-star-rating-widget": "^1.7.3",
     "react-native-vector-icons": "^10.0.2",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "expo-checkbox": "~2.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

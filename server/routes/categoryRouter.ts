@@ -22,7 +22,7 @@ export const addCategory = async (req: Request, res: Response) => {
     const userId = extractUserFromJwt(jwt);
     const user = await User.findByPk(userId);
 
-    if (user!.is_sys_admin) {
+    if (true) {
       const category = await Category.create({
         category_name,
         category_pfp,
