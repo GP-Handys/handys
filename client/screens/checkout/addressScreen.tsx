@@ -16,7 +16,7 @@ import CustomTextInput from "../../components/CustomTextInput";
 import { TextInput } from "react-native-paper";
 
 const AddressScreen = ({ route }: any) => {
-  const [Building, setBuilding] = useState("");
+  const [StreetName, setStreetName] = useState("");
   const [Apartment, setApartment] = useState("");
   const [Floor, setFloor] = useState("");
   const [phone_number, setPhone_number] = useState("");
@@ -54,9 +54,9 @@ const AddressScreen = ({ route }: any) => {
 
       <View style={styles.inputsContainer}>
         <CustomTextInput
-          placeholder="Building Name"
-          value={Building}
-          onChangeText={(Building) => setBuilding(Building)}
+          placeholder="Street Name"
+          value={StreetName}
+          onChangeText={(StreetName) => setStreetName(StreetName)}
         />
         <View style={styles.row}>
           <CustomTextInput
@@ -73,8 +73,8 @@ const AddressScreen = ({ route }: any) => {
           />
         </View>
         <CustomTextInput
-        style={{marginTop:10}}
-          placeholder={"07********"}
+          style={{ marginTop: 10 }}
+          placeholder={"Phone Number | 07********"}
           onChangeText={(text) => setPhone_number(text)}
           maxLength={10}
           mode={"tel"}
