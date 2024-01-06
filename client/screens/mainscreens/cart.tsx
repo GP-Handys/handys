@@ -91,8 +91,8 @@ export default function Cart() {
 
         <View style={styles.container}>
           <View style={styles.priceContainer}>
-            <Text style={styles.TotalPriceLable}>Total Price</Text>
-            <Text style={styles.price}>JOD {totalPrice}</Text>
+            <Text style={styles.TotalPrice}>Total Price</Text>
+            <Text style={styles.TotalPrice}>JOD {totalPrice}</Text>
           </View>
           <TouchableOpacity style={styles.button} onPress={() => {
             console.log(items);
@@ -119,16 +119,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "baseline",
   },
-  TotalPriceLable: {
-    color: "gray",
-    fontSize: 13,
-    fontWeight: "700",
-  },
-  price: {
+  TotalPrice: {
     color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "500",
   },
+
   button: {
     height: 45,
     backgroundColor: COLORS.CTAButtonBackground,
