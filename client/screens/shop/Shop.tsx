@@ -12,10 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Item } from "../../models/Item";
 import React, {
-  useCallback,
   useEffect,
-  useMemo,
-  useRef,
   useState,
 } from "react";
 import { getItemsForShopId } from "../../api/ItemApi";
@@ -83,7 +80,7 @@ export default function ShopScreen({ route }: any) {
             style={styles.rating}
           />
         </View>
-        {true && (
+        {shop?.userId === userId && (
           <View style={styles.subToPremiumContainer}>
             <TouchableOpacity
               style={styles.subToPremiumButton}
