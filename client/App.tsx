@@ -20,6 +20,7 @@ import MyPostsScreen from "./screens/community/MyPosts";
 import Map from './screens/checkout/map';
 import AddressScreen from './screens/checkout/addressScreen'
 import EditItemScreen from "./screens/item/EditItem";
+import ShopSettingsScreen from "./screens/shop/Settings";
 
 
 export default function App() {
@@ -203,6 +204,18 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="ShopSettingsScreen"
+          component={ShopSettingsScreen}
+          options={{
+            title: "Shop Settings",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
       </Stack.Navigator>

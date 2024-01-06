@@ -6,6 +6,7 @@ import { Category } from "../../models/Category";
 import { PostModel } from "../../models/Post";
 import { Item } from "../../models/Item";
 import { User } from "../../models/User";
+import { Shop } from "../../models/Shop";
 
 export type StackParamList = {
   Landing: undefined;
@@ -35,6 +36,7 @@ export type StackParamList = {
   DonePlaceOrder:undefined;
 
   EditItemScreen: { item: Item, shopId: number };
+  ShopSettingsScreen: {shop: Shop}
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
