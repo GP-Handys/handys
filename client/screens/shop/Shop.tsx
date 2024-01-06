@@ -11,12 +11,18 @@ import COLORS from "../../common/colors";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Item } from "../../models/Item";
-import { useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { getItemsForShopId } from "../../api/ItemApi";
 import { getShopById } from "../../api/ShopApi";
 import { getProfile } from "../../api/UserApi";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
 import ItemCard from "../../components/home/ItemCard";
 import { getWishList } from "../../api/WishlistApi";
@@ -65,20 +71,6 @@ export default function ShopScreen({ route }: any) {
 
   return (
     <CommonScrollableBackground>
-      {shop?.userId == userId && (
-        <View style={styles.addItemsButtonContainer}>
-          <TouchableOpacity
-            style={styles.addItemButton}
-            onPress={() => {
-              navigation.navigate("AddItemScreen", {
-                shopId: shopId,
-              });
-            }}
-          >
-            <Text style={{ fontSize: 16, fontWeight: "500" }}>Add item</Text>
-          </TouchableOpacity>
-        </View>
-      )}
       <Image source={{ uri: shop?.pfp_url }} style={styles.shopImage} />
       <View style={styles.footerContainer}>
         <View>
@@ -91,34 +83,36 @@ export default function ShopScreen({ route }: any) {
             style={styles.rating}
           />
         </View>
-        {shop?.userId == userId && (
-          <View>
-            <View style={styles.subToPremiumContainer}>
-              <TouchableOpacity
-                style={styles.subToPremiumButton}
-                onPress={() => {
-                  navigation.navigate("AddItemScreen", {
-                    shopId: shopId,
-                  });
-                }}
+        {true && (
+          <View style={styles.subToPremiumContainer}>
+            <TouchableOpacity
+              style={styles.subToPremiumButton}
+              onPress={() => navigation.navigate("ShopSettingsScreen", {shop: shop})}
+            >
+              <Ionicons name="settings" size={22} color="white" />
+              <Text
+                style={{ fontSize: 14, fontWeight: "bold", color: "white" }}
               >
-                <FontAwesome5 name="crown" size={22} color="black" />
-                <Text style={{ fontSize: 14, fontWeight: "bold" }}>
-                  Get premium
-                </Text>
-              </TouchableOpacity>
-            </View>
+                Settings
+              </Text>
+            </TouchableOpacity>
           </View>
         )}
       </View>
       <Text style={styles.bio}>{shop?.bio}</Text>
       <ThematicBreak />
       <Text style={styles.shopItems}>Shop's handicrafts</Text>
-      <View style={{marginLeft: 20, marginRight: 20}}>
+      <View style={{ marginLeft: 20, marginRight: 20 }}>
         <FlatList
           data={items}
           renderItem={({ item }) => {
-            return <ItemCard item={item} isFavorite={favoriteItems.includes(item.id)} isEditable={shop?.userId === userId}/>;
+            return (
+              <ItemCard
+                item={item}
+                isFavorite={favoriteItems.includes(item.id)}
+                isEditable={shop?.userId === userId}
+              />
+            );
           }}
           numColumns={2}
           scrollEnabled={false}
@@ -136,21 +130,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 25,
-  },
-  addItemsButtonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginRight: 15,
-  },
-  addItemButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: COLORS.CTAButtonBackground,
-    height: 37,
-    width: 100,
-    borderRadius: 6,
-    marginVertical: 10,
   },
   shopImage: {
     width: "100%",
@@ -176,8 +155,8 @@ const styles = StyleSheet.create({
   subToPremiumButton: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: COLORS.CTAButtonBackground,
+    gap: 20,
+    backgroundColor: COLORS.handysGrey,
     height: 37,
     width: 135,
     borderRadius: 6,
@@ -196,5 +175,32 @@ const styles = StyleSheet.create({
     color: "white",
     marginLeft: 15,
     marginTop: 20,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    marginTop: "auto",
+    height: "50%",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 16,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  closeButton: {
+    alignItems: "center",
+    padding: 16,
+  },
+  container: {
+    flex: 1,
+    padding: 24,
+    justifyContent: "center",
+    backgroundColor: "grey",
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: "center",
   },
 });

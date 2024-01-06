@@ -17,6 +17,7 @@ import WishlistScreen from "./screens/profile/Wishlist";
 import ItemScreen from "./screens/item/Item";
 import MyPostsScreen from "./screens/community/MyPosts";
 import EditItemScreen from "./screens/item/EditItem";
+import ShopSettingsScreen from "./screens/shop/Settings";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -172,6 +173,18 @@ export default function App() {
           component={EditItemScreen}
           options={{
             title: "Edit Item",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShopSettingsScreen"
+          component={ShopSettingsScreen}
+          options={{
+            title: "Shop Settings",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
