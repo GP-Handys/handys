@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Wishlist } from "../models/Wishlist";
-import { Item } from "../models/Item";
 import { connection as DB } from "../database/database";
 
 export const addToWishList = async (req: Request, res: Response) => {
@@ -9,11 +8,17 @@ export const addToWishList = async (req: Request, res: Response) => {
   const userId: number = extractUserFromJwt(jwt);
   const itemId = req.params.itemId;
   try {
+    let item = await Wishlist.findOne({where: {
+      user_id:userId,
+      item_id:itemId,
+    },})
+
+    if(item==null){
     await Wishlist.create({
       item_id: itemId,
       user_id: userId,
     });
-    // 201 = resource created. better convention :)
+  }
     res.sendStatus(201);
   } catch (error) {
     console.error(error);
@@ -26,12 +31,15 @@ export const removeFromWishList = async (req: Request, res: Response) => {
   const user_id: number = extractUserFromJwt(jwt);
   const item_id = req.params.itemId;
   try {
-    await Wishlist.destroy({
-      where: {
-        user_id,
-        item_id,
-      },
-    });
+    let item = await Wishlist.findOne({where: {
+      user_id,
+      item_id,
+    },})
+
+    if(item!=null){
+      item.destroy()
+    }
+    
     res.sendStatus(200);
   } catch (error) {
     console.error(error);
