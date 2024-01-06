@@ -5,29 +5,36 @@ import {
   TouchableOpacity,
   Modal,
   Text,
-  Image,
   Platform,
   FlatList,
 } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
-import COLORS from "../../common/colors";
-import SelectableCategory from "./SelectableCategories";
+import SelectableCategory from "./SelectableCategory";
+import { Category } from "../../models/Category";
 
 interface CategoriesModalProps {
+  addCategory:(id: number) => void
+  removeCategory:(id: number) => void
   isVisible: boolean;
   onDismiss: () => void;
+  selectedCategories:Number[];
 }
+
 export default function PostModal({
   isVisible,
   onDismiss,
+  addCategory,
+  removeCategory,
+  selectedCategories
+
 }: CategoriesModalProps) {
+
   const handleAdCategories = async () => {
     onDismiss();
   };
-
-  const [data, setData] = useState([
+  const [data, setData] = useState<Category[]>([
     {
       id: 1,
       category_name: "Rings",
@@ -80,7 +87,7 @@ export default function PostModal({
           <ThematicBreak />
           <FlatList
             data={data}
-            renderItem={({ item }) => <SelectableCategory />}
+            renderItem={({ item }) => <SelectableCategory category={item} isChecked={selectedCategories.includes(item.id)} addCategory={addCategory} removeCategory={removeCategory}/>}
             ItemSeparatorComponent={() => <ThematicBreak />}
           />
         </CommonBackgroundWithSafeArea>
@@ -92,7 +99,7 @@ export default function PostModal({
 const styles = StyleSheet.create({
   ModalHeader: {
     paddingTop: Platform.OS === "android" ? 15 : 0,
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 15,
     marginTop: 10,
@@ -113,13 +120,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 75,
     alignItems: "center",
-    height: 30,
+    height: 35,
     backgroundColor: "#F6977F",
     justifyContent: "center",
     marginEnd: 10,
     position: "absolute",
     right: 10,
-    top: 14,
   },
   InnerButton: {
     color: "black",

@@ -1,11 +1,5 @@
 import { Feather } from "@expo/vector-icons";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import COLORS from "../../common/colors";
@@ -14,10 +8,8 @@ import { useState } from "react";
 import { addItemForShopId } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import CheckBoxItem from "../../components/CheckBoxItem";
 import { MaterialIcons } from "@expo/vector-icons";
 import AddCategoriesModal from "./AddCategoriesModal";
-
 
 export default function AddItemScreen({ route }: any) {
   const shopId = route.params.shopId;
@@ -29,14 +21,21 @@ export default function AddItemScreen({ route }: any) {
   const [itemDiscount, setItemDiscount] = useState("");
   const [itemQuantity, setItemQuantity] = useState("");
   const [itemDescription, setItemDescription] = useState("");
-  const [isBagChecked, setIsBagChecked] = useState(false);
-  const [isBraceletChecked, setIsBraceletChecked] = useState(false);
-  const [isEarringChecked, setIsEarringChecked] = useState(false);
-  const [isRingsChecked, setIsRingsChecked] = useState(false);
   const [customization, setCustomization] = useState("");
-
-  const [isAddCategoriesModal, setIsAddCategoriesModal] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+
+  const addCategory = (id: number)=> {
+    if (!selectedCategories.includes(id)) {
+      setSelectedCategories(prevCategories => [...prevCategories, id]);
+    }
+  }
+
+  const removeCategory=(id: number) =>{
+    setSelectedCategories(prevCategories =>
+      prevCategories.filter(categoryId => categoryId !== id)
+    );
+  }
 
 
   const handleUploadPressed = async () => {
@@ -55,6 +54,7 @@ export default function AddItemScreen({ route }: any) {
       description: itemDescription,
       img_url: itemImageUrl,
       customization: customization,
+      categories:selectedCategories
     }).then((res) => {
       if (res.status === 200) {
         alert("Item added successfully");
@@ -153,32 +153,33 @@ export default function AddItemScreen({ route }: any) {
         />
       </View>
 
-      
-      <View style={{paddingTop:10}}>
-          <TouchableOpacity style={
-            {borderWidth:1,  
-              backgroundColor: COLORS.handysGrey, 
-              borderRadius: 8,
-              flexDirection: "row",
-              height: 45,
-              marginHorizontal: 33,
-              marginBottom: 10,
-              display: "flex",
-              gap: 150,
-          }
-          }
-          onPress={() => {setModalVisible(true)}}
-          >
-  <Text style={{color: "white", marginTop:8, fontSize: 15, marginRight:10, paddingLeft:10}}> 
-    Category
-  </Text>
-          <MaterialIcons name="keyboard-arrow-right" size={22} color="white" style={{marginTop:8,paddingLeft:20}} />           
-          </TouchableOpacity>
+      <View style={{ paddingTop: 10, paddingHorizontal: 33 }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: COLORS.handysGrey,
+            borderRadius: 10,
+            flexDirection: "row",
+            height: 50,
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 10,
+          }}
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <Text style={styles.categoryName}>Categories</Text>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="white" />
+        </TouchableOpacity>
       </View>
+
       <AddCategoriesModal
+      selectedCategories={selectedCategories}
+      addCategory={addCategory}
+      removeCategory={removeCategory}
         isVisible={modalVisible}
         onDismiss={() => setModalVisible(false)}
-        />
+      />
 
       <View style={styles.confirmPressableContainer}>
         <TouchableOpacity
@@ -220,13 +221,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 41,
     borderRadius: 8,
-    marginHorizontal: 23,
+    marginHorizontal: 33,
   },
   confirmPressableContainer: {
     marginTop: 40,
     paddingBottom: 50,
   },
   blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
+
   changeIMG: {
     height: 40,
     backgroundColor: COLORS.CTAButtonBackground,
@@ -237,15 +239,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 100,
     marginBottom: 20,
   },
-  checkboxRow: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
+
   categoryName: {
-    marginRight: 5,
+    fontSize:16,
     color: "white",
-    fontWeight: "bold",
+    fontWeight: "500",
   },
 });
