@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   RefreshControl,
+  Dimensions,
 } from "react-native";
 import ThematicBreak from "../../components/ThematicBreak";
 import PostModal from "../community/AddPostModal";

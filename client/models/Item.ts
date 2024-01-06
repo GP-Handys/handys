@@ -6,7 +6,7 @@ class Item  {
   public discount!: number;
   public rating!: number;
   public quantity!: number;
-  public customization!: string;
+  public is_customizable!: boolean;
   public img_url?: string | null;
   public is_deleted!: boolean;
   public shopId!: number;

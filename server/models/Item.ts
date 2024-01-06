@@ -14,7 +14,7 @@ class Item extends Model {
   public discount!: number;
   public rating!: number;
   public quantity!: number;
-  public customization!: string;
+  public is_customizable!: boolean;
   public img_url?: string | null;
   public is_deleted!: boolean;
   public shopId!: number;
@@ -64,9 +64,9 @@ Item.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    customization: {
-      type: DataTypes.STRING,
-      allowNull: true,
+    is_customizable: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     img_url: {
       type: DataTypes.STRING,

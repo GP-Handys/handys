@@ -1,5 +1,4 @@
 import { Feather } from "@expo/vector-icons";
-
 import {
   View,
   Text,
@@ -17,8 +16,6 @@ import { useState } from "react";
 import { addItemForShopId } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import { MaterialIcons } from "@expo/vector-icons";
-import AddCategoriesModal from "./AddCategoriesModal";
 
 export default function AddItemScreen({ route }: any) {
   const shopId = route.params.shopId;
@@ -30,22 +27,6 @@ export default function AddItemScreen({ route }: any) {
   const [itemDiscount, setItemDiscount] = useState("");
   const [itemQuantity, setItemQuantity] = useState("");
   const [itemDescription, setItemDescription] = useState("");
-  const [customization, setCustomization] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-
-  const addCategory = (id: number)=> {
-    if (!selectedCategories.includes(id)) {
-      setSelectedCategories(prevCategories => [...prevCategories, id]);
-    }
-  }
-
-  const removeCategory=(id: number) =>{
-    setSelectedCategories(prevCategories =>
-      prevCategories.filter(categoryId => categoryId !== id)
-    );
-  }
-
 
   const handleUploadPressed = async () => {
     const itemId = await pickImageAndStore("items", setItemImageUrl);
@@ -63,8 +44,6 @@ export default function AddItemScreen({ route }: any) {
       quantity: itemQuantity,
       description: itemDescription,
       img_url: itemImageUrl,
-      customization: customization,
-      categories:selectedCategories
     }).then((res) => {
       Alert.alert(res.data)
     });
@@ -93,10 +72,7 @@ export default function AddItemScreen({ route }: any) {
         </>
       ) : (
         <>
-          <TouchableOpacity
-            onPress={handleUploadPressed}
-            style={[styles.uploadPressable, { marginBottom: 30 }]}
-          >
+<TouchableOpacity onPress={handleUploadPressed} style={[styles.uploadPressable, {marginBottom: 30}]}>
             <Feather name="upload" size={52} color="white" />
           </TouchableOpacity>
         </>
@@ -148,46 +124,6 @@ export default function AddItemScreen({ route }: any) {
           }}
         />
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Customization</Text>
-        <CustomTextInput
-          placeholder="What can the customer customize with your creation?"
-          multiline={true}
-          minHeight={100}
-          onChangeText={(text) => {
-            setCustomization(text);
-          }}
-        />
-      </View>
-
-      <View style={{ paddingTop: 10, paddingHorizontal: 33 }}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: COLORS.handysGrey,
-            borderRadius: 10,
-            flexDirection: "row",
-            height: 50,
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-          }}
-          onPress={() => {
-            setModalVisible(true);
-          }}
-        >
-          <Text style={styles.categoryName}>Categories</Text>
-          <MaterialIcons name="keyboard-arrow-right" size={28} color="white" />
-        </TouchableOpacity>
-      </View>
-
-      <AddCategoriesModal
-      selectedCategories={selectedCategories}
-      addCategory={addCategory}
-      removeCategory={removeCategory}
-        isVisible={modalVisible}
-        onDismiss={() => setModalVisible(false)}
-      />
-
       <View style={styles.confirmPressableContainer}>
         <TouchableOpacity
           onPress={handleAddItem}
@@ -228,14 +164,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 41,
     borderRadius: 8,
-    marginHorizontal: 33,
+    marginHorizontal: 23,
   },
   confirmPressableContainer: {
     marginTop: 40,
     paddingBottom: 50,
   },
   blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
-
   changeIMG: {
     height: 40,
     backgroundColor: COLORS.CTAButtonBackground,
@@ -245,11 +180,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 100,
     marginBottom: 20,
-  },
-
-  categoryName: {
-    fontSize:16,
-    color: "white",
-    fontWeight: "500",
   },
 });

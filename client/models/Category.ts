@@ -3,5 +3,6 @@ class Category  {
   public category_name!: string;
   public category_pfp?: string | null;
 }
+
   
 export { Category };

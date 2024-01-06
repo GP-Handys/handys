@@ -7,7 +7,6 @@ import { connection as DB } from "../database/database";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Sequelize } from "sequelize";
 import { Category } from "../models/Category";
-import { log } from "console";
 
 export const addItem = async (req: Request, res: Response) => {
   try {
@@ -17,7 +16,7 @@ export const addItem = async (req: Request, res: Response) => {
       base_price,
       discount,
       quantity,
-      customization,
+      is_customizable,
       img_url,
       categories,
     } = req.body;
@@ -33,7 +32,7 @@ export const addItem = async (req: Request, res: Response) => {
         base_price,
         discount,
         quantity,
-        customization,
+        is_customizable,
         shopId,
         img_url,
       });
@@ -41,9 +40,7 @@ export const addItem = async (req: Request, res: Response) => {
       categories.forEach(async (categoryId: number) => {
         let category = Category.findByPk(categoryId);
         if (category != null) {
-          const currentDate = new Date();
-          const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); 
-          let query = `insert into item_category (itemId , categoryId , createdAt,updatedAt) values (${item.id},${categoryId},'${formattedDate}','${formattedDate}')`;
+          let query = `insert into item_category (itemId , categoryId) values (${item.id},${categoryId})`;
           await DB.query(query);
         }
       });
@@ -53,8 +50,6 @@ export const addItem = async (req: Request, res: Response) => {
       res.sendStatus(403);
     }
   } catch (error) {
-    console.log(error);
-    
     res.status(500).json(error);
   }
 };
@@ -67,7 +62,7 @@ export const updateItem = async (req: Request, res: Response) => {
       base_price,
       discount,
       quantity,
-      customization,
+      is_customizable,
       categories,
       img_url
     } = req.body;
@@ -93,7 +88,7 @@ export const updateItem = async (req: Request, res: Response) => {
         base_price,
         discount,
         quantity,
-        customization,
+        is_customizable,
         img_url
       });
 
