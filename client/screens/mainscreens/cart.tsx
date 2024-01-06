@@ -8,7 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
-import CartItem from "../../components/cart/CartItem";
+import CartItem from "../../components/cart/cartItem";
 import { useEffect, useState } from "react";
 import COLORS from "../../common/colors";
 import { getCart, removeFromcart } from "../../api/CartApi";
