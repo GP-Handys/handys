@@ -60,13 +60,13 @@ const AddressScreen = ({ route }: any) => {
         />
         <View style={styles.row}>
           <CustomTextInput
-            style={{ width: 155 }}
+            style={{ paddingRight: 30 }}
             placeholder="Apt. Number"
             value={Apartment}
             onChangeText={(Apartment) => setApartment(Apartment)}
           />
           <CustomTextInput
-            style={{ width: 155 }}
+            style={{ paddingRight: 90 }}
             placeholder="Floor"
             value={Floor}
             onChangeText={(Floor) => setFloor(Floor)}
@@ -75,7 +75,7 @@ const AddressScreen = ({ route }: any) => {
         <CustomTextInput
           style={{ marginTop: 10 }}
           placeholder={"Phone Number | 07********"}
-          onChangeText={(text) => setPhone_number(text)}
+          onChangeText={(phone_number) => setPhone_number(phone_number)}
           maxLength={10}
           mode={"tel"}
         />
@@ -86,6 +86,7 @@ const AddressScreen = ({ route }: any) => {
           <Text style={styles.confirm}>Confirm</Text>
         </TouchableOpacity>
       </View>
+      
     </CommonBackgroundWithSafeArea>
   );
 };
@@ -127,8 +128,6 @@ const styles = StyleSheet.create({
     height: 60
   },
   change: {
-    textAlignVertical: "center",
-    height: 60,
     fontSize: 14,
     color: COLORS.CTAButtonBackground
   },
@@ -158,8 +157,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 8,
     width: "90%",
-    bottom: 20,
-    marginTop: "55%"
+    marginTop: "50%"
   }
 });
 
