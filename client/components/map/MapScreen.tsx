@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
+import MapView, { Marker } from "react-native-maps";
+import * as Location from "expo-location";
+import { CommonBackgroundWithNoSafeArea, CommonBackgroundWithSafeArea } from "../../common/background";
 
 // Define a type for the location state
 type LocationType = {
@@ -18,8 +19,8 @@ export default function MapScreen() {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
         return;
       }
 
@@ -33,21 +34,30 @@ export default function MapScreen() {
       {location ? (
         <View style={styles.mapContainer}>
           <MapView
+            scrollEnabled={false}
+            zoomEnabled={false}
+            rotateEnabled={false}
+            pitchEnabled={false}
+            showsUserLocation={false}
+            showsMyLocationButton={false}
             style={styles.map}
             region={{
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+              latitudeDelta: 0.05,
+              longitudeDelta: 0.05
             }}
           >
             <Marker
+              draggable={false}
+              onPress={() => {}}
+              onCalloutPress={() => {}}
+              stopPropagation={false}
+
               coordinate={{
                 latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
+                longitude: location.coords.longitude
               }}
-              title={'My Location'}
-              description={'This is my current location'}
             />
           </MapView>
         </View>
@@ -59,13 +69,14 @@ export default function MapScreen() {
 }
 
 const styles = StyleSheet.create({
-
   mapContainer: {
-    borderRadius: 15,  // Add border radius to create rounded corners
-    overflow: 'hidden',  // Apply overflow hidden to clip the content
+    marginTop:20,
+    marginHorizontal:"5%",
+    borderRadius: 7.5,
+    overflow: "hidden" 
   },
   map: {
-    width: Dimensions.get('window').width * 0.9,  // Set width to 80% of the screen width
-    height: Dimensions.get('window').height * 0.25,  // Set height to 50% of the screen height
-  },
+    width: Dimensions.get("window").width * 0.9, 
+    height: Dimensions.get("window").height * 0.15 
+  }
 });
