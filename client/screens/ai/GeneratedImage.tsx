@@ -1,4 +1,3 @@
-import { CommonScrollableBackground } from "../../common/background";
 import {
   Image,
   View,
@@ -12,11 +11,12 @@ import React, { useState } from "react";
 import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ActivityIndicator } from "react-native-paper";
-import CustomTextInput from "../../components/CustomTextInput";
+import { useNavigation } from "@react-navigation/native";
 
 type StackProps = NativeStackScreenProps<StackParamList>;
 
 export default function GeneratedImageScreen({ route }: any) {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const prompt = route.params.prompt;
   const [image, setImage] = useState();
   const [generating, isGenerating] = useState(true);
@@ -27,11 +27,16 @@ export default function GeneratedImageScreen({ route }: any) {
         {false ? (
           <ActivityIndicator size={"large"} color="white" />
         ) : (
-          <Image source={{ uri: "https://firebasestorage.googleapis.com/v0/b/handys-1.appspot.com/o/items%2F008E22D3-DC4C-43D6-898C-2B8D5F095366.jpg?alt=media&token=5f7fd35f-4634-49b3-a4bd-27b4d85318df" }} style={styles.image} />
+          <Image
+            source={{
+              uri: "https://firebasestorage.googleapis.com/v0/b/handys-1.appspot.com/o/items%2F008E22D3-DC4C-43D6-898C-2B8D5F095366.jpg?alt=media&token=5f7fd35f-4634-49b3-a4bd-27b4d85318df",
+            }}
+            style={styles.image}
+          />
         )}
       </View>
       <View>
-        <TouchableOpacity style={styles.download}>
+        <TouchableOpacity style={styles.download} onPress={() => navigation.pop()}>
           <Text style={{ color: "white", fontWeight: "600", fontSize: 16 }}>
             Generate Again
           </Text>
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 50,
-    marginTop: -100
+    marginTop: -100,
   },
   image: {
     width: 350,
