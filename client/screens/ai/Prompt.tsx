@@ -7,18 +7,15 @@ import {
 } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import COLORS from "../../common/colors";
-import { StackProps } from "../../components/navigation/NavigationStack";
-import { submitTicket } from "../../api/TicketApi";
 import CustomTextInput from "../../components/CustomTextInput";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function SendTicketScreen({ navigation }: StackProps) {
+export default function AiPromptScreen() {
   const [prompt, setPrompt] = useState("");
 
   const isButtonEnabled = prompt.trim().length > 6;
 
   const handleSendPrompt = () => {
-    submitTicket(prompt);
     // navigation.navigate("result");
   };
   var maxLength = 100;
@@ -28,7 +25,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
         <View style={styles.upperContainer}>
           <AntDesign name="rocket1" size={100} color="white" />
           <Text style={styles.textTitle}>
-            Struggling with lack of ideas? No worries, this AI will assist you.
+            Use this cutting-edge AI tool to help you visualize your ideas to real products!
           </Text>
         </View>
 
@@ -49,7 +46,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
                 *Note: please use words that are related to handcrafts to get
                 better results.
               </Text>
-              <Text style={styles.note}>eg. Black painted wood handcraft </Text>
+              <Text style={styles.note}>eg. Scarfs for babies ages 3 to 12 months old, nitted using blue and pink wool with some star stickers stuck on the scarf. </Text>
             </View>
             {!isButtonEnabled ? (
               <TouchableOpacity
