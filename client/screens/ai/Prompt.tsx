@@ -4,15 +4,13 @@ import { CommonScrollableBackground } from "../../common/background";
 import COLORS from "../../common/colors";
 import CustomTextInput from "../../components/CustomTextInput";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 export default function AiPromptScreen() {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const [prompt, setPrompt] = useState("");
-
   const isButtonEnabled = prompt.trim().length > 6;
-
-  const handleSendPrompt = () => {
-    // navigation.navigate("result");
-  };
 
   return (
     <CommonScrollableBackground>
@@ -47,16 +45,16 @@ export default function AiPromptScreen() {
           {!isButtonEnabled ? (
             <TouchableOpacity
               disabled={true}
-              style={[{ opacity: 0.5 }, styles.confirmPressable]}
+              style={[{ opacity: 0.5 }, styles.generatePressable]}
             >
               <Text style={styles.confirm}>Generate</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              style={styles.confirmPressable}
-              onPress={handleSendPrompt}
+              style={styles.generatePressable}
+              onPress={() => navigation.navigate("GeneratedImageScreen", {prompt: prompt})}
             >
-              <Text style={styles.confirm}>Confirm</Text>
+              <Text style={styles.confirm}>Generate</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
   },
-  confirmPressable: {
+  generatePressable: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",

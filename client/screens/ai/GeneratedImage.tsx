@@ -1,5 +1,12 @@
 import { CommonScrollableBackground } from "../../common/background";
-import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import COLORS from "../../common/colors";
 import React, { useState } from "react";
 import { StackParamList } from "../../components/navigation/NavigationStack";
@@ -15,55 +22,48 @@ export default function GeneratedImageScreen({ route }: any) {
   const [generating, isGenerating] = useState(true);
 
   return (
-    <CommonScrollableBackground>
-      <View style={{ marginTop: "25%", marginHorizontal: 20 }}>
-        <CustomTextInput
-          placeholder="Type your Prompt.."
-          multiline={true}
-          maxLength={100}
-        />
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.imageView}>
+        {false ? (
+          <ActivityIndicator size={"large"} color="white" />
+        ) : (
+          <Image source={{ uri: "https://firebasestorage.googleapis.com/v0/b/handys-1.appspot.com/o/items%2F008E22D3-DC4C-43D6-898C-2B8D5F095366.jpg?alt=media&token=5f7fd35f-4634-49b3-a4bd-27b4d85318df" }} style={styles.image} />
+        )}
       </View>
       <View>
-        <Image source={{ uri: "facebook.com" }} style={style.image} />
-      </View>
-      <View style={{ marginBottom: 40, marginHorizontal: 10 }}>
-        <TouchableOpacity style={style.generateAgain}>
+        <TouchableOpacity style={styles.download}>
           <Text style={{ color: "white", fontWeight: "600", fontSize: 16 }}>
-            Download
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={style.generateAgain}>
-          <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
             Generate Again
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.generateAgain}>
+          <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
+            Download
+          </Text>
+        </TouchableOpacity>
       </View>
-    </CommonScrollableBackground>
+    </SafeAreaView>
   );
 }
 
-const style = StyleSheet.create({
-  image: {
-    resizeMode: "cover",
-    width: 150,
-    height: 150,
-    borderRadius: 9,
-    alignItems: "center",
-    padding: 15,
-    backgroundColor: COLORS.handysGrey,
+const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: COLORS.commonBackground,
+    flex: 1,
+    justifyContent: "center",
   },
-  cardFont: {
-    fontSize: 19,
-    color: "white",
-    fontWeight: "500",
-  },
-  cardsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  imageView: {
     justifyContent: "center",
     alignItems: "center",
-    gap: 20,
-    marginTop: "15%",
+    marginBottom: 50,
+    marginTop: -100
+  },
+  image: {
+    width: 350,
+    height: 350,
+    borderRadius: 9,
+    padding: 15,
+    backgroundColor: COLORS.handysGrey,
   },
   generateAgain: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -71,7 +71,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    marginTop: "25%",
+    marginHorizontal: 50,
   },
   download: {
     backgroundColor: COLORS.handysGrey,
@@ -79,6 +79,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    marginTop: "25%",
+    marginBottom: 15,
+    marginHorizontal: 50,
   },
 });
