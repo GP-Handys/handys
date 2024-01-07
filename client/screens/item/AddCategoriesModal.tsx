@@ -13,6 +13,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
 import SelectableCategory from "./SelectableCategory";
 import { Category } from "../../models/Category";
+import { getCategories } from "../../api/CategoryApi";
+import { localeData } from "moment";
+import { ActivityIndicator } from "react-native-paper";
+import COLORS from "../../common/colors";
 
 interface CategoriesModalProps {
   addCategory:(id: number) => void
@@ -34,34 +38,26 @@ export default function PostModal({
   const handleAdCategories = async () => {
     onDismiss();
   };
-  const [data, setData] = useState<Category[]>([
-    {
-      id: 1,
-      category_name: "Rings",
-      category_pfp: require("../../assets/logo.png"),
-    },
-    {
-      id: 2,
-      category_name: "Macramé",
-      category_pfp: require("../../assets/logo.png"),
-    },
-    {
-      id: 3,
-      category_name: "Category 3",
-      category_pfp: require("../../assets/logo.png"),
-    },
-    {
-      id: 4,
-      category_name: "Category 4",
-      category_pfp: require("../../assets/logo.png"),
-    },
-    {
-      id: 5,
-      category_name: "Category 5",
-      category_pfp: require("../../assets/logo.png"), 
-    }
-  ]);
+  const [loading , setLoading] = useState(true);
+  const [categories, setCategories] = useState<Category[]>([]);
 
+  useEffect(()=>{
+    const fetchCategory = async ()=>{
+      let data = await getCategories();
+      setCategories(data);
+      setLoading(false)
+    }
+    fetchCategory()
+  },[])
+
+  
+  if (loading) {
+    return (
+      <View style={styles.loadingPage}>
+        <ActivityIndicator size={"large"} color="white" />
+      </View>
+    );
+  } else
   return (
     <View>
       <Modal animationType="slide" transparent={false} visible={isVisible}>
@@ -86,7 +82,7 @@ export default function PostModal({
           </View>
           <ThematicBreak />
           <FlatList
-            data={data}
+            data={categories}
             renderItem={({ item }) => <SelectableCategory category={item} isChecked={selectedCategories.includes(item.id)} addCategory={addCategory} removeCategory={removeCategory}/>}
             ItemSeparatorComponent={() => <ThematicBreak />}
           />
@@ -132,5 +128,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontWeight: "700",
     fontSize: 14,
+  },
+  loadingPage: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
   },
 });

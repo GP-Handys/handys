@@ -20,13 +20,14 @@ import { Category } from "../../models/Category";
 import { getWishList } from "../../api/WishlistApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
+import { getCategories } from "../../api/CategoryApi";
 
 export default function Home() {
   const navigation = useNavigation<StackProps["navigation"]>();
   const [recommendedShops, setRecommendedShops] = useState<Shop[]>([]);
   const [mostPopularItems, setMostPopularItems] = useState<Item[]>([]);
   const [favItems, setFavItems] = useState<any[]>([]);
-  const [Categories, setCategories] = useState<Category[]>([{id:1,category_name:"hi",category_pfp:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"}]);
+  const [Categories, setCategories] = useState<Category[]>();
 
   const fetchRecommendedShops = async () => {
     await getRecommendedShops().then((result) => {
@@ -35,6 +36,14 @@ export default function Home() {
       }
     });
   };
+
+  const fetchCategory = async () => {
+    await getCategories().then((result) => {
+        setCategories(result);
+    });
+  };
+
+  
 
   const fetchFavItems = async () => {
     await getWishList("ids").then((result) => {
@@ -55,12 +64,14 @@ export default function Home() {
       await fetchFavItems();
       await fetchRecommendedShops();
       await fetchMostPopularItems();
+      await fetchCategory()
     };
 
     fetchScreenData();
 
     navigation.addListener("focus", fetchScreenData);
   }, []);
+  
 
   return (
     <CommonScrollableBackground>
