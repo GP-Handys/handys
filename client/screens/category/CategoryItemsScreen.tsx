@@ -1,15 +1,21 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native-paper";
 import { GetItemsBycategory } from "../../api/ItemApi";
+import ItemCard from "../../components/home/ItemCard";
+import { getWishList } from "../../api/WishlistApi";
+import COLORS from "../../common/colors";
+import { Item } from "../../models/Item";
 
 export default function CategoryItemsScreen({ route }: any) {
   const category = route.params.category;
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [loadingItems, setLoadingItems] = useState(false);
-
+  const [loadingFav, setLoadingFav] = useState(false);
+  const [favItems, setFavItems] = useState<any[]>([]);
+  
   useEffect(() => {
     async function handleSearch() {
       setLoadingItems(true);
@@ -17,10 +23,22 @@ export default function CategoryItemsScreen({ route }: any) {
         setItems(result);
         setLoadingItems(false);
       });
+      await getWishList("ids").then((result)=>{
+        setFavItems(result)
+        setLoadingFav(false)
+      })
     }
     handleSearch();
   }, []);
 
+
+  if (loadingItems || loadingFav) {
+    return (
+      <View style={styles.loadingPage}>
+        <ActivityIndicator size={"large"} color="white" />
+      </View>
+    );
+  } else
   return (
     <CommonScrollableBackground>
       <View style={{ margin: 15, minHeight: "90%", }}>
@@ -56,9 +74,13 @@ export default function CategoryItemsScreen({ route }: any) {
               </View>
             ) : (
               <View style={{ gap: 15 }}>
-                {/* {items.map((item: any) => (
-                  <ItemCard key={item.id} item={item} />
-                ))} */}
+                <FlatList
+                data={items}
+                renderItem={({ item }) => <ItemCard item={item} isFavorite={favItems.includes(item.id)} isEditable={false}/>}
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                scrollEnabled={false}
+              />
               </View>
             )}
           </View>
@@ -79,4 +101,12 @@ const styles = StyleSheet.create({
     height: 250,
     alignSelf: "center",
   },
+  loadingPage: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
+  },
+  
 });
