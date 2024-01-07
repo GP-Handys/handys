@@ -65,6 +65,7 @@ export default function ShopSettingsScreen({ route }: any) {
               styles.touchableStyle,
               { backgroundColor: COLORS.CTAButtonBackground },
             ]}
+            onPress={() => navigation.navigate("AiPromptScreen")}
           >
             <FontAwesome5 name="lightbulb" size={22} color="black" />
             <Text
