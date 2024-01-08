@@ -78,6 +78,7 @@ export default function ShopSettingsScreen({ route }: any) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate("GenerationHistoryScreen")}
             style={[
               styles.touchableStyle,
               { backgroundColor: COLORS.CTAButtonBackground },
