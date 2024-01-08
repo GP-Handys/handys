@@ -21,7 +21,7 @@ GeneratedImage.init(
       allowNull: false,
     },
     image_url: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT("long"),
       allowNull: false,
     },
   },
