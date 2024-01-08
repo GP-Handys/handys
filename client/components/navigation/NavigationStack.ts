@@ -9,6 +9,7 @@ import { User } from "../../models/User";
 import { Shop } from "../../models/Shop";
 
 export type StackParamList = {
+  home:undefined;
   Landing: undefined;
   SignIn: undefined;
   SignUp: undefined;
@@ -27,8 +28,20 @@ export type StackParamList = {
   CategoryItemsScreen: { category: Category };
   WishlistScreen: undefined;
   MyPostsScreen: undefined;
+
+  Cart:undefined;
+  Map: undefined;
+  AddressScreen:{governorate: any , street: any};
+  CardDetails:undefined;
+  PlaceOrder:undefined;
+  DonePlaceOrder:undefined;
+
   EditItemScreen: { item: Item, shopId: number };
   ShopSettingsScreen: {shop: Shop}
+  Cart:undefined;
+  Map: { totalAmount: number};
+  AddressScreen:{governorate: any , street: any, totalAmount: number};
+  DonePlaceOrder:undefined;
   AiPromptScreen: undefined;
   GeneratedImageScreen: {prompt: string}
 };
