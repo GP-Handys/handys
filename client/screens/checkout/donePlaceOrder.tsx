@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "white",
     fontWeight: "500",
-    fontSize: 20
+    fontSize: 16,
+    textAlign: "center"
   },
   container: {
     flex: 1,

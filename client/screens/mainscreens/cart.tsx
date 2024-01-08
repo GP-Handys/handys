@@ -5,7 +5,7 @@ import {
   View,
   StyleSheet,
   Pressable,
-  FlatList,
+  FlatList
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import CartItem from "../../components/cart/cartItem";
@@ -29,7 +29,7 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    setLoading(true)
+    setLoading(true);
     let data = await getCart();
     setCartItems(data[0]);
     setItems(data[1]);
@@ -58,13 +58,11 @@ export default function Cart() {
 
   function countTotal() {
     let total = 0;
-    cartItems.forEach((element:any) => {
-      total+= itemPrices[element.item_id]
+    cartItems.forEach((element: any) => {
+      total += itemPrices[element.item_id];
     });
     setTotalPrice(total);
   }
-
-  
 
   if (loading) {
     return (
@@ -88,18 +86,19 @@ export default function Cart() {
             />
           )}
         />
-
         <View style={styles.container}>
           <View style={styles.priceContainer}>
             <Text style={styles.TotalPrice}>Total Price</Text>
             <Text style={styles.TotalPrice}>JOD {totalPrice}</Text>
           </View>
-          <TouchableOpacity style={styles.button} onPress={() => {
-            console.log(items);
-            console.log(cartItems);
-            navigation.navigate("Map")
-            
-          }}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              console.log(items);
+              console.log(cartItems);
+              navigation.navigate("Map", { totalAmount: totalPrice });
+            }}
+          >
             <Text style={styles.checkout}>Checkout</Text>
           </TouchableOpacity>
         </View>
@@ -112,35 +111,34 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 30,
     marginBottom: 20,
-    gap: 5,
+    gap: 5
   },
   priceContainer: {
     justifyContent: "space-between",
     flexDirection: "row",
-    alignItems: "baseline",
+    alignItems: "baseline"
   },
   TotalPrice: {
     color: "white",
     fontSize: 16,
-    fontWeight: "500",
+   fontWeight: "500",
   },
-
   button: {
     height: 45,
     backgroundColor: COLORS.CTAButtonBackground,
     borderRadius: 10,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   checkout: {
     fontSize: 20,
-    fontWeight: "500",
+    fontWeight: "500"
   },
   loadingPage: {
     backgroundColor: COLORS.commonBackground,
     justifyContent: "center",
     display: "flex",
     alignItems: "center",
-    flex: 1,
-  },
+    flex: 1
+  }
 });
