@@ -22,7 +22,7 @@ export default function DonePlaceOrder({ navigation }: StackProps) {
           source={require("../../assets/Done-pana.png")}
         />
         <Text style={styles.textIcon}>
-          We’ll let you know about the delivery process!
+          We’ll let you know about the delivery process!{" "}
         </Text>
       </View>
 
@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "white",
     fontWeight: "500",
-    fontSize: 20
+    fontSize: 16,
+    textAlign: "center"
   },
   container: {
     flex: 1,

@@ -9,6 +9,7 @@ import { User } from "../../models/User";
 import { Shop } from "../../models/Shop";
 
 export type StackParamList = {
+  home:undefined;
   Landing: undefined;
   SignIn: undefined;
   SignUp: undefined;
@@ -30,10 +31,8 @@ export type StackParamList = {
   EditItemScreen: { item: Item, shopId: number };
   ShopSettingsScreen: {shop: Shop}
   Cart:undefined;
-  Map: undefined;
-  AddressScreen:{governorate: any , street: any};
-  CardDetails:undefined;
-  PlaceOrder:undefined;
+  Map: { totalAmount: number};
+  AddressScreen:{governorate: any , street: any, totalAmount: number};
   DonePlaceOrder:undefined;
 };
 

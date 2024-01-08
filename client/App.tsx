@@ -19,8 +19,10 @@ import MyPostsScreen from "./screens/community/MyPosts";
 import EditItemScreen from "./screens/item/EditItem";
 import ShopSettingsScreen from "./screens/shop/Settings";
 
-import Map from './screens/checkout/map';
-import AddressScreen from './screens/checkout/addressScreen'
+import Map from "./screens/checkout/map";
+import AddressScreen from "./screens/checkout/addressScreen";
+import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
+import Home from "./screens/mainscreens/home";
 export default function App() {
   initializeApp(firebaseConfig);
 
@@ -28,10 +30,21 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OnboardingScreensContainer">
         <Stack.Screen
+          name="home"
+          component={Home}
+          options={{
+            title: "Address",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center"
+          }}
+        />
+        <Stack.Screen
           name="OnboardingScreensContainer"
           component={OnboardingNavigationContainer}
           options={{
-            headerShown: false,
+            headerShown: false
           }}
         />
         <Stack.Screen
@@ -39,7 +52,7 @@ export default function App() {
           component={TabBarNavigationContainer}
           options={{
             headerShown: false,
-            gestureEnabled: false,
+            gestureEnabled: false
           }}
         />
         <Stack.Screen
@@ -51,7 +64,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -60,7 +73,7 @@ export default function App() {
           options={{
             headerShown: false,
             gestureEnabled: false,
-            headerTitleAlign: "center",
+            headerTitleAlign: "center"
           }}
         />
         <Stack.Screen
@@ -72,7 +85,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -84,7 +97,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           })}
         />
         <Stack.Screen
@@ -96,7 +109,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -108,7 +121,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -120,7 +133,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -132,7 +145,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           })}
         />
         <Stack.Screen
@@ -144,7 +157,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -155,7 +168,7 @@ export default function App() {
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
-            headerTitleAlign: "center",
+            headerTitleAlign: "center"
           })}
         />
         <Stack.Screen
@@ -167,7 +180,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -179,7 +192,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -191,7 +204,7 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
+            headerBackTitleVisible: false
           }}
         />
         <Stack.Screen
@@ -202,7 +215,7 @@ export default function App() {
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
-            headerTitleAlign: "center",
+            headerTitleAlign: "center"
           }}
         />
         <Stack.Screen
@@ -213,7 +226,18 @@ export default function App() {
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
-            headerTitleAlign: "center",
+            headerTitleAlign: "center"
+          }}
+        />
+        <Stack.Screen
+          name="DonePlaceOrder"
+          component={DonePlaceOrder}
+          options={{
+            title: "Address",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center"
           }}
         />
       </Stack.Navigator>
