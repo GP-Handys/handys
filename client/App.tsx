@@ -223,7 +223,7 @@ export default function App() {
           name="GenerationHistoryScreen"
           component={GenerationHistoryScreen}
           options={{
-            title: "Image Generation History",
+            title: "Generated Images",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
