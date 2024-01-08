@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, SafeAreaView } from "react-native";
 import COLORS from "../../common/colors";
 import { GeneratedImage } from "../../models/GeneratedImage";
 import { useEffect, useState } from "react";
@@ -32,7 +32,7 @@ export default function GenerationHistoryScreen() {
     );
   } else {
     return (
-      <View
+      <SafeAreaView
         style={{
           backgroundColor: COLORS.commonBackground,
           flex: 1,
@@ -42,9 +42,15 @@ export default function GenerationHistoryScreen() {
         <FlatList
           data={history}
           renderItem={({ item }) => <History generatedImage={item} />}
-          ItemSeparatorComponent={() => <ThematicBreak />}
+          ItemSeparatorComponent={() => {
+            return (
+              <View style={{ marginVertical: 20 }}>
+                <ThematicBreak marginHorizontal={15} />
+              </View>
+            );
+          }}
         />
-      </View>
+      </SafeAreaView>
     );
   }
 }
