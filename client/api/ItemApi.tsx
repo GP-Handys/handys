@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApiManager from "./ApiManager";
+import { Item } from "../models/Item";
 
 export const getMostPopularItems = async () => {
   let token = await AsyncStorage.getItem("Authorization");
@@ -99,3 +100,19 @@ export const updateItemById = async (itemId: number, data: any) => {
     return error.message;
   }
 };
+
+export const deleteItem = async (itemId:number)=>{
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/items/deleteItem/" + itemId, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token,
+      },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+}
