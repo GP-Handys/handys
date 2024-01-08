@@ -33,6 +33,14 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
+    const fetchProfile = async () => {
+      await getProfile().then(async (result) => {
+        setUser(result);
+        fetchShops(result.id);
+      });
+    };
+
     const fetchShops = async (id: any) => {
       await getShopsForUserId(id)
         .then((result) => {
@@ -41,13 +49,6 @@ export default function Profile() {
         .finally(() => {
           setLoading(false);
         });
-    };
-
-    const fetchProfile = async () => {
-      await getProfile().then(async (result) => {
-        setUser(result);
-        fetchShops(result.id);
-      });
     };
 
     navigation.addListener("focus", fetchProfile);
@@ -101,6 +102,8 @@ export default function Profile() {
             <Text style={style.lableFont}>Your shops</Text>
           </View>
 
+
+            {shops.length>0 &&
           <ScrollView horizontal={true} scrollEnabled={false} contentContainerStyle={{width:"100%",justifyContent:"center"}}>
             <View >
             <FlatList
@@ -119,7 +122,7 @@ export default function Profile() {
 
             />
             </View>
-          </ScrollView>
+          </ScrollView>}
 
           <View style={{ gap: 20, paddingVertical: 15 }}>
   
