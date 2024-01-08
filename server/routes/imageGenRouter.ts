@@ -33,3 +33,25 @@ export const generateImage = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Error generating image" });
   }
 };
+
+export const getGeneratedImagesForUser = async (
+  req: Request,
+  res: Response
+) => {
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId = extractUserFromJwt(jwt);
+  if (!userId) {
+    res.status(403).json({ error: "Invalid token" });
+    return;
+  }
+  try {
+    const images = await GeneratedImage.findAll({
+      where: {
+        userId: userId,
+      },
+    });
+    res.status(200).json(images);
+  } catch (error) {
+    res.status(500).json({ error: "Error getting images" });
+  }
+};

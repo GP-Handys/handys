@@ -93,5 +93,6 @@ router.get("/api/ticket/resolve/:ticketId",tokenValidate ,ticketRouter.resolveTi
 
 //AI
 router.get("/api/ai/generate", tokenValidate, imageGenRouter.generateImage)
+router.get("/api/ai/images", tokenValidate, imageGenRouter.getGeneratedImagesForUser)
 
 export {router}
