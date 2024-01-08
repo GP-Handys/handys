@@ -22,6 +22,8 @@ import AddressScreen from './screens/checkout/addressScreen'
 import EditItemScreen from "./screens/item/EditItem";
 import ShopSettingsScreen from "./screens/shop/Settings";
 import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
+import AiPromptScreen from "./screens/ai/Prompt";
+import GeneratedImageScreen from "./screens/ai/GeneratedImage";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -238,6 +240,30 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center"
+          }}
+        />
+        <Stack.Screen
+          name="AiPromptScreen"
+          component={AiPromptScreen}
+          options={{
+            title: "Ideas Generator",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="GeneratedImageScreen"
+          component={GeneratedImageScreen}
+          options={{
+            title: "Generated Image",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
           }}
         />
       </Stack.Navigator>

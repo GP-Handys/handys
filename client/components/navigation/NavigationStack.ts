@@ -42,6 +42,8 @@ export type StackParamList = {
   Map: { totalAmount: number};
   AddressScreen:{governorate: any , street: any, totalAmount: number};
   DonePlaceOrder:undefined;
+  AiPromptScreen: undefined;
+  GeneratedImageScreen: {prompt: string}
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const BACKEND_URL = "http://ovrnpb-ip-37-220-118-53.tunnelmole.net";
-
 const ApiManager = axios.create({
   baseURL: `${BACKEND_URL}/api`,
   responseType: "json",
