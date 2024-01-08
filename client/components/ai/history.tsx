@@ -1,15 +1,15 @@
 import { View, Text, Image, StyleSheet } from "react-native";
+import { GeneratedImage } from "../../models/GeneratedImage";
 
 interface Props {
-  imageUrl: string;
-  prompt: string;
+    generatedImage: GeneratedImage
 }
 
-export default function History({ imageUrl, prompt }: Props) {
+export default function History({ generatedImage }: Props) {
   return (
     <View style={styles.mainContainer}>
-      <Image source={{ uri: imageUrl }} />
-      <Text>{prompt}</Text>
+      <Image source={{ uri: generatedImage.image_url }} />
+      <Text>{generatedImage.prompt}</Text>
     </View>
   );
 }
