@@ -5,6 +5,7 @@ import { Stack } from "./components/navigation/NavigationStack";
 import { firebaseConfig } from "./storage/firebase";
 import { initializeApp } from "firebase/app";
 import SendTicketScreen from "./screens/support/SendTicket";
+import Home from "./screens/mainscreens/home";
 import DoneScreen from "./screens/support/Done";
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
@@ -16,11 +17,14 @@ import CategoryItemsScreen from "./screens/category/CategoryItemsScreen";
 import WishlistScreen from "./screens/profile/Wishlist";
 import ItemScreen from "./screens/item/Item";
 import MyPostsScreen from "./screens/community/MyPosts";
+import Map from "./screens/checkout/map";
+import AddressScreen from "./screens/checkout/addressScreen";
 import EditItemScreen from "./screens/item/EditItem";
 import ShopSettingsScreen from "./screens/shop/Settings";
+import GenerationHistoryScreen from "./screens/ai/History";
+import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
 import AiPromptScreen from "./screens/ai/Prompt";
 import GeneratedImageScreen from "./screens/ai/GeneratedImage";
-import GenerationHistoryScreen from "./screens/ai/History";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -28,6 +32,17 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OnboardingScreensContainer">
+        <Stack.Screen
+          name="home"
+          component={Home}
+          options={{
+            title: "Address",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
         <Stack.Screen
           name="OnboardingScreensContainer"
           component={OnboardingNavigationContainer}
@@ -193,6 +208,39 @@ export default function App() {
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{
+            title: "Select Location",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="AddressScreen"
+          component={AddressScreen}
+          options={{
+            title: "Address",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="DonePlaceOrder"
+          component={DonePlaceOrder}
+          options={{
+            title: "Address",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen

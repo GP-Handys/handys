@@ -1,19 +1,17 @@
 
 
+
 import React, { useState } from "react";
 import {
   View,
   TouchableOpacity,
   Text,
   StyleSheet,
-  ScrollView,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
+
 } from "react-native";
 import {
   CommonBackgroundWithNoSafeArea,
-  CommonScrollableBackground,
+  CommonScrollableBackground
 } from "../../common/background";
 import { Entypo } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
@@ -36,7 +34,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
     let data = {
       email: email,
       subject: subject,
-      content: message,
+      content: message
     };
     submitTicket(data);
     navigation.navigate("DoneScreen");
@@ -99,7 +97,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flex: 1
   },
   upperContainer: {
     width: 300,
@@ -107,21 +105,21 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     textAlign: "left",
     alignSelf: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   textTitle: {
     color: "white",
     marginTop: 10,
     fontWeight: "500",
     fontSize: 25,
-    textAlign: "center",
+    textAlign: "center"
   },
   confirmPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 50,
-    borderRadius: 8,
+    borderRadius: 8
   },
   confirmPressableDisabled: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -129,22 +127,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 8,
-    opacity: 0.5,
+    opacity: 0.5
   },
   inputsContainer: {
     marginTop: 10,
     gap: 15,
-    marginHorizontal: 20,
+    marginHorizontal: 20
   },
   confirm: {
     color: "black",
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 20
   },
   defaultEmail: {
     alignSelf: "center",
     color: COLORS.handysGrey,
     fontSize: 13,
-    marginBottom: 3,
-  },
+    marginBottom: 3
+  }
 });

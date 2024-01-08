@@ -9,6 +9,7 @@ import { User } from "../../models/User";
 import { Shop } from "../../models/Shop";
 
 export type StackParamList = {
+  home:undefined;
   Landing: undefined;
   SignIn: undefined;
   SignUp: undefined;
@@ -29,9 +30,13 @@ export type StackParamList = {
   MyPostsScreen: undefined;
   EditItemScreen: { item: Item, shopId: number };
   ShopSettingsScreen: {shop: Shop}
+  GenerationHistoryScreen: undefined;
+  Cart:undefined;
+  Map: { totalAmount: number};
+  AddressScreen:{governorate: any , street: any, totalAmount: number};
+  DonePlaceOrder:undefined;
   AiPromptScreen: undefined;
   GeneratedImageScreen: {prompt: string}
-  GenerationHistoryScreen: undefined;
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
