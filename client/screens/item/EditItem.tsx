@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -12,7 +13,7 @@ import COLORS from "../../common/colors";
 import pickImageAndStore from "../../storage/store";
 import { useState } from "react";
 import React from "react";
-import { updateItemById } from "../../api/ItemApi";
+import { deleteItem, updateItemById } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Item } from "../../models/Item";
@@ -51,6 +52,24 @@ export default function EditItemScreen({ route }: any) {
   const handleEditItem = () => {
     editItem();
   };
+
+  const handleDeleteItem = () => {
+    Alert.alert("Delete item", "Are you sure?", [
+      {
+        text: "Cancel",
+      },
+      {
+        text: "Yes",
+        onPress: () =>  excuteDeleteItem()
+        ,
+      },
+    ]);
+  }
+
+  const excuteDeleteItem = async ()=>{
+    navigation.pop()
+    await deleteItem(item.id)
+  }
 
   return (
     <CommonScrollableBackground>
@@ -132,6 +151,14 @@ export default function EditItemScreen({ route }: any) {
             Confirm Edit
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleDeleteItem}
+          style={styles.deletePressable}
+        >
+          <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
+            Delete item
+          </Text>
+        </TouchableOpacity>
       </View>
     </CommonScrollableBackground>
   );
@@ -157,6 +184,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 11,
   },
+  deletePressable: {
+    backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 41,
+    borderRadius: 8,
+    marginHorizontal: 23,
+  },
   confirmPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
@@ -168,6 +203,7 @@ const styles = StyleSheet.create({
   confirmPressableContainer: {
     marginTop: 40,
     paddingBottom: 50,
+    gap:20
   },
   blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
   changeIMG: {
