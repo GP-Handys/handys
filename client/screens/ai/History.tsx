@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import COLORS from "../../common/colors";
 import { GeneratedImage } from "../../models/GeneratedImage";
 import { useEffect, useState } from "react";
@@ -25,7 +25,11 @@ export default function GenerationHistoryScreen() {
   }, []);
 
   if (isFetching) {
-    return <ActivityIndicator size={"large"} color="white" />;
+    return (
+      <View style={styles.activityIndicator}>
+        <ActivityIndicator size={"large"} color="white" />
+      </View>
+    );
   } else {
     return (
       <View
@@ -44,3 +48,13 @@ export default function GenerationHistoryScreen() {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  activityIndicator: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
+  },
+});
