@@ -28,14 +28,6 @@ export type StackParamList = {
   CategoryItemsScreen: { category: Category };
   WishlistScreen: undefined;
   MyPostsScreen: undefined;
-
-  Cart:undefined;
-  Map: undefined;
-  AddressScreen:{governorate: any , street: any};
-  CardDetails:undefined;
-  PlaceOrder:undefined;
-  DonePlaceOrder:undefined;
-
   EditItemScreen: { item: Item, shopId: number };
   ShopSettingsScreen: {shop: Shop}
   Cart:undefined;
