@@ -19,6 +19,7 @@ import MyPostsScreen from "./screens/community/MyPosts";
 import EditItemScreen from "./screens/item/EditItem";
 import ShopSettingsScreen from "./screens/shop/Settings";
 import AiPromptScreen from "./screens/ai/Prompt";
+import GeneratedImageScreen from "./screens/ai/GeneratedImage";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -198,6 +199,18 @@ export default function App() {
           component={AiPromptScreen}
           options={{
             title: "Ideas Generator",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="GeneratedImageScreen"
+          component={GeneratedImageScreen}
+          options={{
+            title: "Generated Image",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
