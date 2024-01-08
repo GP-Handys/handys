@@ -23,6 +23,7 @@ export const generateImage = async (req: Request, res: Response) => {
       const imageUrl = response.data[0].url;
       await GeneratedImage.create({
         image_url: imageUrl,
+        prompt: prompt,
         userId: userId,
       });
       res.status(200).json(imageUrl);

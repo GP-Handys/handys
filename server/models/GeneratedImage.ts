@@ -5,6 +5,7 @@ import { User } from "./User";
 class GeneratedImage extends Model {
   public id!: number;
   public image_url!: string;
+  public prompt!: string;
   public userId!: number;
 }
 
@@ -14,6 +15,10 @@ GeneratedImage.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+    },
+    prompt: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     image_url: {
       type: DataTypes.STRING,
