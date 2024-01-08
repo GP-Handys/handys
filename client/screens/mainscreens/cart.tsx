@@ -94,8 +94,6 @@ export default function Cart() {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              console.log(items);
-              console.log(cartItems);
               navigation.navigate("Map", { totalAmount: totalPrice });
             }}
           >
