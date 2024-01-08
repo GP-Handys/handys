@@ -48,10 +48,11 @@ export default function GeneratedImageScreen({ route }: any) {
       </View>
       <View>
         <TouchableOpacity
-          style={styles.generateAgain}
+          style={[styles.generateAgain, { opacity: isGenerating ? 0.5 : 1 }]}
           onPress={() => navigation.pop()}
+          disabled={isGenerating}
         >
-          <Text style={{ color: "white", fontWeight: "600", fontSize: 16 }}>
+          <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
             Generate Again
           </Text>
         </TouchableOpacity>

@@ -30,6 +30,7 @@ export type StackParamList = {
   MyPostsScreen: undefined;
   EditItemScreen: { item: Item, shopId: number };
   ShopSettingsScreen: {shop: Shop}
+  GenerationHistoryScreen: undefined;
   Cart:undefined;
   Map: { totalAmount: number};
   AddressScreen:{governorate: any , street: any, totalAmount: number};

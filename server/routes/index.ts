@@ -92,6 +92,7 @@ router.post("/api/ticket/submitTicket" , tokenValidate , ticketRouter.submitTick
 router.get("/api/ticket/resolve/:ticketId",tokenValidate ,ticketRouter.resolveTicket)
 
 //AI
-router.get("/api/ai/generate", imageGenRouter.generateImage)
+router.get("/api/ai/generate", tokenValidate, imageGenRouter.generateImage)
+router.get("/api/ai/images", tokenValidate, imageGenRouter.getGeneratedImagesForUser)
 
 export {router}
