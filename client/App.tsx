@@ -20,6 +20,7 @@ import EditItemScreen from "./screens/item/EditItem";
 import ShopSettingsScreen from "./screens/shop/Settings";
 import AiPromptScreen from "./screens/ai/Prompt";
 import GeneratedImageScreen from "./screens/ai/GeneratedImage";
+import GenerationHistoryScreen from "./screens/ai/History";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -211,6 +212,18 @@ export default function App() {
           component={GeneratedImageScreen}
           options={{
             title: "Generated Image",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="GenerationHistoryScreen"
+          component={GenerationHistoryScreen}
+          options={{
+            title: "Image Generation History",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",

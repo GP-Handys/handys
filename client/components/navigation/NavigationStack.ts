@@ -31,6 +31,7 @@ export type StackParamList = {
   ShopSettingsScreen: {shop: Shop}
   AiPromptScreen: undefined;
   GeneratedImageScreen: {prompt: string}
+  GenerationHistoryScreen: undefined;
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
