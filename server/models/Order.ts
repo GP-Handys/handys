@@ -9,8 +9,7 @@ class Order extends Model {
   public street_name!: string;
   public apt_number!: string;
   public floor!: string;
-  public phone_number!:string;
-  public special_instructions!: string;
+  public phone_number!: string;
   public price!: number;
 }
 
@@ -60,13 +59,13 @@ ItemOrder.init(
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate:{
-        min:1
-      }
+      validate: {
+        min: 1,
+      },
     },
-    customization:{
+    customization: {
       type: DataTypes.STRING,
-      allowNull:true
+      allowNull: true,
     },
   },
   {

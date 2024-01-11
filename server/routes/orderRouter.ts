@@ -1,30 +1,39 @@
 import { Order, ItemOrder } from "../models/Order";
-import { Item } from "../models/Item";
 import { extractUserFromJwt } from "../utils/tokenUtils";
-import { Request, Response } from "express";
+import { Request, Response, query } from "express";
+import { connection as DB } from "../database/database";
+import { Cart } from "../models/Cart";
 
 export const placeOrder = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
   try {
-    const {
-      delivery_address,
-      phoneNumber
-    } = req.body;
+    const { street_name, apt_number, floor, phone_number, price } = req.body;
 
-    // const order: Order = await Order.create({
-    //   delivery_address: delivery_address,
-    //   payment_method: payment_method,
-    //   price: price,
-    //   is_confirmed: is_confirmed,
-    //   userId: userId,
-    //   shopId: shopId,
-    // });
+    const order: Order = await Order.create({
+      userId:userId,
+      shopId:1,
+      street_name,
+      apt_number,
+      floor,
+      phone_number,
+      price,
+    });
 
-    
+    let cart: Cart[] = await Cart.findAll({ where: { user_id: userId } });
 
-    
-    //res.status(201).json(order);
+    cart.forEach(async (element: Cart) => {
+      await ItemOrder.create({
+        orderId: order.id,
+        itemId: element.item_id,
+        customization: element.customization,
+        quantity: element.quantity,
+      });
+    });
+
+    await Cart.destroy({where:{user_id:userId}})
+
+    return res.status(200).json({ cart });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });

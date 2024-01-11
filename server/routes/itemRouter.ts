@@ -7,7 +7,6 @@ import { connection as DB } from "../database/database";
 import { extractUserFromJwt } from "../utils/tokenUtils";
 import { Sequelize } from "sequelize";
 import { Category } from "../models/Category";
-import { log } from "console";
 
 export const addItem = async (req: Request, res: Response) => {
   try {

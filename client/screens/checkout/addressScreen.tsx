@@ -15,17 +15,30 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { confirmOrder } from "../../api/OrderApi";
 
 const AddressScreen = ({ route }: any) => {
-  const [StreetName, setStreetName] = useState("");
-  const [Apartment, setApartment] = useState("");
-  const [Floor, setFloor] = useState("");
-  const [phone_number, setPhone_number] = useState("");
   const { governorate, street, totalAmount } = route.params;
+  const [streetName, setStreetName] = useState(street);
+  const [apartment, setApartment] = useState("");
+  const [floor, setFloor] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const navigation = useNavigation<StackProps["navigation"]>();
-  let DELIVREY_FEE = parseInt("2");
+  let DELIVREY_FEE = parseInt("5");
   let serviceFee = parseFloat((totalAmount * 0.03).toFixed(2));
   let grandTotal = parseFloat(totalAmount + serviceFee + DELIVREY_FEE);
+
+  function handleConfirm(){
+    let data=  {
+      street_name:streetName,
+      apt_number:apartment,
+      floor:floor,
+      phone_number:phoneNumber,
+      price:grandTotal,
+    }
+    confirmOrder(data);
+    navigation.navigate("DonePlaceOrder")
+  }
 
   return (
     <CommonBackgroundWithSafeArea>
@@ -58,28 +71,28 @@ const AddressScreen = ({ route }: any) => {
         <View style={styles.inputsContainer}>
           <CustomTextInput
             placeholder="Street Name"
-            value={StreetName}
+            value={streetName}
             onChangeText={(StreetName) => setStreetName(StreetName)}
           />
           <View style={styles.row}>
             <CustomTextInput
               style={{ paddingRight: 30 }}
               placeholder="Apt. Number"
-              value={Apartment}
+              value={apartment}
               onChangeText={(Apartment) => setApartment(Apartment)}
             />
             <CustomTextInput
               style={{ paddingRight: 90 }}
               placeholder="Floor"
-              value={Floor}
+              value={floor}
               onChangeText={(Floor) => setFloor(Floor)}
             />
           </View>
           <CustomTextInput
             style={{ marginTop: 10 }}
             placeholder={"Phone Number | 07********"}
-            onChangeText={(phone_number) => setPhone_number(phone_number)}
-            value={phone_number}
+            onChangeText={(phone_number) => setPhoneNumber(phone_number)}
+            value={phoneNumber}
             maxLength={10}
             mode={"tel"}
           />
@@ -106,13 +119,15 @@ const AddressScreen = ({ route }: any) => {
             <Text style={styles.grandTotalPrice}>JOD {grandTotal}</Text>
           </View>
         </View>
-        <View style={styles.button}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("DonePlaceOrder")}
+        <TouchableOpacity
+            onPress={handleConfirm}
           >
+        <View style={styles.button}>
+          
             <Text style={styles.confirm}>Confirm</Text>
-          </TouchableOpacity>
         </View>
+        </TouchableOpacity>
+
       </ScrollView>
     </CommonBackgroundWithSafeArea>
   );
