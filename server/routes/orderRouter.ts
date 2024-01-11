@@ -1,53 +1,39 @@
 import { Order, ItemOrder } from "../models/Order";
-import { Item } from "../models/Item";
 import { extractUserFromJwt } from "../utils/tokenUtils";
-import { Request, Response } from "express";
+import { Request, Response, query } from "express";
+import { connection as DB } from "../database/database";
+import { Cart } from "../models/Cart";
 
 export const placeOrder = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
   try {
-    const {
-      delivery_address,
-      payment_method,
-      price,
-      is_confirmed,
-      shopId,
-      items,
-    } = req.body;
+    const { street_name, apt_number, floor, phone_number, price } = req.body;
 
     const order: Order = await Order.create({
-      delivery_address: delivery_address,
-      payment_method: payment_method,
-      price: price,
-      is_confirmed: is_confirmed,
-      userId: userId,
-      shopId: shopId,
+      userId:userId,
+      shopId:1,
+      street_name,
+      apt_number,
+      floor,
+      phone_number,
+      price,
     });
 
-    if (items && items.length > 0) {
-      for (const itemData of items) {
-        const { itemId, quantity } = itemData;
+    let cart: Cart[] = await Cart.findAll({ where: { user_id: userId } });
 
-        const item: Item | null = await Item.findByPk(itemId);
+    cart.forEach(async (element: Cart) => {
+      await ItemOrder.create({
+        orderId: order.id,
+        itemId: element.item_id,
+        customization: element.customization,
+        quantity: element.quantity,
+      });
+    });
 
-        if (item == null) {
-          return res
-            .status(400)
-            .json({ error: `Item with ID ${itemId} not found` });
-        }
+    await Cart.destroy({where:{user_id:userId}})
 
-        // add to item_orders joint table
-        await ItemOrder.create({
-          quantity: quantity,
-          itemId: itemId,
-          orderId: order.id,
-        });
-      }
-    }
-
-    // 201 = resource created. better convention :)
-    res.status(201).json(order);
+    return res.status(200).json({ cart });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
