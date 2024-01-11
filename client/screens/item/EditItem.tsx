@@ -21,7 +21,7 @@ import { Item } from "../../models/Item";
 export default function EditItemScreen({ route }: any) {
   const item: Item = route.params.item;
   const navigation = useNavigation<StackProps["navigation"]>();
-  const [itemImageUrl, setItemImageUrl] = useState();
+  const [itemImageUrl, setItemImageUrl] = useState(item.img_url);
   const [itemImagePicked, setItemImagePicked] = useState(true);
   const [itemName, setItemName] = useState(item.name);
   const [itemPrice, setItemPrice] = useState(item.base_price);
@@ -78,7 +78,7 @@ export default function EditItemScreen({ route }: any) {
           <TouchableOpacity onPress={handleUploadPressed}>
             <Image
               style={styles.uploadPressable}
-              source={{ uri: item.img_url ?? "" }}
+              source={{ uri: itemImageUrl ?? "" }}
             />
           </TouchableOpacity>
           <TouchableOpacity
