@@ -6,10 +6,12 @@ import { Shop } from "./Shop";
 
 class Order extends Model {
   public id!: number;
-  public delivery_address!: string;
-  public payment_method!: string;
+  public street_name!: string;
+  public apt_number!: string;
+  public floor!: string;
+  public phone_number!:string;
+  public special_instructions!: string;
   public price!: number;
-  public is_confirmed!: boolean;
 }
 
 Order.init(
@@ -19,21 +21,27 @@ Order.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    delivery_address: {
+    street_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    payment_method: {
-      type: DataTypes.STRING,
+    apt_number: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    floor: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    phone_number: {
+      type: DataTypes.INTEGER,
+      validate: {
+        is: /^(07[789]\d{7})$/,
+      },
     },
     price: {
       type: DataTypes.DOUBLE,
       allowNull: false,
-    },
-    is_confirmed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
     },
   },
   {

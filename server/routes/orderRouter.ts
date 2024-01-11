@@ -9,45 +9,22 @@ export const placeOrder = async (req: Request, res: Response) => {
   try {
     const {
       delivery_address,
-      payment_method,
-      price,
-      is_confirmed,
-      shopId,
-      items,
+      phoneNumber
     } = req.body;
 
-    const order: Order = await Order.create({
-      delivery_address: delivery_address,
-      payment_method: payment_method,
-      price: price,
-      is_confirmed: is_confirmed,
-      userId: userId,
-      shopId: shopId,
-    });
+    // const order: Order = await Order.create({
+    //   delivery_address: delivery_address,
+    //   payment_method: payment_method,
+    //   price: price,
+    //   is_confirmed: is_confirmed,
+    //   userId: userId,
+    //   shopId: shopId,
+    // });
 
-    if (items && items.length > 0) {
-      for (const itemData of items) {
-        const { itemId, quantity } = itemData;
+    
 
-        const item: Item | null = await Item.findByPk(itemId);
-
-        if (item == null) {
-          return res
-            .status(400)
-            .json({ error: `Item with ID ${itemId} not found` });
-        }
-
-        // add to item_orders joint table
-        await ItemOrder.create({
-          quantity: quantity,
-          itemId: itemId,
-          orderId: order.id,
-        });
-      }
-    }
-
-    // 201 = resource created. better convention :)
-    res.status(201).json(order);
+    
+    //res.status(201).json(order);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
