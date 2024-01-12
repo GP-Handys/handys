@@ -1,9 +1,7 @@
 import { Alert } from "react-native";
-import { loginUser } from "../../api/UserApi";
 import STRINGS from "../../strings/strings";
 import { StackParamList } from "../../components/navigation/NavigationStack";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { confirmOrder } from "../../api/OrderApi";
 
 export default function checkoutHelper(
@@ -18,16 +16,14 @@ export default function checkoutHelper(
 
   if (!phoneReg.test(String(phone_number))) {
     Alert.alert(STRINGS.failPopUp, "You have to enter valid phone number");
-  } else if (street_name.length==0) {
+  } else if (street_name.length == 0) {
     Alert.alert(STRINGS.failPopUp, "You have to enter street name");
-  }
-  else if (floor.length==0) {
+  } else if (floor.length == 0) {
     Alert.alert(STRINGS.failPopUp, "You have to enter the floor");
-  }
-  else if (apt_number.length==0) {
+  } else if (apt_number.length == 0) {
     Alert.alert(STRINGS.failPopUp, "You have to enter apartment number");
   } else {
-    confirmOrder({street_name,apt_number,floor,phone_number,price})
-    navigation.navigate("DonePlaceOrder")
+    confirmOrder({ street_name, apt_number, floor, phone_number, price });
+    navigation.navigate("DonePlaceOrder");
   }
 }

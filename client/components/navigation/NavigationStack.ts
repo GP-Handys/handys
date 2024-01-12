@@ -37,6 +37,7 @@ export type StackParamList = {
   DonePlaceOrder:undefined;
   AiPromptScreen: undefined;
   GeneratedImageScreen: {prompt: string}
+  MyOrdersScreen: undefined;
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();

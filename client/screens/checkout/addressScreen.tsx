@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import MapScreen from "../../components/map/MapScreen";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
@@ -135,7 +135,6 @@ const AddressScreen = ({ route }: any) => {
             <Text style={styles.grandTotalPrice}>JOD {grandTotal}</Text>
           </View>
         </View>
-
         <View>
           <TouchableOpacity onPress={handleConfirm}>
             <View style={styles.button}>
@@ -150,7 +149,7 @@ const AddressScreen = ({ route }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
   },
   areaView: {
     height: 60,
@@ -159,38 +158,38 @@ const styles = StyleSheet.create({
     marginTop: 25,
     borderRadius: 7.5,
     backgroundColor: COLORS.handysGrey,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   firstSection: {
     width: "75%",
     height: 60,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   area: {
     fontSize: 16,
     color: "white",
     marginTop: 10,
-    fontWeight: "500"
+    fontWeight: "500",
   },
   details: {
     fontSize: 12,
     color: "#A2A4A4",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   secondSection: {
     justifyContent: "center",
     alignItems: "center",
     width: "25%",
-    height: 60
+    height: 60,
   },
   change: {
     fontSize: 14,
-    color: COLORS.CTAButtonBackground
+    color: COLORS.CTAButtonBackground,
   },
   confirm: {
     color: "black",
     fontWeight: "500",
-    fontSize: 20
+    fontSize: 20,
   },
   inputsContainer: {
     width: "90%",
@@ -200,7 +199,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     marginTop: 10,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   paymentContainer: {
     marginTop: 10,
@@ -209,12 +208,12 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     borderRadius: 7.5,
-    backgroundColor: COLORS.handysGrey
+    backgroundColor: COLORS.handysGrey,
   },
   paymentRows: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 3
+    marginBottom: 3,
   },
   title: {
     marginLeft: 35,
@@ -234,7 +233,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 10,
     fontWeight: "500",
-    color: "white"
+    color: "white",
   },
   grandTotalTitle: {
     marginTop: 5,
@@ -262,6 +261,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginVertical: 20
   }
+
 });
 
 export default AddressScreen;

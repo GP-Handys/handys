@@ -43,7 +43,7 @@ export default function WishlistScreen() {
                 key={"_"}
                 keyExtractor={(item) => "_" + item.id}
                 data={items}
-                renderItem={({ item }) => <ItemCard item={item} isFavorite={true}/>}
+                renderItem={({ item }) => <ItemCard item={item} isFavorite={true} isEditable={false}/>}
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: "space-between" }}
               />
