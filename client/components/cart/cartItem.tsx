@@ -73,7 +73,7 @@ export default function cartItem({
             {cartItem.customization != "" && (
               <View>
                 <Text style={styles.Customized}>Customized</Text>
-                <Text style={styles.details}>Details:</Text>
+                <Text style={styles.details}>Details: {cartItem.customization}</Text>
               </View>
             )}
           </View>

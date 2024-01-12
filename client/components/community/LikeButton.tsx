@@ -8,9 +8,11 @@ interface props {
   postId: number;
   isLiked: boolean;
   likeCount: number;
+  handleIsLiked?:any;
+  handleLikeCount?:any
 }
 
-export default function LikeButton({ isLiked, postId, likeCount }: props) {
+export default function LikeButton({ isLiked, postId, likeCount,handleIsLiked,handleLikeCount }: props) {
   const [liked, setLiked] = useState(isLiked);
   const [LikeCounts, setLikeCount] = useState(likeCount);
 
@@ -22,11 +24,17 @@ export default function LikeButton({ isLiked, postId, likeCount }: props) {
     if (liked) {
       removeLike(postId);
       setLiked(false);
-      setLikeCount(LikeCounts - 1);
+      let newLikeCount=LikeCounts - 1
+      setLikeCount(newLikeCount);
+      handleLikeCount(newLikeCount)
+      handleIsLiked(false);
     } else {
       addLike(postId);
       setLiked(true);
-      setLikeCount(LikeCounts + 1);
+      let newLikeCount=LikeCounts + 1
+      setLikeCount(newLikeCount);
+      handleLikeCount(newLikeCount)
+      handleIsLiked(true);
     }
   }
 

@@ -100,15 +100,22 @@ export default function Profile() {
           <View style={style.lable}>
             <Text style={style.lableFont}>Your shops</Text>
           </View>
-
-          {shops.length > 0 && (
-            <View style={{marginTop:10,gap:10}}>
-              {shops.map((shop: any) => (
-                <UserShop key={shop.id} shop={shop} />
-              ))}
-            </View>
-          )}
-
+          
+          <>
+          <FlatList
+            scrollEnabled={false}
+              style={{alignSelf:"center",marginTop:10}}
+              data={shops}
+              renderItem={({ item }) => (
+                <UserShop shop={item} />
+              )}
+              ItemSeparatorComponent={()=>{
+                return (
+                <View style={{marginVertical:5}} />
+                )
+              }}
+            />
+          </>
           <View style={{ gap: 20, paddingVertical: 15 }}>
             <TouchableOpacity
               style={style.createShop}
