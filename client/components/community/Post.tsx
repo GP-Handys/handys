@@ -14,6 +14,7 @@ import TimeStamp from "./TimeStamp";
 import LikeButton from "./LikeButton";
 import CommentButton from "./CommentButton";
 import { PostModel } from "../../models/Post";
+import { useState } from "react";
 interface PostProps {
   post: PostModel;
   isComment?: boolean;
@@ -37,6 +38,18 @@ export default function Post({
   pfpImgStyle,
   userNameStyle,
 }: PostProps) {
+  const [liked, setLiked] = useState(isLiked);
+  const [likeCount, setlikeCount] = useState(post.votes);
+
+  function handleIsLiked(newValue:boolean){
+    setLiked(newValue)
+  }
+
+  function handleLikeCount(value:number){
+    post.votes=value
+    setlikeCount(value)
+  }
+
   return (
     <View>
       <View style={[styles.userProfile, userProfileStyle]}>
@@ -62,8 +75,8 @@ export default function Post({
           )}
         </View>
         <View style={[styles.footer, footerStyle]}>
-          {!isComment && <LikeButton postId={post.id} isLiked={isLiked} likeCount={post.votes}/>}
-          {!isComment && <CommentButton post={post} isLiked={isLiked} />}
+          {!isComment && <LikeButton postId={post.id} isLiked={liked} likeCount={likeCount} handleIsLiked={handleIsLiked} handleLikeCount={handleLikeCount}/>}
+          {!isComment && <CommentButton post={post} isLiked={liked} />}
         </View>
       </View>
     </View>

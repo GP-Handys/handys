@@ -33,7 +33,6 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const fetchProfile = async () => {
       await getProfile().then(async (result) => {
         setUser(result);
@@ -101,12 +100,9 @@ export default function Profile() {
           <View style={style.lable}>
             <Text style={style.lableFont}>Your shops</Text>
           </View>
-
-
-            {shops.length>0 &&
-          <ScrollView horizontal={true} scrollEnabled={false} contentContainerStyle={{width:"100%",justifyContent:"center"}}>
-            <View >
-            <FlatList
+          
+          <>
+          <FlatList
             scrollEnabled={false}
               style={{alignSelf:"center",marginTop:10}}
               data={shops}
@@ -116,16 +112,11 @@ export default function Profile() {
               ItemSeparatorComponent={()=>{
                 return (
                 <View style={{marginVertical:5}} />
-
                 )
               }}
-
             />
-            </View>
-          </ScrollView>}
-
+          </>
           <View style={{ gap: 20, paddingVertical: 15 }}>
-  
             <TouchableOpacity
               style={style.createShop}
               onPress={() => {
