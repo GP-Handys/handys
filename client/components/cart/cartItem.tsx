@@ -70,7 +70,13 @@ export default function cartItem({
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
             <Text style={styles.itemName}>{item.name}</Text>
-            
+            {cartItem.customization!="" && (
+              <View>
+                <Text style={styles.Customized}>Customized</Text>
+                <Text style={styles.details}>Details:</Text>
+              </View>
+            )}
+          
           </View>
           <View style={styles.footer}>
             <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
@@ -144,9 +150,4 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-{/* {item.is_customizable && (
-              <View>
-                <Text style={styles.Customized}>Customized</Text>
-                <Text style={styles.details}>Details:</Text>
-              <View/>
-            )} */}
+{/*  */}
