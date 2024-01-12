@@ -15,6 +15,7 @@ import ThematicBreak from "../../components/ThematicBreak";
 interface ModalProps {
   isVisible: boolean;
   onDismiss: () => void;
+  itemCustomization: string;
   setCustomization: (customization: string) => void;
 }
 
@@ -22,6 +23,7 @@ export default function CustomizeScreen({
   isVisible,
   onDismiss,
   setCustomization,
+  itemCustomization,
 }: ModalProps) {
   const [tempCustomization, setTempCustomization] = useState("");
 
@@ -40,7 +42,7 @@ export default function CustomizeScreen({
           </View>
           <View style={{ marginHorizontal: 10, marginTop: 20 }}>
             <CustomTextInput
-              placeholder="Any special requests?"
+              placeholder = {itemCustomization}
               multiline={true}
               minHeight={150}
               onChangeText={(text) => {

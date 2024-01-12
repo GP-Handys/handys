@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, Text, StyleSheet, Image, Alert } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Image,
+  Alert,
+} from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import COLORS from "../../common/colors";
 import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
@@ -20,7 +27,6 @@ export default function ItemScreen({ route }: any) {
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isCustomizeModalVisible, setIsCustomizeModalVisible] = useState(false);
   const [customization, setCustomization] = useState("");
-
 
   const fetchShopDataById = async () => {
     await getShopById(item.shopId).then((res) => {
@@ -120,27 +126,36 @@ export default function ItemScreen({ route }: any) {
               </View>
 
               {isCustomizeModalVisible && (
-          <CustomizeModal 
-            setCustomization={setCustomization}
-            isVisible={isCustomizeModalVisible}
-            onDismiss={() => setIsCustomizeModalVisible(false)}
-          />
-        )}
+                <CustomizeModal
+                  setCustomization={setCustomization}
+                  isVisible={isCustomizeModalVisible}
+                  itemCustomization={item.customization}
+                  onDismiss={() => setIsCustomizeModalVisible(false)}
+                />
+              )}
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}
-              onPress={() => 
-                setIsCustomizeModalVisible(true)
-              }
-            >
-              <Text style={{ fontSize: 16, color: "white", fontWeight: "500" }}>
-                Customize
-              </Text>
-            </TouchableOpacity>
+            {item.customization && (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => setIsCustomizeModalVisible(true)}
+              >
+                <Text
+                  style={{ fontSize: 16, color: "white", fontWeight: "500" }}
+                >
+                  Customize
+                </Text>
+              </TouchableOpacity>
+            )}
+
             <ThematicBreak />
 
-            <TouchableOpacity style={styles.cartButton} onPress={()=>{
-              Alert.alert("Item added to cart succefully")
-              addToCart(item.id , customization)}}>
+            <TouchableOpacity
+              style={styles.cartButton}
+              onPress={() => {
+                Alert.alert("Item added to cart succefully");
+                addToCart(item.id, customization);
+              }}
+            >
               <Feather name="shopping-cart" size={24} color="black" />
               <Text
                 style={{
