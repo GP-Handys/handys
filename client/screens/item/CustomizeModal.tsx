@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
-import { CommonScrollableBackground } from "../../common/background";
+import { CommonBackgroundWithSafeArea } from "../../common/background";
 import COLORS from "../../common/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
@@ -28,7 +28,7 @@ export default function CustomizeScreen({
   return (
     <View>
       <Modal animationType="slide" transparent={false} visible={isVisible}>
-        <CommonScrollableBackground>
+        <CommonBackgroundWithSafeArea>
           <View style={{ backgroundColor: COLORS.commonBackground }}>
             <View style={styles.ModalHeader}>
               <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
@@ -57,7 +57,7 @@ export default function CustomizeScreen({
           >
             <Text style={styles.Text}>Confirm</Text>
           </TouchableOpacity>
-        </CommonScrollableBackground>
+        </CommonBackgroundWithSafeArea>
       </Modal>
     </View>
   );
