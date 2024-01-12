@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Shop } from "../../models/Shop";
 import { getShopById } from "../../api/ShopApi";
+import { MaterialIcons } from "@expo/vector-icons";
 
 interface Props {
   shopId: number;
@@ -24,16 +25,17 @@ export default function MyOrder({ shopId, orderId }: Props) {
   }, []);
 
   return (
-    <View style={styles.mainContainer}>
+    <TouchableOpacity style={styles.mainContainer}>
       {shop && (
         <View style={styles.imageContainer}>
           <Image source={{ uri: shop.pfp_url ?? "" }} style={styles.image} />
         </View>
       )}
       <View style={styles.textContainer}>
-        <Text>{shop?.name}</Text>
+        <Text style={styles.shopName}>{shop?.name}</Text>
+        <MaterialIcons name="keyboard-arrow-right" size={30} color="white" style={{alignItems: "center", justifyContent: "center", alignSelf: "center"}} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -47,14 +49,16 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
     borderRadius: 8,
   },
   textContainer: {
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  prompt: {
+  shopName: {
     fontSize: 14,
     fontWeight: "bold",
     color: "white",
