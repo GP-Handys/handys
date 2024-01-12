@@ -53,16 +53,20 @@ export const removeFromcart = async (cartId: number) => {
 };
 
 export const editQuantity = async(cartId:number , quantity:number)=>{
+  console.log(cartId);
+  console.log('====================================');
+  console.log(quantity);
+  console.log('====================================');
+  
   let token = await AsyncStorage.getItem("Authorization");
   try {
-    const result = await ApiManager(`/cart/update/" + ${cartId}/${quantity}`, {
+    const result = await ApiManager(`/cart/update/${cartId}/${quantity+1}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
       },
     });
-
     return result.data;
   } catch (error: any) {
     return error.message;

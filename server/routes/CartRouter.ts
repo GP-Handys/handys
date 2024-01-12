@@ -31,8 +31,8 @@ export const addToCart = async (req: Request, res: Response) => {
 };
 
 export const updateQuantity = async (req: Request, res: Response) => {
-  const cartId = req.params.cartId;
-  const quantity = req.params.quantity;
+  const cartId = parseInt(req.params.cartId);
+  const quantity = parseInt(req.params.quantity);
   try {
     await Cart.update({ quantity: quantity }, { where: { id: cartId } });
     res.sendStatus(200);
