@@ -11,12 +11,15 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
 import { addToCart } from "../../api/CartApi";
+import CustomizeModal from "./CustomizeModal";
 
 export default function ItemScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
   const { item, favorite } = route.params;
   const [shop, setShop] = useState<Shop>();
   const [isFavorite, setIsFavorite] = useState(favorite);
+  const [isCustomizeModalVisible, setIsCustomizeModalVisible] = useState(false);
+
 
   const fetchShopDataById = async () => {
     await getShopById(item.shopId).then((res) => {
@@ -114,8 +117,19 @@ export default function ItemScreen({ route }: any) {
                   color="white"
                 />
               </View>
+
+              {isCustomizeModalVisible && (
+          <CustomizeModal
+            isVisible={isCustomizeModalVisible}
+            onDismiss={() => setIsCustomizeModalVisible(false)}
+          />
+        )}
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button}
+              onPress={() => 
+                setIsCustomizeModalVisible(true)
+              }
+            >
               <Text style={{ fontSize: 16, color: "white", fontWeight: "500" }}>
                 Customize
               </Text>
