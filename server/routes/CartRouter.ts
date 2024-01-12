@@ -11,17 +11,22 @@ export const addToCart = async (req: Request, res: Response) => {
   const { customization } = req.body;
 
   try {
-    let cartItem =await Cart.findOne({
-      where: { item_id: itemId, user_id: userId, customization: customization },
+    let shopId = (await Item.findByPk(itemId))?.shopId;
+    let cartItem = await Cart.findOne({
+      where: { item_id: itemId, shop_id: shopId, user_id: userId, customization: customization},
     });
     if (cartItem == null) {
       await Cart.create({
         item_id: itemId,
         user_id: userId,
+        shop_id: shopId,
         customization: customization,
       });
     } else {
-      await Cart.update({ quantity:cartItem.quantity+1  }, { where: { id: cartItem.id } });
+      await Cart.update(
+        { quantity: cartItem.quantity + 1 },
+        { where: { id: cartItem.id } }
+      );
     }
     res.sendStatus(201);
   } catch (error) {

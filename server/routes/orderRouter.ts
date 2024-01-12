@@ -1,18 +1,18 @@
 import { Order, ItemOrder } from "../models/Order";
 import { extractUserFromJwt } from "../utils/tokenUtils";
-import { Request, Response, query } from "express";
-import { connection as DB } from "../database/database";
+import { Request, Response } from "express";
 import { Cart } from "../models/Cart";
 
 export const placeOrder = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
   try {
-    const { street_name, apt_number, floor, phone_number, price } = req.body;
+    const { street_name, apt_number, floor, phone_number, price, shopId } =
+      req.body;
 
     const order: Order = await Order.create({
-      userId:userId,
-      shopId:1,
+      userId: userId,
+      shopId: shopId,
       street_name,
       apt_number,
       floor,
@@ -31,7 +31,7 @@ export const placeOrder = async (req: Request, res: Response) => {
       });
     });
 
-    await Cart.destroy({where:{user_id:userId}})
+    await Cart.destroy({ where: { user_id: userId } });
 
     return res.status(200).json({ cart });
   } catch (error) {
@@ -60,7 +60,7 @@ export const getOrderForShopId = async (req: Request, res: Response) => {
 export const getOrdersForUserId = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
-  
+
   try {
     const orders: Order[] = await Order.findAll({
       where: {
