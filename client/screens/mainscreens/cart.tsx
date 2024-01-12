@@ -1,11 +1,10 @@
 import {
-  ScrollView,
   Text,
   TouchableOpacity,
   View,
   StyleSheet,
-  Pressable,
-  FlatList
+  FlatList,
+  Image
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import CartItem from "../../components/cart/cartItem";
@@ -14,17 +13,13 @@ import COLORS from "../../common/colors";
 import { getCart, removeFromcart } from "../../api/CartApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
-
 import { ActivityIndicator } from "react-native-paper";
 
-
-export default function Cart() {
-
-    
+export default function Cart() {    
   const navigation = useNavigation<StackProps["navigation"]>();
   const [itemPrices, setItemPrices] = useState<any>({});
   const [totalPrice, setTotalPrice] = useState(0);
-  const [cartItems, setCartItems] = useState<any>();
+  const [cartItems, setCartItems] = useState<any>([]);
   const [items, setItems] = useState<any>({});
   const [loading, setLoading] = useState(true);
 
@@ -58,9 +53,11 @@ export default function Cart() {
 
   function countTotal() {
     let total = 0;
+    if(cartItems){
     cartItems.forEach((element: any) => {
       total += itemPrices[element.item_id];
     });
+  }
     setTotalPrice(total);
   }
 
@@ -70,7 +67,29 @@ export default function Cart() {
         <ActivityIndicator size={"large"} color="white" />
       </View>
     );
-  } else
+  } else if(cartItems.length==0){
+    return (
+      <CommonBackgroundWithNoSafeArea>
+        <View style={styles.Emptycontainer}>
+          <Text
+            style={{
+              fontSize: 40,
+              color: "white",
+              fontWeight: "600",
+              marginBottom: 20,
+            }}
+          >
+            Wait!
+          </Text>
+          <Image
+            style={styles.image}
+            source={require("../../assets/Done-pana.png")}
+          />
+          <Text style={styles.textIcon}>The Cart is empty</Text>
+        </View>
+      </CommonBackgroundWithNoSafeArea>
+    );
+  }else
     return (
       <CommonBackgroundWithNoSafeArea>
         <FlatList
@@ -95,6 +114,7 @@ export default function Cart() {
             style={styles.button}
             onPress={() => {
               navigation.navigate("Map", { totalAmount: totalPrice });
+              setTotalPrice(0)
             }}
           >
             <Text style={styles.checkout}>Checkout</Text>
@@ -138,5 +158,27 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flex: 1
-  }
+  },
+  textIcon: {
+    marginTop: 20,
+    color: "white",
+    fontWeight: "500",
+    fontSize: 20,
+  },
+  Emptycontainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  okay: {
+    backgroundColor: COLORS.CTAButtonBackground,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 50,
+    borderRadius: 8,
+  },
+  image: {
+    width: 300,
+    height: 300,
+  },
 });
