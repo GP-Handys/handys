@@ -25,9 +25,11 @@ export default function MyOrder({ shopId, orderId }: Props) {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.imageContainer}>
-        <Image source={{ uri: shop?.pfp_url ?? "" }} style={styles.image} />
-      </View>
+      {shop && (
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: shop.pfp_url ?? "" }} style={styles.image} />
+        </View>
+      )}
       <View style={styles.textContainer}>
         <Text>{shop?.name}</Text>
       </View>
