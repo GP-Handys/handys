@@ -51,16 +51,6 @@ export default function SendTicketScreen({ navigation }: StackProps) {
         </View>
 
         <View style={styles.inputsContainer}>
-          <View>
-            <Text style={styles.defaultEmail}>
-              *We will use your Handy's email if you leave this field empty.
-            </Text>
-            <CustomTextInput
-              placeholder={"Email (optinal)"}
-              onChangeText={(inputValue) => setEmail(inputValue)}
-            />
-          </View>
-
           <CustomTextInput
             placeholder={"subject"}
             onChangeText={(inputValue) => setSubject(inputValue)}

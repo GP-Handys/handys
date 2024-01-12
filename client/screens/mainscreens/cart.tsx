@@ -115,6 +115,7 @@ export default function Cart() {
             onPress={() => {
               navigation.navigate("Map", { totalAmount: totalPrice });
               setTotalPrice(0)
+              setLoading(true)
             }}
           >
             <Text style={styles.checkout}>Checkout</Text>
