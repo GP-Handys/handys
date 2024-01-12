@@ -28,7 +28,7 @@ export const getOrdersForUser = async () => {
         Authorization: token,
       },
     });
-    return result.data;
+    return result;
   } catch (error: any) {
     return error.message;
   }

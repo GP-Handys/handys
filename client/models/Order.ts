@@ -1,9 +1,11 @@
 class Order {
   public id!: number;
-  public delivery_address!: string;
-  public payment_method!: string;
+  public street_name!: string;
+  public apt_number!: string;
+  public floor!: string;
+  public phone_number!: string;
   public price!: number;
-  public is_confirmed!: boolean;
+  public shopId!: number;
 }
 
 export { Order };
