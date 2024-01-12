@@ -16,28 +16,21 @@ import { StackProps } from "../../components/navigation/NavigationStack";
 import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { confirmOrder } from "../../api/OrderApi";
+import checkoutHelper from "../../helpers/checkout/checkoutHelper";
 
 const AddressScreen = ({ route }: any) => {
   const { governorate, street, totalAmount } = route.params;
   const [streetName, setStreetName] = useState(street);
   const [apartment, setApartment] = useState("");
   const [floor, setFloor] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState<any>();
   const navigation = useNavigation<StackProps["navigation"]>();
   let DELIVREY_FEE = parseInt("5");
   let serviceFee = parseFloat((totalAmount * 0.03).toFixed(2));
   let grandTotal = parseFloat(totalAmount + serviceFee + DELIVREY_FEE);
 
   function handleConfirm(){
-    let data=  {
-      street_name:streetName,
-      apt_number:apartment,
-      floor:floor,
-      phone_number:phoneNumber,
-      price:grandTotal,
-    }
-    confirmOrder(data);
-    navigation.navigate("DonePlaceOrder")
+    checkoutHelper(streetName,apartment,floor,phoneNumber,grandTotal,navigation)
   }
 
   return (
@@ -172,7 +165,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.CTAButtonBackground
   },
-
   confirm: {
     color: "black",
     fontWeight: "500",

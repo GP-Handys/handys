@@ -25,11 +25,11 @@ Order.init(
       allowNull: false,
     },
     apt_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     floor: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     phone_number: {

@@ -34,6 +34,7 @@ export default function MapScreen() {
       {location ? (
         <View style={styles.mapContainer}>
           <MapView
+          provider="google"
             scrollEnabled={false}
             zoomEnabled={false}
             rotateEnabled={false}
