@@ -1,7 +1,7 @@
 import ApiManager from "./ApiManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const confirmOrder = async (data:any) => {
+export const confirmOrder = async (data: any) => {
   const token = await AsyncStorage.getItem("Authorization");
   try {
     const result = await ApiManager("/orders/place", {
@@ -10,7 +10,23 @@ export const confirmOrder = async (data:any) => {
         "Content-Type": "application/json",
         Authorization: token,
       },
-      data:data
+      data: data,
+    });
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+export const getOrdersForUser = async () => {
+  const token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/orders/user", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
     });
     return result.data;
   } catch (error: any) {

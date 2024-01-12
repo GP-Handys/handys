@@ -57,11 +57,12 @@ export const getOrderForShopId = async (req: Request, res: Response) => {
   }
 };
 
-export const getOrderForUserId = async (req: Request, res: Response) => {
-  const userId: number = Number(req.params.userId);
-
+export const getOrdersForUserId = async (req: Request, res: Response) => {
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId: number = extractUserFromJwt(jwt);
+  
   try {
-    const orders = await Order.findAll({
+    const orders: Order[] = await Order.findAll({
       where: {
         userId: userId,
       },
