@@ -17,6 +17,7 @@ import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { confirmOrder } from "../../api/OrderApi";
 import checkoutHelper from "../../helpers/checkout/checkoutHelper";
+import { InstanceError } from "sequelize";
 
 const AddressScreen = ({ route }: any) => {
   const { governorate, street, totalAmount } = route.params;
@@ -24,13 +25,22 @@ const AddressScreen = ({ route }: any) => {
   const [apartment, setApartment] = useState("");
   const [floor, setFloor] = useState("");
   const [phoneNumber, setPhoneNumber] = useState<any>();
+  const [buildingNumber, setBuildingNumber] = useState<any>();
+  const [instructions, setInstructions] = useState<any>();
   const navigation = useNavigation<StackProps["navigation"]>();
   let DELIVREY_FEE = parseInt("5");
   let serviceFee = parseFloat((totalAmount * 0.03).toFixed(2));
   let grandTotal = parseFloat(totalAmount + serviceFee + DELIVREY_FEE);
 
-  function handleConfirm(){
-    checkoutHelper(streetName,apartment,floor,phoneNumber,grandTotal,navigation)
+  function handleConfirm() {
+    checkoutHelper(
+      streetName,
+      apartment,
+      floor,
+      phoneNumber,
+      grandTotal,
+      navigation
+    );
   }
 
   return (
@@ -89,6 +99,20 @@ const AddressScreen = ({ route }: any) => {
             maxLength={10}
             mode={"tel"}
           />
+          <CustomTextInput
+            style={{ marginTop: 10 }}
+            placeholder={"Buliding Number"}
+            onChangeText={(buildingNumber) => setBuildingNumber(buildingNumber)}
+            value={buildingNumber}
+            maxLength={10}
+          />
+          <CustomTextInput
+            style={{ marginTop: 10 }}
+            placeholder={"Any Instructions?"}
+            onChangeText={(Instructions) => setInstructions(Instructions)}
+            value={instructions}
+            multiline={true}
+          />
         </View>
         <View style={styles.paymentContainer}>
           <View style={styles.paymentRows}>
@@ -112,15 +136,14 @@ const AddressScreen = ({ route }: any) => {
             <Text style={styles.grandTotalPrice}>JOD {grandTotal}</Text>
           </View>
         </View>
-        <TouchableOpacity
-            onPress={handleConfirm}
-          >
-        <View style={styles.button}>
-          
-            <Text style={styles.confirm}>Confirm</Text>
-        </View>
-        </TouchableOpacity>
 
+        <View>
+          <TouchableOpacity onPress={handleConfirm}>
+            <View style={styles.button}>
+              <Text style={styles.confirm}>Confirm</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </CommonBackgroundWithSafeArea>
   );
@@ -171,10 +194,9 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   inputsContainer: {
-    height: "30%",
     width: "90%",
     alignSelf: "center",
-    marginTop: 25
+    marginVertical: 20
   },
   row: {
     flexDirection: "row",
@@ -184,7 +206,7 @@ const styles = StyleSheet.create({
   paymentContainer: {
     marginTop: 10,
     padding: 15,
-    height: "20%",
+    height: 140,
     width: "90%",
     alignSelf: "center",
     borderRadius: 7.5,
@@ -196,17 +218,17 @@ const styles = StyleSheet.create({
     marginBottom: 3
   },
   title: {
-    marginLeft: "11.5%",
+    marginLeft: 35,
     color: "white",
     fontSize: 12,
     fontWeight: "500",
-    width: "64%"
+    width: 185
   },
   titlePrice: {
     color: "white",
     fontSize: 12,
     fontWeight: "500",
-    width: "25%",
+    width: 75,
     textAlign: "right"
   },
   paymentSummaryWord: {
@@ -217,18 +239,18 @@ const styles = StyleSheet.create({
   },
   grandTotalTitle: {
     marginTop: 5,
-    marginLeft: "11.5%",
+    marginLeft: 33,
     color: "white",
     fontSize: 14,
     fontWeight: "700",
-    width: "64%"
+    width: 160
   },
   grandTotalPrice: {
     marginTop: 5,
     color: "white",
     fontSize: 14,
     fontWeight: "800",
-    width: "25%",
+    width: 100,
     textAlign: "right"
   },
   button: {
@@ -239,7 +261,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 8,
     width: "90%",
-    marginTop: "8%"
+    marginVertical: 20
   }
 });
 
