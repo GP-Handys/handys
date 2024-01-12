@@ -17,7 +17,6 @@ import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { confirmOrder } from "../../api/OrderApi";
 import checkoutHelper from "../../helpers/checkout/checkoutHelper";
-import { InstanceError } from "sequelize";
 
 const AddressScreen = ({ route }: any) => {
   const { governorate, street, totalAmount } = route.params;
