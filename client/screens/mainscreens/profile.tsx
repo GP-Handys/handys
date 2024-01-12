@@ -152,7 +152,7 @@ export default function Profile() {
               />
               <Text style={style.cardFont}>My Posts</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={style.card}>
+            <TouchableOpacity style={style.card} onPress={() => navigation.navigate("MyOrdersScreen")}>
               <Entypo name="shopping-bag" size={24} color="white" />
               <Text style={style.cardFont}>Orders</Text>
             </TouchableOpacity>

@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import MapScreen from "../../components/map/MapScreen";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
@@ -29,8 +29,15 @@ const AddressScreen = ({ route }: any) => {
   let serviceFee = parseFloat((totalAmount * 0.03).toFixed(2));
   let grandTotal = parseFloat(totalAmount + serviceFee + DELIVREY_FEE);
 
-  function handleConfirm(){
-    checkoutHelper(streetName,apartment,floor,phoneNumber,grandTotal,navigation)
+  function handleConfirm() {
+    checkoutHelper(
+      streetName,
+      apartment,
+      floor,
+      phoneNumber,
+      grandTotal,
+      navigation
+    );
   }
 
   return (
@@ -112,15 +119,11 @@ const AddressScreen = ({ route }: any) => {
             <Text style={styles.grandTotalPrice}>JOD {grandTotal}</Text>
           </View>
         </View>
-        <TouchableOpacity
-            onPress={handleConfirm}
-          >
-        <View style={styles.button}>
-          
+        <TouchableOpacity onPress={handleConfirm}>
+          <View style={styles.button}>
             <Text style={styles.confirm}>Confirm</Text>
-        </View>
+          </View>
         </TouchableOpacity>
-
       </ScrollView>
     </CommonBackgroundWithSafeArea>
   );
@@ -128,7 +131,7 @@ const AddressScreen = ({ route }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
   },
   areaView: {
     height: 60,
@@ -137,49 +140,49 @@ const styles = StyleSheet.create({
     marginTop: 25,
     borderRadius: 7.5,
     backgroundColor: COLORS.handysGrey,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   firstSection: {
     width: "75%",
     height: 60,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   area: {
     fontSize: 16,
     color: "white",
     marginTop: 10,
-    fontWeight: "500"
+    fontWeight: "500",
   },
   details: {
     fontSize: 12,
     color: "#A2A4A4",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   secondSection: {
     justifyContent: "center",
     alignItems: "center",
     width: "25%",
-    height: 60
+    height: 60,
   },
   change: {
     fontSize: 14,
-    color: COLORS.CTAButtonBackground
+    color: COLORS.CTAButtonBackground,
   },
   confirm: {
     color: "black",
     fontWeight: "500",
-    fontSize: 20
+    fontSize: 20,
   },
   inputsContainer: {
     height: "30%",
     width: "90%",
     alignSelf: "center",
-    marginTop: 25
+    marginTop: 25,
   },
   row: {
     flexDirection: "row",
     marginTop: 10,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   paymentContainer: {
     marginTop: 10,
@@ -188,32 +191,32 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     borderRadius: 7.5,
-    backgroundColor: COLORS.handysGrey
+    backgroundColor: COLORS.handysGrey,
   },
   paymentRows: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 3
+    marginBottom: 3,
   },
   title: {
     marginLeft: "11.5%",
     color: "white",
     fontSize: 12,
     fontWeight: "500",
-    width: "64%"
+    width: "64%",
   },
   titlePrice: {
     color: "white",
     fontSize: 12,
     fontWeight: "500",
     width: "25%",
-    textAlign: "right"
+    textAlign: "right",
   },
   paymentSummaryWord: {
     fontSize: 14,
     marginLeft: 10,
     fontWeight: "500",
-    color: "white"
+    color: "white",
   },
   grandTotalTitle: {
     marginTop: 5,
@@ -221,7 +224,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 14,
     fontWeight: "700",
-    width: "64%"
+    width: "64%",
   },
   grandTotalPrice: {
     marginTop: 5,
@@ -229,7 +232,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "800",
     width: "25%",
-    textAlign: "right"
+    textAlign: "right",
   },
   button: {
     backgroundColor: COLORS.CTAButtonBackground,
@@ -239,8 +242,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 8,
     width: "90%",
-    marginTop: "8%"
-  }
+    marginTop: "8%",
+  },
 });
 
 export default AddressScreen;

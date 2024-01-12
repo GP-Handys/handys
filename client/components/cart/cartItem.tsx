@@ -56,7 +56,7 @@ export default function cartItem({
     }
   };
 
-  useEffect(() => {  
+  useEffect(() => {
     const quantity = cartItem.quantity;
     setCounter(quantity);
     const newTotalPrice = counter * item.base_price;
@@ -70,13 +70,12 @@ export default function cartItem({
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
             <Text style={styles.itemName}>{item.name}</Text>
-            {cartItem.customization!="" && (
+            {cartItem.customization != "" && (
               <View>
                 <Text style={styles.Customized}>Customized</Text>
                 <Text style={styles.details}>Details: {cartItem.customization}</Text>
               </View>
             )}
-          
           </View>
           <View style={styles.footer}>
             <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
@@ -150,4 +149,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-{/*  */}
+{
+  /*  */
+}

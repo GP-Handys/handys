@@ -4,6 +4,7 @@ import { connection } from "../database/database";
 class Cart extends Model {
   public id!: number;
   public user_id!: number;
+  public shop_id!: number;
   public item_id!: number;
   public quantity!:number;
   public customization!:string;
@@ -17,6 +18,10 @@ Cart.init(
       autoIncrement: true,
     },
     user_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    shop_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
