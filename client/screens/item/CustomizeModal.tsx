@@ -15,9 +15,16 @@ import ThematicBreak from "../../components/ThematicBreak";
 interface ModalProps {
   isVisible: boolean;
   onDismiss: () => void;
+  setCustomization: (customization: string) => void;
 }
 
-export default function CustomizeScreen({ isVisible, onDismiss }: ModalProps) {
+export default function CustomizeScreen({
+  isVisible,
+  onDismiss,
+  setCustomization,
+}: ModalProps) {
+  const [tempCustomization, setTempCustomization] = useState("");
+
   return (
     <View>
       <Modal animationType="slide" transparent={false} visible={isVisible}>
@@ -28,9 +35,6 @@ export default function CustomizeScreen({ isVisible, onDismiss }: ModalProps) {
                 <MaterialIcons name="close" size={23} color="white" />
               </TouchableOpacity>
               <Text style={styles.HeaderText}> Customize</Text>
-              <TouchableOpacity onPress={onDismiss} style={styles.DoneButton}>
-                <Text style={styles.DoneText}>Done</Text>
-              </TouchableOpacity>
             </View>
             <ThematicBreak />
           </View>
@@ -39,8 +43,20 @@ export default function CustomizeScreen({ isVisible, onDismiss }: ModalProps) {
               placeholder="Any special requests?"
               multiline={true}
               minHeight={150}
+              onChangeText={(text) => {
+                setTempCustomization(text);
+              }}
             />
           </View>
+          <TouchableOpacity
+            style={styles.ConfirmButton}
+            onPress={() => {
+              setCustomization(tempCustomization);
+              onDismiss();
+            }}
+          >
+            <Text style={styles.Text}>Confirm</Text>
+          </TouchableOpacity>
         </CommonScrollableBackground>
       </Modal>
     </View>

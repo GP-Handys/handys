@@ -19,6 +19,7 @@ export default function ItemScreen({ route }: any) {
   const [shop, setShop] = useState<Shop>();
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isCustomizeModalVisible, setIsCustomizeModalVisible] = useState(false);
+  const [customization, setCustomization] = useState("");
 
 
   const fetchShopDataById = async () => {
@@ -119,7 +120,8 @@ export default function ItemScreen({ route }: any) {
               </View>
 
               {isCustomizeModalVisible && (
-          <CustomizeModal
+          <CustomizeModal 
+            setCustomization={setCustomization}
             isVisible={isCustomizeModalVisible}
             onDismiss={() => setIsCustomizeModalVisible(false)}
           />
@@ -138,7 +140,7 @@ export default function ItemScreen({ route }: any) {
 
             <TouchableOpacity style={styles.cartButton} onPress={()=>{
               Alert.alert("Item added to cart succefully")
-              addToCart(item.id)}}>
+              addToCart(item.id , customization)}}>
               <Feather name="shopping-cart" size={24} color="black" />
               <Text
                 style={{
