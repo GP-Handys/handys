@@ -39,9 +39,6 @@ export default function CustomizeScreen({ isVisible, onDismiss }: ModalProps) {
             minHeight={150}
             />
          </View>
-         <TouchableOpacity style={styles.ConfirmButton}>
-            <Text style={styles.Text}>Confirm</Text>
-         </TouchableOpacity>
       </CommonScrollableBackground>
 
       </Modal>
