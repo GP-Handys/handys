@@ -33,7 +33,6 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const fetchProfile = async () => {
       await getProfile().then(async (result) => {
         setUser(result);
@@ -102,30 +101,15 @@ export default function Profile() {
             <Text style={style.lableFont}>Your shops</Text>
           </View>
 
-
-            {shops.length>0 &&
-          <ScrollView horizontal={true} scrollEnabled={false} contentContainerStyle={{width:"100%",justifyContent:"center"}}>
-            <View >
-            <FlatList
-            scrollEnabled={false}
-              style={{alignSelf:"center",marginTop:10}}
-              data={shops}
-              renderItem={({ item }) => (
-                <UserShop shop={item} />
-              )}
-              ItemSeparatorComponent={()=>{
-                return (
-                <View style={{marginVertical:5}} />
-
-                )
-              }}
-
-            />
+          {shops.length > 0 && (
+            <View style={{marginTop:10,gap:10}}>
+              {shops.map((shop: any) => (
+                <UserShop key={shop.id} shop={shop} />
+              ))}
             </View>
-          </ScrollView>}
+          )}
 
           <View style={{ gap: 20, paddingVertical: 15 }}>
-  
             <TouchableOpacity
               style={style.createShop}
               onPress={() => {
