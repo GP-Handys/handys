@@ -7,8 +7,7 @@ export const placeOrder = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
   try {
-    const { street_name, apt_number, floor, phone_number, price } =
-      req.body;
+    const { street_name, apt_number, floor, phone_number, price } = req.body;
 
     let cart: Cart[] = await Cart.findAll({ where: { user_id: userId } });
 
@@ -71,6 +70,27 @@ export const getOrdersForUserId = async (req: Request, res: Response) => {
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: error });
+  }
+};
+
+export const getItemsForOrderId = async (req: Request, res: Response) => {
+  const orderId = req.params.orderId;
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId: number = extractUserFromJwt(jwt);
+
+  try {
+    const itemOrders: ItemOrder[] = await ItemOrder.findAll({ 
+      where: {
+        orderId: orderId
+      }
+    });
+    if (!itemOrders) {
+      res.status(404).json("No items found");
+      return;
+    }
+    res.status(200).json(itemOrders);
+  } catch (error) {
     res.status(500).json({ error: error });
   }
 };
