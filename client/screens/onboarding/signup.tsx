@@ -31,7 +31,7 @@ export default function SignUp({ navigation }: StackProps) {
       <View style={{ marginTop: 31, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Name"
-          left={<TextInput.Icon icon="account" color={"white"} />}
+          left={<TextInput.Icon icon="account" color={"#854627"} />}
           value={name}
           onChangeText={(text) => setName(text)}
         />
@@ -39,7 +39,7 @@ export default function SignUp({ navigation }: StackProps) {
       <View style={{ marginTop: 14, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Email"
-          left={<TextInput.Icon icon="email" color={"white"} />}
+          left={<TextInput.Icon icon="email" color={"#854627"} />}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
@@ -50,7 +50,7 @@ export default function SignUp({ navigation }: StackProps) {
           isSecureTextEntry={isSecureTextEntry}
           value={password}
           onChangeText={(text) => setPassword(text)}
-          left={<TextInput.Icon icon="lock" color={"white"} />}
+          left={<TextInput.Icon icon="lock" color={"#854627"} />}
           right={
             <TextInput.Icon
               icon={icon}
@@ -72,7 +72,7 @@ export default function SignUp({ navigation }: StackProps) {
           isSecureTextEntry={isSecureTextEntry2}
           value={ConfirmPassword}
           onChangeText={(text) => setConfirmPassword(text)}
-          left={<TextInput.Icon icon="lock" color={"white"} />}
+          left={<TextInput.Icon icon="lock" color={"#854627"} />}
           right={
             <TextInput.Icon
               icon={icon2}
@@ -99,7 +99,7 @@ export default function SignUp({ navigation }: StackProps) {
             },
           ]}
         >
-          <Text style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}>
+          <Text style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: 18.44 }}>
             {STRINGS.signUp}
           </Text>
         </Pressable>

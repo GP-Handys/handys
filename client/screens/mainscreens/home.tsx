@@ -77,7 +77,7 @@ export default function Home() {
     <CommonScrollableBackground>
       <View>
         <ImageBackground
-          source={require("../../assets/homeBanner.png")}
+          source={require("../../assets/homeBanner2.jpg")}
           style={styles.banner}
         >
           <Text style={styles.homeBannerTitleContainer}>

@@ -30,7 +30,7 @@ export default function CustomTextInput({
   minHeight = 44,
   maxHeight = 440,
 
-  bgColor = COLORS.handysGrey,
+  bgColor = "#CABEAB",
   mode = "text",
   style,
 
@@ -50,7 +50,7 @@ export default function CustomTextInput({
       secureTextEntry={isSecureTextEntry}
       left={left}
       right={right}
-      textColor="white"
+      textColor="#522C19"
       placeholderTextColor={COLORS.textInputPlaceholder}
       selectionColor={COLORS.textInputSelection}
       activeUnderlineColor="transparent"
@@ -59,6 +59,7 @@ export default function CustomTextInput({
       maxLength={maxLength}
       multiline={multiline}
       inputMode={mode}
+      
     />
   );
 }

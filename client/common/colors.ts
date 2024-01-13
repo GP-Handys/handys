@@ -1,11 +1,12 @@
 let COLORS = {
-  commonBackground: "#202525",
-  CTAButtonBackground: "#F6977F",
-  handysGrey: "#464949",
-  textInputSelection: "#00000090",
-  textInputPlaceholder: "#FFFFFF80",
-  tabNavIconFocused: "#F6977F",
-  DividerColor:"rgba(255, 255, 255, 0.25)"
+  commonBackground: "#F4EDE7",
+  CTAButtonBackground: "#7C7459",
+  handysGrey: "#CABEAB",
+  textInputSelection: "#7C7459",
+  textInputPlaceholder: "#854627",
+  tabNavIconFocused: "#CABEAB",
+  DividerColor:"#7C7459",
+  textUserInputColor:"#522C19"
 };
 
 export default COLORS;
