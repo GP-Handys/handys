@@ -26,7 +26,7 @@ import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
 import AiPromptScreen from "./screens/ai/Prompt";
 import GeneratedImageScreen from "./screens/ai/GeneratedImage";
 import ShopContactScreen from "./screens/shop/Contact";
-import { ItemOrdersScreen } from "./screens/profile/ItemOrders";
+import { ItemOrderScreen } from "./screens/profile/ItemOrders";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -189,7 +189,7 @@ export default function App() {
             headerBackTitleVisible: false,
           }}
         />
-        
+
         <Stack.Screen
           name="ShopSettingsScreen"
           component={ShopSettingsScreen}
@@ -283,6 +283,12 @@ export default function App() {
             headerBackTitleVisible: false,
           }}
         />
+
+        <Stack.Screen
+          name="ItemOrderScreen"
+          component={ItemOrderScreen}
+          options={{
+            title: "My Order",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
@@ -290,11 +296,6 @@ export default function App() {
             headerBackTitleVisible: false,
           }}
         />
-        <Stack.Screen
-          name="ItemOrdersScreen"
-          component={ItemOrdersScreen}
-          options={{
-            title: "My Order",
       </Stack.Navigator>
     </NavigationContainer>
   );

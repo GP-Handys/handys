@@ -8,7 +8,7 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { getItemsForOrderId } from "../../api/OrderApi";
 import ItemOrder from "../../components/profile/ItemOrder";
 
-export function ItemOrdersScreen({ route }: any) {
+export function ItemOrderScreen({ route }: any) {
   const orderId: number = route.params.orderId;
   const shop: Shop = route.params.shop;
   const [shopRating, setShopRating] = useState<number>(0);

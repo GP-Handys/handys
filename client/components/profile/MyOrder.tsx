@@ -30,7 +30,7 @@ export default function MyOrder({ shopId, orderId }: Props) {
     <TouchableOpacity
       style={styles.mainContainer}
       onPress={() =>
-        navigation.navigate("ItemOrdersScreen", {
+        navigation.navigate("ItemOrderScreen", {
           shop: shop,
           orderId: orderId,
         })
