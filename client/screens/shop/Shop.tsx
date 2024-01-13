@@ -122,12 +122,6 @@ export default function ShopScreen({ route }: any) {
 }
 
 const styles = StyleSheet.create({
-  shopHeader: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 25,
-  },
   shopImage: {
     width: "100%",
     aspectRatio: 3 / 2,

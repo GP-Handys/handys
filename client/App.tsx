@@ -26,7 +26,7 @@ import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
 import AiPromptScreen from "./screens/ai/Prompt";
 import GeneratedImageScreen from "./screens/ai/GeneratedImage";
 import { MyOrders } from "./screens/profile/MyOrders";
-import { ItemOrders } from "./screens/profile/ItemOrders";
+import { ItemOrdersScreen } from "./screens/profile/ItemOrders";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -298,7 +298,7 @@ export default function App() {
         />
         <Stack.Screen
           name="ItemOrdersScreen"
-          component={ItemOrders}
+          component={ItemOrdersScreen}
           options={{
             title: "My Order",
             headerTitleStyle: { color: "white" },

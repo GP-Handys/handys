@@ -3,6 +3,8 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Shop } from "../../models/Shop";
 import { getShopById } from "../../api/ShopApi";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../navigation/NavigationStack";
 
 interface Props {
   shopId: number;
@@ -10,7 +12,8 @@ interface Props {
 }
 
 export default function MyOrder({ shopId, orderId }: Props) {
-  const [shop, setShop] = useState<Shop>();
+  const navigation = useNavigation<StackProps["navigation"]>();
+  const [shop, setShop] = useState<any>();
 
   const fetchShopDataById = async () => {
     await getShopById(shopId).then((res) => {
@@ -25,7 +28,15 @@ export default function MyOrder({ shopId, orderId }: Props) {
   }, []);
 
   return (
-    <TouchableOpacity style={styles.mainContainer}>
+    <TouchableOpacity
+      style={styles.mainContainer}
+      onPress={() =>
+        navigation.navigate("ItemOrdersScreen", {
+          shop: shop,
+          orderId: orderId,
+        })
+      }
+    >
       {shop && (
         <View style={styles.imageContainer}>
           <Image source={{ uri: shop.pfp_url ?? "" }} style={styles.image} />
@@ -33,7 +44,16 @@ export default function MyOrder({ shopId, orderId }: Props) {
       )}
       <View style={styles.textContainer}>
         <Text style={styles.shopName}>{shop?.name}</Text>
-        <MaterialIcons name="keyboard-arrow-right" size={30} color="white" style={{alignItems: "center", justifyContent: "center", alignSelf: "center"}} />
+        <MaterialIcons
+          name="keyboard-arrow-right"
+          size={30}
+          color="white"
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            alignSelf: "center",
+          }}
+        />
       </View>
     </TouchableOpacity>
   );
