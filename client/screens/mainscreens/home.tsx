@@ -43,8 +43,6 @@ export default function Home() {
     });
   };
 
-  
-
   const fetchFavItems = async () => {
     await getWishList("ids").then((result) => {
         setFavItems(result);
@@ -68,8 +66,6 @@ export default function Home() {
     };
 
     fetchScreenData();
-
-    navigation.addListener("focus", fetchScreenData);
   }, []);
   
 

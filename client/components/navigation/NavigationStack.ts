@@ -9,7 +9,7 @@ import { User } from "../../models/User";
 import { Shop } from "../../models/Shop";
 
 export type StackParamList = {
-  home:undefined;
+  home: undefined;
   Landing: undefined;
   SignIn: undefined;
   SignUp: undefined;
@@ -22,21 +22,22 @@ export type StackParamList = {
   ShopScreen: { shopId: number | undefined; shopName: string | undefined };
   Comments: { post: PostModel; isLiked: boolean };
   AddItemScreen: { shopId: number };
-  EditProfile: {user:User}
-  ItemScreen: {item: Item, favorite: boolean};
+  EditProfile: { user: User };
+  ItemScreen: { item: Item; favorite: boolean };
   AddCustomization: undefined;
   CategoryItemsScreen: { category: Category };
   WishlistScreen: undefined;
   MyPostsScreen: undefined;
-  EditItemScreen: { item: Item, shopId: number };
-  ShopSettingsScreen: {shop: Shop}
+  EditItemScreen: { item: Item; shopId: number };
+  ShopSettingsScreen: { shop: Shop };
+  ShopContactScreen: { shop: Shop };
   GenerationHistoryScreen: undefined;
-  Cart:undefined;
-  Map: { totalAmount: number};
-  AddressScreen:{governorate: any , street: any, totalAmount: number};
-  DonePlaceOrder:undefined;
+  Cart: undefined;
+  Map: { totalAmount: number };
+  AddressScreen: { governorate: any; street: any; totalAmount: number };
+  DonePlaceOrder: undefined;
   AiPromptScreen: undefined;
-  GeneratedImageScreen: {prompt: string}
+  GeneratedImageScreen: { prompt: string };
   MyOrdersScreen: undefined;
 };
 
