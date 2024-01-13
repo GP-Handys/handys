@@ -1,15 +1,32 @@
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, FlatList } from "react-native";
 import { Shop } from "../../models/Shop";
 import COLORS from "../../common/colors";
 import StarRating from "react-native-star-rating-widget";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CommonScrollableBackground } from "../../common/background";
 import ThematicBreak from "../../components/ThematicBreak";
+import { getItemsForOrderId } from "../../api/OrderApi";
+import ItemOrder from "../../components/profile/ItemOrder";
 
 export function ItemOrdersScreen({ route }: any) {
   const orderId: number = route.params.orderId;
   const shop: Shop = route.params.shop;
   const [shopRating, setShopRating] = useState<number>(0);
+  const [itemOrders, setItemOrders] = useState<any[]>([]);
+  const [isFetchingItems, setIsFetchingItems] = useState<boolean>(false);
+
+  const fetchItemsForOrderId = async () => {
+    await getItemsForOrderId(orderId).then((res) => {
+      if (res.status === 200) {
+        setItemOrders(res.data);
+        setIsFetchingItems(false);
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchItemsForOrderId();
+  }, []);
 
   return (
     <CommonScrollableBackground>
@@ -34,9 +51,21 @@ export function ItemOrdersScreen({ route }: any) {
         Please provide feedback to help improve the shop and the items in the
         future.
       </Text>
-      <View style={{marginVertical: 10}}>
+      <View style={{ marginVertical: 10 }}>
         <ThematicBreak />
       </View>
+      <FlatList
+        data={itemOrders}
+        renderItem={({ item }) => <ItemOrder itemOrder={item} />}
+        scrollEnabled={false}
+        ItemSeparatorComponent={() => {
+          return (
+            <View style={{ marginVertical: 20 }}>
+              <ThematicBreak marginHorizontal={15} />
+            </View>
+          );
+        }}
+      />
     </CommonScrollableBackground>
   );
 }

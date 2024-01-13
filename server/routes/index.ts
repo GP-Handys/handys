@@ -53,6 +53,7 @@ router.get("/api/items/getByCategory/:categoryId", tokenValidate,itemRouter.getb
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
 router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrderForShopId)
 router.get("/api/orders/user", tokenValidate, orderRouter.getOrdersForUserId)
+router.get("/api/orders/items/:orderId", tokenValidate, orderRouter.getItemsForOrderId)
 
 //community routes
 router.post("/api/community/addPost", tokenValidate, communityRouter.addPost)
