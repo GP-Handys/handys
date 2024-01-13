@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   shop: {
     backgroundColor: COLORS.handysGrey,
     height: 60,
-    width: 320,
+    width: "100%",
     borderRadius: 9,
     gap: 12,
     flexDirection: "row",

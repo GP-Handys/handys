@@ -100,22 +100,25 @@ export default function Profile() {
           <View style={style.lable}>
             <Text style={style.lableFont}>Your shops</Text>
           </View>
-          
-          <>
-          <FlatList
-            scrollEnabled={false}
-              style={{alignSelf:"center",marginTop:10}}
-              data={shops}
-              renderItem={({ item }) => (
-                <UserShop shop={item} />
-              )}
-              ItemSeparatorComponent={()=>{
-                return (
-                <View style={{marginVertical:5}} />
-                )
-              }}
-            />
-          </>
+
+          <View style={{ paddingHorizontal: 15 ,width:"100%"}}>
+            {shops.length && (
+              
+                <FlatList
+                  scrollEnabled={false}
+                  style={{
+                    alignSelf: "center",
+                    marginTop: 10,
+                    width: "100%",    
+                  }}
+                  data={shops}
+                  renderItem={({ item }) => <UserShop shop={item} />}
+                  ItemSeparatorComponent={() => {
+                    return <View style={{ marginVertical: 5 }} />;
+                  }}
+                />
+            )}
+          </View>
           <View style={{ gap: 20, paddingVertical: 15 }}>
             <TouchableOpacity
               style={style.createShop}
@@ -152,7 +155,10 @@ export default function Profile() {
               />
               <Text style={style.cardFont}>My Posts</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={style.card} onPress={() => navigation.navigate("MyOrdersScreen")}>
+            <TouchableOpacity
+              style={style.card}
+              onPress={() => navigation.navigate("MyOrdersScreen")}
+            >
               <Entypo name="shopping-bag" size={24} color="white" />
               <Text style={style.cardFont}>Orders</Text>
             </TouchableOpacity>
