@@ -69,7 +69,7 @@ export const getCart = async (req: Request, res: Response) => {
 
   try {
     let cart = await Cart.findAll({ where: { user_id: user_id } });
-    let query = `select * from items where id = (select item_id from carts where user_id = ${user_id} and item_id=items.id);`;
+    let query = `select * from items where id = (select item_id from carts where user_id = ${user_id} and item_id=items.id limit 1);`;
     const items = (await DB.query(query)) as Item[];
 
     let itemsMap: any = {};

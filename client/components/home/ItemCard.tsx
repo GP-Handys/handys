@@ -108,7 +108,9 @@ const styles = StyleSheet.create({
     marginTop: 7,
     color: "white",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 15,
+    flexWrap:"wrap-reverse",
+    maxWidth:140
   },
   ratingContainer: {
     backgroundColor: "#464949",
