@@ -26,6 +26,7 @@ import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
 import AiPromptScreen from "./screens/ai/Prompt";
 import GeneratedImageScreen from "./screens/ai/GeneratedImage";
 import { MyOrders } from "./screens/profile/MyOrders";
+import { ItemOrders } from "./screens/profile/ItemOrders";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -288,6 +289,18 @@ export default function App() {
           component={MyOrders}
           options={{
             title: "My Orders",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ItemOrdersScreen"
+          component={ItemOrders}
+          options={{
+            title: "My Order",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",

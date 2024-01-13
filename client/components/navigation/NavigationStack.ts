@@ -38,6 +38,7 @@ export type StackParamList = {
   AiPromptScreen: undefined;
   GeneratedImageScreen: {prompt: string}
   MyOrdersScreen: undefined;
+  ItemOrdersScreen: {orderId: number}
 };
 
 export const Stack = createNativeStackNavigator<StackParamList>();
