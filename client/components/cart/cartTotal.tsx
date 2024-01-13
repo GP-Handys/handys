@@ -17,7 +17,7 @@ export default function cartTotal() {
         <Pressable
           style={styles.pressable}
           onPress={() => {
-            navigation.navigate("Map");
+            navigation.navigate("Map", {totalAmount: totalPrice});
           }}
         >
           <Text style={styles.button}>Checkout</Text>
