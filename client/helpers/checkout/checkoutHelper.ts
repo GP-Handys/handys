@@ -10,6 +10,8 @@ export default function checkoutHelper(
   floor: string,
   phone_number: number,
   price: number,
+  buildingNumber:string,
+  instructions:string,
   navigation: NativeStackNavigationProp<StackParamList>
 ) {
   let phoneReg = STRINGS.phoneValidator;
@@ -20,10 +22,12 @@ export default function checkoutHelper(
     Alert.alert(STRINGS.failPopUp, "You have to enter street name");
   } else if (floor.length == 0) {
     Alert.alert(STRINGS.failPopUp, "You have to enter the floor");
+  } else if (buildingNumber.length == 0) {
+    Alert.alert(STRINGS.failPopUp, "You have to enter the building number");
   } else if (apt_number.length == 0) {
     Alert.alert(STRINGS.failPopUp, "You have to enter apartment number");
   } else {
-    confirmOrder({ street_name, apt_number, floor, phone_number, price });
+    confirmOrder({ street_name, apt_number, floor, phone_number, price,buildingNumber,instructions });
     navigation.navigate("DonePlaceOrder");
   }
 }
