@@ -11,6 +11,8 @@ class Order extends Model {
   public floor!: string;
   public phone_number!: string;
   public price!: number;
+  public building_number!:string;
+  public instructions!:string;
 }
 
 Order.init(
@@ -31,6 +33,14 @@ Order.init(
     floor: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    building_number: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    instructions: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     phone_number: {
       type: DataTypes.INTEGER,
@@ -56,6 +66,11 @@ class ItemOrder extends Model {
 
 ItemOrder.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,

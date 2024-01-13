@@ -7,7 +7,7 @@ export const placeOrder = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
   try {
-    const { street_name, apt_number, floor, phone_number, price } =
+    const { street_name, apt_number, floor, phone_number, price ,buildingNumber,instructions} =
       req.body;
 
     let cart: Cart[] = await Cart.findAll({ where: { user_id: userId } });
@@ -20,6 +20,8 @@ export const placeOrder = async (req: Request, res: Response) => {
       floor,
       phone_number,
       price,
+      building_number:buildingNumber,
+      instructions
     });
 
     cart.forEach(async (element: Cart) => {
