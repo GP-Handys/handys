@@ -25,7 +25,7 @@ import GenerationHistoryScreen from "./screens/ai/History";
 import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
 import AiPromptScreen from "./screens/ai/Prompt";
 import GeneratedImageScreen from "./screens/ai/GeneratedImage";
-import { MyOrders } from "./screens/profile/MyOrders";
+import ShopContactScreen from "./screens/shop/Contact";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -199,11 +199,24 @@ export default function App() {
             headerBackTitleVisible: false,
           }}
         />
+        
         <Stack.Screen
           name="ShopSettingsScreen"
           component={ShopSettingsScreen}
           options={{
             title: "Shop Settings",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShopContactScreen"
+          component={ShopContactScreen}
+          options={{
+            title: "Shop Contact",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
@@ -220,7 +233,6 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -232,7 +244,6 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -244,7 +255,6 @@ export default function App() {
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -276,18 +286,6 @@ export default function App() {
           component={GenerationHistoryScreen}
           options={{
             title: "Generated Images",
-            headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-            headerBackTitleVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="MyOrdersScreen"
-          component={MyOrders}
-          options={{
-            title: "My Orders",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
