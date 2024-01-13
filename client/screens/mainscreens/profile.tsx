@@ -101,7 +101,9 @@ export default function Profile() {
             <Text style={style.lableFont}>Your shops</Text>
           </View>
           
-          <>
+          
+          {shops.length && (
+            <>
           <FlatList
             scrollEnabled={false}
               style={{alignSelf:"center",marginTop:10}}
@@ -116,6 +118,7 @@ export default function Profile() {
               }}
             />
           </>
+        )}
           <View style={{ gap: 20, paddingVertical: 15 }}>
             <TouchableOpacity
               style={style.createShop}
