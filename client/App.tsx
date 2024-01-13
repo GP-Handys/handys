@@ -35,17 +35,6 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OnboardingScreensContainer">
         <Stack.Screen
-          name="home"
-          component={Home}
-          options={{
-            title: "Address",
-            headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-          }}
-        />
-        <Stack.Screen
           name="OnboardingScreensContainer"
           component={OnboardingNavigationContainer}
           options={{

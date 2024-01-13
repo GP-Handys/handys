@@ -40,7 +40,7 @@ router.get("/api/shop/recommended", tokenValidate, shopRouter.getRecommendedShop
 router.post("/api/items/addItem/:shopId", tokenValidate,itemRouter.addItem)
 router.put("/api/items/update/:itemId", tokenValidate,itemRouter.updateItem)
 router.delete("/api/items/deleteItem/:itemId", tokenValidate,itemRouter.deleteItem)
-router.get("/api/items/getItem/:itemId", tokenValidate,itemRouter.getItem)
+router.get("/api/items/:itemId", tokenValidate,itemRouter.getItem)
 router.get("/api/items/getReviews/:itemId", tokenValidate,itemRouter.getReviews)
 router.post("/api/items/addReview/:itemId", tokenValidate,itemRouter.addReview)
 router.delete("/api/items/removeReview/:reviewId",tokenValidate,itemRouter.removeReview)

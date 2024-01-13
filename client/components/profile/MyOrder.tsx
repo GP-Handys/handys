@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { Shop } from "../../models/Shop";
 import { getShopById } from "../../api/ShopApi";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
