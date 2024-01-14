@@ -15,7 +15,7 @@ export default function TabBarNavigationContainer() {
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarStyle: {
-          backgroundColor: "black",
+          backgroundColor: "#7C7459",
           borderTopWidth: 0,
         },
         headerStyle: {

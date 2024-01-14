@@ -98,7 +98,7 @@ export default function Community() {
                   alignSelf: "center",
                   fontWeight: "500",
                   marginTop: 30,
-                  color: "white",
+                  color: COLORS.postUser,
                 }}
               >
                 There are no post yet...

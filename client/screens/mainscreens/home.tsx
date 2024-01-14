@@ -21,6 +21,7 @@ import { getWishList } from "../../api/WishlistApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { getCategories } from "../../api/CategoryApi";
+import COLORS from "../../common/colors";
 
 export default function Home() {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -73,7 +74,7 @@ export default function Home() {
     <CommonScrollableBackground>
       <View>
         <ImageBackground
-          source={require("../../assets/homeBanner.png")}
+          source={require("../../assets/homeBanner2.jpg")}
           style={styles.banner}
         >
           <Text style={styles.homeBannerTitleContainer}>
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontWeight: "bold",
     fontSize: 20,
-    color: "white",
+    color: COLORS.textTitle,
   },
   pageContainer: {
     marginHorizontal: 30,

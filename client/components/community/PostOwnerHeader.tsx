@@ -10,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import { getUserById } from "../../api/UserApi";
 import { User } from "../../models/User";
+import COLORS from "../../common/colors";
 
 interface PostOwnerHeaderProps {
   userId: number;
@@ -63,9 +64,10 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   userName: {
-    color: "#FFFFFFE0",
+    color: "#45291C",
     fontSize: 16,
     paddingLeft: 6,
+    fontWeight:"500"
     // borderWidth:1,
   },
 });

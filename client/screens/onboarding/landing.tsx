@@ -15,7 +15,7 @@ export default function Landing({ navigation }: StackProps) {
       <View style={styles.imagesContainer}>
         <Image
           style={{ width: "100%" }}
-          source={require("../../assets/landing.png")}
+          source={require("../../assets/landing2.png")}
         />
         <View style={styles.logo}>
           <Logo />
@@ -37,7 +37,7 @@ export default function Landing({ navigation }: StackProps) {
           }}
         >
           <Text
-            style={{ color: "#202525", fontWeight: "bold", fontSize: 18.44 }}
+            style={{ color: "#F4EDE7", fontWeight: "bold", fontSize: 18.44 }}
           >
             {STRINGS.signIn}
           </Text>
@@ -55,7 +55,7 @@ export default function Landing({ navigation }: StackProps) {
             navigation.navigate("SignUp");
           }}
         >
-          <Text style={{ color: "#FFFF", fontWeight: "bold", fontSize: 18.44 }}>
+          <Text style={{ color: "#7C7459", fontWeight: "bold", fontSize: 18.44 }}>
             {STRINGS.signUp}
           </Text>
         </Pressable>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
   },
   welcome: {
-    color: "#FFFFFF",
+    color: "#854627",
     textAlign: "center",
     fontSize: 13,
   },

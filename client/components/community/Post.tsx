@@ -15,6 +15,7 @@ import LikeButton from "./LikeButton";
 import CommentButton from "./CommentButton";
 import { PostModel } from "../../models/Post";
 import { useState } from "react";
+import COLORS from "../../common/colors";
 interface PostProps {
   post: PostModel;
   isComment?: boolean;
@@ -67,7 +68,7 @@ export default function Post({
       </View>
       <View>
         <View style={[styles.mainPost, mainPostStyle]}>
-          <Text style={{ color: "white", fontSize: 12.5 }}>{post.content}</Text>
+          <Text style={{ color: COLORS.postContent, fontSize: 14, marginLeft:15  }}>{post.content}</Text>
           {post.img_url && (
             <View style={styles.postImgContainer}>
               <Image style={styles.postImg} source={{ uri: post.img_url }} />
@@ -84,6 +85,7 @@ export default function Post({
 }
 const styles = StyleSheet.create({
   userProfile: {
+    color:COLORS.postUser,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -99,10 +101,14 @@ const styles = StyleSheet.create({
   },
   postImgContainer: {
     marginTop: 8,
+    borderRadius:5,
   },
   postImg: {
-    width: Dimensions.get("window").width - 20,
-    height: Dimensions.get("window").width - 20,
+    width: 300,
+    height: 300,
+    borderRadius:5,
+    alignSelf:'center'
+    //Dimensions.get("window").width - 20
   },
   footer: {
     flexDirection: "row",

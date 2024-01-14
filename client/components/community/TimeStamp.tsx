@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
 import moment from "moment";
+import COLORS from "../../common/colors";
 
 interface TimeStampProps {
   time: Date;
@@ -11,7 +12,7 @@ export default function TimeStamp({ time }: TimeStampProps) {
 
   return (
     <View>
-      <Text style={{ color: "#FFFFFA80", fontSize: 12.11 }}>
+      <Text style={{ color: COLORS.postContent, fontSize: 12.11 }}>
         {formattedTime}
       </Text>
     </View>

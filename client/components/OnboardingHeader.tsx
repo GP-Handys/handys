@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
   },
   welcome: {
-    color: "#FFFFFF",
+    color: "#854627",
     textAlign: "center",
     fontSize: 13,
   },
