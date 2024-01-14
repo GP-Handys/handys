@@ -14,9 +14,9 @@ import { useState, useEffect } from "react";
 import { getLikedPosts, getPosts } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Feather } from '@expo/vector-icons';
 import COLORS from "../../common/colors";
 import { ActivityIndicator } from "react-native-paper";
-
 export default function Community() {
   const [posts, setPosts] = useState<any[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -130,7 +130,8 @@ export default function Community() {
           style={styles.Iconbutton}
           onPress={() => setIsPostModalVisible(true)}
         >
-          <MaterialIcons name="add-circle" size={55} color="#F6977F" />
+
+          <Feather name="plus-square" size={30} color="white" style={{margin:10}} />
         </TouchableOpacity>
       </View>
     );
@@ -138,8 +139,10 @@ export default function Community() {
 const styles = StyleSheet.create({
   Iconbutton: {
     position: "absolute",
-    right: 20,
-    bottom: 20,
+    right: 10,
+    bottom: 10,
+    borderRadius:10,
+    backgroundColor: COLORS.CTAButtonBackground
   },
   image: {
     width: 260,
@@ -158,4 +161,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
+
+
 });
