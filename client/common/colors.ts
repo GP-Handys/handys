@@ -4,16 +4,17 @@ let COLORS = {
   handysGrey: "#CABEAB",
   textInputSelection: "#7C7459",
   textInputPlaceholder: "#854627",
-  textTitle:"#854627",
+  textTitle: "#854627",
   tabNavIconFocused: "#CABEAB",
-  DividerColor:"#7C7459",
-  textUserInputColor:"#522C19",
-  shopBackground:'#7C7459',
-  itemDetails:"#854627",
-  postUser:"#45291C",
-  postContent:'#854627',
-  postButton:'#522C19',
-  createPostText:'#522C19'
+  DividerColor: "#7C7459",
+  textUserInputColor: "#522C19",
+  shopBackground: "#7C7459",
+  itemDetails: "#854627",
+  postUser: "#45291C",
+  postContent: "#854627",
+  postButton: "#522C19",
+  createPostText: "#522C19",
+  normalText: "#522C19",
 };
 
 export default COLORS;
