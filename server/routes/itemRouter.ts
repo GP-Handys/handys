@@ -164,7 +164,7 @@ export const getItem = async (req: Request, res: Response) => {
   }
 };
 
-export const addReview = async (req: Request, res: Response) => {
+export const addRating = async (req: Request, res: Response) => {
   try {
     const itemId = req.params.itemId;
     const jwt: string = req.get("Authorization")?.toString()!;
