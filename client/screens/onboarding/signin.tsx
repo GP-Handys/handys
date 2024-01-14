@@ -27,7 +27,7 @@ export default function SignIn({ navigation }: StackProps) {
       <View style={{ marginTop: 31, marginHorizontal: 30 }}>
         <CustomTextInput
           placeholder="Email"
-          left={<TextInput.Icon icon="email" color={"white"} />}
+          left={<TextInput.Icon icon="email" color={"#854627"} />}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
@@ -36,7 +36,7 @@ export default function SignIn({ navigation }: StackProps) {
         <CustomTextInput
           placeholder="Password"
           isSecureTextEntry={isSecureTextEntry}
-          left={<TextInput.Icon icon="lock" color={"white"} />}
+          left={<TextInput.Icon icon="lock" color={"#854627"} />}
           value={password}
           onChangeText={(text) => setPassword(text)}
           right={
@@ -64,7 +64,7 @@ export default function SignIn({ navigation }: StackProps) {
             },
           ]}
         >
-          <Text style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}>
+          <Text style={{ color: "#FFFFFF", fontWeight: "400", fontSize: 18.44 }}>
             {STRINGS.signIn}
           </Text>
         </Pressable>

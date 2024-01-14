@@ -2,6 +2,7 @@ import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../navigation/NavigationStack";
 import { Category } from "../../models/Category";
+import COLORS from "../../common/colors";
 
 interface Props {
   category: Category;
@@ -30,10 +31,11 @@ export default function CategoryCard({category}:Props) {
 }
 const styles = StyleSheet.create({
   categoryName: {
-    color: "white",
+    color: COLORS.textInputPlaceholder,
     fontSize: 15,
     textAlign: "center",
-    marginTop:5
+    marginTop:5,
+    fontWeight:'500'
   },
   categoryImg: {
     borderRadius: 8,

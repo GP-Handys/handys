@@ -69,15 +69,15 @@ export default function ItemCard({
           {favorite ? (
             <FontAwesome
               name="heart"
-              size={24}
-              color="red"
+              size={20}
+              color="#854627"
               onPress={handleFavorite}
             />
           ) : (
             <FontAwesome
               name="heart-o"
-              size={24}
-              color="white"
+              size={20}
+              color="#854627"
               onPress={handleFavorite}
             />
           )}
@@ -106,19 +106,20 @@ const styles = StyleSheet.create({
   },
   itemName: {
     marginTop: 7,
-    color: "white",
+    color: COLORS.itemDetails,
     fontWeight: "bold",
     fontSize: 15,
     flexWrap:"wrap-reverse",
     maxWidth:140
   },
   ratingContainer: {
-    backgroundColor: "#464949",
+    backgroundColor: COLORS.CTAButtonBackground,
     width: 35,
     marginTop: 5,
-    borderRadius: 3,
+    borderRadius: 4,
     flex: 1,
     flexDirection: "row",
+    padding:1,
   },
   rating: {
     color: "white",
@@ -130,9 +131,9 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   price: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 18,
+    color: COLORS.itemDetails,
+    fontWeight: "900",
+    fontSize: 14,
   },
   editButton: {
     borderRadius: 5,
