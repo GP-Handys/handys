@@ -95,7 +95,7 @@ export const getItemsForOrderId = async (req: Request, res: Response) => {
         orderId: orderId,
       },
     });
-    if (!itemOrders) {
+    if (itemOrders.length == 0) {
       res.status(404).json("No items found");
       return;
     }

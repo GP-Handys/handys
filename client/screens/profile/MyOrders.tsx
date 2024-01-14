@@ -22,7 +22,7 @@ export function MyOrders() {
 
   useEffect(() => {
     fetchOrders();
-  });
+  }, []);
 
   if (isFetching) {
     return (
