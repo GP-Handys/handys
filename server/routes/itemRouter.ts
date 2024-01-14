@@ -192,31 +192,6 @@ export const addRating = async (req: Request, res: Response) => {
   }
 };
 
-export const removeReview = async (req: Request, res: Response) => {
-  try {
-    const reviewId = req.params.reviewId;
-    const jwt: string = req.get("Authorization")?.toString()!;
-
-    const userId = extractUserFromJwt(jwt);
-    const user = await User.findByPk(userId);
-    let review = await ItemReview.findByPk(reviewId);
-
-    if (review == null) {
-      res.sendStatus(404);
-      return;
-    }
-
-    if (user!.is_sys_admin || userId == review.userId) {
-      await review.destroy();
-      res.status(200).json("Review removed successfully ");
-    } else {
-      res.sendStatus(404);
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
 export const searchItem = async (req: Request, res: Response) => {
   try {
     const search = req.query.search;
@@ -235,16 +210,6 @@ export const getByShop = async (req: Request, res: Response) => {
   try {
     const shopId = req.params.shopId;
     const result = await Item.findAll({ where: { shopId: shopId } });
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const getReviews = async (req: Request, res: Response) => {
-  try {
-    const itemId = req.params.shopId;
-    const result = await ItemReview.findAll({ where: { itemId: itemId } });
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
