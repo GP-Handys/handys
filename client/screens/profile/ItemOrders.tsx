@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Text, FlatList } from "react-native";
+import { View, Image, StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
 import { Shop } from "../../models/Shop";
 import COLORS from "../../common/colors";
 import StarRating from "react-native-star-rating-widget";
@@ -81,6 +81,15 @@ export function ItemOrderScreen({ route }: any) {
           );
         }}
       />
+      <View style={{ marginHorizontal: 38, paddingBottom: 50 }}>
+        <TouchableOpacity
+          style={styles.submitButton}
+        >
+          <Text style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}>
+            Submit Rating
+          </Text>
+        </TouchableOpacity>
+      </View>
     </CommonScrollableBackground>
   );
 }
@@ -114,5 +123,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginHorizontal: 25,
     marginBottom: 10,
+  },
+  submitButton: {
+    backgroundColor: COLORS.CTAButtonBackground,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    height: 41,
+    borderRadius: 8,
   },
 });
