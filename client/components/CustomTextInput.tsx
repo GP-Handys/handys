@@ -59,7 +59,7 @@ export default function CustomTextInput({
       maxLength={maxLength}
       multiline={multiline}
       inputMode={mode}
-      
+      underlineStyle={{display:"none"}}
     />
   );
 }
