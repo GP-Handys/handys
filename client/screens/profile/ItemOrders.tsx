@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { Shop } from "../../models/Shop";
 import COLORS from "../../common/colors";
@@ -25,7 +26,7 @@ export function ItemOrderScreen({ route }: any) {
   const shop: Shop = route.params.shop;
   const [shopRating, setShopRating] = useState<number>(0);
   const [itemOrders, setItemOrders] = useState<any[]>([]);
-  const [isFetchingItems, setIsFetchingItems] = useState<boolean>(false);
+  const [isFetchingItems, setIsFetchingItems] = useState<boolean>(true);
   const [itemReviews, setItemReviews] = useState<{ [itemId: number]: number }>(
     {}
   );
@@ -60,66 +61,76 @@ export function ItemOrderScreen({ route }: any) {
     fetchItemsForOrderId();
   }, []);
 
-  return (
-    <CommonScrollableBackground>
-      {shop && (
-        <>
-          <Image
-            source={{ uri: shop?.pfp_url ?? "" }}
-            style={styles.shopImage}
-          />
-          <View style={styles.shopFooter}>
-            <Text style={styles.shopName}>{shop.name}</Text>
-            <StarRating
-              rating={shopRating}
-              onChange={setShopRating}
-              starSize={25}
-              color="white"
+  if (isFetchingItems) {
+    return (
+      <View style={styles.loadingPage}>
+        <ActivityIndicator size={"large"} color="white" />
+      </View>
+    );
+  } else {
+    return (
+      <CommonScrollableBackground>
+        {shop && (
+          <>
+            <Image
+              source={{ uri: shop?.pfp_url ?? "" }}
+              style={styles.shopImage}
             />
-          </View>
-        </>
-      )}
-      <Text style={styles.screenDescription}>
-        Please provide feedback to help improve the shop and the items in the
-        future.
-      </Text>
-      <View style={{ marginVertical: 10 }}>
-        <ThematicBreak />
-      </View>
-      <FlatList
-        data={itemOrders}
-        renderItem={({ item }) => (
-          <ItemOrder
-            itemOrder={item}
-            onItemReviewChange={handleItemReviewChange}
-          />
-        )}
-        scrollEnabled={false}
-        ItemSeparatorComponent={() => {
-          return (
-            <View style={{ marginVertical: 20 }}>
-              <ThematicBreak marginHorizontal={15} />
+            <View style={styles.shopFooter}>
+              <Text style={styles.shopName}>{shop.name}</Text>
+              <StarRating
+                rating={shopRating}
+                onChange={setShopRating}
+                starSize={25}
+                color="white"
+              />
             </View>
-          );
-        }}
-      />
-      <View style={{ marginHorizontal: 38, paddingBottom: 50 }}>
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => {
-            handleSubmitShopRating();
-            handleSubmitItemsRating();
-            navigation.pop();
-            Alert.alert("Thank you for your feedback!");
+          </>
+        )}
+        <Text style={styles.screenDescription}>
+          Please provide feedback to help improve the shop and the items in the
+          future.
+        </Text>
+        <View style={{ marginVertical: 10 }}>
+          <ThematicBreak />
+        </View>
+        <FlatList
+          data={itemOrders}
+          renderItem={({ item }) => (
+            <ItemOrder
+              itemOrder={item}
+              onItemReviewChange={handleItemReviewChange}
+            />
+          )}
+          scrollEnabled={false}
+          ItemSeparatorComponent={() => {
+            return (
+              <View style={{ marginVertical: 20 }}>
+                <ThematicBreak marginHorizontal={15} />
+              </View>
+            );
           }}
-        >
-          <Text style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}>
-            Submit Rating
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </CommonScrollableBackground>
-  );
+        />
+        <View style={{ marginHorizontal: 38, paddingBottom: 50 }}>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={() => {
+              handleSubmitShopRating();
+              handleSubmitItemsRating();
+              navigation.pop();
+              Alert.alert("Thank you for your feedback!");
+            }}
+          >
+            <Text
+              style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}
+            >
+              Submit Rating
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </CommonScrollableBackground>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -159,5 +170,12 @@ const styles = StyleSheet.create({
     marginTop: 40,
     height: 41,
     borderRadius: 8,
+  },
+  loadingPage: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
   },
 });
