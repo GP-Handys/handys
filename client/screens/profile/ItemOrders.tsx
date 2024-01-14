@@ -1,4 +1,11 @@
-import { View, Image, StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import { Shop } from "../../models/Shop";
 import COLORS from "../../common/colors";
 import StarRating from "react-native-star-rating-widget";
@@ -7,6 +14,7 @@ import { CommonScrollableBackground } from "../../common/background";
 import ThematicBreak from "../../components/ThematicBreak";
 import { getItemsForOrderId } from "../../api/OrderApi";
 import ItemOrder from "../../components/profile/ItemOrder";
+import { submitItemRating, submitShopRating } from "../../api/Rating";
 
 export function ItemOrderScreen({ route }: any) {
   const orderId: number = route.params.orderId;
@@ -23,6 +31,16 @@ export function ItemOrderScreen({ route }: any) {
       ...prevItemReviews,
       [itemId]: rating,
     }));
+  };
+
+  const handleSubmitShopRating = async () => {
+    await submitShopRating(shop.id, shopRating);
+  };
+
+  const handleSubmitItemsRating = async () => {
+    for (const [itemId, rating] of Object.entries(itemReviews)) {
+      await submitItemRating(parseInt(itemId), rating);
+    }
   };
 
   const fetchItemsForOrderId = async () => {
@@ -82,9 +100,7 @@ export function ItemOrderScreen({ route }: any) {
         }}
       />
       <View style={{ marginHorizontal: 38, paddingBottom: 50 }}>
-        <TouchableOpacity
-          style={styles.submitButton}
-        >
+        <TouchableOpacity style={styles.submitButton}>
           <Text style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}>
             Submit Rating
           </Text>
