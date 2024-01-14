@@ -14,6 +14,16 @@ export function ItemOrderScreen({ route }: any) {
   const [shopRating, setShopRating] = useState<number>(0);
   const [itemOrders, setItemOrders] = useState<any[]>([]);
   const [isFetchingItems, setIsFetchingItems] = useState<boolean>(false);
+  const [itemReviews, setItemReviews] = useState<{ [itemId: number]: number }>(
+    {}
+  );
+
+  const handleItemReviewChange = (itemId: number, rating: number) => {
+    setItemReviews((prevItemReviews) => ({
+      ...prevItemReviews,
+      [itemId]: rating,
+    }));
+  };
 
   const fetchItemsForOrderId = async () => {
     await getItemsForOrderId(orderId).then((res) => {
@@ -56,7 +66,12 @@ export function ItemOrderScreen({ route }: any) {
       </View>
       <FlatList
         data={itemOrders}
-        renderItem={({ item }) => <ItemOrder itemOrder={item} />}
+        renderItem={({ item }) => (
+          <ItemOrder
+            itemOrder={item}
+            onItemReviewChange={handleItemReviewChange}
+          />
+        )}
         scrollEnabled={false}
         ItemSeparatorComponent={() => {
           return (

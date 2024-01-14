@@ -7,9 +7,10 @@ import { Item } from "../../models/Item";
 
 interface Props {
   itemOrder: ItemOrderModel;
+  onItemReviewChange: (itemId: number, rating: number) => void;
 }
 
-export default function ItemOrder({ itemOrder }: Props) {
+export default function ItemOrder({ itemOrder, onItemReviewChange }: Props) {
   const [itemRating, setItemRating] = useState<number>(0);
   const [item, setItem] = useState<Item>();
 
@@ -41,7 +42,9 @@ export default function ItemOrder({ itemOrder }: Props) {
               <View style={{ marginRight: 5, marginTop: 5, marginBottom: 5 }}>
                 <Text style={{ opacity: 0.25, color: "white" }}>
                   Customization:
-                  {itemOrder.customization.length === 0 ? " This item is not customizable." : " " + itemOrder.customization}
+                  {itemOrder.customization.length === 0
+                    ? " This item is not customizable."
+                    : " " + itemOrder.customization}
                 </Text>
               </View>
             </View>
@@ -70,7 +73,10 @@ export default function ItemOrder({ itemOrder }: Props) {
           <View style={styles.starRating}>
             <StarRating
               rating={itemRating}
-              onChange={setItemRating}
+              onChange={(rating) => {
+                setItemRating(rating);
+                onItemReviewChange(itemOrder.itemId, rating);
+              }}
               color="white"
               starSize={25}
             />
