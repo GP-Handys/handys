@@ -20,7 +20,7 @@ export default function CommentButton({ post,isLiked }: Props) {
       })}
       }
       >
-        <MaterialIcons name="comment" size={25} color={"#FFFFFFBF"} />
+        <MaterialIcons name="comment" size={25} color={"#BD9A87"} />
       </TouchableOpacity>
     </View>
   );

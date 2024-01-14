@@ -37,47 +37,48 @@ export default function ShopCard({ shop }: Props) {
           rating={shop.rating}
           starSize={13}
           color={"white"}
-          starStyle={{ width: 2 }}
+          starStyle={{ width: 2 , alignItems:"center" }}
         />
+      </View>
 
         {shop.rating < 1000 ? (
           <Text style={styles.ratingCount}>{shop.rating} Reviews</Text>
         ) : (
           <Text style={styles.ratingCount}>({shop.rating / 1000}k Reviews)</Text>
         )}
-      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   shopCardContainer: {
-    backgroundColor: COLORS.handysGrey,
-    padding: 6,
+    backgroundColor: COLORS.shopBackground,
+    padding: 10,
     maxWidth: 150,
     borderRadius: 10
   },
   shopImg: {
     borderRadius: 8,
-    width: 135,
+    width: 125,
     height: 135,
     resizeMode: "cover"
   },
   shopName: {
     color: "white",
-    fontSize: 16,
-    fontWeight: "600",
+    fontSize: 18,
+    fontWeight: "500",
     marginVertical: 5,
-    marginLeft: 5
+    alignSelf:'center'
   },
   rating: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 10
+    alignSelf:'center',
+    marginBottom:5,
   },
   ratingCount: {
-    fontSize: 8,
+    fontSize: 9,
     color: "#fffffa",
-    opacity: 0.5
+    opacity: 0.7,
+    alignSelf:'center'
   }
 });

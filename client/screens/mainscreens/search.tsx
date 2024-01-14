@@ -54,11 +54,11 @@ export default function Search(this: any) {
       <View style={{ margin: 15, minHeight: "100%" }}>
         <CustomTextInput
           onChangeText={(query) => setSearchQuery(query)}
-          placeholder="search for shop , item or category"
+          placeholder="Search for a shop or item"
           multiline={false}
           left={
             <TextInput.Icon
-              icon={() => <FontAwesome5 name="search" size={24} color="grey" />}
+              icon={() => <FontAwesome5 name="search" size={20} color="#854627" />}
             />
           }
           right={
@@ -68,7 +68,7 @@ export default function Search(this: any) {
                 handleSearch();
               }}
               icon={() => (
-                <FontAwesome5 name="arrow-right" size={30} color="grey" />
+                <FontAwesome5 name="arrow-right" size={20} color="#854627" />
               )}
               style={{ marginRight: 15 }}
             />
@@ -84,7 +84,7 @@ export default function Search(this: any) {
             backgroundColor: COLORS.handysGrey,
             borderColor: COLORS.handysGrey,
           }}
-          tabTextStyle={{ color: "white", fontSize: 18, fontWeight: "bold" }}
+          tabTextStyle={{ color: "white", fontSize: 14, fontWeight: "bold" }}
           activeTabStyle={{ backgroundColor: COLORS.CTAButtonBackground }}
           tabsContainerStyle={{
             height: 45,
@@ -92,7 +92,7 @@ export default function Search(this: any) {
           }}
           activeTabOpacity={5}
           borderRadius={10}
-          activeTabTextStyle={{ color: "black", fontWeight: "bold" }}
+          activeTabTextStyle={{ color: "white", fontWeight: "bold" }}
         />
 
         {(loadingItems || loadingShops || loadingFav)? (

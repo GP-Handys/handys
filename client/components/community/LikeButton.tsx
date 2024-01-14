@@ -42,16 +42,16 @@ export default function LikeButton({ isLiked, postId, likeCount,handleIsLiked,ha
     <View style={{display:"flex",flexDirection:"row",gap:5,alignItems:"center"}}>
       <TouchableOpacity onPress={handleLike}>
         {liked ? (
-          <MaterialIcons name={"thumb-up-alt"} size={26} color="#FFFFFFBF" />
+          <MaterialIcons name={"thumb-up-alt"} size={26} color="#BD9A87" />
         ) : (
           <MaterialIcons
             name={"thumb-up-off-alt"}
             size={26}
-            color="#FFFFFFBF"
+            color="#BD9A87"
           />
         )}
       </TouchableOpacity>
-      <Text style={{color: "white",opacity:0.7,fontSize:16,fontWeight:"600" }}>
+      <Text style={{color: "#BD9A87",opacity:0.7,fontSize:16,fontWeight:"600" }}>
         {LikeCounts}
       </Text>
     </View>
