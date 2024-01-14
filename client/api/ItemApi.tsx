@@ -91,7 +91,7 @@ export const updateItemById = async (itemId: number, data: any) => {
       method: "put",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
       data: data,
     });
@@ -101,18 +101,34 @@ export const updateItemById = async (itemId: number, data: any) => {
   }
 };
 
-export const deleteItem = async (itemId:number)=>{
+export const deleteItem = async (itemId: number) => {
   let token = await AsyncStorage.getItem("Authorization");
   try {
     const result = await ApiManager("/items/deleteItem/" + itemId, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        Authorization: token,
       },
     });
     return result;
   } catch (error: any) {
     return error.message;
   }
-}
+};
+
+export const getItemById = async (itemId: number) => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/items/" + itemId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+};

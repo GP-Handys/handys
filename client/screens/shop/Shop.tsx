@@ -20,6 +20,7 @@ import { getShopById } from "../../api/ShopApi";
 import { getProfile } from "../../api/UserApi";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
 import ItemCard from "../../components/home/ItemCard";
 import { getWishList } from "../../api/WishlistApi";
@@ -80,7 +81,7 @@ export default function ShopScreen({ route }: any) {
             style={styles.rating}
           />
         </View>
-        {shop?.userId === userId && (
+        { (shop?.userId === userId && userId!=undefined) ? (
           <View style={styles.subToPremiumContainer}>
             <TouchableOpacity
               style={styles.subToPremiumButton}
@@ -94,7 +95,23 @@ export default function ShopScreen({ route }: any) {
               </Text>
             </TouchableOpacity>
           </View>
-        )}
+        ):(
+          <View style={styles.subToPremiumContainer}>
+            <TouchableOpacity
+              style={styles.subToPremiumButton}
+              onPress={() => navigation.navigate("ShopContactScreen", {shop: shop})}
+            >
+              <FontAwesome5 name="phone-alt" size={22} color="white" />
+              <Text
+                style={{ fontSize: 14, fontWeight: "bold", color: "white" }}
+              >
+                Contact
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )
+          
+        }
       </View>
       <Text style={styles.bio}>{shop?.bio}</Text>
       <ThematicBreak />
@@ -122,12 +139,6 @@ export default function ShopScreen({ route }: any) {
 }
 
 const styles = StyleSheet.create({
-  shopHeader: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 25,
-  },
   shopImage: {
     width: "100%",
     aspectRatio: 3 / 2,

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, Pressable, Alert } from "react-native";
+import { View, StyleSheet, Image, Text, Pressable, Alert,Dimensions } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import React, { useEffect, useState } from "react";
@@ -17,6 +17,10 @@ interface Props {
   removeItem: any;
 }
 
+const windowDimensions = Dimensions.get('window');
+const screenDimensions = Dimensions.get('screen');
+
+
 export default function cartItem({
   cartItem,
   item,
@@ -25,6 +29,12 @@ export default function cartItem({
 }: Props) {
   const [counter, setCounter] = useState(cartItem.quantity);
   const [ItemTotalPrice, setItemTotalPrice] = useState(0);
+
+  const [dimensions, setDimensions] = useState({
+    window: windowDimensions,
+    screen: screenDimensions,
+  });
+
 
   const plus = () => {
     const newCounter = counter + 1;
@@ -66,14 +76,14 @@ export default function cartItem({
 
   return (
     <View>
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
             <Text style={styles.itemName}>{item.name}</Text>
             {cartItem.customization != "" && (
               <View>
                 <Text style={styles.Customized}>Customized</Text>
-                <Text style={styles.details}>Details: {cartItem.customization}</Text>
+                <Text style={[styles.details,{maxWidth:(dimensions.screen.width-200)}]}>Details: {cartItem.customization}</Text>
               </View>
             )}
           </View>
@@ -123,10 +133,15 @@ const styles = StyleSheet.create({
     color: COLORS.CTAButtonBackground,
     fontSize: 14,
     textDecorationLine: "underline",
+    
+    flexWrap:"wrap"
+
   },
   details: {
     fontSize: 12,
     color: "grey",
+    maxWidth:180,
+    flexWrap:"wrap"
   },
   image: {
     width: 130,

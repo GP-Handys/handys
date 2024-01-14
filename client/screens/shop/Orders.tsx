@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, ActivityIndicator } from "react-native";
 import { Order } from "../../models/Order";
-import { getOrdersForUser } from "../../api/OrderApi";
-import { ActivityIndicator } from "react-native-paper";
+import { getOrdersForShopId, getOrdersForUser } from "../../api/OrderApi";
 import COLORS from "../../common/colors";
-import MyOrder from "../../components/profile/MyOrder";
-import ThematicBreak from "../../components/ThematicBreak";
 
-export function MyOrders() {
+import ThematicBreak from "../../components/ThematicBreak";
+import ShopOrder from "../../components/shop/ShopOrder";
+
+export function ShopOrders({ route }: any) {
+  const shopId: number = route.params.shopId;
   const [orders, setOrders] = useState<Order[]>([]);
   const [isFetching, setIsFetching] = useState(true);
 
   const fetchOrders = async () => {
-    await getOrdersForUser().then((result) => {
+    await getOrdersForShopId(shopId).then((result) => {
       if (result.status == 200) {
         setOrders(result.data);
         setIsFetching(false);
@@ -42,7 +43,7 @@ export function MyOrders() {
         <FlatList
           data={orders}
           renderItem={({ item }) => (
-            <MyOrder shopId={item.shopId} orderId={item.id} />
+            <ShopOrder userId={item.userId} orderId={item.id} />
           )}
           ItemSeparatorComponent={() => {
             return (

@@ -33,3 +33,35 @@ export const getOrdersForUser = async () => {
     return error.message;
   }
 };
+
+export const getItemsForOrderId = async (orderId: number) => {
+  const token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/orders/items/" + orderId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+export const getOrdersForShopId = async (shopId: number) => {
+  const token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/orders/shop/" + shopId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+};
