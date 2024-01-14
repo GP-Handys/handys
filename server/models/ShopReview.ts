@@ -5,7 +5,6 @@ import { User } from "./User";
 
 class ShopReview extends Model {
   public id!: number;
-  public content!: string;
   public rating!: number;
   public userId!: number;
 }
@@ -16,10 +15,6 @@ ShopReview.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-    },
-    content: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     rating: {
       type: DataTypes.INTEGER,

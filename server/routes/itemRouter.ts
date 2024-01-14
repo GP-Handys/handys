@@ -165,22 +165,28 @@ export const getItem = async (req: Request, res: Response) => {
 };
 
 export const addReview = async (req: Request, res: Response) => {
-  //TODO : check if user buy the item
   try {
     const itemId = req.params.itemId;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
-    const { content, rating } = req.body;
-    const data = { content, rating, userId, itemId };
+    const { rating } = req.body;
+    const data = { rating, userId, itemId };
     const item = await Item.findByPk(itemId);
 
     if (item == null) {
       res.sendStatus(404);
       return;
     }
-
-    const review = await ItemReview.create(data);
-    res.status(200).json("Review Added successfully");
+    await ItemReview.create(data);
+    const averageRating = await ItemReview.findOne({
+      attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
+      where: { itemId: itemId },
+    });
+    await Item.update(
+      { rating: averageRating?.toJSON().average },
+      { where: { id: itemId } }
+    );
+    res.status(200).json("Shop rating submitted successfully!");
   } catch (error) {
     res.status(500).json(error);
   }
