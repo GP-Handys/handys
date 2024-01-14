@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { getShopById } from "../../api/ShopApi";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../navigation/NavigationStack";
@@ -17,9 +16,7 @@ export default function ShopOrder({ userId, orderId }: Props) {
 
   const fetchUserDataById = async () => {
     await getUserById(userId).then((res) => {
-      if (res.status === 200) {
-        setUser(res.data);
-      }
+      setUser(res);
     });
   };
 
@@ -39,7 +36,7 @@ export default function ShopOrder({ userId, orderId }: Props) {
     >
       {user && (
         <View style={styles.imageContainer}>
-          {user.pfp_url === "" || user.pfp_url == null ? (
+          {user.pfp_url == null ? (
             <Image
               source={require("../../assets/default_profile_img.jpg")}
               style={styles.image}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View, ActivityIndicator } from "react-native";
 import { Order } from "../../models/Order";
-import { getOrdersForShopId, getOrdersForUser } from "../../api/OrderApi";
+import { getOrdersForShopId } from "../../api/OrderApi";
 import COLORS from "../../common/colors";
 
 import ThematicBreak from "../../components/ThematicBreak";

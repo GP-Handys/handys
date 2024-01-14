@@ -33,7 +33,12 @@ export default function ShopSettingsScreen({ route }: any) {
         <ThematicBreak marginHorizontal={25} />
       </View>
 
-      <TouchableOpacity style={styles.touchableStyle}>
+      <TouchableOpacity
+        style={styles.touchableStyle}
+        onPress={() => {
+          navigation.navigate("ShopOrdersScreen", { shopId: shop.id });
+        }}
+      >
         <MaterialIcons name="history" size={32} color={"white"} />
         <Text style={styles.buttonText}>Orders</Text>
       </TouchableOpacity>
@@ -42,7 +47,7 @@ export default function ShopSettingsScreen({ route }: any) {
         <ThematicBreak marginHorizontal={25} />
       </View>
 
-      {true? (
+      {true ? (
         <View>
           <TouchableOpacity
             style={[
