@@ -164,48 +164,29 @@ export const getItem = async (req: Request, res: Response) => {
   }
 };
 
-export const addReview = async (req: Request, res: Response) => {
-  //TODO : check if user buy the item
+export const addRating = async (req: Request, res: Response) => {
   try {
     const itemId = req.params.itemId;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
-    const { content, rating } = req.body;
-    const data = { content, rating, userId, itemId };
+    const { rating } = req.body;
+    const data = { rating, userId, itemId };
     const item = await Item.findByPk(itemId);
 
     if (item == null) {
       res.sendStatus(404);
       return;
     }
-
-    const review = await ItemReview.create(data);
-    res.status(200).json("Review Added successfully");
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const removeReview = async (req: Request, res: Response) => {
-  try {
-    const reviewId = req.params.reviewId;
-    const jwt: string = req.get("Authorization")?.toString()!;
-
-    const userId = extractUserFromJwt(jwt);
-    const user = await User.findByPk(userId);
-    let review = await ItemReview.findByPk(reviewId);
-
-    if (review == null) {
-      res.sendStatus(404);
-      return;
-    }
-
-    if (user!.is_sys_admin || userId == review.userId) {
-      await review.destroy();
-      res.status(200).json("Review removed successfully ");
-    } else {
-      res.sendStatus(404);
-    }
+    await ItemReview.create(data);
+    const averageRating = await ItemReview.findOne({
+      attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
+      where: { itemId: itemId },
+    });
+    await Item.update(
+      { rating: averageRating?.toJSON().average },
+      { where: { id: itemId } }
+    );
+    res.status(200).json("Shop rating submitted successfully!");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -229,16 +210,6 @@ export const getByShop = async (req: Request, res: Response) => {
   try {
     const shopId = req.params.shopId;
     const result = await Item.findAll({ where: { shopId: shopId } });
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const getReviews = async (req: Request, res: Response) => {
-  try {
-    const itemId = req.params.shopId;
-    const result = await ItemReview.findAll({ where: { itemId: itemId } });
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
