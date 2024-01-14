@@ -11,7 +11,9 @@ let COLORS = {
   shopBackground:'#7C7459',
   itemDetails:"#854627",
   postUser:"#45291C",
-  postContent:'#854627'
+  postContent:'#854627',
+  postButton:'#522C19',
+  createPostText:'#522C19'
 };
 
 export default COLORS;

@@ -6,7 +6,7 @@ import {
   Modal,
   Text,
   Image,
-  Platform,
+  Platform
 } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -54,7 +54,7 @@ export default function PostModal({ isVisible, onDismiss }: PostModalProps) {
           <View style={{ backgroundColor: COLORS.commonBackground }}>
             <View style={styles.ModalHeader}>
               <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
-                <MaterialIcons name="close" size={23} color="white" />
+                <MaterialIcons name="close" size={25} color="#522C19" />
               </TouchableOpacity>
               <Text style={styles.HeaderText}> Create post</Text>
               <TouchableOpacity
@@ -64,8 +64,8 @@ export default function PostModal({ isVisible, onDismiss }: PostModalProps) {
                   {
                     opacity: postText ? 1 : 0.5,
                     position: "absolute",
-                    right: 0,
-                  },
+                    right: 0
+                  }
                 ]}
                 disabled={!postText}
               >
@@ -80,15 +80,15 @@ export default function PostModal({ isVisible, onDismiss }: PostModalProps) {
               alignItems: "center",
               justifyContent: "space-between",
               marginHorizontal: 20,
-              marginTop: 15,
+              marginTop: 15
             }}
           >
             <PostOwnerHeader userId={user.id} />
             <TouchableOpacity>
               <MaterialIcons
                 name="insert-photo"
-                size={40}
-                color="#FFFFFF83"
+                size={30}
+                color="#522C19"
                 onPress={async () => {
                   const imgId = await pickImageAndStore(
                     "posts",
@@ -133,42 +133,41 @@ export default function PostModal({ isVisible, onDismiss }: PostModalProps) {
 }
 const styles = StyleSheet.create({
   ModalHeader: {
+    flexDirection: "row",
     paddingTop: Platform.OS === "android" ? 15 : 0,
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 15,
-    marginTop: 10,
+    marginVertical: 15
   },
   CloseButton: {
-    width: 30,
     position: "absolute",
-    left: 15,
+    left: 15
   },
   HeaderText: {
     fontSize: 18,
-    color: "white",
-    marginEnd: 25,
+    color: COLORS.createPostText,
+    fontWeight: "bold",
+    marginBottom: 10
   },
   PostButton: {
-    borderWidth: 1,
-    borderRadius: 20,
-    width: 86,
-    alignItems: "center",
+    borderRadius: 6,
+    width: 80,
     height: 30,
-    backgroundColor: "#F6977F",
+    backgroundColor: COLORS.postButton,
     justifyContent: "center",
-    marginEnd: 10,
+    alignItems: "center",
+    marginRight: 15
   },
   InnerPostButton: {
-    color: "black",
+    color: "white",
     alignItems: "center",
     fontWeight: "700",
-    fontSize: 14,
+    fontSize: 14
   },
   postImgUploaded: {
     width: 350,
     height: 250,
     resizeMode: "contain",
-    alignSelf: "center",
-  },
+    alignSelf: "center"
+  }
 });
