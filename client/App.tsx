@@ -27,6 +27,8 @@ import GeneratedImageScreen from "./screens/ai/GeneratedImage";
 import ShopContactScreen from "./screens/shop/Contact";
 import { ItemOrderScreen } from "./screens/profile/ItemOrders";
 import { MyOrders } from "./screens/profile/MyOrders";
+import { ShopOrders } from "./screens/shop/Orders";
+import ShopOrderItemsScreen from "./screens/shop/OrderItems";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -300,6 +302,30 @@ export default function App() {
           component={ItemOrderScreen}
           options={{
             title: "My Order",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShopOrdersScreen"
+          component={ShopOrders}
+          options={{
+            title: "My Shop's Orders",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShopOrderItemsScreen"
+          component={ShopOrderItemsScreen}
+          options={{
+            title: "Order",
             headerTitleStyle: { color: "white" },
             headerStyle: { backgroundColor: COLORS.commonBackground },
             headerTintColor: "white",
