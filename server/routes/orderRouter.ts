@@ -49,11 +49,11 @@ export const placeOrder = async (req: Request, res: Response) => {
   }
 };
 
-export const getOrderForShopId = async (req: Request, res: Response) => {
+export const getOrdersForShopId = async (req: Request, res: Response) => {
   const shopId = req.params.shopId;
 
   try {
-    const orders = await Order.findAll({
+    const orders: Order[] = await Order.findAll({
       where: {
         shopId: shopId,
       },

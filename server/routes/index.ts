@@ -45,7 +45,7 @@ router.get("/api/items/getByCategory/:categoryId", tokenValidate,itemRouter.getb
 
 //order routes
 router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
-router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrderForShopId)
+router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrdersForShopId)
 router.get("/api/orders/user", tokenValidate, orderRouter.getOrdersForUserId)
 router.get("/api/orders/items/:orderId", tokenValidate, orderRouter.getItemsForOrderId)
 
