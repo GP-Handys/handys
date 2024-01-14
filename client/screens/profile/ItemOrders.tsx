@@ -5,6 +5,7 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Shop } from "../../models/Shop";
 import COLORS from "../../common/colors";
@@ -15,8 +16,11 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { getItemsForOrderId } from "../../api/OrderApi";
 import ItemOrder from "../../components/profile/ItemOrder";
 import { submitItemRating, submitShopRating } from "../../api/Rating";
+import { useNavigation } from "@react-navigation/native";
+import { StackProps } from "../../components/navigation/NavigationStack";
 
 export function ItemOrderScreen({ route }: any) {
+  const navigation = useNavigation<StackProps["navigation"]>();
   const orderId: number = route.params.orderId;
   const shop: Shop = route.params.shop;
   const [shopRating, setShopRating] = useState<number>(0);
@@ -100,7 +104,15 @@ export function ItemOrderScreen({ route }: any) {
         }}
       />
       <View style={{ marginHorizontal: 38, paddingBottom: 50 }}>
-        <TouchableOpacity style={styles.submitButton}>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={() => {
+            handleSubmitShopRating();
+            handleSubmitItemsRating();
+            navigation.pop();
+            Alert.alert("Thank you for your feedback!");
+          }}
+        >
           <Text style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}>
             Submit Rating
           </Text>
