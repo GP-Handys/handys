@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     borderWidth:2,
     padding:7,
     gap: 5,
+    marginBottom:20,
   },
   info: {
     gap: 5,

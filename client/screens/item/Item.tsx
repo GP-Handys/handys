@@ -64,7 +64,7 @@ export default function ItemScreen({ route }: any) {
               }}
             >
               {isFavorite ? (
-                <AntDesign name="heart" size={16} color="red" />
+                <AntDesign name="heart" size={16} color="#522C19" />
               ) : (
                 <AntDesign name="hearto" size={16} color="white" />
               )}
@@ -121,7 +121,7 @@ export default function ItemScreen({ route }: any) {
                 <MaterialIcons
                   name="keyboard-arrow-right"
                   size={24}
-                  color="white"
+                  color="#522C19"
                 />
               </View>
 
@@ -140,7 +140,7 @@ export default function ItemScreen({ route }: any) {
                 onPress={() => setIsCustomizeModalVisible(true)}
               >
                 <Text
-                  style={{ fontSize: 16, color: "white", fontWeight: "500" }}
+                  style={{ fontSize: 16, color: COLORS.darkBrown, fontWeight: "500" }}
                 >
                   Customize
                 </Text>
@@ -156,11 +156,11 @@ export default function ItemScreen({ route }: any) {
                 addToCart(item.id, customization);
               }}
             >
-              <Feather name="shopping-cart" size={24} color="black" />
+              <Feather name="shopping-cart" size={24} color="white" />
               <Text
                 style={{
                   fontSize: 16,
-                  color: "black",
+                  color: "white",
                   fontWeight: "500",
                   marginLeft: 10,
                 }}
@@ -192,13 +192,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   itemNameText: {
-    color: "white",
+    color: COLORS.normalText,
     fontWeight: "500",
     paddingVertical: 10,
     fontSize: 24,
   },
   circle: {
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: "#A79A85",
     width: 30,
     height: 30,
     borderRadius: 100,
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     width: 145,
     height: 30,
     borderRadius: 7.5,
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: "#A79A85",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -233,13 +233,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   Description: {
-    color: "white",
+    color: COLORS.normalText,
     marginVertical: 10,
     fontSize: 20,
     fontWeight: "500",
   },
   itemDesc: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 14,
     lineHeight: 20,
   },
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
   },
   madeBy: {
     fontSize: 12,
-    color: "#A2A4A1",
+    color: COLORS.normalText,
     fontWeight: "500",
   },
   shopPic: {
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
     width: 130,
     marginLeft: 10,
     fontWeight: "500",
-    color: "white",
+    color: COLORS.normalText,
   },
   rowContainer: {
     flexDirection: "row",

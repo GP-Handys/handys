@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
-    backgroundColor: COLORS.CTAButtonBackground,
+    backgroundColor: COLORS.lightBrown,
     height: 37,
     width: 135,
     borderRadius: 6,
