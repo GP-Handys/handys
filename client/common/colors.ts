@@ -15,8 +15,10 @@ let COLORS = {
   postButton: "#522C19",
   createPostText: "#522C19",
   normalText: "#522C19",
-  disabledButtom:"#4F431D",
-  greenColor:"#449035"
+  disabledButtom: "#4F431D",
+  greenColor: "#449035",
+  shopOrderUserInfoBox: "#7C7459",
+  headerColor: "#7C7459",
 };
 
 export default COLORS;

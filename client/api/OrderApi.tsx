@@ -65,3 +65,19 @@ export const getOrdersForShopId = async (shopId: number) => {
     return error.message;
   }
 };
+
+export const getOrderById = async (orderId: number) => {
+  const token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/order/" + orderId, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return result;
+  } catch (error: any) {
+    return error.message;
+  }
+};

@@ -3,6 +3,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { Item } from "../../models/Item";
 import { getItemById } from "../../api/ItemApi";
 import { ItemOrderModel } from "../../models/ItemOrder";
+import COLORS from "../../common/colors";
 
 interface Props {
   itemOrder: ItemOrderModel;
@@ -38,7 +39,7 @@ export default function OrderItem({ itemOrder }: Props) {
             <View style={{ flex: 1 }}>
               <Text style={styles.itemName}>{item?.name}</Text>
               <View style={{ marginRight: 5, marginTop: 5, marginBottom: 5 }}>
-                <Text style={{ opacity: 0.25, color: "white" }}>
+                <Text style={{ opacity: 0.5, color: "black" }}>
                   Customization:
                   {itemOrder.customization.length === 0
                     ? " This item is not customizable."
@@ -58,7 +59,7 @@ export default function OrderItem({ itemOrder }: Props) {
                 }}
               >
                 <Text
-                  style={{ fontSize: 13, color: "white", fontWeight: "bold" }}
+                  style={{ fontSize: 13, color: COLORS.normalText, fontWeight: "bold" }}
                 >
                   x{itemOrder.quantity}
                 </Text>
@@ -87,12 +88,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   itemName: {
-    color: "white",
+    color: COLORS.normalText,
     fontWeight: "bold",
     fontSize: 16,
   },
   itemPrice: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 13,
     fontWeight: "bold",
   },
