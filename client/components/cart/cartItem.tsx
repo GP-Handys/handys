@@ -79,13 +79,13 @@ export default function cartItem({
           </View>
           <View style={styles.footer}>
             <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
-            <View style={{ flexDirection: "row", gap: 15 }}>
+            <View style={{ flexDirection: "row", gap: 5, justifyContent:'center', alignItems:'center' }}>
               <Pressable onPress={minus}>
-                <MaterialIcons name="remove" size={23} color="#ffffff" />
+                <MaterialIcons name="remove" size={24} color="#715A4F" />
               </Pressable>
               <Text style={styles.counter}>{counter}</Text>
               <Pressable onPress={plus}>
-                <MaterialIcons name="add" size={23} color="#ffffff" />
+                <MaterialIcons name="add" size={24} color="#715A4F" />
               </Pressable>
             </View>
           </View>
@@ -100,24 +100,28 @@ export default function cartItem({
           <Image source={{ uri: item.img_url }} style={styles.image} />
         )}
       </View>
-      <ThematicBreak verticalHorizontal={20} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
     justifyContent: "space-between",
-    gap: 10,
+    flexDirection: "row",
+    borderColor:"#7C7459",
+    borderRadius:5,
+    borderWidth:2,
+    padding:7,
+    gap: 5,
   },
   info: {
     gap: 5,
     flexGrow: 1,
   },
   itemName: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 16,
+    fontWeight:'bold'
   },
   Customized: {
     color: COLORS.CTAButtonBackground,
@@ -126,11 +130,13 @@ const styles = StyleSheet.create({
   },
   details: {
     fontSize: 12,
-    color: "grey",
+    color: "#715A4F",
+    maxWidth:180,
+    flexWrap:"wrap"
   },
   image: {
-    width: 130,
-    height: 130,
+    width: 120,
+    height: 120,
     borderRadius: 6,
   },
   footer: {
@@ -142,11 +148,11 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 16,
     fontWeight: "500",
-    color: "white",
+    color: COLORS.normalText,
   },
   counter: {
     fontSize: 16,
-    color: "white",
+    color: COLORS.normalText,
   },
 });
 {

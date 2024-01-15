@@ -13,7 +13,8 @@ let COLORS = {
   postUser:"#45291C",
   postContent:'#854627',
   postButton:'#522C19',
-  createPostText:'#522C19'
+  createPostText:'#522C19',
+  normalText:'#522C19'
 };
 
 export default COLORS;

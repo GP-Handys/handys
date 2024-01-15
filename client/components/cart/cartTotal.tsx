@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, Alert, Pressable } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
+import COLORS from "../../common/colors";
 
 export default function cartTotal() {
   var [totalPrice, setTotalPrice] = useState(0);
@@ -34,18 +35,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   text: {
-    color: "white",
+    color: COLORS.textTitle,
     fontSize: 12,
     fontWeight: "normal"
   },
   price: {
-    color: "white",
+    color: COLORS.textTitle,
     fontSize: 18,
     fontWeight: "bold"
   },
   button: {
     textAlignVertical: "center",
-    color: "black",
+    color: "white",
     fontSize: 18,
     fontWeight: "bold"
   },
