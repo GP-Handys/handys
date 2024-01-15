@@ -29,7 +29,6 @@ export default function CustomTextInput({
   multiline,
   minHeight = 44,
   maxHeight = 440,
-
   bgColor = "#CABEAB",
   mode = "text",
   style,
@@ -59,6 +58,7 @@ export default function CustomTextInput({
       maxLength={maxLength}
       multiline={multiline}
       inputMode={mode}
+      underlineStyle={{display:"none"}}
       
     />
   );

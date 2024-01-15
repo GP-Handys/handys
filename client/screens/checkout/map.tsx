@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   confirm: {
-    color: "black",
+    color: "white",
     fontWeight: "500",
     fontSize: 20
   },
