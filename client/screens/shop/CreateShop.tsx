@@ -117,9 +117,9 @@ export default function CreateShop({ navigation }: StackProps) {
 }
 
 const style = StyleSheet.create({
-  font: { fontSize: 20, fontWeight: "500", color: "white" },
+  font: { fontSize: 20, fontWeight: "500", color: COLORS.darkBrown },
   lengthCounterFont: {
-    color: "#FFFFFF80",
+    color: COLORS.normalText,
     fontSize: 15,
     alignSelf: "flex-end",
   },
@@ -133,7 +133,7 @@ const style = StyleSheet.create({
     marginBottom: 40,
   },
   uploadIMG: {
-    backgroundColor: "#585858",
+    backgroundColor: COLORS.brown,
     width: 120,
     height: 120,
     borderRadius: 120,
@@ -143,7 +143,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     margin: 30,
   },
-  blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
+  blackFont: { color: "white", fontWeight: "bold", fontSize: 18.44 },
   uploadedIMG: {
     width: 150,
     height: 150,
