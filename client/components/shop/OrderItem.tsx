@@ -39,7 +39,7 @@ export default function OrderItem({ itemOrder }: Props) {
             <View style={{ flex: 1 }}>
               <Text style={styles.itemName}>{item?.name}</Text>
               <View style={{ marginRight: 5, marginTop: 5, marginBottom: 5 }}>
-                <Text style={{ opacity: 0.5, color: "black" }}>
+                <Text style={{ opacity: 0.5, color: "black", fontSize: 12 }}>
                   Customization:
                   {itemOrder.customization.length === 0
                     ? " This item is not customizable."

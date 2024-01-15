@@ -159,18 +159,20 @@ export default function ShopOrderItemsScreen({ route }: any) {
         <View style={{ marginBottom: 40 }}>
           <ThematicBreak marginHorizontal={30} />
         </View>
-        <FlatList
-          data={items}
-          renderItem={({ item }) => <OrderItem itemOrder={item} />}
-          scrollEnabled={false}
-          ItemSeparatorComponent={() => {
-            return (
-              <View style={{ marginVertical: 20 }}>
-                <ThematicBreak marginHorizontal={15} />
-              </View>
-            );
-          }}
-        />
+        <View style={{marginHorizontal: 15}}>
+          <FlatList
+            data={items}
+            renderItem={({ item }) => <OrderItem itemOrder={item} />}
+            scrollEnabled={false}
+            ItemSeparatorComponent={() => {
+              return (
+                <View style={{ marginVertical: 20 }}>
+                  <ThematicBreak marginHorizontal={15} />
+                </View>
+              );
+            }}
+          />
+        </View>
       </CommonScrollableBackground>
     );
   }
