@@ -28,12 +28,15 @@ export default function EditItemScreen({ route }: any) {
   const [itemDiscount, setItemDiscount] = useState(item.discount);
   const [itemQuantity, setItemQuantity] = useState(item.quantity);
   const [itemDescription, setItemDescription] = useState(item.description);
+  const [disableClick , setDisableClick] = useState(false);
+
 
   const handleUploadPressed = async () => {
     await pickImageAndStore("items", setItemImageUrl);
   };
 
   const editItem = async () => {
+    setDisableClick(true)
     await updateItemById(item.id, {
       name: itemName,
       base_price: itemPrice,
@@ -44,8 +47,8 @@ export default function EditItemScreen({ route }: any) {
     }).then((res) => {
         if (res.status === 200) {
           alert("Item edited successfully");
-          navigation.pop();
         }
+        navigation.pop();
     });
   };
 
@@ -145,7 +148,8 @@ export default function EditItemScreen({ route }: any) {
       <View style={styles.confirmPressableContainer}>
         <TouchableOpacity
           onPress={handleEditItem}
-          style={styles.confirmPressable}
+          style={[styles.confirmPressable,{backgroundColor:disableClick?COLORS.disabledButtom:COLORS.CTAButtonBackground}]}
+          disabled={disableClick}
         >
           <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
             Confirm Edit
@@ -193,7 +197,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 23,
   },
   confirmPressable: {
-    backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 41,
