@@ -35,8 +35,10 @@ export default function Search(this: any) {
   const [loadingItems, setLoadingItems] = useState(false);
   const [loadingFav, setLoadingFav] = useState(false);
   const [favItems, setFavItems] = useState<any[]>([]);
+  const [searchedOneTime, setSearchedOneTime] = useState(false);
 
   async function handleSearch() {
+    setSearchedOneTime(true)
     setLoadingShops(true);
     setLoadingItems(true);
     setLoadingFav(true);
@@ -119,68 +121,68 @@ export default function Search(this: any) {
           </View>
         ) : (
           <View style={{ marginTop: 15 }}>
-            {index === 0 ? (
+            {searchedOneTime && (
               <View>
-                {items.length > 0 ? (
-                  <FlatList
-                    key={"_"}
-                    keyExtractor={(item) => "_" + item.id}
-                    data={items}
-                    renderItem={({ item }) => (
-                      <ItemCard
-                        item={item}
-                        isFavorite={favItems.includes(item.id)}
-                        isEditable={false}
+                {index === 0 ? (
+                  <View>
+                    {items.length > 0 ? (
+                      <FlatList
+                        key={"_"}
+                        keyExtractor={(item) => "_" + item.id}
+                        data={items}
+                        renderItem={({ item }) => (
+                          <ItemCard
+                            item={item}
+                            isFavorite={favItems.includes(item.id)}
+                            isEditable={false}
+                          />
+                        )}
+                        numColumns={2}
+                        columnWrapperStyle={{ justifyContent: "space-between" }}
+                        scrollEnabled={false}
                       />
+                    ) : (
+                      <CommonBackgroundWithNoSafeArea>
+                        <View style={styles.Emptycontainer}>
+                          <Text style={styles.textIcon}>Sorry</Text>
+                          <Image
+                            style={styles.image}
+                            source={require("../../assets/Done-pana.png")}
+                          />
+                          <Text style={styles.textIcon}>We can't find any result</Text>
+                        </View>
+                      </CommonBackgroundWithNoSafeArea>
                     )}
-                    numColumns={2}
-                    columnWrapperStyle={{ justifyContent: "space-between" }}
-                    scrollEnabled={false}
-                  />
+                  </View>
                 ) : (
-                  <CommonBackgroundWithNoSafeArea>
-                    <View style={styles.Emptycontainer}>
-                      <Text
-                        style={styles.textIcon}>
-                        Wait!
-                      </Text>
-                      <Image
-                        style={styles.image}
-                        source={require("../../assets/Done-pana.png")}
+                  <View>
+                    {shops.length > 0 ? (
+                      <FlatList
+                        key={"#"}
+                        keyExtractor={(item) => "#" + item.id}
+                        data={shops}
+                        renderItem={({ item }) => (
+                          <SearchShopCard shop={item} />
+                        )}
+                        ItemSeparatorComponent={() => (
+                          <View style={{ height: 20 }} />
+                        )}
+                        scrollEnabled={false}
+                        numColumns={1}
                       />
-                      <Text style={styles.textIcon}>no items here</Text>
-                    </View>
-                  </CommonBackgroundWithNoSafeArea>
-                )}
-              </View>
-            ) : (
-              <View>
-                {shops.length > 0 ? (
-                  <FlatList
-                    key={"#"}
-                    keyExtractor={(item) => "#" + item.id}
-                    data={shops}
-                    renderItem={({ item }) => <SearchShopCard shop={item} />}
-                    ItemSeparatorComponent={() => (
-                      <View style={{ height: 20 }} />
+                    ) : (
+                      <CommonBackgroundWithNoSafeArea>
+                        <View style={styles.Emptycontainer}>
+                          <Text style={styles.textIcon}>Sorry</Text>
+                          <Image
+                            style={styles.image}
+                            source={require("../../assets/Done-pana.png")}
+                          />
+                          <Text style={styles.textIcon}>We can't find any result</Text>
+                        </View>
+                      </CommonBackgroundWithNoSafeArea>
                     )}
-                    scrollEnabled={false}
-                    numColumns={1}
-                  />
-                ) : (
-                  <CommonBackgroundWithNoSafeArea>
-                    <View style={styles.Emptycontainer}>
-                      <Text
-                        style={styles.textIcon}>
-                        Wait!
-                      </Text>
-                      <Image
-                        style={styles.image}
-                        source={require("../../assets/Done-pana.png")}
-                      />
-                      <Text style={styles.textIcon}>no shops here</Text>
-                    </View>
-                  </CommonBackgroundWithNoSafeArea>
+                  </View>
                 )}
               </View>
             )}
