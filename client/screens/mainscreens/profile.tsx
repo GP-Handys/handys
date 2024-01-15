@@ -101,16 +101,10 @@ export default function Profile() {
             <Text style={style.lableFont}>Your shops</Text>
           </View>
 
-          <View style={{ paddingHorizontal: 15 ,width:"100%"}}>
-            {shops.length && (
-              
+          <View style={{width:"100%",alignItems:"center",paddingTop:10}}>
+            {shops.length>0 && (
                 <FlatList
                   scrollEnabled={false}
-                  style={{
-                    alignSelf: "center",
-                    marginTop: 10,
-                    width: "100%",    
-                  }}
                   data={shops}
                   renderItem={({ item }) => <UserShop shop={item} />}
                   ItemSeparatorComponent={() => {
