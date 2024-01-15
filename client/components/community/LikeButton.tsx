@@ -15,32 +15,35 @@ interface props {
 export default function LikeButton({ isLiked, postId, likeCount,handleIsLiked,handleLikeCount }: props) {
   const [liked, setLiked] = useState(isLiked);
   const [LikeCounts, setLikeCount] = useState(likeCount);
+  const [disableClick , setDisableClick] = useState(false)
 
   useEffect(() => {
     setLiked(isLiked);
   }, [isLiked]);
 
-  function handleLike() {
+  async function handleLike() {
+    setDisableClick(true)
     if (liked) {
-      removeLike(postId);
       setLiked(false);
       let newLikeCount=LikeCounts - 1
       setLikeCount(newLikeCount);
       handleLikeCount(newLikeCount)
+      await removeLike(postId);
       handleIsLiked(false);
     } else {
-      addLike(postId);
       setLiked(true);
       let newLikeCount=LikeCounts + 1
       setLikeCount(newLikeCount);
       handleLikeCount(newLikeCount)
+      await addLike(postId);
       handleIsLiked(true);
     }
+    setDisableClick(false)
   }
 
   return (
     <View style={{display:"flex",flexDirection:"row",gap:5,alignItems:"center"}}>
-      <TouchableOpacity onPress={handleLike}>
+      <TouchableOpacity onPress={handleLike} disabled={disableClick}>
         {liked ? (
           <MaterialIcons name={"thumb-up-alt"} size={26} color="#BD9A87" />
         ) : (
