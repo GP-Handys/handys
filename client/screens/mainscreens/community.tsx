@@ -24,6 +24,8 @@ export default function Community() {
   const [likedPosts, setLikedPosts] = useState<any[]>([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [loadingLikes, setLoadingLikes] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(true);
+
 
   const onRefresh = () => {
     setIsRefreshing(true);
@@ -33,6 +35,7 @@ export default function Community() {
     fetchPosts().then(() => {
       setIsRefreshing(false);
       setLoadingPosts(false);
+      setFirstLoad(false);
     });
 
     fetchlikedPosts().then(() => {
@@ -66,7 +69,7 @@ export default function Community() {
     );
   };
 
-  if (loadingLikes || loadingPosts) {
+  if (firstLoad && (loadingLikes || loadingPosts)) {
     return (
       <View style={styles.loadingPage}>
         <ActivityIndicator size={"large"} color="white" />
