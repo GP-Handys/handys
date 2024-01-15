@@ -22,6 +22,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { getCategories } from "../../api/CategoryApi";
 import COLORS from "../../common/colors";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function Home() {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -29,11 +30,20 @@ export default function Home() {
   const [mostPopularItems, setMostPopularItems] = useState<Item[]>([]);
   const [favItems, setFavItems] = useState<any[]>([]);
   const [Categories, setCategories] = useState<Category[]>();
+  
+  const [loadingRecommended, setLoadingRecommended] = useState(true);
+  const [loadingCategory, setLoadingCategory] = useState(true)
+  const [loadingFavItems, setLoadingFavItems] = useState(true)
+  const [loadingMostPopular, setLoadingMostPopular] = useState(true)
+  const [firstLoad, setFirstLoad] = useState(true);
+
+
 
   const fetchRecommendedShops = async () => {
     await getRecommendedShops().then((result) => {
       if (result.status === 200) {
         setRecommendedShops(result.data);
+        setLoadingRecommended(false)
       }
     });
   };
@@ -41,12 +51,14 @@ export default function Home() {
   const fetchCategory = async () => {
     await getCategories().then((result) => {
         setCategories(result);
+        setLoadingCategory(false)
     });
   };
 
   const fetchFavItems = async () => {
     await getWishList("ids").then((result) => {
         setFavItems(result);
+        setLoadingFavItems(false)
     });
   };
 
@@ -54,6 +66,7 @@ export default function Home() {
     await getMostPopularItems().then(async (result) => {
       if (result.status === 200) {
         setMostPopularItems(result.data);
+        setLoadingMostPopular(false)
       }
     });
   };
@@ -68,8 +81,15 @@ export default function Home() {
 
     fetchScreenData();
   }, []);
-  
-
+    
+    if(firstLoad && (loadingCategory || loadingFavItems || loadingMostPopular || loadingRecommended ))
+    {
+      return (
+        <View style={styles.loadingPage}>
+            <ActivityIndicator size={"large"} color="#CABEAB" />
+        </View>
+      );
+    } else
   return (
     <CommonScrollableBackground>
       <View>
@@ -150,5 +170,12 @@ const styles = StyleSheet.create({
   },
   pageContainer: {
     marginHorizontal: 30,
+  },
+  loadingPage: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
   },
 });

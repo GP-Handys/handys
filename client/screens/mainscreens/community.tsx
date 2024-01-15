@@ -72,7 +72,7 @@ export default function Community() {
   if (firstLoad && (loadingLikes || loadingPosts)) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color="#CABEAB" />
       </View>
     );
   } else
