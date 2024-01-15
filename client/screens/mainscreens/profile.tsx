@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
+  ViewBase,
 } from "react-native";
 import COLORS from "../../common/colors";
 import {
@@ -176,6 +177,7 @@ export default function Profile() {
           </View>
         </View>
 
+              <View style={{paddingHorizontal:40}}>
         <TouchableOpacity
           onPress={async () => {
             await AsyncStorage.removeItem("Authorization");
@@ -194,6 +196,7 @@ export default function Profile() {
           />
           <Text style={style.font}>Logout</Text>
         </TouchableOpacity>
+        </View>
       </CommonScrollableBackground>
     );
 }
