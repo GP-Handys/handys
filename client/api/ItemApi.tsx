@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApiManager from "./ApiManager";
-import { Item } from "../models/Item";
 
 export const getMostPopularItems = async () => {
   let token = await AsyncStorage.getItem("Authorization");
@@ -70,14 +69,15 @@ export const GetItemsBycategory = async (categoryId: number) => {
 export const ItemSearch = async (data: any) => {
   let token = await AsyncStorage.getItem("Authorization");
   try {
-    const result = await ApiManager("/items/search?search=" + data, {
+    const result = await ApiManager("/item/search?search=" + data, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
       },
     });
-
+    console.log(result);
+    
     return result.data;
   } catch (error: any) {
     return error.message;
