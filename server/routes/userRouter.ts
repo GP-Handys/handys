@@ -119,7 +119,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
     if (user.is_sys_admin || Number(userIdToken) == Number(user.id)) {
       user = await user.update(data);
-      res.status(200).json("User modified");
+      res.status(200).json("Information has been updated successfully!");
     } else {
       res.sendStatus(403);
     }
@@ -143,7 +143,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     
     if (user.is_sys_admin || id == userIdToken) {
       await user.destroy();
-      res.status(200).json("User deleted");
+      res.status(200).json("User has been deleted");
     } else {
       res.sendStatus(403);
     }
