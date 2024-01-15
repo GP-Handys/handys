@@ -21,14 +21,18 @@ export default function ItemCard({
 }: ItemCardProps) {
   const [favorite, setFavorite] = useState(isFavorite);
   const navigation = useNavigation<StackProps["navigation"]>();
+  const [disableClick , setDisableClick] = useState(false)
 
   async function handleFavorite() {
+    setDisableClick(true)
     if (favorite) {
       setFavorite(false);
       await removeFromWishList(item.id);
+      setDisableClick(false)
     } else {
       setFavorite(true);
       await addToWishList(item.id);
+      setDisableClick(false)
     }
   }
   return (
@@ -72,6 +76,7 @@ export default function ItemCard({
               size={20}
               color="#854627"
               onPress={handleFavorite}
+              disabled={disableClick}
             />
           ) : (
             <FontAwesome
@@ -79,6 +84,7 @@ export default function ItemCard({
               size={20}
               color="#854627"
               onPress={handleFavorite}
+              disabled={disableClick}
             />
           )}
         </TouchableOpacity>
