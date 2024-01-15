@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  FlatList,
+  FlatList
 } from "react-native";
 import COLORS from "../../common/colors";
 import {
@@ -13,7 +13,7 @@ import {
   Feather,
   FontAwesome5,
   MaterialCommunityIcons,
-  MaterialIcons,
+  MaterialIcons
 } from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
@@ -78,22 +78,38 @@ export default function Profile() {
           <Text style={style.font}>{user.name}</Text>
 
           <View
-            style={{ marginTop: 17, marginBottom: 20, alignSelf: "stretch" }}
+            style={{ marginTop: 15, marginBottom: 20, alignSelf: "stretch" }}
           >
             <ThematicBreak />
           </View>
+
           <TouchableOpacity
             style={style.editProfile}
             onPress={() => {
               navigation.navigate("EditProfile", {
-                user: user,
+                user: user
               });
             }}
           >
-            <Feather name="edit" size={32} color={"white"} />
-            <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
-              Edit Profile
-            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <FontAwesome5 name="edit" size={24} color="white" />
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "500",
+                  color: "white",
+                  marginLeft: "5%"
+                }}
+              >
+                Edit Profile
+              </Text>
+            </View>
           </TouchableOpacity>
 
           {/*user shops */}
@@ -101,22 +117,21 @@ export default function Profile() {
             <Text style={style.lableFont}>Your shops</Text>
           </View>
 
-          <View style={{ paddingHorizontal: 15 ,width:"100%"}}>
+          <View style={{ paddingHorizontal: 15, width: "100%" }}>
             {shops.length && (
-              
-                <FlatList
-                  scrollEnabled={false}
-                  style={{
-                    alignSelf: "center",
-                    marginTop: 10,
-                    width: "100%",    
-                  }}
-                  data={shops}
-                  renderItem={({ item }) => <UserShop shop={item} />}
-                  ItemSeparatorComponent={() => {
-                    return <View style={{ marginVertical: 5 }} />;
-                  }}
-                />
+              <FlatList
+                scrollEnabled={false}
+                style={{
+                  alignSelf: "center",
+                  marginTop: 10,
+                  width: "100%"
+                }}
+                data={shops}
+                renderItem={({ item }) => <UserShop shop={item} />}
+                ItemSeparatorComponent={() => {
+                  return <View style={{ marginVertical: 5 }} />;
+                }}
+              />
             )}
           </View>
           <View style={{ gap: 20, paddingVertical: 15 }}>
@@ -186,7 +201,7 @@ export default function Profile() {
             await AsyncStorage.removeItem("Authorization");
             navigation.reset({
               index: 0,
-              routes: [{ name: "OnboardingScreensContainer" }],
+              routes: [{ name: "OnboardingScreensContainer" }]
             });
           }}
           style={style.logout}
@@ -197,77 +212,93 @@ export default function Profile() {
             color={"white"}
             style={{ paddingTop: 11 }}
           />
-          <Text style={style.font}>Logout</Text>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "500",
+              color: "white",
+              alignSelf: "center"
+            }}
+          >
+            Logout
+          </Text>
         </TouchableOpacity>
       </CommonScrollableBackground>
     );
 }
 
 const style = StyleSheet.create({
-  font: { fontSize: 24, color: "white", fontWeight: "600", paddingTop: 10 },
-  profileIMG: { width: 120, height: 120, borderRadius: 120 },
+  font: {
+    fontSize: 24,
+    color: COLORS.darkBrown,
+    fontWeight: "600",
+    paddingTop: 10
+  },
+  profileIMG: {
+    width: 120,
+    height: 120,
+    borderRadius: 60
+  },
   editProfile: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: COLORS.brown,
     height: 60,
-    width: 320,
+    width: 280,
     alignSelf: "center",
-    borderRadius: 9,
-    gap: 12,
+    borderRadius: 12,
     paddingLeft: 15,
-    marginBottom: 15,
+    marginBottom: 15
   },
   createShop: {
     height: 60,
-    width: 320,
+    width: 280,
     borderWidth: 2,
     borderStyle: "dashed",
     borderRadius: 9,
-    borderColor: COLORS.handysGrey,
+    borderColor: COLORS.brown,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center",
+    alignSelf: "center"
   },
   createNewShopFont: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "500",
-    color: "rgba(255, 255, 255, 0.75)",
+    color: COLORS.darkBrown
   },
   lableFont: {
     fontSize: 24,
     fontWeight: "500",
-    color: "white",
+    color: COLORS.darkBrown
   },
   lable: {
-    alignSelf: "flex-start",
-    paddingLeft: 15,
+    alignSelf: "flex-start"
   },
   card: {
-    width: 140,
+    width: 120,
     height: 90,
     borderRadius: 9,
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: COLORS.handysGrey
   },
-  otherGrid: { flexDirection: "row", gap: 30 },
+  otherGrid: { flexDirection: "row", gap: 25 },
   logout: {
-    width: 316,
+    width: 280,
     height: 50,
     backgroundColor: "#BA1200",
     borderRadius: 5,
     alignSelf: "center",
     marginVertical: 20,
     paddingLeft: 30,
-    gap: 27,
-    flexDirection: "row",
+    gap: 20,
+    flexDirection: "row"
   },
   cardFont: {
     fontSize: 19,
     color: "white",
-    fontWeight: "500",
+    fontWeight: "500"
   },
   cardsContainer: {
     display: "flex",
@@ -275,14 +306,14 @@ const style = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    gap: 25,
-    paddingTop: 10,
+    gap: 20,
+    paddingTop: 10
   },
   loadingPage: {
     backgroundColor: COLORS.commonBackground,
     justifyContent: "center",
     display: "flex",
     alignItems: "center",
-    flex: 1,
-  },
+    flex: 1
+  }
 });
