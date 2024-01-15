@@ -44,7 +44,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
     <View style={styles.mainContainer}>
       <CommonScrollableBackground>
         <View style={styles.upperContainer}>
-          <Entypo name="ticket" size={100} color="white" />
+          <Entypo name="ticket" size={100} color="#522C19" />
           <Text style={styles.textTitle}>
             Fill the form below and we will get back to you soon :)
           </Text>
@@ -52,7 +52,7 @@ export default function SendTicketScreen({ navigation }: StackProps) {
 
         <View style={styles.inputsContainer}>
           <CustomTextInput
-            placeholder={"subject"}
+            placeholder={"Subject"}
             onChangeText={(inputValue) => setSubject(inputValue)}
           />
 
@@ -98,10 +98,10 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   textTitle: {
-    color: "white",
+    color: COLORS.darkBrown,
     marginTop: 10,
     fontWeight: "500",
-    fontSize: 25,
+    fontSize: 18,
     textAlign: "center"
   },
   confirmPressable: {
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   },
   confirm: {
-    color: "black",
+    color: "white",
     fontWeight: "500",
     fontSize: 20
   },
