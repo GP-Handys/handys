@@ -50,11 +50,11 @@ export default function ShopSettingsScreen({ route }: any) {
               { backgroundColor: COLORS.CTAButtonBackground },
             ]}
           >
-            <FontAwesome5 name="crown" size={22} color="black" />
+            <FontAwesome5 name="crown" size={22} color="white" />
             <Text
               style={[
                 styles.buttonText,
-                { color: "black", fontWeight: "bold" },
+                { color: "white", fontWeight: "bold" },
               ]}
             >
               Subscribed!
@@ -67,11 +67,11 @@ export default function ShopSettingsScreen({ route }: any) {
             ]}
             onPress={() => navigation.navigate("AiPromptScreen")}
           >
-            <FontAwesome5 name="lightbulb" size={22} color="black" />
+            <FontAwesome5 name="lightbulb" size={22} color="white" />
             <Text
               style={[
                 styles.buttonText,
-                { color: "black", fontWeight: "bold" },
+                { color: "white", fontWeight: "bold" },
               ]}
             >
               Ideas Generator
@@ -84,11 +84,11 @@ export default function ShopSettingsScreen({ route }: any) {
               { backgroundColor: COLORS.CTAButtonBackground },
             ]}
           >
-            <FontAwesome5 name="images" size={22} color="black" />
+            <FontAwesome5 name="images" size={22} color="white" />
             <Text
               style={[
                 styles.buttonText,
-                { color: "black", fontWeight: "bold" },
+                { color: "white", fontWeight: "bold" },
               ]}
             >
               Generated Ideas
@@ -102,9 +102,9 @@ export default function ShopSettingsScreen({ route }: any) {
             { backgroundColor: COLORS.CTAButtonBackground },
           ]}
         >
-          <FontAwesome5 name="crown" size={22} color="black" />
+          <FontAwesome5 name="crown" size={22} color="white" />
           <Text
-            style={[styles.buttonText, { color: "black", fontWeight: "bold" }]}
+            style={[styles.buttonText, { color: "white", fontWeight: "bold" }]}
           >
             Subscribe to premium
           </Text>

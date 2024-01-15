@@ -147,7 +147,7 @@ export default function EditItemScreen({ route }: any) {
           onPress={handleEditItem}
           style={styles.confirmPressable}
         >
-          <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 17 }}>
             Confirm Edit
           </Text>
         </TouchableOpacity>
@@ -155,7 +155,7 @@ export default function EditItemScreen({ route }: any) {
           onPress={handleDeleteItem}
           style={styles.deletePressable}
         >
-          <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 17 }}>
             Delete item
           </Text>
         </TouchableOpacity>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   textLabel: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 11,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
     gap:20
   },
-  blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
+  blackFont: { color: "white", fontWeight: "bold", fontSize: 18.44 },
   changeIMG: {
     height: 40,
     backgroundColor: COLORS.CTAButtonBackground,

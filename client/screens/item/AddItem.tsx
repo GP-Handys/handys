@@ -88,7 +88,7 @@ export default function AddItemScreen({ route }: any) {
             style={styles.changeIMG}
             onPress={handleUploadPressed}
           >
-            <Text style={styles.blackFont}>Change image</Text>
+            <Text style={styles.whiteFont}>Change image</Text>
           </TouchableOpacity>
         </>
       ) : (
@@ -176,7 +176,7 @@ export default function AddItemScreen({ route }: any) {
           }}
         >
           <Text style={styles.categoryName}>Categories</Text>
-          <MaterialIcons name="keyboard-arrow-right" size={28} color="white" />
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#522C19" />
         </TouchableOpacity>
       </View>
 
@@ -193,7 +193,7 @@ export default function AddItemScreen({ route }: any) {
           onPress={handleAddItem}
           style={styles.confirmPressable}
         >
-          <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>
             Add
           </Text>
         </TouchableOpacity>
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   textLabel: {
-    color: "white",
+    color: COLORS.darkBrown,
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 11,
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     paddingBottom: 50,
   },
-  blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
+  whiteFont: { color: "white", fontWeight: "bold", fontSize: 18.44 },
 
   changeIMG: {
     height: 40,
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
 
   categoryName: {
     fontSize:16,
-    color: "white",
+    color: COLORS.darkBrown,
     fontWeight: "500",
   },
 });
