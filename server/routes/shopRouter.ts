@@ -51,7 +51,7 @@ export const updateShop = async (req: Request, res: Response) => {
         }
       );
 
-      res.status(200).json("Shop is updated");
+      res.status(200).json("Shop information has been updated!");
     } else {
       res.sendStatus(403);
     }
