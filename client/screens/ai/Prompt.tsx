@@ -15,7 +15,7 @@ export default function AiPromptScreen() {
   return (
     <CommonScrollableBackground>
       <View style={styles.upperContainer}>
-        <AntDesign name="rocket1" size={70} color="white" />
+        <AntDesign name="rocket1" size={70} color="#522C19" />
         <Text style={styles.textTitle}>
           Use this cutting-edge AI tool to help you visualize your ideas to real
           products!
@@ -81,14 +81,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textTitle: {
-    color: "white",
+    color: COLORS.darkBrown,
     marginTop: 10,
     fontWeight: "400",
     fontSize: 15,
     textAlign: "center",
   },
   note: {
-    color: "#C7C9C9",
+    color: COLORS.oliveBrown,
     marginTop: 10,
     fontWeight: "400",
     fontSize: 14,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   confirm: {
-    color: "black",
+    color: "white",
     fontWeight: "500",
     fontSize: 20,
   },

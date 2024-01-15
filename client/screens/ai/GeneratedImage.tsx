@@ -52,7 +52,7 @@ export default function GeneratedImageScreen({ route }: any) {
           onPress={() => navigation.pop()}
           disabled={isGenerating}
         >
-          <Text style={{ color: "black", fontWeight: "600", fontSize: 16 }}>
+          <Text style={{ color: "white", fontWeight: "600", fontSize: 16 }}>
             Generate Again
           </Text>
         </TouchableOpacity>
