@@ -33,6 +33,7 @@ export default function AddItemScreen({ route }: any) {
   const [customization, setCustomization] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [disableClick , setDisableClick] = useState(false);
 
   const addCategory = (id: number)=> {
     if (!selectedCategories.includes(id)) {
@@ -55,7 +56,7 @@ export default function AddItemScreen({ route }: any) {
   };
 
   const addItem = async () => {
-    navigation.pop();
+    setDisableClick(true)
     await addItemForShopId(shopId, {
       name: itemName,
       base_price: itemPrice,
@@ -67,6 +68,7 @@ export default function AddItemScreen({ route }: any) {
       categories:selectedCategories
     }).then((res) => {
       Alert.alert(res.data)
+      navigation.pop();
     });
   };
 
@@ -190,8 +192,9 @@ export default function AddItemScreen({ route }: any) {
 
       <View style={styles.confirmPressableContainer}>
         <TouchableOpacity
+        disabled={disableClick}
           onPress={handleAddItem}
-          style={styles.confirmPressable}
+          style={[styles.confirmPressable,{backgroundColor:disableClick?COLORS.CTAButtonBackground:COLORS.disabledButtom}]}
         >
           <Text style={{ color: "black", fontWeight: "bold", fontSize: 17 }}>
             Add
@@ -223,7 +226,6 @@ const styles = StyleSheet.create({
     marginBottom: 11,
   },
   confirmPressable: {
-    backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 41,

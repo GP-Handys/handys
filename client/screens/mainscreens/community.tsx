@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import { getLikedPosts, getPosts } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Feather } from '@expo/vector-icons';
+import { Feather } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 import { ActivityIndicator } from "react-native-paper";
 export default function Community() {
@@ -24,6 +24,7 @@ export default function Community() {
   const [likedPosts, setLikedPosts] = useState<any[]>([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [loadingLikes, setLoadingLikes] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const onRefresh = () => {
     setIsRefreshing(true);
@@ -33,6 +34,7 @@ export default function Community() {
     fetchPosts().then(() => {
       setIsRefreshing(false);
       setLoadingPosts(false);
+      setFirstLoad(false);
     });
 
     fetchlikedPosts().then(() => {
@@ -66,10 +68,10 @@ export default function Community() {
     );
   };
 
-  if (loadingLikes || loadingPosts) {
+  if (firstLoad && (loadingLikes || loadingPosts)) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color="#CABEAB" />
       </View>
     );
   } else
@@ -130,8 +132,12 @@ export default function Community() {
           style={styles.Iconbutton}
           onPress={() => setIsPostModalVisible(true)}
         >
-
-          <Feather name="plus-square" size={30} color="white" style={{margin:10}} />
+          <Feather
+            name="plus-square"
+            size={30}
+            color="white"
+            style={{ margin: 10 }}
+          />
         </TouchableOpacity>
       </View>
     );
@@ -141,8 +147,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 10,
     bottom: 10,
-    borderRadius:10,
-    backgroundColor: COLORS.CTAButtonBackground
+    borderRadius: 10,
+    backgroundColor: COLORS.CTAButtonBackground,
   },
   image: {
     width: 260,
@@ -161,6 +167,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-
-
 });

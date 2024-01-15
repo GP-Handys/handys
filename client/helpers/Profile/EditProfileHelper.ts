@@ -16,13 +16,16 @@ export default function EditProfileHelper(
   ConfirmPassword: string,
   pfp_url: string | null,
   userId: number,
-  navigation: NativeStackNavigationProp<StackParamList>
+  navigation: NativeStackNavigationProp<StackParamList>,
+  setDisableClick:any
 ) {
   
   if (Password != ConfirmPassword) {
     Alert.alert(STRINGS.failPopUp, STRINGS.passwordDontMatch);
+    setDisableClick(false)
   } else if (Password.length < 8 && Password.length!=0) {
     Alert.alert(STRINGS.failPopUp, STRINGS.invalidPassword);
+    setDisableClick(false)
   } else {
     let data: Profile = {
       name: name,

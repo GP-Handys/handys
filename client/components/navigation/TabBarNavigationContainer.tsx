@@ -23,7 +23,7 @@ export default function TabBarNavigationContainer() {
         },
         tabBarShowLabel: false,
         headerShadowVisible: false,
-        headerTintColor: "white",
+        headerTintColor: COLORS.textUserInputColor,
         headerTitleAlign: "center",
         tabBarIcon: ({ focused }) => {
           let iconName:
@@ -49,7 +49,7 @@ export default function TabBarNavigationContainer() {
         },
       })}
     >
-      <Tab.Screen name="Home" component={Home}/>
+      <Tab.Screen name="Home" component={Home} options={{headerShown: false}}/>
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="Community" component={Community} />
       <Tab.Screen name="Cart" component={Cart} />

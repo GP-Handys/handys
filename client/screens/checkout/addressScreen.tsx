@@ -30,8 +30,11 @@ const AddressScreen = ({ route }: any) => {
   let DELIVREY_FEE = parseInt("5");
   let serviceFee = parseFloat((totalAmount * 0.03).toFixed(2));
   let grandTotal = parseFloat(totalAmount + serviceFee + DELIVREY_FEE);
+  const [disableClick , setDisableClick] = useState(false);
+
 
   function handleConfirm() {
+    setDisableClick(true)
     checkoutHelper(
       streetName,
       apartment,
@@ -40,7 +43,8 @@ const AddressScreen = ({ route }: any) => {
       grandTotal,
       buildingNumber,
       instructions,
-      navigation
+      navigation,
+      setDisableClick
     );
   }
 
@@ -139,8 +143,8 @@ const AddressScreen = ({ route }: any) => {
           </View>
         </View>
         <View>
-          <TouchableOpacity onPress={handleConfirm}>
-            <View style={styles.button}>
+          <TouchableOpacity onPress={handleConfirm} disabled={disableClick}> 
+            <View style={[styles.button,{backgroundColor: disableClick ? COLORS.disabledButtom : COLORS.CTAButtonBackground}]}>
               <Text style={styles.confirm}>Confirm</Text>
             </View>
           </TouchableOpacity>
@@ -253,7 +257,6 @@ const styles = StyleSheet.create({
     textAlign: "right"
   },
   button: {
-    backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
