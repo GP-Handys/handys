@@ -108,7 +108,7 @@ export const updateItem = async (req: Request, res: Response) => {
       //   }
       // });
 
-      res.status(200).json("item modified");
+      res.status(200).json("Item information has been updated!");
     }
   } catch (error) {
     console.log(error)
