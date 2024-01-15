@@ -63,7 +63,7 @@ export default function Profile() {
     return (
       <CommonScrollableBackground>
         {/* page container */}
-        <View style={{ paddingHorizontal: 40, alignItems: "center" }}>
+        <View style={{ marginHorizontal:40, alignItems: "center" }}>
           {/* user informations */}
 
           {user.pfp_url === null ? (
@@ -106,6 +106,7 @@ export default function Profile() {
                 <FlatList
                   scrollEnabled={false}
                   data={shops}
+                  style={{width:"100%"}}
                   renderItem={({ item }) => <UserShop shop={item} />}
                   ItemSeparatorComponent={() => {
                     return <View style={{ marginVertical: 5 }} />;
@@ -113,7 +114,7 @@ export default function Profile() {
                 />
             )}
           </View>
-          <View style={{ gap: 20, paddingVertical: 15 }}>
+          <View style={{ gap: 20, paddingVertical: 15,width:"100%" }}>
             <TouchableOpacity
               style={style.createShop}
               onPress={() => {
@@ -205,7 +206,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     backgroundColor: COLORS.handysGrey,
     height: 60,
-    width: 320,
+    width: "100%",
     alignSelf: "center",
     borderRadius: 9,
     gap: 12,
@@ -214,7 +215,7 @@ const style = StyleSheet.create({
   },
   createShop: {
     height: 60,
-    width: 320,
+    width: "100%",
     borderWidth: 2,
     borderStyle: "dashed",
     borderRadius: 9,
@@ -248,7 +249,7 @@ const style = StyleSheet.create({
   },
   otherGrid: { flexDirection: "row", gap: 30 },
   logout: {
-    width: 316,
+    width: "100%",
     height: 50,
     backgroundColor: "#BA1200",
     borderRadius: 5,
