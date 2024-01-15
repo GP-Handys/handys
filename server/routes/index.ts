@@ -48,6 +48,7 @@ router.post("/api/orders/place", tokenValidate,orderRouter.placeOrder)
 router.get("/api/orders/shop/:shopId", tokenValidate,orderRouter.getOrdersForShopId)
 router.get("/api/orders/user", tokenValidate, orderRouter.getOrdersForUserId)
 router.get("/api/orders/items/:orderId", tokenValidate, orderRouter.getItemsForOrderId)
+router.get("/api/order/:orderId", tokenValidate, orderRouter.getOrderById)
 
 //community routes
 router.post("/api/community/addPost", tokenValidate, communityRouter.addPost)

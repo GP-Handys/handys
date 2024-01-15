@@ -104,3 +104,18 @@ export const getItemsForOrderId = async (req: Request, res: Response) => {
     res.status(500).json({ error: error });
   }
 };
+
+export const getOrderById = async (req: Request, res: Response) => {
+  const orderId = req.params.orderId;
+
+  try {
+    const order: Order | null = await Order.findByPk(orderId);
+    if (!order) {
+      res.status(404).json("No order found");
+      return;
+    }
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};

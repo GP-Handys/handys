@@ -327,7 +327,7 @@ export default function App() {
           options={{
             title: "Order",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.headerColor },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
