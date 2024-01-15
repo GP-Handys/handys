@@ -127,6 +127,7 @@ export default function ItemScreen({ route }: any) {
 
               {isCustomizeModalVisible && (
                 <CustomizeModal
+                  customization={customization}
                   setCustomization={setCustomization}
                   isVisible={isCustomizeModalVisible}
                   itemCustomization={item.customization}
@@ -136,7 +137,7 @@ export default function ItemScreen({ route }: any) {
             </TouchableOpacity>
             {item.customization && (
               <TouchableOpacity
-                style={styles.button}
+                style={[styles.button,{backgroundColor:customization.length>0?COLORS.greenColor:COLORS.handysGrey}]}
                 onPress={() => setIsCustomizeModalVisible(true)}
               >
                 <Text
@@ -258,7 +259,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   button: {
-    backgroundColor: COLORS.handysGrey,
     justifyContent: "center",
     alignItems: "center",
     height: 45,
