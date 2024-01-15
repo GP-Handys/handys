@@ -5,7 +5,7 @@ import {
   RefreshControl,
   Keyboard,
   InputAccessoryView,
-  Platform,
+  Platform
 } from "react-native";
 import CustomTextInput from "../../components/CustomTextInput";
 import { useState, useEffect } from "react";
@@ -15,6 +15,7 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { addComment, getComments } from "../../api/CommunityApi";
 import { TextInput } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
+import COLORS from "../../common/colors";
 
 export default function Comments({ route }: any) {
   const { post } = route.params;
@@ -27,9 +28,7 @@ export default function Comments({ route }: any) {
     let tempComment = comment;
     setComment("");
     Keyboard.dismiss();
-    await addComment(post.id, { content: tempComment }).then(() => {
-      
-    });
+    await addComment(post.id, { content: tempComment }).then(() => {});
   };
   const onRefresh = () => {
     setIsRefreshing(true);
@@ -53,13 +52,13 @@ export default function Comments({ route }: any) {
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        <View style={{ marginLeft: 10 }}>
+        <View style={{ marginLeft: 10, marginTop: 10 }}>
           <Post post={post} isComment={false} isLiked={isLiked} />
         </View>
         <View style={{ marginTop: 10 }}>
           <ThematicBreak />
         </View>
-        <View style={{ marginHorizontal: 7, marginTop: 7 }}>
+        <View style={{ marginHorizontal: 20, marginTop: 7 }}>
           <FlatList
             data={Comments}
             renderItem={({ item }) => (
@@ -85,13 +84,13 @@ export default function Comments({ route }: any) {
           <CustomTextInput
             onChangeText={(text) => setComment(text)}
             value={comment}
-            placeholder="Share your thoughts..."
+            placeholder="Write a comment..."
             multiline={true}
             style={{
               borderRadius: 0,
               borderTopLeftRadius: 0,
               borderTopRightRadius: 0,
-              borderBottomLeftRadius: 0,
+              borderBottomLeftRadius: 0
             }}
             right={
               <TextInput.Icon
@@ -113,21 +112,21 @@ export default function Comments({ route }: any) {
         <CustomTextInput
           onChangeText={(text) => setComment(text)}
           value={comment}
-          placeholder="Share your thoughts..."
+          placeholder="Write a Comment..."
           multiline={true}
           style={{
             borderRadius: 0,
             borderTopLeftRadius: 0,
             borderTopRightRadius: 0,
-            borderBottomLeftRadius: 0,
+            borderBottomLeftRadius: 0
           }}
           right={
             <TextInput.Icon
-              icon={() => <MaterialIcons name="send" size={23} color="white" />}
+              icon={() => <MaterialIcons name="send" size={22} color="white" />}
               color={"white"}
               style={[
                 { opacity: comment.trim() === "" ? 0.5 : 1 },
-                { borderWidth: 1 },
+                { borderWidth: 1 }
               ]}
               onPress={() => {
                 if (comment.trim() !== "") {
@@ -147,29 +146,26 @@ const styles = StyleSheet.create({
   pfpImgStyle: {
     height: 27,
     width: 27,
-    borderRadius: 27,
+    borderRadius: 27
   },
   userDataStyle: {
-    marginLeft: 10,
+    marginLeft: 10
   },
 
   userProfileStyle: {
-    marginTop: 5,
+    marginTop: 5
   },
   userNameStyle: {
-    fontSize: 11.5,
+    fontSize: 11.5
   },
   mainPostStyle: {
-    marginLeft: 35,
-    backgroundColor: "#FFFFFF10",
-    borderRadius: 10,
-    paddingHorizontal: 10,
+    marginLeft: 40,
+    backgroundColor: COLORS.commentBackground,
+    borderRadius: 7.5,
     marginTop: 4,
-    paddingBottom: 5,
     alignSelf: "flex-start",
-    width: "auto",
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 4,
-  },
+    padding: 5,
+    paddingRight:15,
+    
+  }
 });

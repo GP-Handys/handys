@@ -14,7 +14,8 @@ let COLORS = {
   postContent:'#854627',
   postButton:'#522C19',
   createPostText:'#522C19',
-  normalText:'#522C19'
+  normalText:'#522C19',
+  commentBackground:'#CABEAB'
 };
 
 export default COLORS;
