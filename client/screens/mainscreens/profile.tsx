@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   ViewBase,
+  Platform,
 } from "react-native";
 import COLORS from "../../common/colors";
 import {
@@ -57,7 +58,7 @@ export default function Profile() {
   if (loading) {
     return (
       <View style={style.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color={COLORS.tabNavIconFocused} />
       </View>
     );
   } else
@@ -66,7 +67,7 @@ export default function Profile() {
         {/* page container */}
         <View style={{ marginHorizontal: 40, alignItems: "center" }}>
           {/* user informations */}
-
+          <View style={style.ShadowImg}> 
           {user.pfp_url === null ? (
             <Image
               source={require("../../assets/default_profile_img.jpg")}
@@ -75,7 +76,7 @@ export default function Profile() {
           ) : (
             <Image source={{ uri: user.pfp_url }} style={style.profileIMG} />
           )}
-
+        </View>
           <Text style={style.font}>{user.name}</Text>
 
           <View
@@ -91,8 +92,8 @@ export default function Profile() {
               });
             }}
           >
-            <Feather name="edit" size={32} color={"white"} />
-            <Text style={{ fontSize: 18, fontWeight: "500", color: "white" }}>
+            <Feather name="edit" size={32} color={ COLORS.normalText } />
+            <Text style={{ fontSize: 18, fontWeight: "500", color:COLORS.normalText }}>
               Edit Profile
             </Text>
           </TouchableOpacity>
@@ -139,39 +140,40 @@ export default function Profile() {
         </View>
 
         <View style={style.cardsContainer}>
-          <View style={style.otherGrid}>
+          <View style={[style.otherGrid]}>
+            
             <TouchableOpacity
-              style={style.card}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("MyPostsScreen")}
             >
               <MaterialCommunityIcons
                 name="note-text-outline"
                 size={28}
-                color="white"
+                color={COLORS.normalText}
               />
               <Text style={style.cardFont}>My Posts</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={style.card}
+              style={[style.card,style.cardShadow]}
               onPress={() => navigation.navigate("MyOrdersScreen")}
             >
-              <Entypo name="shopping-bag" size={24} color="white" />
+              <Entypo name="shopping-bag" size={24} color={COLORS.normalText} />
               <Text style={style.cardFont}>Orders</Text>
             </TouchableOpacity>
           </View>
           <View style={style.otherGrid}>
             <TouchableOpacity
-              style={style.card}
+              style={[style.card,style.cardShadow]}
               onPress={() => navigation.navigate("WishlistScreen")}
             >
-              <FontAwesome5 name="heart" size={24} color="white" />
+              <FontAwesome5 name="heart" size={24} color={COLORS.normalText} />
               <Text style={style.cardFont}>Favorites</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={style.card}
+              style={[style.card,style.cardShadow]}
               onPress={() => navigation.navigate("SendTicketScreen")}
             >
-              <MaterialIcons name="headset-mic" size={24} color="white" />
+              <MaterialIcons name="headset-mic" size={24} color={COLORS.normalText} />
               <Text style={style.cardFont}>Support</Text>
             </TouchableOpacity>
           </View>
@@ -190,11 +192,11 @@ export default function Profile() {
           >
             <MaterialIcons
               name="logout"
-              size={28}
+              size={24}
               color={"white"}
               style={{ paddingTop: 11 }}
             />
-            <Text style={style.font}>Logout</Text>
+            <Text style={style.Logoutfont}>Logout</Text>
           </TouchableOpacity>
         </View>
       </CommonScrollableBackground>
@@ -202,8 +204,24 @@ export default function Profile() {
 }
 
 const style = StyleSheet.create({
-  font: { fontSize: 24, color: "white", fontWeight: "600", paddingTop: 10 },
-  profileIMG: { width: 120, height: 120, borderRadius: 120 },
+  Logoutfont: { 
+    fontSize: 20, 
+    color: COLORS.normalText, 
+    fontWeight: "500", 
+    paddingTop: 10,
+     paddingLeft: 20,
+    },
+  font: { 
+    fontSize: 22, 
+    color: COLORS.normalText, 
+    fontWeight: "600", 
+    paddingTop: 10 
+  },
+  profileIMG: { 
+    width: 120, 
+    height: 120, 
+    borderRadius: 120 
+  },
   editProfile: {
     flexDirection: "row",
     alignItems: "center",
@@ -215,6 +233,7 @@ const style = StyleSheet.create({
     gap: 12,
     paddingLeft: 15,
     marginBottom: 15,
+    color: COLORS.normalText,
   },
   createShop: {
     height: 60,
@@ -230,12 +249,12 @@ const style = StyleSheet.create({
   createNewShopFont: {
     fontSize: 18,
     fontWeight: "500",
-    color: "rgba(255, 255, 255, 0.75)",
+    color: COLORS.normalText,
   },
   lableFont: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "500",
-    color: "white",
+    color: COLORS.normalText,
   },
   lable: {
     alignSelf: "flex-start",
@@ -264,7 +283,7 @@ const style = StyleSheet.create({
   },
   cardFont: {
     fontSize: 19,
-    color: "white",
+    color: COLORS.normalText,
     fontWeight: "500",
   },
   cardsContainer: {
@@ -283,4 +302,37 @@ const style = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
+  ShadowImg:{
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    elevation: 12,
+    borderRadius: 120,
+    backgroundColor: COLORS.commonBackground,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 120,
+    height: 120,
+    marginVertical: 20,
+  },
+  cardShadow :{
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    elevation: 12,
+    borderRadius: 9,
+    backgroundColor: COLORS.commonBackground,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 140,
+    height: 90,
+  }
 });
