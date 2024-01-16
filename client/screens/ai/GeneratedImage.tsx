@@ -5,11 +5,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  ActivityIndicator
 } from "react-native";
 import COLORS from "../../common/colors";
 import React, { useEffect, useState } from "react";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import { ActivityIndicator } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { generateImage } from "../../api/Ai";
 
@@ -36,7 +36,7 @@ export default function GeneratedImageScreen({ route }: any) {
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.imageView}>
         {isGenerating ? (
-          <ActivityIndicator size={"large"} color="white" />
+          <ActivityIndicator size={"large"} color={COLORS.normalText} />
         ) : (
           <Image
             source={{
