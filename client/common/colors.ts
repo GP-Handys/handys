@@ -19,6 +19,7 @@ let COLORS = {
   greenColor: "#449035",
   shopOrderUserInfoBox: "#7C7459",
   headerColor: "#7C7459",
+  postText: "#5B2F19",
 };
 
 export default COLORS;
