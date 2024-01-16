@@ -108,3 +108,16 @@ export const getCart = async (req: Request, res: Response) => {
     res.status(500).json({ error: error });
   }
 };
+
+export const clearCart = async (req: Request, res: Response) => {
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const user_id: number = extractUserFromJwt(jwt);
+
+  try {
+    await Cart.destroy({ where: { user_id: user_id } });
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
+};
