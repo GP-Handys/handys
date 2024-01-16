@@ -137,7 +137,15 @@ export default function ItemScreen({ route }: any) {
             </TouchableOpacity>
             {item.customization && (
               <TouchableOpacity
-                style={[styles.button,{backgroundColor:customization.length>0?COLORS.greenColor:COLORS.handysGrey}]}
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor:
+                      customization.length > 0
+                        ? COLORS.greenColor
+                        : COLORS.handysGrey,
+                  },
+                ]}
                 onPress={() => setIsCustomizeModalVisible(true)}
               >
                 <Text
