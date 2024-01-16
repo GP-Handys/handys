@@ -1,4 +1,4 @@
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import { deleteItem, updateItemById } from "../../api/ItemApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Item } from "../../models/Item";
+import AddCategoriesModal from "./AddCategoriesModal";
 
 export default function EditItemScreen({ route }: any) {
   const item: Item = route.params.item;
@@ -29,6 +30,20 @@ export default function EditItemScreen({ route }: any) {
   const [itemQuantity, setItemQuantity] = useState(item.quantity);
   const [itemDescription, setItemDescription] = useState(item.description);
   const [disableClick , setDisableClick] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+
+  const addCategory = (id: number)=> {
+    if (!selectedCategories.includes(id)) {
+      setSelectedCategories(prevCategories => [...prevCategories, id]);
+    }
+  }
+
+  const removeCategory=(id: number) =>{
+    setSelectedCategories(prevCategories =>
+      prevCategories.filter(categoryId => categoryId !== id)
+    );
+  }
 
 
   const handleUploadPressed = async () => {
@@ -44,6 +59,7 @@ export default function EditItemScreen({ route }: any) {
       quantity: itemQuantity,
       description: itemDescription,
       img_url: itemImageUrl,
+      selectedCategories:selectedCategories
     }).then((res) => {
         if (res.status === 200) {
           alert("Item edited successfully");
@@ -117,15 +133,6 @@ export default function EditItemScreen({ route }: any) {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Discount %</Text>
-        <CustomTextInput
-          placeholder={item.discount.toString()}
-          onChangeText={(text) => {
-            setItemDiscount(Number(text));
-          }}
-        />
-      </View>
-      <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Quantity</Text>
         <CustomTextInput
           placeholder={item.quantity.toString()}
@@ -145,6 +152,33 @@ export default function EditItemScreen({ route }: any) {
           }}
         />
       </View>
+      <View style={{ paddingTop: 10, paddingHorizontal: 33 }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: COLORS.handysGrey,
+            borderRadius: 10,
+            flexDirection: "row",
+            height: 50,
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 10,
+          }}
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <Text style={styles.categoryName}>Categories</Text>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="white" />
+        </TouchableOpacity>
+      </View>
+
+      <AddCategoriesModal
+      selectedCategories={selectedCategories}
+      addCategory={addCategory}
+      removeCategory={removeCategory}
+        isVisible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      />
       <View style={styles.confirmPressableContainer}>
         <TouchableOpacity
           onPress={handleEditItem}
@@ -218,5 +252,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 100,
     marginBottom: 20,
+  },
+  
+  categoryName: {
+    fontSize:16,
+    color: "white",
+    fontWeight: "500",
   },
 });

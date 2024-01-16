@@ -67,7 +67,7 @@ export const updateItem = async (req: Request, res: Response) => {
       discount,
       quantity,
       customization,
-      categories,
+      selectedCategories,
       img_url
     } = req.body;
     const itemId: number = Number(req.params.itemId);
@@ -96,17 +96,17 @@ export const updateItem = async (req: Request, res: Response) => {
         img_url
       });
 
-      // categories.forEach(async (categoryId: number) => {
-      //   await DB.query("DELETE FROM item_category WHERE itemId=" + itemId);
+      selectedCategories.forEach(async (categoryId: number) => {
+        await DB.query("DELETE FROM item_category WHERE itemId=" + itemId);
 
-      //   let category = Category.findByPk(categoryId);
-      //   if (category != null) {
-      //     let query = `insert into item_category (itemId , categoryId) values (${
-      //       item!.id
-      //     },${categoryId})`;
-      //     await DB.query(query);
-      //   }
-      // });
+        let category = Category.findByPk(categoryId);
+        if (category != null) {
+          const currentDate = new Date();
+          const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); 
+          let query = `insert into item_category (itemId , categoryId , createdAt,updatedAt) values (${itemId},${categoryId},'${formattedDate}','${formattedDate}')`;
+          await DB.query(query);
+        }
+      });
 
       res.status(200).json("Item information has been updated!");
     }
@@ -195,9 +195,9 @@ export const addRating = async (req: Request, res: Response) => {
 export const searchItem = async (req: Request, res: Response) => {
   try {
     const search = req.query.search;
-    const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
-     OR id LIKE (select itemId from item_category where categoryId Like 
-      (select categoryId from categories where category_name LIKE '%${search}%'));`;
+    const query = `SELECT * FROM items WHERE name = '%${search}%' OR description = '%${search}%'
+     OR id = (select itemId from item_category where categoryId = 
+      (select categoryId from categories where category_name = '%${search}%'));`;
 
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult[0]);
@@ -232,7 +232,7 @@ export const getbyCategory = async (req: Request, res: Response) => {
   try {
     const categoryId = req.params.categoryId;
 
-    const query = `SELECT * FROM items WHERE id LIKE (select itemId from item_category where categoryId Like ${categoryId});`;
+    const query = `SELECT * FROM items WHERE id = (select itemId from item_category where categoryId = ${categoryId} and itemId=items.id);`;
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult[0]);
   } catch (error) {

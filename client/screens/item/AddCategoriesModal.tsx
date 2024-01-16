@@ -115,12 +115,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   Button: {
-    borderWidth: 1,
     borderRadius: 20,
     width: 75,
     alignItems: "center",
     height: 35,
-    backgroundColor: "#F6977F",
+    backgroundColor: COLORS.CTAButtonBackground,
     justifyContent: "center",
     marginEnd: 10,
     position: "absolute",

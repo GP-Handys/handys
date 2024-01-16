@@ -38,6 +38,8 @@ export default function Community() {
 
     fetchlikedPosts().then(() => {
       setLoadingLikes(false);
+      setFirstLoad(false);
+
     });
   };
 
@@ -45,6 +47,7 @@ export default function Community() {
     await getLikedPosts().then((result) => {
       setLikedPosts(result);
       setLoadingLikes(false);
+      setFirstLoad(false);
     });
   };
 

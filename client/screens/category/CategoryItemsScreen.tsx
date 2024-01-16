@@ -18,8 +18,8 @@ export default function CategoryItemsScreen({ route }: any) {
   const category = route.params.category;
 
   const [items, setItems] = useState<Item[]>([]);
-  const [loadingItems, setLoadingItems] = useState(false);
-  const [loadingFav, setLoadingFav] = useState(false);
+  const [loadingItems, setLoadingItems] = useState(true);
+  const [loadingFav, setLoadingFav] = useState(true);
   const [favItems, setFavItems] = useState<any[]>([]);
 
   useEffect(() => {

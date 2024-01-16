@@ -46,7 +46,7 @@ export default function cartItem({
   };
 
   const minus = () => {
-    if (counter > 1) {
+    if (counter > 1 && counter<item.quantity) {
       const newCounter = counter - 1;
       setCounter(newCounter);
       const newTotalPrice = newCounter * item.base_price;
