@@ -17,8 +17,9 @@ import { Shop } from "../../models/Shop";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
-import { addToCart } from "../../api/CartApi";
+import { addToCart, clearCart } from "../../api/CartApi";
 import CustomizeModal from "./CustomizeModal";
+import STRINGS from "../../strings/strings";
 
 export default function ItemScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -54,10 +55,27 @@ export default function ItemScreen({ route }: any) {
       if (res.status === 201) {
         Alert.alert(res.data);
       } else if (res.status === 400) {
-        Alert.alert(res.data);
+        Alert.alert(
+          STRINGS.failPopUp,
+          res.data,
+          [
+            {
+              text: "Continue shopping",
+              onPress: () => setIsAddToCartButtonDisabled(false),
+            },
+            {
+              text: "Clear cart and add this item",
+              onPress: async () => {
+                await clearCart();
+                await addToCart(item.id, customization);
+                setIsAddToCartButtonDisabled(false);
+              },
+            },
+          ],
+          { cancelable: false }
+        );
       }
     });
-    setIsAddToCartButtonDisabled(false);
   };
 
   useEffect(() => {
@@ -173,7 +191,10 @@ export default function ItemScreen({ route }: any) {
             <ThematicBreak />
 
             <TouchableOpacity
-              style={[styles.cartButton, isAddToCartButtonDisabled && { opacity: 0.5 }]}
+              style={[
+                styles.cartButton,
+                isAddToCartButtonDisabled && { opacity: 0.5 },
+              ]}
               onPress={handleAddToCart}
               disabled={isAddToCartButtonDisabled}
             >
