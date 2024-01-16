@@ -46,6 +46,16 @@ export default function ItemScreen({ route }: any) {
     }
   };
 
+  const handleAddToCart = async () => {
+    await addToCart(item.id, customization).then((res) => {
+      if (res.status === 201) {
+        Alert.alert(res.data);
+      } else if (res.status === 400) {
+        Alert.alert(res.data);
+      }
+    });
+  };
+
   useEffect(() => {
     fetchShopDataById();
   }, []);
@@ -160,10 +170,7 @@ export default function ItemScreen({ route }: any) {
 
             <TouchableOpacity
               style={styles.cartButton}
-              onPress={() => {
-                Alert.alert("Item added to cart succefully");
-                addToCart(item.id, customization);
-              }}
+              onPress={handleAddToCart}
             >
               <Feather name="shopping-cart" size={24} color="black" />
               <Text
