@@ -57,7 +57,7 @@ export default function App() {
           options={{
             title: "Send Ticket",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -78,7 +78,7 @@ export default function App() {
           options={{
             title: "Create Shop",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -90,7 +90,7 @@ export default function App() {
           options={({ route }) => ({
             title: route.params.shopName,
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -102,7 +102,7 @@ export default function App() {
           options={{
             title: "Comments",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -114,7 +114,7 @@ export default function App() {
           options={{
             title: "Add Item",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -126,7 +126,7 @@ export default function App() {
           options={{
             title: "Edit profile",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -138,7 +138,7 @@ export default function App() {
           options={({ route }) => ({
             title: route.params.category.category_name,
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -150,7 +150,7 @@ export default function App() {
           options={{
             title: "Wishlist",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -162,7 +162,7 @@ export default function App() {
           options={({ route }) => ({
             title: route.params.item.name,
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
           })}
@@ -173,7 +173,7 @@ export default function App() {
           options={{
             title: "My Posts",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -185,7 +185,7 @@ export default function App() {
           options={{
             title: "Edit Item",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -198,7 +198,7 @@ export default function App() {
           options={{
             title: "Shop Settings",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -210,7 +210,7 @@ export default function App() {
           options={{
             title: "Shop Contact",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -222,7 +222,7 @@ export default function App() {
           options={{
             title: "Select Location",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
           }}
@@ -233,7 +233,7 @@ export default function App() {
           options={{
             title: "Address",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
           }}
@@ -244,7 +244,7 @@ export default function App() {
           options={{
             title: "Address",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
           }}
@@ -255,7 +255,7 @@ export default function App() {
           options={{
             title: "Ideas Generator",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -267,7 +267,7 @@ export default function App() {
           options={{
             title: "Generated Image",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -279,7 +279,7 @@ export default function App() {
           options={{
             title: "Generated Images",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -291,7 +291,7 @@ export default function App() {
           options={{
             title: "My Orders",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -303,7 +303,7 @@ export default function App() {
           options={{
             title: "My Order",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -315,7 +315,7 @@ export default function App() {
           options={{
             title: "My Shop's Orders",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -327,7 +327,7 @@ export default function App() {
           options={{
             title: "Order",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.headerColor },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,

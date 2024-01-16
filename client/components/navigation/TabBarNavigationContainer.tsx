@@ -19,11 +19,11 @@ export default function TabBarNavigationContainer() {
           borderTopWidth: 0,
         },
         headerStyle: {
-          backgroundColor: COLORS.commonBackground,
+          backgroundColor: COLORS.CTAButtonBackground,
         },
         tabBarShowLabel: false,
         headerShadowVisible: false,
-        headerTintColor: COLORS.textUserInputColor,
+        headerTintColor: "white",
         headerTitleAlign: "center",
         tabBarIcon: ({ focused }) => {
           let iconName:
