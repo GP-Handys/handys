@@ -5,7 +5,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import CartItem from "../../components/cart/cartItem";
