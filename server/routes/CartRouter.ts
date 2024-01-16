@@ -12,8 +12,25 @@ export const addToCart = async (req: Request, res: Response) => {
 
   try {
     let shopId = (await Item.findByPk(itemId))?.shopId;
+    let cartItems = await Cart.findAll({
+      where: {
+        shop_id: shopId,
+        user_id: userId,
+      },
+    });
+    if (cartItems.length > 0) {
+      res
+        .status(403)
+        .json("You can't order from different shops at the same time");
+      return;
+    }
     let cartItem = await Cart.findOne({
-      where: { item_id: itemId, shop_id: shopId, user_id: userId, customization: customization},
+      where: {
+        item_id: itemId,
+        shop_id: shopId,
+        user_id: userId,
+        customization: customization,
+      },
     });
     if (cartItem == null) {
       await Cart.create({
@@ -28,7 +45,7 @@ export const addToCart = async (req: Request, res: Response) => {
         { where: { id: cartItem.id } }
       );
     }
-    res.sendStatus(201);
+    res.status(201).json("Item added to cart");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
