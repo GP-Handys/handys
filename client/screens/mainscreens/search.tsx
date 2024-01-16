@@ -1,11 +1,11 @@
 import {
   View,
   Text,
-  Dimensions,
   Keyboard,
   FlatList,
   Image,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import {
   CommonBackgroundWithNoSafeArea,
@@ -19,7 +19,6 @@ import { useState } from "react";
 import COLORS from "../../common/colors";
 import { shopSearch } from "../../api/ShopApi";
 import SearchShopCard from "../../components/search/SearchShopCard";
-import { ActivityIndicator } from "react-native-paper";
 import { ItemSearch } from "../../api/ItemApi";
 import ItemCard from "../../components/home/ItemCard";
 import { Item } from "../../models/Item";
@@ -38,7 +37,7 @@ export default function Search(this: any) {
   const [searchedOneTime, setSearchedOneTime] = useState(false);
 
   async function handleSearch() {
-    setSearchedOneTime(true)
+    setSearchedOneTime(true);
     setLoadingShops(true);
     setLoadingItems(true);
     setLoadingFav(true);
@@ -69,7 +68,11 @@ export default function Search(this: any) {
           left={
             <TextInput.Icon
               icon={() => (
-                <FontAwesome5 name="search" size={20} color="#854627" />
+                <FontAwesome5
+                  name="search"
+                  size={20}
+                  color={COLORS.normalText}
+                />
               )}
             />
           }
@@ -149,7 +152,9 @@ export default function Search(this: any) {
                             style={styles.image}
                             source={require("../../assets/Done-pana.png")}
                           />
-                          <Text style={styles.textIcon}>We can't find any result</Text>
+                          <Text style={styles.textIcon}>
+                            We can't find any result
+                          </Text>
                         </View>
                       </CommonBackgroundWithNoSafeArea>
                     )}
@@ -178,7 +183,9 @@ export default function Search(this: any) {
                             style={styles.image}
                             source={require("../../assets/Done-pana.png")}
                           />
-                          <Text style={styles.textIcon}>We can't find any result</Text>
+                          <Text style={styles.textIcon}>
+                            We can't find any result
+                          </Text>
                         </View>
                       </CommonBackgroundWithNoSafeArea>
                     )}

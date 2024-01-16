@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import COLORS from "../../common/colors";
 import { useNavigation } from "@react-navigation/native";
@@ -21,7 +22,6 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
 import ItemCard from "../../components/home/ItemCard";
 import { getWishList } from "../../api/WishlistApi";
-import { ActivityIndicator } from "react-native-paper";
 
 export default function ShopScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -83,7 +83,7 @@ export default function ShopScreen({ route }: any) {
   ) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="#CABEAB" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else

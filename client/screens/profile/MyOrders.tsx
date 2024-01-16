@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, ActivityIndicator } from "react-native";
 import { Order } from "../../models/Order";
 import { getOrdersForUser } from "../../api/OrderApi";
-import { ActivityIndicator } from "react-native-paper";
 import COLORS from "../../common/colors";
 import MyOrder from "../../components/profile/MyOrder";
 import ThematicBreak from "../../components/ThematicBreak";
@@ -27,7 +26,7 @@ export function MyOrders() {
   if (isFetching) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else {

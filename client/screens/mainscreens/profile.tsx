@@ -4,10 +4,9 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   FlatList,
-  ViewBase,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import COLORS from "../../common/colors";
 import {
@@ -22,7 +21,6 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { getShopsForUserId } from "../../api/ShopApi";
 import React, { useState, useEffect } from "react";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import { ActivityIndicator } from "react-native-paper";
 import { getProfile } from "../../api/UserApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native";
@@ -58,7 +56,7 @@ export default function Profile() {
   if (loading) {
     return (
       <View style={style.loadingPage}>
-        <ActivityIndicator size={"large"} color={COLORS.tabNavIconFocused} />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else

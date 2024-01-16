@@ -1,11 +1,10 @@
-import { FlatList, StyleSheet, View, SafeAreaView } from "react-native";
+import { FlatList, StyleSheet, View, SafeAreaView, ActivityIndicator } from "react-native";
 import COLORS from "../../common/colors";
 import { GeneratedImage } from "../../models/GeneratedImage";
 import { useEffect, useState } from "react";
 import { getHistoryForUser } from "../../api/Ai";
 import History from "../../components/ai/history";
 import ThematicBreak from "../../components/ThematicBreak";
-import { ActivityIndicator } from "react-native-paper";
 
 export default function GenerationHistoryScreen() {
   const [history, setHistory] = useState<GeneratedImage[]>([]);
@@ -27,7 +26,7 @@ export default function GenerationHistoryScreen() {
   if (isFetching) {
     return (
       <View style={styles.activityIndicator}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else {

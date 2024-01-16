@@ -7,16 +7,15 @@ import {
   Image,
   ScrollView,
   RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 import ThematicBreak from "../../components/ThematicBreak";
 import PostModal from "../community/AddPostModal";
 import { useState, useEffect } from "react";
 import { getLikedPosts, getPosts } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
-import { ActivityIndicator } from "react-native-paper";
 export default function Community() {
   const [posts, setPosts] = useState<any[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -68,10 +67,10 @@ export default function Community() {
     );
   };
 
-  if (firstLoad && (loadingLikes || loadingPosts)) {
+  if (firstLoad || loadingLikes || loadingPosts) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="#CABEAB" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else

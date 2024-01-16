@@ -1,10 +1,15 @@
-import { FlatList, ImageBackground, StyleSheet, Text } from "react-native";
+import {
+  FlatList,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import { CommonScrollableBackground } from "../../common/background";
 import { View } from "react-native";
 import STRINGS from "../../strings/strings";
 import CategoryCard from "../../components/home/CategoryCard";
 import ShopCard from "../../components/home/ShopCard";
-import MostPopularItem from "../../components/home/ItemCard";
 import { Shop } from "../../models/Shop";
 import { useEffect, useState } from "react";
 import { Item } from "../../models/Item";
@@ -17,7 +22,6 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { getCategories } from "../../api/CategoryApi";
 import COLORS from "../../common/colors";
-import { ActivityIndicator } from "react-native-paper";
 
 export default function Home() {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -84,7 +88,7 @@ export default function Home() {
   ) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="#CABEAB" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else
