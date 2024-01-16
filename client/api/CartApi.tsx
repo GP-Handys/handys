@@ -17,7 +17,7 @@ export const getCart = async () => {
   }
 };
 
-export const addToCart = async (ItemId: number,customization="") => {
+export const addToCart = async (ItemId: number, customization = "") => {
   let token = await AsyncStorage.getItem("Authorization");
   try {
     const result = await ApiManager("/cart/add/" + ItemId, {
@@ -26,9 +26,9 @@ export const addToCart = async (ItemId: number,customization="") => {
         "Content-Type": "application/json",
         Authorization: token,
       },
-      data:{customization}
+      data: { customization },
     });
-    
+
     return result.data;
   } catch (error: any) {
     return error.message;
@@ -52,10 +52,10 @@ export const removeFromcart = async (cartId: number) => {
   }
 };
 
-export const editQuantity = async(cartId:number , quantity:number)=>{
+export const editQuantity = async (cartId: number, quantity: number) => {
   let token = await AsyncStorage.getItem("Authorization");
   try {
-    const result = await ApiManager(`/cart/update/${cartId}/${quantity+1}`, {
+    const result = await ApiManager(`/cart/update/${cartId}/${quantity + 1}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -66,5 +66,20 @@ export const editQuantity = async(cartId:number , quantity:number)=>{
   } catch (error: any) {
     return error.message;
   }
-}
+};
 
+export const clearCart = async () => {
+  let token = await AsyncStorage.getItem("Authorization");
+  try {
+    const result = await ApiManager("/cart/clear", {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return result.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
