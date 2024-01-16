@@ -42,7 +42,7 @@ export default function cartItem({
     const newTotalPrice = newCounter * item.base_price;
     setItemTotalPrice(newTotalPrice);
     updateTotal(item.id, newTotalPrice);
-    editQuantity(cartItem.id, counter);
+    editQuantity(cartItem?.id, counter);
   };
 
   const minus = () => {
@@ -52,12 +52,12 @@ export default function cartItem({
       const newTotalPrice = newCounter * item.base_price;
       setItemTotalPrice(newTotalPrice);
       updateTotal(item.id, newTotalPrice);
-      editQuantity(cartItem.id, counter);
+      editQuantity(cartItem?.id, counter);
     } else {
       Alert.alert("Delete item from cart", "Are you sure?", [
         {
           text: "Yes",
-          onPress: () => removeItem(cartItem.id),
+          onPress: () => removeItem(cartItem?.id),
         },
         {
           text: "Cancel",
@@ -67,7 +67,7 @@ export default function cartItem({
   };
 
   useEffect(() => {
-    const quantity = cartItem.quantity;
+    const quantity = cartItem?.quantity;
     setCounter(quantity);
     const newTotalPrice = counter * item.base_price;
     setItemTotalPrice(newTotalPrice);
@@ -79,11 +79,11 @@ export default function cartItem({
       <View style={[styles.container]}>
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.itemName}>{item.name}</Text>
-            {cartItem.customization != "" && (
+            <Text style={styles.itemName}>{item?.name}</Text>
+            {cartItem?.customization != null && (
               <View>
                 <Text style={styles.Customized}>Customized</Text>
-                <Text style={[styles.details,{maxWidth:(dimensions.screen.width-200)}]}>Details: {cartItem.customization}</Text>
+                <Text style={[styles.details,{maxWidth:(dimensions.screen.width-200)}]}>Details: {cartItem?.customization}</Text>
               </View>
             )}
           </View>
@@ -101,13 +101,13 @@ export default function cartItem({
           </View>
         </View>
 
-        {item.img_url === null ? (
+        {item?.img_url === null ? (
           <Image
             source={require("../../assets/default_shop_img.png")}
             style={styles.image}
           />
         ) : (
-          <Image source={{ uri: item.img_url }} style={styles.image} />
+          <Image source={{ uri: item?.img_url }} style={styles.image} />
         )}
       </View>
       <ThematicBreak verticalHorizontal={20} />

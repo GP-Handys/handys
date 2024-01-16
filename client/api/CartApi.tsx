@@ -29,7 +29,7 @@ export const addToCart = async (ItemId: number, customization = "") => {
       data: { customization },
     });
 
-    return result.data;
+    return result;
   } catch (error: any) {
     return error.message;
   }
