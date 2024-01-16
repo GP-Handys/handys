@@ -27,9 +27,7 @@ export default function Comments({ route }: any) {
     let tempComment = comment;
     setComment("");
     Keyboard.dismiss();
-    await addComment(post.id, { content: tempComment }).then(() => {
-      
-    });
+    await addComment(post.id, { content: tempComment }).then(() => {});
   };
   const onRefresh = () => {
     setIsRefreshing(true);
@@ -161,15 +159,17 @@ const styles = StyleSheet.create({
   },
   mainPostStyle: {
     marginLeft: 35,
-    backgroundColor: "#FFFFFF10",
-    borderRadius: 10,
+    backgroundColor: "#BBB4AE",
+    borderRadius: 7.5,
+    borderTopLeftRadius: 0,
     paddingHorizontal: 10,
     marginTop: 4,
     paddingBottom: 5,
     alignSelf: "flex-start",
-    width: "auto",
+    maxWidth: "80%",
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 4,
+    marginVertical: 5,
   },
 });
