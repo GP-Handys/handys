@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { CommonBackgroundWithNoSafeArea } from "../../common/background";
 import CartItem from "../../components/cart/cartItem";
@@ -13,7 +14,6 @@ import COLORS from "../../common/colors";
 import { getCart, removeFromcart } from "../../api/CartApi";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import { ActivityIndicator } from "react-native-paper";
 
 export default function Cart() {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -64,7 +64,7 @@ export default function Cart() {
   if (loading) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else if (cartItems && cartItems.length == 0) {

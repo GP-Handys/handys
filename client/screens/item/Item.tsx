@@ -27,6 +27,8 @@ export default function ItemScreen({ route }: any) {
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isCustomizeModalVisible, setIsCustomizeModalVisible] = useState(false);
   const [customization, setCustomization] = useState("");
+  const [isAddToCartButtonDisabled, setIsAddToCartButtonDisabled] =
+    useState(false);
 
   const fetchShopDataById = async () => {
     await getShopById(item.shopId).then((res) => {
@@ -44,6 +46,18 @@ export default function ItemScreen({ route }: any) {
       setIsFavorite(true);
       await addToWishList(item.id);
     }
+  };
+
+  const handleAddToCart = async () => {
+    setIsAddToCartButtonDisabled(true);
+    await addToCart(item.id, customization).then((res) => {
+      if (res.status === 201) {
+        Alert.alert(res.data);
+      } else if (res.status === 400) {
+        Alert.alert(res.data);
+      }
+    });
+    setIsAddToCartButtonDisabled(false);
   };
 
   useEffect(() => {
@@ -137,7 +151,15 @@ export default function ItemScreen({ route }: any) {
             </TouchableOpacity>
             {item.customization && (
               <TouchableOpacity
-                style={[styles.button,{backgroundColor:customization.length>0?COLORS.greenColor:COLORS.handysGrey}]}
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor:
+                      customization.length > 0
+                        ? COLORS.greenColor
+                        : COLORS.handysGrey,
+                  },
+                ]}
                 onPress={() => setIsCustomizeModalVisible(true)}
               >
                 <Text
@@ -151,11 +173,9 @@ export default function ItemScreen({ route }: any) {
             <ThematicBreak />
 
             <TouchableOpacity
-              style={styles.cartButton}
-              onPress={() => {
-                Alert.alert("Item added to cart succefully");
-                addToCart(item.id, customization);
-              }}
+              style={[styles.cartButton, isAddToCartButtonDisabled && { opacity: 0.5 }]}
+              onPress={handleAddToCart}
+              disabled={isAddToCartButtonDisabled}
             >
               <Feather name="shopping-cart" size={24} color="black" />
               <Text
