@@ -85,7 +85,7 @@ export default function Profile() {
             <ThematicBreak />
           </View>
           <TouchableOpacity
-            style={style.editProfile}
+            style={[style.editProfile, style.editProfileShadow]}
             onPress={() => {
               navigation.navigate("EditProfile", {
                 user: user,
@@ -108,7 +108,7 @@ export default function Profile() {
               <FlatList
                 scrollEnabled={false}
                 data={shops}
-                style={{ width: "100%" }}
+                style={[ style.userShopShadow,{ width: "100%"  }]}
                 renderItem={({ item }) => <UserShop shop={item} />}
                 ItemSeparatorComponent={() => {
                   return <View style={{ marginVertical: 5 }} />;
@@ -334,5 +334,38 @@ const style = StyleSheet.create({
     justifyContent: "center",
     width: 140,
     height: 90,
+  },
+  editProfileShadow:{
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    elevation: 12,
+    borderRadius: 9,
+    backgroundColor: "#CABEAB",
+    alignItems: "center",
+    width: "100%",
+    height: 60,
+    alignSelf: "center",
+    paddingLeft: 15,
+    marginBottom: 15,
+    color: COLORS.normalText,
+  },
+  userShopShadow:{
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    elevation: 12,
+    borderRadius: 9,
+    backgroundColor: COLORS.commonBackground,
+    alignSelf: "center",
+    color: COLORS.normalText,
   }
 });
