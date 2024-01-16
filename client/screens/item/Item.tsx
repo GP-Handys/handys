@@ -27,6 +27,8 @@ export default function ItemScreen({ route }: any) {
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isCustomizeModalVisible, setIsCustomizeModalVisible] = useState(false);
   const [customization, setCustomization] = useState("");
+  const [isAddToCartButtonDisabled, setIsAddToCartButtonDisabled] =
+    useState(false);
 
   const fetchShopDataById = async () => {
     await getShopById(item.shopId).then((res) => {
@@ -47,6 +49,7 @@ export default function ItemScreen({ route }: any) {
   };
 
   const handleAddToCart = async () => {
+    setIsAddToCartButtonDisabled(true);
     await addToCart(item.id, customization).then((res) => {
       if (res.status === 201) {
         Alert.alert(res.data);
@@ -54,6 +57,7 @@ export default function ItemScreen({ route }: any) {
         Alert.alert(res.data);
       }
     });
+    setIsAddToCartButtonDisabled(false);
   };
 
   useEffect(() => {
@@ -169,8 +173,9 @@ export default function ItemScreen({ route }: any) {
             <ThematicBreak />
 
             <TouchableOpacity
-              style={styles.cartButton}
+              style={[styles.cartButton, isAddToCartButtonDisabled && { opacity: 0.5 }]}
               onPress={handleAddToCart}
+              disabled={isAddToCartButtonDisabled}
             >
               <Feather name="shopping-cart" size={24} color="black" />
               <Text
