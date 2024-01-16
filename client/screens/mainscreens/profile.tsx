@@ -67,16 +67,16 @@ export default function Profile() {
         {/* page container */}
         <View style={{ marginHorizontal: 40, alignItems: "center" }}>
           {/* user informations */}
-          <View style={style.ShadowImg}> 
-          {user.pfp_url === null ? (
-            <Image
-              source={require("../../assets/default_profile_img.jpg")}
-              style={style.profileIMG}
-            />
-          ) : (
-            <Image source={{ uri: user.pfp_url }} style={style.profileIMG} />
-          )}
-        </View>
+          <View style={style.shadowImg}>
+            {user.pfp_url === null ? (
+              <Image
+                source={require("../../assets/default_profile_img.jpg")}
+                style={style.profileIMG}
+              />
+            ) : (
+              <Image source={{ uri: user.pfp_url }} style={style.profileIMG} />
+            )}
+          </View>
           <Text style={style.font}>{user.name}</Text>
 
           <View
@@ -92,8 +92,14 @@ export default function Profile() {
               });
             }}
           >
-            <Feather name="edit" size={32} color={ COLORS.normalText } />
-            <Text style={{ fontSize: 18, fontWeight: "500", color:COLORS.normalText }}>
+            <Feather name="edit" size={32} color={COLORS.normalText} />
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "500",
+                color: COLORS.normalText,
+              }}
+            >
               Edit Profile
             </Text>
           </TouchableOpacity>
@@ -108,7 +114,7 @@ export default function Profile() {
               <FlatList
                 scrollEnabled={false}
                 data={shops}
-                style={[ style.userShopShadow,{ width: "100%"  }]}
+                style={[style.userShopShadow, { width: "100%" }]}
                 renderItem={({ item }) => <UserShop shop={item} />}
                 ItemSeparatorComponent={() => {
                   return <View style={{ marginVertical: 5 }} />;
@@ -141,7 +147,6 @@ export default function Profile() {
 
         <View style={style.cardsContainer}>
           <View style={[style.otherGrid]}>
-            
             <TouchableOpacity
               style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("MyPostsScreen")}
@@ -154,7 +159,7 @@ export default function Profile() {
               <Text style={style.cardFont}>My Posts</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[style.card,style.cardShadow]}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("MyOrdersScreen")}
             >
               <Entypo name="shopping-bag" size={24} color={COLORS.normalText} />
@@ -163,17 +168,21 @@ export default function Profile() {
           </View>
           <View style={style.otherGrid}>
             <TouchableOpacity
-              style={[style.card,style.cardShadow]}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("WishlistScreen")}
             >
               <FontAwesome5 name="heart" size={24} color={COLORS.normalText} />
               <Text style={style.cardFont}>Favorites</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[style.card,style.cardShadow]}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("SendTicketScreen")}
             >
-              <MaterialIcons name="headset-mic" size={24} color={COLORS.normalText} />
+              <MaterialIcons
+                name="headset-mic"
+                size={24}
+                color={COLORS.normalText}
+              />
               <Text style={style.cardFont}>Support</Text>
             </TouchableOpacity>
           </View>
@@ -204,23 +213,23 @@ export default function Profile() {
 }
 
 const style = StyleSheet.create({
-  Logoutfont: { 
-    fontSize: 20, 
-    color: COLORS.normalText, 
-    fontWeight: "500", 
+  Logoutfont: {
+    fontSize: 20,
+    color: COLORS.normalText,
+    fontWeight: "500",
     paddingTop: 10,
-     paddingLeft: 20,
-    },
-  font: { 
-    fontSize: 22, 
-    color: COLORS.normalText, 
-    fontWeight: "600", 
-    paddingTop: 10 
+    paddingLeft: 20,
   },
-  profileIMG: { 
-    width: 120, 
-    height: 120, 
-    borderRadius: 120 
+  font: {
+    fontSize: 22,
+    color: COLORS.normalText,
+    fontWeight: "600",
+    paddingTop: 10,
+  },
+  profileIMG: {
+    width: 120,
+    height: 120,
+    borderRadius: 120,
   },
   editProfile: {
     flexDirection: "row",
@@ -302,7 +311,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  ShadowImg:{
+  shadowImg: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -310,16 +319,9 @@ const style = StyleSheet.create({
     },
     shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
     shadowRadius: 7.49,
-    elevation: 12,
-    borderRadius: 120,
-    backgroundColor: COLORS.commonBackground,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 120,
-    height: 120,
     marginVertical: 20,
   },
-  cardShadow :{
+  cardShadow: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -327,15 +329,12 @@ const style = StyleSheet.create({
     },
     shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
     shadowRadius: 7.49,
-    elevation: 12,
     borderRadius: 9,
     backgroundColor: COLORS.commonBackground,
     alignItems: "center",
     justifyContent: "center",
-    width: 140,
-    height: 90,
   },
-  editProfileShadow:{
+  editProfileShadow: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -343,18 +342,9 @@ const style = StyleSheet.create({
     },
     shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
     shadowRadius: 7.49,
-    elevation: 12,
     borderRadius: 9,
-    backgroundColor: "#CABEAB",
-    alignItems: "center",
-    width: "100%",
-    height: 60,
-    alignSelf: "center",
-    paddingLeft: 15,
-    marginBottom: 15,
-    color: COLORS.normalText,
   },
-  userShopShadow:{
+  userShopShadow: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -367,5 +357,5 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.commonBackground,
     alignSelf: "center",
     color: COLORS.normalText,
-  }
+  },
 });

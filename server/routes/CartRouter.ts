@@ -9,11 +9,36 @@ export const addToCart = async (req: Request, res: Response) => {
   const userId: number = extractUserFromJwt(jwt);
   const itemId = req.params.itemId;
   const { customization } = req.body;
+  let canAddToCard = true;
 
   try {
     let shopId = (await Item.findByPk(itemId))?.shopId;
+    let cartItems: Cart[] = await Cart.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+    if (cartItems.length > 0) {
+      cartItems.forEach((cartItem) => {
+        if (cartItem.shop_id != shopId) {
+          canAddToCard = false;
+        }
+      });
+    }
+    if (!canAddToCard) {
+      res
+        .status(400)
+        .json("You can't add items from different shops to the cart");
+      return;
+    }
+
     let cartItem = await Cart.findOne({
-      where: { item_id: itemId, shop_id: shopId, user_id: userId, customization: customization},
+      where: {
+        item_id: itemId,
+        shop_id: shopId,
+        user_id: userId,
+        customization: customization,
+      },
     });
     if (cartItem == null) {
       await Cart.create({
@@ -28,7 +53,7 @@ export const addToCart = async (req: Request, res: Response) => {
         { where: { id: cartItem.id } }
       );
     }
-    res.sendStatus(201);
+    res.status(201).json("Item added to cart");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
