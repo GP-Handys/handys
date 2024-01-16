@@ -122,15 +122,6 @@ export default function AddItemScreen({ route }: any) {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.textLabel}>Discount %</Text>
-        <CustomTextInput
-          placeholder="Enter percentage discount here"
-          onChangeText={(text) => {
-            setItemDiscount(text);
-          }}
-        />
-      </View>
-      <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Quantity</Text>
         <CustomTextInput
           placeholder="Enter quantity here"
