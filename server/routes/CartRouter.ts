@@ -13,7 +13,12 @@ export const addToCart = async (req: Request, res: Response) => {
   try {
     let shopId = (await Item.findByPk(itemId))?.shopId;
     let cartItem = await Cart.findOne({
-      where: { item_id: itemId, shop_id: shopId, user_id: userId, customization: customization},
+      where: {
+        item_id: itemId,
+        shop_id: shopId,
+        user_id: userId,
+        customization: customization,
+      },
     });
     if (cartItem == null) {
       await Cart.create({
@@ -78,6 +83,19 @@ export const getCart = async (req: Request, res: Response) => {
     });
 
     res.status(200).json([cart, itemsMap]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
+};
+
+export const clearCart = async (req: Request, res: Response) => {
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const user_id: number = extractUserFromJwt(jwt);
+
+  try {
+    await Cart.destroy({ where: { user_id: user_id } });
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });

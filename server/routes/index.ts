@@ -74,6 +74,7 @@ router.post("/api/cart/add/:itemId", tokenValidate,cartRoute.addToCart)
 router.delete("/api/cart/delete/:cartId", tokenValidate,cartRoute.removeFromCart)
 router.put("/api/cart/update/:cartId/:quantity", tokenValidate,cartRoute.updateQuantity)
 router.get("/api/cart/get",tokenValidate , cartRoute.getCart)
+router.delete("/api/cart/clear",tokenValidate , cartRoute.clearCart)
 
 // Category routes 
 router.get("/api/category/get", tokenValidate,categoryRouter.getAllCategories)
