@@ -122,7 +122,7 @@ export default function ItemScreen({ route }: any) {
               </View>
             </View>
             <View style={styles.rectangle}>
-              <Text style={styles.price}>JOD {item.base_price} </Text>
+              <Text style={styles.price}>JOD {item?.base_price} </Text>
             </View>
           </View>
           <ThematicBreak />

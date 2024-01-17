@@ -39,7 +39,7 @@ export default function cartItem({
   const plus = () => {
     const newCounter = counter + 1;
     setCounter(newCounter);
-    const newTotalPrice = newCounter * item.base_price;
+    const newTotalPrice = newCounter * item?.base_price;
     setItemTotalPrice(newTotalPrice);
     updateTotal(item.id, newTotalPrice);
     editQuantity(cartItem?.id, counter);
@@ -49,7 +49,7 @@ export default function cartItem({
     if (counter > 1 && counter<item.quantity) {
       const newCounter = counter - 1;
       setCounter(newCounter);
-      const newTotalPrice = newCounter * item.base_price;
+      const newTotalPrice = newCounter * item?.base_price;
       setItemTotalPrice(newTotalPrice);
       updateTotal(item.id, newTotalPrice);
       editQuantity(cartItem?.id, counter);
@@ -69,7 +69,7 @@ export default function cartItem({
   useEffect(() => {
     const quantity = cartItem?.quantity;
     setCounter(quantity);
-    const newTotalPrice = counter * item.base_price;
+    const newTotalPrice = counter * item?.base_price;
     setItemTotalPrice(newTotalPrice);
     updateTotal(item.id, newTotalPrice);
   }, []);

@@ -126,7 +126,7 @@ export default function EditItemScreen({ route }: any) {
       <View style={styles.inputContainer}>
         <Text style={styles.textLabel}>Price</Text>
         <CustomTextInput
-          placeholder={"JOD " + item.base_price.toString()}
+          placeholder={"JOD " + item?.base_price.toString()}
           onChangeText={(text) => {
             setItemPrice(Number(text));
           }}

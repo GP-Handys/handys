@@ -67,7 +67,7 @@ export default function ItemCard({
         }}
       >
         <View style={styles.priceIconContainer}>
-          <Text style={styles.price}>JOD {item.base_price}</Text>
+          <Text style={styles.price}>JOD {item?.base_price}</Text>
         </View>
         <TouchableOpacity>
           {favorite ? (
