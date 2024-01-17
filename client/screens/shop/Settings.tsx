@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View, Alert } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { Feather, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
@@ -7,10 +7,22 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { Shop } from "../../models/Shop";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { subToPremium } from "../../api/ShopApi";
+import { useState } from "react";
 
 export default function ShopSettingsScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
   const shop: Shop = route.params.shop;
+  const [isSubscribed, setIsSubscribed] = useState(shop?.is_premium);
+
+  const handleSubToPremium = async () => {
+    await subToPremium(shop.id).then((res) => {
+      if (res.status === 200) {
+        setIsSubscribed(true);
+        Alert.alert(res.data);
+      }
+    });
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -47,7 +59,7 @@ export default function ShopSettingsScreen({ route }: any) {
         <ThematicBreak marginHorizontal={25} />
       </View>
 
-      {true ? (
+      {isSubscribed ? (
         <View>
           <TouchableOpacity
             style={[
@@ -102,9 +114,12 @@ export default function ShopSettingsScreen({ route }: any) {
         </View>
       ) : (
         <TouchableOpacity
+          onPress={handleSubToPremium}
           style={[
             styles.touchableStyle,
-            { backgroundColor: COLORS.CTAButtonBackground },
+            {
+              backgroundColor: COLORS.CTAButtonBackground,
+            },
           ]}
         >
           <FontAwesome5 name="crown" size={22} color="white" />
