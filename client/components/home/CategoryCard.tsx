@@ -32,7 +32,7 @@ export default function CategoryCard({category}:Props) {
 const styles = StyleSheet.create({
   categoryName: {
     color: COLORS.textInputPlaceholder,
-    fontSize: 15,
+    fontSize: 12,
     textAlign: "center",
     marginTop:5,
     fontWeight:'500'

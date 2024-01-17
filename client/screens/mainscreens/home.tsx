@@ -116,7 +116,7 @@ export default function Home() {
             keyExtractor={(item) => item.id.toString()}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+            ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
           />
 
           <Text style={styles.sectionTitle}>Recommended Shops</Text>
