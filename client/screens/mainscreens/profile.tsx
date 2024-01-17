@@ -7,6 +7,7 @@ import {
   FlatList,
   Platform,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import COLORS from "../../common/colors";
 import {
@@ -23,7 +24,6 @@ import React, { useState, useEffect } from "react";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { getProfile } from "../../api/UserApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Profile() {
@@ -316,6 +316,7 @@ const style = StyleSheet.create({
       height: 5,
     },
     shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    elevation: Platform.OS === "android" ? 10 : 0,
     shadowRadius: 7.49,
     marginVertical: 20,
   },
@@ -327,6 +328,7 @@ const style = StyleSheet.create({
     },
     shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
     shadowRadius: 7.49,
+    elevation: Platform.OS === "android" ? 10 : 0,
     borderRadius: 9,
     backgroundColor: COLORS.commonBackground,
     alignItems: "center",
@@ -339,6 +341,7 @@ const style = StyleSheet.create({
       height: 5,
     },
     shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    elevation: Platform.OS === "android" ? 10 : 0,
     shadowRadius: 7.49,
     borderRadius: 9,
   },
@@ -350,7 +353,7 @@ const style = StyleSheet.create({
     },
     shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
     shadowRadius: 7.49,
-    elevation: 12,
+    elevation: Platform.OS === "android" ? 10 : 0,
     borderRadius: 9,
     backgroundColor: COLORS.commonBackground,
     alignSelf: "center",

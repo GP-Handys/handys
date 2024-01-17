@@ -27,7 +27,7 @@ export default function ShopSettingsScreen({ route }: any) {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <TouchableOpacity style={styles.touchableStyle}>
-        <Feather name="edit" size={32} color={"white"} />
+        <Feather name="edit" size={32} color={COLORS.normalText} />
         <Text style={styles.buttonText}>Edit Shop Profile</Text>
       </TouchableOpacity>
 
@@ -37,7 +37,7 @@ export default function ShopSettingsScreen({ route }: any) {
           navigation.navigate("AddItemScreen", { shopId: shop.id })
         }
       >
-        <MaterialIcons name="add-box" size={32} color={"white"} />
+        <MaterialIcons name="add-box" size={32} color={COLORS.normalText} />
         <Text style={styles.buttonText}>Add Item</Text>
       </TouchableOpacity>
 
@@ -51,7 +51,7 @@ export default function ShopSettingsScreen({ route }: any) {
           navigation.navigate("ShopOrdersScreen", { shopId: shop.id });
         }}
       >
-        <MaterialIcons name="history" size={32} color={"white"} />
+        <MaterialIcons name="history" size={32} color={COLORS.normalText} />
         <Text style={styles.buttonText}>Orders</Text>
       </TouchableOpacity>
 
@@ -155,6 +155,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: "500",
-    color: "white",
+    color: COLORS.normalText,
   },
 });
