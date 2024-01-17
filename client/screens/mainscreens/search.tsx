@@ -119,7 +119,7 @@ export default function Search(this: any) {
               marginTop: "50%",
             }}
           >
-            <ActivityIndicator size={"large"} color="white" />
+            <ActivityIndicator size={"large"} color={COLORS.normalText} />
           </View>
         ) : (
           <View style={{ marginTop: 15 }}>
