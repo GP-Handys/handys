@@ -177,7 +177,7 @@ export default function Search(this: any) {
                           <Text style={styles.textIcon}>Sorry</Text>
                           <Image
                             style={styles.image}
-                            source={require("../../assets/Done-pana.png")}
+                            source={require("../../assets/sad.png")}
                           />
                           <Text style={styles.textIcon}>
                             We couldn't find any matches :(
