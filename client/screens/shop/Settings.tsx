@@ -47,7 +47,7 @@ export default function ShopSettingsScreen({ route }: any) {
         <ThematicBreak marginHorizontal={25} />
       </View>
 
-      {true ? (
+      {shop?.is_premium ? (
         <View>
           <TouchableOpacity
             style={[
