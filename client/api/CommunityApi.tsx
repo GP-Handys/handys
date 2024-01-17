@@ -12,7 +12,7 @@ export const addPost = async (data: any) => {
       },
       data: data,
     });
-    return result;
+    return result.data;
   } catch (error: any) {
     return error.message;
   }
@@ -61,7 +61,7 @@ export const addComment = async (postId: number, data: any) => {
       },
       data: data,
     });
-    return result;
+    return result.data;
   } catch (error: any) {
     return error.message;
   }
