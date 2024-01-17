@@ -46,7 +46,7 @@ export default function ShopContactScreen({ route }: any) {
     return (
       <SafeAreaView style={styles.mainContainer}>
         <TouchableOpacity style={styles.touchableStyle}>
-          <Text style={{ color: "gray" }}>owner : </Text>
+          <Text style={{ color: "black", fontSize:18 }}>owner : </Text>
           {user.pfp_url === null ? (
             <Image
               source={require("../../assets/default_profile_img.jpg")}
@@ -56,7 +56,7 @@ export default function ShopContactScreen({ route }: any) {
             <Image source={{ uri: user.pfp_url }} style={styles.profileIMG} />
           )}
           <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text style={{ color: "white", fontSize: 20 }}>{user.name}</Text>
+            <Text style={{ color: "black", fontSize: 18 }}>{user.name}</Text>
           </View>
         </TouchableOpacity>
         <View style={{ marginVertical: 20, width: "100%" }}>
@@ -64,7 +64,7 @@ export default function ShopContactScreen({ route }: any) {
         </View>
 
         <TouchableOpacity style={styles.touchableStyle}>
-          <FontAwesome5 name="phone-alt" size={25} color={"white"} />
+          <FontAwesome5 name="phone-alt" size={25} color={"#EEEEEE"} />
           <Text style={styles.buttonText}>{shop.phone_number}</Text>
         </TouchableOpacity>
 
@@ -85,7 +85,7 @@ export default function ShopContactScreen({ route }: any) {
             }
           }}
         >
-          <MaterialCommunityIcons name="web" size={32} color={"white"} />
+          <MaterialCommunityIcons name="web" size={30} color={"#EEEEEE"} />
           <Text style={styles.buttonText}>Shop Site</Text>
         </TouchableOpacity>
       </SafeAreaView>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: "500",
-    color: "white",
+    color: "black",
   },
   loadingPage: {
     backgroundColor: COLORS.commonBackground,

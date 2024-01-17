@@ -175,9 +175,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: COLORS.textTitle,
+    
   },
   pageContainer: {
-    marginHorizontal: 30,
+    marginHorizontal: 20,
   },
   loadingPage: {
     backgroundColor: COLORS.commonBackground,

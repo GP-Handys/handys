@@ -71,8 +71,7 @@ export default function Search(this: any) {
                 <FontAwesome5
                   name="search"
                   size={20}
-                  color={COLORS.normalText}
-                />
+                  color="#854627"                />
               )}
             />
           }
@@ -104,7 +103,7 @@ export default function Search(this: any) {
           tabTextStyle={{ color: "white", fontSize: 14, fontWeight: "bold" }}
           activeTabStyle={{ backgroundColor: COLORS.CTAButtonBackground }}
           tabsContainerStyle={{
-            height: 45,
+            height: 40,
             backgroundColor: COLORS.commonBackground,
           }}
           activeTabOpacity={5}
@@ -203,7 +202,7 @@ export default function Search(this: any) {
 const styles = StyleSheet.create({
   textIcon: {
     marginTop: 20,
-    color: "white",
+    color: "#854627",
     fontWeight: "500",
     fontSize: 20,
   },

@@ -4,7 +4,6 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
 } from "react-native";
 import { Shop } from "../../models/Shop";
 import { StackProps } from "../navigation/NavigationStack";
@@ -65,14 +64,22 @@ export default function SearchShopCard({ shop }: Props) {
 const styles = StyleSheet.create({
   shopCardContainer: {
     backgroundColor: COLORS.handysGrey,
-    padding: 6,
+    padding: 5,
     borderRadius: 10,
-    flexDirection:"row"
+    flexDirection:"row",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   shopImg: {
     borderRadius: 8,
-    width: 135,
-    height: 135,
+    width: 120,
+    height: 120,
     resizeMode: "cover",
   },
   header: {
@@ -80,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   shopName: {
-    color: "white",
+    color: "#784024",
     fontSize: 18,
     fontWeight: "600",
     marginVertical: 5,
@@ -93,14 +100,14 @@ const styles = StyleSheet.create({
   },
   ratingCount: {
     fontSize: 10,
-    color: "#fffffa",
+    color: "black",
     opacity: 0.5,
     marginLeft: 10,
   },
   bio:{
     marginTop:9,
     marginLeft:10,
-    color:"#FFF",
+    color: COLORS.itemDetails,
     fontSize:12
   }
 });

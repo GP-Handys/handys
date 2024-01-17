@@ -194,13 +194,13 @@ const styles = StyleSheet.create({
   },
   bio: {
     fontSize: 14,
-    color: COLORS.normalText,
-    opacity: 0.5,
+    color: COLORS.textTitle,
+    opacity: 0.8,
     marginLeft: 15,
     marginVertical: 17,
   },
   shopItems: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     color: COLORS.normalText,
     marginLeft: 15,

@@ -69,7 +69,6 @@ export default function ItemCard({
       >
         <View style={styles.priceIconContainer}>
           <Text style={styles.price}>JOD {item?.base_price}</Text>
-        </View>
         <TouchableOpacity>
           {favorite ? (
             <FontAwesome
@@ -89,6 +88,7 @@ export default function ItemCard({
             />
           )}
         </TouchableOpacity>
+        </View>
       </View>
       {isEditable && (
         <TouchableOpacity
@@ -149,7 +149,12 @@ const styles = StyleSheet.create({
   },
   priceIconContainer: {
     marginTop: 6,
-  },
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    width: 140,
+    paddingHorizontal: 4,
+    paddingVertical: 4,
+    },
   price: {
     color: COLORS.itemDetails,
     fontWeight: "900",
