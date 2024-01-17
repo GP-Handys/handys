@@ -54,7 +54,7 @@ export default function SignUp({ navigation }: StackProps) {
           right={
             <TextInput.Icon
               icon={icon}
-              color={"white"}
+              color={COLORS.brown}
               onPress={() => {
                 Keyboard.dismiss();
                 setIsSecureTextEntry(
@@ -76,7 +76,7 @@ export default function SignUp({ navigation }: StackProps) {
           right={
             <TextInput.Icon
               icon={icon2}
-              color={"white"}
+              color={COLORS.brown}
               onPress={() => {
                 Keyboard.dismiss();
                 setIsSecureTextEntry2(

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import { View, FlatList, ActivityIndicator, StyleSheet, Text, Image } from "react-native";
 import { getLikedPosts, getPostsForUserId } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
 import { PostModel } from "../../models/Post";
@@ -42,19 +42,32 @@ export default function MyPostsScreen() {
   } else {
     return (
       <CommonScrollableBackground>
-        <FlatList
-          data={posts}
-          renderItem={({ item }) => (
-            <Post post={item} isLiked={likedPosts.includes(item.id)} />
-          )}
-          ItemSeparatorComponent={() => (
-            <View style={{ marginVertical: 20 }}>
-              <ThematicBreak />
-            </View>
-          )}
-          scrollEnabled={false}
-          style={{ paddingHorizontal: 15 }}
-        />
+        {posts.length === 0 ? (
+          <View style={styles.container}>
+            <Text style={styles.textIcon}>Oh...</Text>
+            <Image
+              style={styles.image}
+              source={require("../../assets/sad.png")}
+            />
+            <Text style={styles.textIcon}>
+              You haven't made any posts yet :(
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            data={posts}
+            renderItem={({ item }) => (
+              <Post post={item} isLiked={likedPosts.includes(item.id)} />
+            )}
+            ItemSeparatorComponent={() => (
+              <View style={{ marginVertical: 20 }}>
+                <ThematicBreak />
+              </View>
+            )}
+            scrollEnabled={false}
+            style={{ paddingHorizontal: 15 }}
+          />
+        )}
       </CommonScrollableBackground>
     );
   }
@@ -67,5 +80,22 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flex: 1,
+  },
+  textIcon: {
+    marginVertical: 20,
+    color: "#854627",
+    fontWeight: "500",
+    fontSize: 20,
+    alignSelf: "center",
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    width: 300,
+    height: 300,
+    alignSelf: "center",
   },
 });

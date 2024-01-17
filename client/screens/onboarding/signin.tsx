@@ -58,7 +58,7 @@ export default function SignIn({ navigation }: StackProps) {
         <Pressable
           onPress={handleLogin}
           style={({ pressed }) => [
-            styles.signUpPressable,
+            styles.signInPressable,
             {
               opacity: pressed ? 0.6 : 1,
             },
@@ -89,12 +89,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 13,
   },
-  signUpPressable: {
+  signInPressable: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
     height: 41,
     borderRadius: 8,
+    fontWeight: "bold"
   },
 });
