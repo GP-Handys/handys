@@ -93,7 +93,7 @@ export default function Community() {
           >
             <View style={styles.centered}>
               <Image
-                source={require("../../assets/content-creation-monochromatic.png")}
+                source={require("../../assets/sad.png")}
                 style={styles.image}
               />
               <Text
