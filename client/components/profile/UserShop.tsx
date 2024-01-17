@@ -37,7 +37,7 @@ export function UserShop({ shop }: Props) {
       </View>
       {shop.is_premium && (
         <View style={styles.premium}>
-          <FontAwesome5 name="crown" size={22} color="black" />
+          <FontAwesome5 name="crown" size={20} color={(COLORS.lightestBrown)} />
         </View>
       )}
     </TouchableOpacity>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   premium: {
     width: 36,
     height: 36,
-    backgroundColor: "#F6977F",
+    backgroundColor: COLORS.CTAButtonBackground,
     borderRadius: 5,
     display: "flex",
     justifyContent: "center",

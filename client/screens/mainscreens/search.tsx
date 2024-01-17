@@ -5,11 +5,11 @@ import {
   FlatList,
   Image,
   StyleSheet,
-  ActivityIndicator,
+  ActivityIndicator
 } from "react-native";
 import {
   CommonBackgroundWithNoSafeArea,
-  CommonScrollableBackground,
+  CommonScrollableBackground
 } from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -68,10 +68,7 @@ export default function Search(this: any) {
           left={
             <TextInput.Icon
               icon={() => (
-                <FontAwesome5
-                  name="search"
-                  size={20}
-                  color="#854627"                />
+                <FontAwesome5 name="search" size={20} color="#854627" />
               )}
             />
           }
@@ -98,13 +95,13 @@ export default function Search(this: any) {
           onTabPress={(index) => setIndex(index)}
           tabStyle={{
             backgroundColor: COLORS.handysGrey,
-            borderColor: COLORS.handysGrey,
+            borderColor: COLORS.handysGrey
           }}
           tabTextStyle={{ color: "white", fontSize: 14, fontWeight: "bold" }}
           activeTabStyle={{ backgroundColor: COLORS.CTAButtonBackground }}
           tabsContainerStyle={{
             height: 40,
-            backgroundColor: COLORS.commonBackground,
+            backgroundColor: COLORS.commonBackground
           }}
           activeTabOpacity={5}
           borderRadius={10}
@@ -116,7 +113,7 @@ export default function Search(this: any) {
             style={{
               alignItems: "center",
               flex: 1,
-              marginTop: "50%",
+              marginTop: "50%"
             }}
           >
             <ActivityIndicator size={"large"} color={COLORS.normalText} />
@@ -149,10 +146,10 @@ export default function Search(this: any) {
                           <Text style={styles.textIcon}>Sorry</Text>
                           <Image
                             style={styles.image}
-                            source={require("../../assets/Done-pana.png")}
+                            source={require("../../assets/sad.png")}
                           />
                           <Text style={styles.textIcon}>
-                            We can't find any result
+                            We couldn't find any matches :(
                           </Text>
                         </View>
                       </CommonBackgroundWithNoSafeArea>
@@ -183,7 +180,7 @@ export default function Search(this: any) {
                             source={require("../../assets/Done-pana.png")}
                           />
                           <Text style={styles.textIcon}>
-                            We can't find any result
+                            We couldn't find any matches :(
                           </Text>
                         </View>
                       </CommonBackgroundWithNoSafeArea>
@@ -201,25 +198,27 @@ export default function Search(this: any) {
 
 const styles = StyleSheet.create({
   textIcon: {
-    marginTop: 20,
+    marginVertical: 20,
     color: "#854627",
     fontWeight: "500",
     fontSize: 20,
+    alignSelf: "center"
   },
   Emptycontainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   okay: {
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     height: 50,
-    borderRadius: 8,
+    borderRadius: 8
   },
   image: {
     width: 300,
     height: 300,
-  },
+    alignSelf: "center"
+  }
 });

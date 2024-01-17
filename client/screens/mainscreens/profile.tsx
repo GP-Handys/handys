@@ -115,7 +115,7 @@ export default function Profile() {
               <FlatList
                 scrollEnabled={false}
                 data={shops}
-                style={[style.userShopShadow, { width: "100%" }]}
+                style={[style.userShopShadow, { width: "100%" , backgroundColor:"#F4EDE7" }]}
                 renderItem={({ item }) => <UserShop shop={item} />}
                 ItemSeparatorComponent={() => {
                   return <View style={{ marginVertical: 5 }} />;

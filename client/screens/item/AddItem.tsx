@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   textLabel: {
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 11,
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
 
   categoryName: {
     fontSize:16,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontWeight: "500",
   },
 });
