@@ -71,7 +71,7 @@ export default function CategoryItemsScreen({ route }: any) {
                       alignSelf: "center",
                       fontWeight: "500",
                       marginTop: 30,
-                      color: "white",
+                      color: COLORS.normalText,
                     }}
                   >
                     There are no items yet...
