@@ -14,7 +14,7 @@ import {
   Feather,
   FontAwesome5,
   MaterialCommunityIcons,
-  MaterialIcons,
+  MaterialIcons
 } from "@expo/vector-icons";
 import { UserShop } from "../../components/profile/UserShop";
 import ThematicBreak from "../../components/ThematicBreak";
@@ -78,15 +78,16 @@ export default function Profile() {
           <Text style={style.font}>{user.name}</Text>
 
           <View
-            style={{ marginTop: 17, marginBottom: 20, alignSelf: "stretch" }}
+            style={{ marginTop: 15, marginBottom: 20, alignSelf: "stretch" }}
           >
             <ThematicBreak />
           </View>
+
           <TouchableOpacity
             style={[style.editProfile, style.editProfileShadow]}
             onPress={() => {
               navigation.navigate("EditProfile", {
-                user: user,
+                user: user
               });
             }}
           >
@@ -98,8 +99,8 @@ export default function Profile() {
                 color: COLORS.normalText,
               }}
             >
-              Edit Profile
-            </Text>
+              Edit profile
+              </Text>
           </TouchableOpacity>
 
           {/*user shops */}
@@ -203,7 +204,12 @@ export default function Profile() {
               color={"white"}
               style={{ paddingTop: 11 }}
             />
-            <Text style={style.Logoutfont}>Logout</Text>
+            <Text style={{
+              fontSize: 20,
+              fontWeight: "500",
+              color: "white",
+              alignSelf: "center"
+            }}>Logout</Text>
           </TouchableOpacity>
         </View>
       </CommonScrollableBackground>
@@ -211,33 +217,26 @@ export default function Profile() {
 }
 
 const style = StyleSheet.create({
-  Logoutfont: {
-    fontSize: 20,
-    color: COLORS.normalText,
-    fontWeight: "500",
-    paddingTop: 10,
-    paddingLeft: 20,
-  },
   font: {
-    fontSize: 22,
+    fontSize: 24,
     color: COLORS.normalText,
     fontWeight: "600",
-    paddingTop: 10,
+    paddingTop: 10
   },
   profileIMG: {
     width: 120,
     height: 120,
-    borderRadius: 120,
+    borderRadius: 60,
+    paddingTop: 10,
   },
   editProfile: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: COLORS.brown,
     height: 60,
     width: "100%",
     alignSelf: "center",
-    borderRadius: 9,
-    gap: 12,
+    borderRadius: 12,
     paddingLeft: 15,
     marginBottom: 15,
     color: COLORS.normalText,
@@ -248,13 +247,13 @@ const style = StyleSheet.create({
     borderWidth: 2,
     borderStyle: "dashed",
     borderRadius: 9,
-    borderColor: COLORS.handysGrey,
+    borderColor: COLORS.brown,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center",
+    alignSelf: "center"
   },
   createNewShopFont: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "500",
     color: COLORS.normalText,
   },
@@ -264,19 +263,18 @@ const style = StyleSheet.create({
     color: COLORS.normalText,
   },
   lable: {
-    alignSelf: "flex-start",
-    paddingLeft: 15,
+    alignSelf: "flex-start"
   },
   card: {
-    width: 140,
+    width: 120,
     height: 90,
     borderRadius: 9,
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: COLORS.handysGrey
   },
-  otherGrid: { flexDirection: "row", gap: 30 },
+  otherGrid: { flexDirection: "row", gap: 25 },
   logout: {
     width: "100%",
     height: 50,
@@ -285,13 +283,13 @@ const style = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 20,
     paddingLeft: 30,
-    gap: 27,
-    flexDirection: "row",
+    gap: 20,
+    flexDirection: "row"
   },
   cardFont: {
     fontSize: 19,
     color: COLORS.normalText,
-    fontWeight: "500",
+    fontWeight: "500"
   },
   cardsContainer: {
     display: "flex",
@@ -299,15 +297,15 @@ const style = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    gap: 25,
-    paddingTop: 10,
+    gap: 20,
+    paddingTop: 10
   },
   loadingPage: {
     backgroundColor: COLORS.commonBackground,
     justifyContent: "center",
     display: "flex",
     alignItems: "center",
-    flex: 1,
+    flex: 1
   },
   shadowImg: {
     shadowColor: "#000",
@@ -355,5 +353,5 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.commonBackground,
     alignSelf: "center",
     color: COLORS.normalText,
-  },
+  }
 });

@@ -68,7 +68,7 @@ export default function Post({
       </View>
       <View>
         <View style={[styles.mainPost, mainPostStyle]}>
-          <Text style={{ color: "#5B2F19", fontSize: 14, marginLeft: 5 }}>
+          <Text style={{ color: COLORS.postContent, fontSize: 14, marginLeft:15  }}>
             {post.content}
           </Text>
           {post.img_url && (
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     height: 340,
     borderRadius: 5,
     alignSelf: "center",
+    //Dimensions.get("window").width - 20
   },
   footer: {
     flexDirection: "row",

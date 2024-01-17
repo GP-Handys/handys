@@ -36,7 +36,7 @@ export default function MyPostsScreen() {
   if (isLoading) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else {
