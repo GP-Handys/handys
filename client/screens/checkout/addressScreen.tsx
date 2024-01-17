@@ -4,8 +4,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  ScrollView,
+  ScrollView
 } from "react-native";
 import MapScreen from "../../components/map/MapScreen";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
@@ -57,7 +56,7 @@ const AddressScreen = ({ route }: any) => {
         <View style={styles.areaView}>
           <View style={styles.firstSection}>
             <View style={{ margin: 10, height: 60 }}>
-              <MaterialIcons name="location-pin" size={20} color="white" />
+              <MaterialIcons name="location-pin" size={20} color="#522C19" />
             </View>
             <View>
               <Text style={styles.area}>Area</Text>
@@ -72,7 +71,7 @@ const AddressScreen = ({ route }: any) => {
                 navigation.goBack();
               }}
             >
-              <Text style={styles.change}>Change</Text>
+              <Text style={styles.change}>change</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -117,12 +116,12 @@ const AddressScreen = ({ route }: any) => {
             onChangeText={(Instructions) => setInstructions(Instructions)}
             value={instructions}
             multiline={true}
-            minHeight={150}
+
           />
         </View>
         <View style={styles.paymentContainer}>
           <View style={styles.paymentRows}>
-            <FontAwesome5 name="money-check-alt" size={18} color="white" />
+            <FontAwesome5 name="money-check-alt" size={18} color="#522C19" />
             <Text style={styles.paymentSummaryWord}>Payment Summary</Text>
           </View>
           <View style={styles.paymentRows}>
@@ -156,7 +155,7 @@ const AddressScreen = ({ route }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "center"
   },
   areaView: {
     height: 60,
@@ -165,38 +164,39 @@ const styles = StyleSheet.create({
     marginTop: 25,
     borderRadius: 7.5,
     backgroundColor: COLORS.handysGrey,
-    flexDirection: "row",
+    flexDirection: "row"
   },
   firstSection: {
     width: "75%",
     height: 60,
-    flexDirection: "row",
+    flexDirection: "row"
   },
   area: {
     fontSize: 16,
-    color: "white",
+    color: COLORS.normalText,
     marginTop: 10,
-    fontWeight: "500",
+    fontWeight: "500"
   },
   details: {
     fontSize: 12,
-    color: "#A2A4A4",
-    fontWeight: "500",
+    color: "#966448",
+    fontWeight: "500"
   },
   secondSection: {
     justifyContent: "center",
     alignItems: "center",
     width: "25%",
-    height: 60,
+    height: 60
   },
   change: {
     fontSize: 14,
-    color: COLORS.CTAButtonBackground,
+    color: COLORS.normalText,
+    fontWeight: "500"
   },
   confirm: {
-    color: "black",
+    color: "white",
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 20
   },
   inputsContainer: {
     width: "90%",
@@ -227,12 +227,12 @@ const styles = StyleSheet.create({
     justifyContent:"space-between"
   },
   title: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 12,
     fontWeight: "500",
   },
   titlePrice: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 12,
     fontWeight: "500",
     textAlign: "right"
@@ -241,17 +241,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 10,
     fontWeight: "500",
-    color: "white",
+    color: COLORS.normalText
   },
   grandTotalTitle: {
     marginTop: 5,
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 14,
     fontWeight: "700",
   },
   grandTotalPrice: {
     marginTop: 5,
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 14,
     fontWeight: "800",
     textAlign: "right"
@@ -265,7 +265,6 @@ const styles = StyleSheet.create({
     width: "90%",
     marginVertical: 20
   }
-
 });
 
 export default AddressScreen;

@@ -96,15 +96,15 @@ export default function ShopScreen({ route }: any) {
             <StarRatingDisplay
               rating={shop?.rating}
               starSize={16}
-              color={"white"}
-              starStyle={{ width: 2 }}
+            color={COLORS.normalText}
+            starStyle={{ width: 5 }}
               style={styles.rating}
             />
           </View>
           {shop?.userId === userId && userId != undefined ? (
             <View style={styles.subToPremiumContainer}>
               <TouchableOpacity
-                style={styles.subToPremiumButton}
+              style={styles.settings}
                 onPress={() =>
                   navigation.navigate("ShopSettingsScreen", { shop: shop })
                 }
@@ -120,7 +120,7 @@ export default function ShopScreen({ route }: any) {
           ) : (
             <View style={styles.subToPremiumContainer}>
               <TouchableOpacity
-                style={styles.subToPremiumButton}
+                style={styles.settings}
                 onPress={() =>
                   navigation.navigate("ShopContactScreen", { shop: shop })
                 }
@@ -173,20 +173,20 @@ const styles = StyleSheet.create({
   footerShopName: {
     fontSize: 20,
     fontWeight: "bold",
-    marginLeft: 25,
-    color: "white",
+    marginLeft: 10,
+    color: COLORS.normalText,
   },
   rating: {
-    marginLeft: 19,
+    marginLeft:8,
   },
   subToPremiumContainer: {
     marginRight: 15,
   },
-  subToPremiumButton: {
+  settings: {
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
-    backgroundColor: COLORS.handysGrey,
+    backgroundColor: COLORS.lightBrown,
     height: 37,
     width: 135,
     borderRadius: 6,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   bio: {
     fontSize: 14,
-    color: "white",
+    color: COLORS.normalText,
     opacity: 0.5,
     marginLeft: 15,
     marginVertical: 17,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   shopItems: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "white",
+    color: COLORS.normalText,
     marginLeft: 15,
     marginTop: 20,
   },

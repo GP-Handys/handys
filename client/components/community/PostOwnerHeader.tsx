@@ -10,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import { getUserById } from "../../api/UserApi";
 import { User } from "../../models/User";
+import COLORS from "../../common/colors";
 
 interface PostOwnerHeaderProps {
   userId: number;

@@ -41,7 +41,7 @@ export default function CustomizeScreen({
               <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
                 <MaterialIcons name="close" size={23} color="white" />
               </TouchableOpacity>
-              <Text style={styles.HeaderText}> Customize</Text>
+              <Text style={styles.HeaderText}>Customize</Text>
             </View>
             <ThematicBreak />
           </View>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   Text: {
-    color: "black",
+    color: "white",
     fontSize: 16,
     fontWeight: "bold",
   },

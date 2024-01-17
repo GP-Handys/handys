@@ -73,19 +73,19 @@ export default function Cart() {
         <View style={styles.Emptycontainer}>
           <Text
             style={{
-              fontSize: 40,
-              color: "white",
+              fontSize: 30,
+              color: COLORS.normalText,
               fontWeight: "600",
               marginBottom: 20,
             }}
           >
-            Wait!
+            Your Cart is Empty
           </Text>
           <Image
             style={styles.image}
-            source={require("../../assets/Done-pana.png")}
+            source={require("../../assets/pana.png")}
           />
-          <Text style={styles.textIcon}>The Cart is empty</Text>
+          <Text style={styles.textIcon}>Add some items to your cart.</Text>
         </View>
       </CommonBackgroundWithNoSafeArea>
     );
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
   },
   TotalPrice: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 16,
     fontWeight: "500",
   },
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   checkout: {
+    color:'white',
     fontSize: 20,
     fontWeight: "500",
   },
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
   },
   textIcon: {
     marginTop: 20,
-    color: "white",
+    color: COLORS.normalText,
     fontWeight: "500",
     fontSize: 20,
   },

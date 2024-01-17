@@ -23,7 +23,9 @@ export default function EditProfile({ route }: any) {
   const [disableClick , setDisableClick] = useState(false);
 
   const [userImageUrl, setUserImageUrl]: any = useState(user.pfp_url);
-  const [userImageUrlPicked, setUserImageUrlPicked] = useState(()=>{return user.pfp_url?true:false});
+  const [userImageUrlPicked, setUserImageUrlPicked] = useState(() => {
+    return user.pfp_url ? true : false;
+  });
 
   async function handleEditProfile() {
     setDisableClick(true)
@@ -54,7 +56,7 @@ export default function EditProfile({ route }: any) {
           <View
             style={{
               alignItems: "center",
-              marginVertical: 10,
+              marginVertical: 10
             }}
           >
             <Image source={{ uri: userImageUrl }} style={style.uploadedIMG} />
@@ -96,7 +98,7 @@ export default function EditProfile({ route }: any) {
           />
         </View>
         <View style={{ marginTop: 15, gap: 10 }}>
-          <Text style={style.font}>confirm password</Text>
+          <Text style={style.font}>Confirm password</Text>
           <CustomTextInput
             placeholder={"Confirm password"}
             onChangeText={(text: any) => setConfirmPassword(text)}
@@ -117,11 +119,11 @@ export default function EditProfile({ route }: any) {
 }
 
 const style = StyleSheet.create({
-  font: { fontSize: 20, fontWeight: "500", color: "white" },
+  font: { fontSize: 20, fontWeight: "500", color: COLORS.normalText },
   lengthCounterFont: {
-    color: "#FFFFFF80",
+    color: COLORS.normalText,
     fontSize: 15,
-    alignSelf: "flex-end",
+    alignSelf: "flex-end"
   },
   ConfirmButton: {
     alignItems: "center",
@@ -129,7 +131,7 @@ const style = StyleSheet.create({
     marginTop: 10,
     height: 60,
     borderRadius: 8,
-    marginBottom: 40,
+    marginBottom: 40
   },
   uploadIMG: {
     backgroundColor: "#585858",
@@ -140,22 +142,21 @@ const style = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    margin: 30,
+    margin: 30
   },
-  blackFont: { color: "black", fontWeight: "bold", fontSize: 18.44 },
+  blackFont: { color: "white", fontWeight: "bold", fontSize: 16 },
   uploadedIMG: {
     width: 150,
     height: 150,
     resizeMode: "contain",
-    borderRadius: 300,
+    borderRadius: 300
   },
   changeIMG: {
-    height: 40,
     backgroundColor: COLORS.CTAButtonBackground,
     marginTop: 20,
-    borderRadius: 10,
+    borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 10,
-  },
+    padding: 15
+  }
 });
