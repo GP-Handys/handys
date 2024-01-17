@@ -60,7 +60,7 @@ export default function PostModal({
           <CommonBackgroundWithSafeArea>
             <View style={styles.ModalHeader}>
               <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
-                <MaterialIcons name="close" size={24} color="white" />
+                <MaterialIcons name="close" size={24} color={COLORS.brown} />
               </TouchableOpacity>
               <Text style={styles.HeaderText}> Select Categories</Text>
               <TouchableOpacity
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   HeaderText: {
     fontSize: 20,
-    color: "white",
+    color: COLORS.brown,
     marginEnd: 50,
     fontWeight: "600",
   },

@@ -40,7 +40,7 @@ export default function SelectableCategory({addCategory , removeCategory, catego
     >
       <View style={styles.container}>
         <Image
-          source={require("../../assets/default_profile_img.jpg")}
+          source={{ uri: category.category_pfp!}}
           style={styles.image}
         />
         <Text style={styles.name}>{category.category_name}</Text>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   name: {
-    color: "white",
+    color: COLORS.brown,
     fontSize: 16,
     fontWeight: "600",
   },
