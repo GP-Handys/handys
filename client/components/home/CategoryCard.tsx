@@ -1,4 +1,4 @@
-import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../navigation/NavigationStack";
 import { Category } from "../../models/Category";
@@ -12,6 +12,7 @@ export default function CategoryCard({category}:Props) {
   const navigation = useNavigation<StackProps["navigation"]>();
 
   return (
+    <View style={styles.containor}>
     <TouchableOpacity onPress={()=>navigation.navigate("CategoryItemsScreen",{
       category:category
     })}>
@@ -27,6 +28,7 @@ export default function CategoryCard({category}:Props) {
 
       <Text style={styles.categoryName}>{category.category_name}</Text>
     </TouchableOpacity>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -42,4 +44,15 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
   },
+  containor:{
+    alignItems:'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  }
 });
