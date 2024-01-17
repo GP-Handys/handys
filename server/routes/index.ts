@@ -31,7 +31,7 @@ router.get("/api/shop/search" , tokenValidate,shopRouter.searchShop)
 router.post("/api/shop/rating/add/:shopId", tokenValidate, shopRouter.addRating)
 router.get("/api/shop/getUserShops/:userId", tokenValidate,shopRouter.getUserShops)
 router.get("/api/shop/recommended", tokenValidate, shopRouter.getRecommendedShops)
-router.get("/api/shop/subscribe/:shopId", tokenValidate, shopRouter.subscribeToPremium)
+router.post("/api/shop/subscribe/:shopId", tokenValidate, shopRouter.subscribeToPremium)
 
 //item routes
 router.post("/api/items/addItem/:shopId", tokenValidate,itemRouter.addItem)

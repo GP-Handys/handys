@@ -182,7 +182,7 @@ export const subscribeToPremium = async (req: Request, res: Response) => {
       }
     );
     if (count != null && count.length > 0) {
-      res.status(200).json("Thank you for subscribing!");
+      res.status(200).json("Thank you for subscribing to premium!");
     }
   } catch (error) {
     res.status(500).json(error);
