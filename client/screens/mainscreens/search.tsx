@@ -142,7 +142,7 @@ export default function Search(this: any) {
                       />
                     ) : (
                       <CommonBackgroundWithNoSafeArea>
-                        <View style={styles.Emptycontainer}>
+                        <View style={styles.emptycontainer}>
                           <Text style={styles.textIcon}>Sorry</Text>
                           <Image
                             style={styles.image}
@@ -173,7 +173,7 @@ export default function Search(this: any) {
                       />
                     ) : (
                       <CommonBackgroundWithNoSafeArea>
-                        <View style={styles.Emptycontainer}>
+                        <View style={styles.emptycontainer}>
                           <Text style={styles.textIcon}>Sorry</Text>
                           <Image
                             style={styles.image}
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: "center"
   },
-  Emptycontainer: {
+  emptycontainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center"

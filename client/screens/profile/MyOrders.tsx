@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View, ActivityIndicator } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Text,
+  Image,
+} from "react-native";
 import { Order } from "../../models/Order";
 import { getOrdersForUser } from "../../api/OrderApi";
 import COLORS from "../../common/colors";
@@ -38,19 +45,30 @@ export function MyOrders() {
           paddingHorizontal: 15,
         }}
       >
-        <FlatList
-          data={orders}
-          renderItem={({ item }) => (
-            <MyOrder shopId={item.shopId} orderId={item.id} />
-          )}
-          ItemSeparatorComponent={() => {
-            return (
-              <View style={{ marginVertical: 20 }}>
-                <ThematicBreak marginHorizontal={15} />
-              </View>
-            );
-          }}
-        />
+        {orders.length === 0 ? (
+          <View style={styles.container}>
+            <Text style={styles.textIcon}>Oh...</Text>
+            <Image
+              style={styles.image}
+              source={require("../../assets/sad.png")}
+            />
+            <Text style={styles.textIcon}>You haven't placed any orders yet :(</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={orders}
+            renderItem={({ item }) => (
+              <MyOrder shopId={item.shopId} orderId={item.id} />
+            )}
+            ItemSeparatorComponent={() => {
+              return (
+                <View style={{ marginVertical: 20 }}>
+                  <ThematicBreak marginHorizontal={15} />
+                </View>
+              );
+            }}
+          />
+        )}
       </View>
     );
   }
@@ -63,5 +81,22 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flex: 1,
+  },
+  textIcon: {
+    marginVertical: 20,
+    color: "#854627",
+    fontWeight: "500",
+    fontSize: 20,
+    alignSelf: "center",
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    width: 300,
+    height: 300,
+    alignSelf: "center",
   },
 });
