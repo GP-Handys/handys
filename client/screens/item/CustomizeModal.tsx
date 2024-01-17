@@ -39,7 +39,7 @@ export default function CustomizeScreen({
           <View style={{ backgroundColor: COLORS.commonBackground }}>
             <View style={styles.ModalHeader}>
               <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
-                <MaterialIcons name="close" size={23} color="white" />
+                <MaterialIcons name="close" size={23} color="#522C19E0" />
               </TouchableOpacity>
               <Text style={styles.HeaderText}>Customize</Text>
             </View>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   HeaderText: {
     fontSize: 20,
-    color: "white",
+    color: "#522C19E0",
     marginEnd: 25,
   },
   DoneButton: {

@@ -181,9 +181,13 @@ export default function ItemScreen({ route }: any) {
                 onPress={() => setIsCustomizeModalVisible(true)}
               >
                 <Text
-                  style={{ fontSize: 16, color: COLORS.normalText, fontWeight: "500" }}
+                  style={{
+                    fontSize: 16,
+                    color: COLORS.normalText,
+                    fontWeight: "500",
+                  }}
                 >
-                  Customize
+                  {customization.length > 0 ? "Customized" : "Customize"}
                 </Text>
               </TouchableOpacity>
             )}
