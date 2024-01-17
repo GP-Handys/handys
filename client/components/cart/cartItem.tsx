@@ -1,4 +1,12 @@
-import { View, StyleSheet, Image, Text, Pressable, Alert,Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  Pressable,
+  Alert,
+  Dimensions,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import React, { useEffect, useState } from "react";
@@ -17,9 +25,8 @@ interface Props {
   removeItem: any;
 }
 
-const windowDimensions = Dimensions.get('window');
-const screenDimensions = Dimensions.get('screen');
-
+const windowDimensions = Dimensions.get("window");
+const screenDimensions = Dimensions.get("screen");
 
 export default function cartItem({
   cartItem,
@@ -35,7 +42,6 @@ export default function cartItem({
     screen: screenDimensions,
   });
 
-
   const plus = () => {
     const newCounter = counter + 1;
     setCounter(newCounter);
@@ -46,7 +52,7 @@ export default function cartItem({
   };
 
   const minus = () => {
-    if (counter > 1 && counter<item.quantity) {
+    if (counter > 1 && counter < item.quantity) {
       const newCounter = counter - 1;
       setCounter(newCounter);
       const newTotalPrice = newCounter * item?.base_price;
@@ -54,7 +60,7 @@ export default function cartItem({
       updateTotal(item.id, newTotalPrice);
       editQuantity(cartItem?.id, counter);
     } else {
-      Alert.alert("Delete item from cart", "Are you sure?", [
+      Alert.alert("Removing item from cart", "Are you sure?", [
         {
           text: "Yes",
           onPress: () => removeItem(cartItem?.id),
@@ -80,12 +86,20 @@ export default function cartItem({
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
             <Text style={styles.itemName}>{item?.name}</Text>
-            {cartItem?.customization != null && (
-              <View>
-                <Text style={styles.Customized}>Customized</Text>
-                <Text style={[styles.details,{maxWidth:(dimensions.screen.width-200)}]}>Details: {cartItem?.customization}</Text>
-              </View>
-            )}
+            {cartItem?.customization != null &&
+              cartItem?.customization.trim() != "" && (
+                <View>
+                  <Text style={styles.Customized}>Customized</Text>
+                  <Text
+                    style={[
+                      styles.details,
+                      { maxWidth: dimensions.screen.width - 200 },
+                    ]}
+                  >
+                    Details: {cartItem?.customization}
+                  </Text>
+                </View>
+              )}
           </View>
           <View style={styles.footer}>
             <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
@@ -118,12 +132,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
     flexDirection: "row",
-    borderColor:"#7C7459",
-    borderRadius:5,
-    borderWidth:2,
-    padding:7,
+    borderColor: "#7C7459",
+    borderRadius: 5,
+    borderWidth: 2,
+    padding: 7,
     gap: 5,
-    marginBottom:20,
+    marginBottom: 20,
   },
   info: {
     gap: 5,
@@ -132,21 +146,20 @@ const styles = StyleSheet.create({
   itemName: {
     color: COLORS.normalText,
     fontSize: 16,
-    fontWeight:'bold'
+    fontWeight: "bold",
   },
   Customized: {
     color: COLORS.CTAButtonBackground,
     fontSize: 14,
     textDecorationLine: "underline",
-    
-    flexWrap:"wrap"
 
+    flexWrap: "wrap",
   },
   details: {
     fontSize: 12,
     color: "#715A4F",
-    maxWidth:180,
-    flexWrap:"wrap"
+    maxWidth: 180,
+    flexWrap: "wrap",
   },
   image: {
     width: 120,
@@ -169,6 +182,3 @@ const styles = StyleSheet.create({
     color: COLORS.normalText,
   },
 });
-{
-  /*  */
-}
