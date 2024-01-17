@@ -26,10 +26,10 @@ export default function ShopSettingsScreen({ route }: any) {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <TouchableOpacity style={styles.touchableStyle}>
+      {/* <TouchableOpacity style={styles.touchableStyle}>
         <Feather name="edit" size={32} color={COLORS.normalText} />
         <Text style={styles.buttonText}>Edit Shop Profile</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         style={styles.touchableStyle}
