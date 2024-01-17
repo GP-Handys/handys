@@ -75,9 +75,7 @@ export const ItemSearch = async (data: any) => {
         "Content-Type": "application/json",
         Authorization: token,
       },
-    });
-    console.log(result);
-    
+    });    
     return result.data;
   } catch (error: any) {
     return error.message;
