@@ -10,7 +10,7 @@ export default function DonePlaceOrder({ navigation }: StackProps) {
         <Text
           style={{
             fontSize: 40,
-            color: COLORS.darkBrown,
+            color: COLORS.normalText,
             fontWeight: "600",
             marginBottom: 20
           }}
@@ -45,7 +45,7 @@ export default function DonePlaceOrder({ navigation }: StackProps) {
 const styles = StyleSheet.create({
   textIcon: {
     marginTop: 20,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontWeight: "500",
     fontSize: 16,
     textAlign: "center"

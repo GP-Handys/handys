@@ -14,7 +14,6 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { confirmOrder } from "../../api/OrderApi";
 import checkoutHelper from "../../helpers/checkout/checkoutHelper";
 
 const AddressScreen = ({ route }: any) => {

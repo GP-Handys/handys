@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import * as Location from "expo-location";
 import MapView, { Marker, Region } from "react-native-maps";
 import COLORS from "../../common/colors";
@@ -19,9 +25,9 @@ interface LocationObject {
 
 export default function Map({ route }: any) {
   const { totalAmount } = route.params;
-
   const [location, setLocation] = useState<LocationObject | any>(null);
   const [errorMsg, setErrorMsg] = useState<any | null>(null);
+  const [isFetchingAddress, setIsFetchingAddress] = useState<boolean>(true);
   const navigation = useNavigation<StackProps["navigation"]>();
 
   const fetchAddress = async (latitude: number, longitude: number) => {
@@ -54,7 +60,6 @@ export default function Map({ route }: any) {
             }
           }
         }
-
         return { governorate, street };
       } else {
         return null;
@@ -76,7 +81,7 @@ export default function Map({ route }: any) {
         navigation.navigate("AddressScreen", {
           governorate: addressData.governorate,
           street: addressData.street,
-          totalAmount: totalAmount
+          totalAmount: totalAmount,
         });
       } else {
         console.log("Failed to fetch address data");
@@ -94,6 +99,7 @@ export default function Map({ route }: any) {
       try {
         let locationData = await Location.getCurrentPositionAsync({});
         setLocation(locationData);
+        setIsFetchingAddress(false);
       } catch (error) {
         setErrorMsg("Error fetching location");
       }
@@ -106,37 +112,46 @@ export default function Map({ route }: any) {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
       latitudeDelta: 1,
-      longitudeDelta: 1
+      longitudeDelta: 1,
     };
   }
 
-  return (
-    <>
-      <View style={styles.container}>
-        {errorMsg && <Text>{errorMsg}</Text>}
-        {location && (
-          <MapView
-            provider="google"
-            region={mapRegion}
-            showsMyLocationButton={true}
-            showsUserLocation={true}
-            style={styles.map}
+  if (isFetchingAddress) {
+    return (
+      <View style={styles.loadingPage}>
+        <Text>Please hang tight while we fetch your location data...</Text>
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
+      </View>
+    );
+  } else {
+    return (
+      <>
+        <View style={styles.container}>
+          {errorMsg && <Text>{errorMsg}</Text>}
+          {location && (
+            <MapView
+              provider="google"
+              region={mapRegion}
+              showsMyLocationButton={true}
+              showsUserLocation={true}
+              style={styles.map}
+            >
+              <Marker coordinate={mapRegion as any} title="My Location" />
+            </MapView>
+          )}
+        </View>
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.confirmPressable}
+            onPress={handleConfirmPress}
           >
-            <Marker coordinate={mapRegion as any} title="My Location" />
-          </MapView>
-        )}
-      </View>
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.confirmPressable}
-          onPress={handleConfirmPress}
-        >
-          <Text style={styles.confirm}>Confirm</Text>
-        </TouchableOpacity>
-        <View style={styles.bar}></View>
-      </View>
-    </>
-  );
+            <Text style={styles.confirm}>Confirm</Text>
+          </TouchableOpacity>
+          <View style={styles.bar}></View>
+        </View>
+      </>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -144,31 +159,38 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.commonBackground,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   map: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   confirm: {
     color: "white",
     fontWeight: "500",
-    fontSize: 20
+    fontSize: 20,
   },
   confirmPressable: {
     width: "100%",
     backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
-    height: 50
+    height: 50,
   },
   footer: {
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   bar: {
     height: 20,
     backgroundColor: COLORS.commonBackground,
-    width: "100%"
-  }
+    width: "100%",
+  },
+  loadingPage: {
+    backgroundColor: COLORS.commonBackground,
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    flex: 1,
+  },
 });
