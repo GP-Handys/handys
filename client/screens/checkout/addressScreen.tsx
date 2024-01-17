@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  KeyboardAvoidingView,
   ScrollView
 } from "react-native";
 import MapScreen from "../../components/map/MapScreen";
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
   },
   area: {
     fontSize: 16,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     marginTop: 10,
     fontWeight: "500"
   },
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
   },
   change: {
     fontSize: 14,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontWeight: "500"
   },
   confirm: {
@@ -207,7 +206,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     marginTop: 10,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
     gap:20
   },
   paymentContainer: {
@@ -218,22 +217,22 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     borderRadius: 7.5,
-    backgroundColor: COLORS.handysGrey
+    backgroundColor: COLORS.handysGrey,
     justifyContent:"space-between"
   },
   paymentRows: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 3
+    marginBottom: 3,
     justifyContent:"space-between"
   },
   title: {
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontSize: 12,
     fontWeight: "500",
   },
   titlePrice: {
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontSize: 12,
     fontWeight: "500",
     textAlign: "right"
@@ -242,17 +241,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 10,
     fontWeight: "500",
-    color: COLORS.darkBrown
+    color: COLORS.normalText
   },
   grandTotalTitle: {
     marginTop: 5,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontSize: 14,
     fontWeight: "700",
   },
   grandTotalPrice: {
     marginTop: 5,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontSize: 14,
     fontWeight: "800",
     textAlign: "right"
