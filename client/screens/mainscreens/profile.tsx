@@ -34,6 +34,7 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      setLoading(true);
       await getProfile().then(async (result) => {
         setUser(result);
         fetchShops(result.id);
