@@ -149,7 +149,7 @@ export default function Search(this: any) {
                           <Text style={styles.textIcon}>Sorry</Text>
                           <Image
                             style={styles.image}
-                            source={require("../../assets/Done-pana.png")}
+                            source={require("../../assets/sad.png")}
                           />
                           <Text style={styles.textIcon}>
                             We can't find any result
@@ -201,10 +201,11 @@ export default function Search(this: any) {
 
 const styles = StyleSheet.create({
   textIcon: {
-    marginTop: 20,
+    marginVertical: 20,
     color: "#854627",
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 26,
+    alignSelf:'center'
   },
   Emptycontainer: {
     flex: 1,
@@ -221,5 +222,6 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 300,
+    alignSelf:'center'
   },
 });
