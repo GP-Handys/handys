@@ -11,7 +11,6 @@ class Item extends Model {
   public name!: string;
   public description!: string;
   public base_price!: number;
-  public discount!: number;
   public rating!: number;
   public quantity!: number;
   public customization!: string;
@@ -41,15 +40,6 @@ Item.init(
       validate: {
         isFloat: true,
         min: 0,
-      },
-    },
-    discount: {
-      type: DataTypes.FLOAT,
-      allowNull: true,
-      validate: {
-        isFloat: true,
-        min: 0,
-        max: 100,
       },
     },
     rating: {
