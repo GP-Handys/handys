@@ -36,13 +36,13 @@ export default function SignIn({ navigation }: StackProps) {
         <CustomTextInput
           placeholder="Password"
           isSecureTextEntry={isSecureTextEntry}
-          left={<TextInput.Icon icon="lock" color={"#854627"} />}
+          left={<TextInput.Icon icon="lock" color={COLORS.brown} />}
           value={password}
           onChangeText={(text) => setPassword(text)}
           right={
             <TextInput.Icon
               icon={icon}
-              color={"white"}
+              color={(COLORS.brown)}
               onPress={() => {
                 Keyboard.dismiss();
                 setIsSecureTextEntry(
@@ -64,7 +64,7 @@ export default function SignIn({ navigation }: StackProps) {
             },
           ]}
         >
-          <Text style={{ color: "#FFFFFF", fontWeight: "400", fontSize: 18.44 }}>
+          <Text style={{ color: "#FFFFFF", fontWeight: "500", fontSize: 18.44 }}>
             {STRINGS.signIn}
           </Text>
         </Pressable>
