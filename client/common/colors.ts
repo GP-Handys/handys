@@ -23,7 +23,8 @@ let COLORS = {
   lightBrown: "#9F9586",
   brown: "#854627",
   shopCard : "#7C7459AD",
-  lightestBrown:'#CABEAB'
+  lightestBrown:'#CABEAB',
+  oliveBrown: "9D4F29"
 };
 
 export default COLORS;
