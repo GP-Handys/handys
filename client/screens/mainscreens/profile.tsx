@@ -4,7 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList
+  FlatList,
   Platform,
   ActivityIndicator,
 } from "react-native";
@@ -99,17 +99,8 @@ export default function Profile() {
                 color: COLORS.normalText,
               }}
             >
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "500",
-                  color: "white",
-                  marginLeft: "5%"
-                }}
-              >
-                Edit Profile
+              Edit profile
               </Text>
-            </View>
           </TouchableOpacity>
 
           {/*user shops */}
@@ -213,16 +204,12 @@ export default function Profile() {
               color={"white"}
               style={{ paddingTop: 11 }}
             />
-            <Text style={style.Logoutfont}>Logout</Text>
-            style={{
+            <Text style={{
               fontSize: 20,
               fontWeight: "500",
               color: "white",
               alignSelf: "center"
-            }}
-          >
-            Logout
-          </Text>
+            }}>Logout</Text>
           </TouchableOpacity>
         </View>
       </CommonScrollableBackground>
@@ -232,21 +219,15 @@ export default function Profile() {
 const style = StyleSheet.create({
   font: {
     fontSize: 24,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     fontWeight: "600",
     paddingTop: 10
   },
   profileIMG: {
     width: 120,
     height: 120,
-    borderRadius: 60
-  },
+    borderRadius: 60,
     paddingTop: 10,
-  },
-  profileIMG: {
-    width: 120,
-    height: 120,
-    borderRadius: 120,
   },
   editProfile: {
     flexDirection: "row",
@@ -257,7 +238,7 @@ const style = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 12,
     paddingLeft: 15,
-    marginBottom: 15
+    marginBottom: 15,
     color: COLORS.normalText,
   },
   createShop: {
@@ -372,4 +353,5 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.commonBackground,
     alignSelf: "center",
     color: COLORS.normalText,
+  }
 });

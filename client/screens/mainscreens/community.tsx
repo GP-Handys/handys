@@ -15,7 +15,6 @@ import { useState, useEffect } from "react";
 import { getLikedPosts, getPosts } from "../../api/CommunityApi";
 import Post from "../../components/community/Post";
 import { Feather } from "@expo/vector-icons";
-import { Feather } from '@expo/vector-icons';
 import COLORS from "../../common/colors";
 export default function Community() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -170,6 +169,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-
-
 });

@@ -181,7 +181,7 @@ export default function ItemScreen({ route }: any) {
                 onPress={() => setIsCustomizeModalVisible(true)}
               >
                 <Text
-                  style={{ fontSize: 16, color: COLORS.darkBrown, fontWeight: "500" }}
+                  style={{ fontSize: 16, color: COLORS.normalText, fontWeight: "500" }}
                 >
                   Customize
                 </Text>

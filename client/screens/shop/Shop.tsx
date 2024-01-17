@@ -96,7 +96,7 @@ export default function ShopScreen({ route }: any) {
             <StarRatingDisplay
               rating={shop?.rating}
               starSize={16}
-            color={COLORS.darkBrown}
+            color={COLORS.normalText}
             starStyle={{ width: 5 }}
               style={styles.rating}
             />
@@ -120,7 +120,7 @@ export default function ShopScreen({ route }: any) {
           ) : (
             <View style={styles.subToPremiumContainer}>
               <TouchableOpacity
-                style={styles.subToPremiumButton}
+                style={styles.settings}
                 onPress={() =>
                   navigation.navigate("ShopContactScreen", { shop: shop })
                 }
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
   },
   rating: {
     marginLeft:8,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   bio: {
     fontSize: 14,
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     opacity: 0.5,
     marginLeft: 15,
     marginVertical: 17,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   shopItems: {
     fontSize: 20,
     fontWeight: "bold",
-    color: COLORS.darkBrown,
+    color: COLORS.normalText,
     marginLeft: 15,
     marginTop: 20,
   },

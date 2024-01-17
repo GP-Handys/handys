@@ -37,7 +37,6 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OnboardingScreensContainer">
         <Stack.Screen
-            headerShown: false,
           name="OnboardingScreensContainer"
           component={OnboardingNavigationContainer}
           options={{
