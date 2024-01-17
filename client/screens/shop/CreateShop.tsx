@@ -117,7 +117,7 @@ export default function CreateShop({ navigation }: StackProps) {
 }
 
 const style = StyleSheet.create({
-  font: { fontSize: 20, fontWeight: "500", color: COLORS.darkBrown },
+  font: { fontSize: 20, fontWeight: "500", color: COLORS.normalText },
   lengthCounterFont: {
     color: COLORS.normalText,
     fontSize: 15,
