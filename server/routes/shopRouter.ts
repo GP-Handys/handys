@@ -169,3 +169,22 @@ export const getRecommendedShops = async (req: Request, res: Response) => {
     res.status(500).json(error);
   }
 };
+
+export const subscribeToPremium = async (req: Request, res: Response) => {
+  const shopId: number = Number(req.params.shopId);
+  try {
+    const count = await Shop.update(
+      { is_premium: true },
+      {
+        where: {
+          id: shopId,
+        },
+      }
+    );
+    if (count != null && count.length > 0) {
+      res.status(200).json("Thank you for subscribing to premium!");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
