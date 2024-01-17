@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
   },
   mainPostStyle: {
     marginLeft: 40,
-    backgroundColor: COLORS.commentBackground,
     borderRadius: 7.5,
     borderTopLeftRadius: 0,
     marginTop: 4,
@@ -168,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 5,
     maxWidth: "80%",
     paddingRight:15,
-    
+    backgroundColor: "#928868",
     marginVertical: 5,
-  }
+  },
 });

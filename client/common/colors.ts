@@ -20,8 +20,9 @@ let COLORS = {
   shopOrderUserInfoBox: "#7C7459",
   headerColor: "#7C7459",
   postText: "#5B2F19",
-  lightBrown: "#CABEAB",
-  brown: "#854627"
+  lightBrown: "#9F9586",
+  brown: "#854627",
+  shopCard : "#7C7459AD"
 };
 
 export default COLORS;

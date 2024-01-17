@@ -68,7 +68,7 @@ export default function Post({
       </View>
       <View>
         <View style={[styles.mainPost, mainPostStyle]}>
-          <Text style={{ color: COLORS.postContent, fontSize: 14, marginLeft:15  }}>
+          <Text style={{ color: "#45291C", fontSize: 14, marginLeft:15  }}>
             {post.content}
           </Text>
           {post.img_url && (
