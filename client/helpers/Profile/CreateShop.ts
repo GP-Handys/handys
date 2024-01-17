@@ -15,9 +15,11 @@ export default function CreateShop(
   let PhoneReg = STRINGS.phoneValidator;
 
   if (name.length == 0) {
-    Alert.alert(STRINGS.failPopUp, "You should enter name");
+    Alert.alert(STRINGS.failPopUp, "Please enter your shop name");
   } else if (!PhoneReg.test(String(phone_number))) {
-    Alert.alert(STRINGS.failPopUp, "You should valid phone number");
+    Alert.alert(STRINGS.failPopUp, "Please enter a valid phone number");
+  } else if (pfp_url == null || pfp_url?.length == 0) {
+    Alert.alert(STRINGS.failPopUp, "Your shop should have a profile picture.");
   } else {
     createShop({
       name: name,

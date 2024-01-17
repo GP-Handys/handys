@@ -24,7 +24,7 @@ export default function CreateShop({ navigation }: StackProps) {
   const [shopImageUrlPicked, setShopImageUrlPicked] = useState(false);
 
   async function handleCreateShop() {
-    CreateShopHelper(name, link, bio, shopImageUrl, navigation,phone_number);
+    CreateShopHelper(name, link, bio, shopImageUrl, navigation, phone_number);
   }
 
   async function handlePickImage() {
