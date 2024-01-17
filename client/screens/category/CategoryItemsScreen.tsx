@@ -55,7 +55,7 @@ export default function CategoryItemsScreen({ route }: any) {
                 justifyContent: "center",
               }}
             >
-              <ActivityIndicator size={"large"} color="white" />
+              <ActivityIndicator size={"large"} color={COLORS.normalText} />
             </View>
           ) : (
             <View style={{ marginTop: 15 }}>

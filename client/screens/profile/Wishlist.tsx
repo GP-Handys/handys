@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { getWishList } from "../../api/WishlistApi";
 import ItemCard from "../../components/home/ItemCard";
+import COLORS from "../../common/colors";
 
 export default function WishlistScreen() {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -35,7 +36,7 @@ export default function WishlistScreen() {
               marginTop: "50%",
             }}
           >
-            <ActivityIndicator size={"large"} color="white" />
+            <ActivityIndicator size={"large"} color={COLORS.normalText} />
           </View>
         ) : (
           <View style={{ marginTop: 15 }}>
