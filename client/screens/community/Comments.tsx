@@ -28,7 +28,9 @@ export default function Comments({ route }: any) {
     let tempComment = comment;
     setComment("");
     Keyboard.dismiss();
-    await addComment(post.id, { content: tempComment }).then(() => {});
+    await addComment(post.id, { content: tempComment }).then((result:any) => {
+      setComments(Comments.concat(result));
+    });
   };
   const onRefresh = () => {
     setIsRefreshing(true);
