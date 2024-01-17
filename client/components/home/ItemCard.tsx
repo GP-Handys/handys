@@ -121,6 +121,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     backgroundColor:COLORS.commonBackground,
     borderRadius: 8,
+    flexDirection: "column",
+    justifyContent: "space-evenly",
   },
   itemName: {
     marginTop: 7,
