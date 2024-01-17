@@ -9,7 +9,7 @@ import {
   Platform
 } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons  } from "@expo/vector-icons";
 import ThematicBreak from "../../components/ThematicBreak";
 import COLORS from "../../common/colors";
 import PostOwnerHeader from "../../components/community/PostOwnerHeader";
@@ -85,10 +85,10 @@ export default function PostModal({ isVisible, onDismiss }: PostModalProps) {
           >
             <PostOwnerHeader userId={user.id} />
             <TouchableOpacity>
-              <MaterialIcons
-                name="insert-photo"
-                size={30}
-                color="#522C19"
+              <MaterialCommunityIcons 
+                name="image-plus"
+                size={28}
+                color="#522C19E0"
                 onPress={async () => {
                   const imgId = await pickImageAndStore(
                     "posts",
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? 15 : 0,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 15
+    marginVertical: 15,
   },
   CloseButton: {
     position: "absolute",
@@ -145,12 +145,13 @@ const styles = StyleSheet.create({
   },
   HeaderText: {
     fontSize: 18,
-    color: COLORS.createPostText,
+    color:"#522C19E0",
     fontWeight: "bold",
-    marginBottom: 10
+    marginBottom: 10,
+    marginRight: 30, 
   },
   PostButton: {
-    borderRadius: 6,
+    borderRadius: 5,
     width: 80,
     height: 30,
     backgroundColor: COLORS.postButton,
