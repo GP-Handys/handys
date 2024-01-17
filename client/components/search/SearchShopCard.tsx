@@ -47,12 +47,6 @@ export default function SearchShopCard({ shop }: Props) {
               starStyle={{ width: 2 }}
               style={{}}
             />
-
-            {2000 < 1000 ? (
-              <Text style={styles.ratingCount}>(100 Reviews)</Text>
-            ) : (
-              <Text style={styles.ratingCount}>({2000 / 1000}k Reviews)</Text>
-            )}
           </View>
         </View>
         <Text style={styles.bio}>{shop.bio}</Text>

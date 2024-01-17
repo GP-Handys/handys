@@ -195,9 +195,9 @@ export const addRating = async (req: Request, res: Response) => {
 export const searchItem = async (req: Request, res: Response) => {
   try {
     const search = req.query.search;
-    const query = `SELECT * FROM items WHERE name = '%${search}%' OR description = '%${search}%'
-     OR id = (select itemId from item_category where categoryId = 
-      (select categoryId from categories where category_name = '%${search}%'));`;
+    const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
+     OR id LIKE (select itemId from item_category where categoryId Like 
+      (select categoryId from categories where category_name LIKE '%${search}%'));`;
 
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult[0]);

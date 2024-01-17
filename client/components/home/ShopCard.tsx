@@ -37,12 +37,6 @@ export default function ShopCard({ shop }: Props) {
           starStyle={{ width: 2, alignItems: "center" }}
         />
       </View>
-
-      {shop.rating < 1000 ? (
-        <Text style={styles.ratingCount}>{shop.rating} Reviews</Text>
-      ) : (
-        <Text style={styles.ratingCount}>({shop.rating / 1000}k Reviews)</Text>
-      )}
     </TouchableOpacity>
   );
 }
@@ -62,8 +56,8 @@ const styles = StyleSheet.create({
   },
   shopName: {
     color: "white",
-    fontSize: 18,
-    fontWeight: "500",
+    fontSize: 12,
+    fontWeight: "600",
     marginVertical: 5,
     alignSelf: "center",
   },
