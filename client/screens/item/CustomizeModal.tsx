@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -17,6 +17,7 @@ interface ModalProps {
   onDismiss: () => void;
   itemCustomization: string;
   setCustomization: (customization: string) => void;
+  customization:string
 }
 
 export default function CustomizeScreen({
@@ -24,9 +25,13 @@ export default function CustomizeScreen({
   onDismiss,
   setCustomization,
   itemCustomization,
+  customization
 }: ModalProps) {
   const [tempCustomization, setTempCustomization] = useState("");
-
+  useEffect(()=>{
+    setTempCustomization(customization)
+  },[])
+  
   return (
     <View>
       <Modal animationType="slide" transparent={false} visible={isVisible}>
@@ -48,6 +53,7 @@ export default function CustomizeScreen({
               onChangeText={(text) => {
                 setTempCustomization(text);
               }}
+              defaultValue={customization}
             />
           </View>
           <TouchableOpacity

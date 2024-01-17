@@ -12,15 +12,22 @@ dotenv.config();
 
 export const createShop = async (req: Request, res: Response) => {
   try {
-    const { name, pfp_url, bio, socialMediaLink ,phone_number} = req.body;
+    const { name, pfp_url, bio, socialMediaLink, phone_number } = req.body;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
 
-    await Shop.create({ name, pfp_url, bio, socialMediaLink, phone_number,userId});
+    await Shop.create({
+      name,
+      pfp_url,
+      bio,
+      socialMediaLink,
+      phone_number,
+      userId,
+    });
 
     res.status(200).json("Shop is created");
   } catch (error) {
-    res.status(500).json("something went wrong");    
+    res.status(500).json("something went wrong");
   }
 };
 
@@ -44,7 +51,7 @@ export const updateShop = async (req: Request, res: Response) => {
         }
       );
 
-      res.status(200).json("Shop is updated");
+      res.status(200).json("Shop information has been updated!");
     } else {
       res.sendStatus(403);
     }
@@ -99,13 +106,13 @@ export const searchShop = async (req: Request, res: Response) => {
   }
 };
 
-export const addReview = async (req: Request, res: Response) => {
+export const addRating = async (req: Request, res: Response) => {
   try {
     const shopId = req.params.shopId;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
-    const { content, rating } = req.body;
-    const data = { content, rating, userId, shopId };
+    const { rating } = req.body;
+    const data = { rating, userId, shopId };
     const shop = await Shop.findByPk(shopId);
 
     if (shop == null) {
@@ -113,111 +120,50 @@ export const addReview = async (req: Request, res: Response) => {
       return;
     }
 
-    const review = await ShopReview.create(data);
-    res.status(200).json("Review Added successfully");
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const removeReview = async (req: Request, res: Response) => {
-  try {
-    const reviewId = req.params.reviewId;
-    const jwt: string = req.get("Authorization")?.toString()!;
-
-    const userId = extractUserFromJwt(jwt);
-    const user = await User.findByPk(userId);
-    let review = await ShopReview.findByPk(reviewId);
-
-    if (review == null) {
-      res.sendStatus(404);
-      return;
-    }
-    if (user!.is_sys_admin || userId == review.userId) {
-      await review.destroy();
-      res.status(200).json("Review removed successfully ");
-    } else {
-      res.sendStatus(404);
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const getShopReviews = async (req: Request, res: Response) => {
-  try {
-    const itemId = req.params.shopId;
-    const result = await ShopReview.findAll({ where: { itemId: itemId } });
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const pendingShops = async (req: Request, res: Response) => {
-  try {
-    const jwt: string = req.get("Authorization")?.toString()!;
-    const userId = extractUserFromJwt(jwt);
-    const user = await User.findByPk(userId);
-
-    if (user!.is_sys_admin) {
-      const result = await Shop.findAll({ where: { is_approved: false } });
-      res.status(200).json(result);
-    } else {
-      res.sendStatus(403);
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const approveShop = async (req: Request, res: Response) => {
-  try {
-    const jwt = extractUserFromJwt("Authorization")?.toString()!;
-    const userId = extractUserFromJwt(jwt);
-    const user = await User.findByPk(userId);
-    const shopId = req.params.shopId;
-    const shop = await Shop.findByPk(shopId);
-
-    if (user!.is_sys_admin) {
-      await shop?.update({ is_approved: true });
-      res.sendStatus(200);
-    } else {
-      res.sendStatus(403);
-    }
+    await ShopReview.create(data);
+    const averageRating = await ShopReview.findOne({
+      attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
+      where: { shopId: shopId },
+    });
+    await Shop.update(
+      { rating: averageRating?.toJSON().average },
+      { where: { id: shopId } }
+    );
+    res.status(200).json("Shop rating submitted successfully!");
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
 export const getUserShops = async (req: Request, res: Response) => {
-  try {    
+  try {
     const userId = req.params.userId;
-    let user = await User.findByPk(userId)
-    
-    if(user!=null){
-      let shops =await Shop.findAll({where:{userId:userId}});
-      return res.send(shops)
-    }
-    else{
-      res.sendStatus(403);  
+    let user = await User.findByPk(userId);
+
+    if (user != null) {
+      let shops = await Shop.findAll({ where: { userId: userId } });
+      return res.send(shops);
+    } else {
+      res.sendStatus(403);
     }
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-export const getRecommendedShops = async (req: Request, res: Response) => { 
+export const getRecommendedShops = async (req: Request, res: Response) => {
   try {
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
     const user = await User.findByPk(userId);
-    if(user!=null){
-      let shops = await Shop.findAll({ order:Sequelize.literal('RAND()'), limit:8})
-      return res.send(shops)
-    }
-    else{
-      res.sendStatus(403);  
+    if (user != null) {
+      let shops = await Shop.findAll({
+        order: Sequelize.literal("RAND()"),
+        limit: 8,
+      });
+      return res.send(shops);
+    } else {
+      res.sendStatus(403);
     }
   } catch (error) {
     res.status(500).json(error);

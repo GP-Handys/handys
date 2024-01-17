@@ -7,6 +7,7 @@ import {
   Text,
   Platform,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { CommonBackgroundWithSafeArea } from "../../common/background";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -14,16 +15,14 @@ import ThematicBreak from "../../components/ThematicBreak";
 import SelectableCategory from "./SelectableCategory";
 import { Category } from "../../models/Category";
 import { getCategories } from "../../api/CategoryApi";
-import { localeData } from "moment";
-import { ActivityIndicator } from "react-native-paper";
 import COLORS from "../../common/colors";
 
 interface CategoriesModalProps {
-  addCategory:(id: number) => void
-  removeCategory:(id: number) => void
+  addCategory: (id: number) => void;
+  removeCategory: (id: number) => void;
   isVisible: boolean;
   onDismiss: () => void;
-  selectedCategories:Number[];
+  selectedCategories: Number[];
 }
 
 export default function PostModal({
@@ -31,65 +30,69 @@ export default function PostModal({
   onDismiss,
   addCategory,
   removeCategory,
-  selectedCategories
-
+  selectedCategories,
 }: CategoriesModalProps) {
-
   const handleAdCategories = async () => {
     onDismiss();
   };
-  const [loading , setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<Category[]>([]);
 
-  useEffect(()=>{
-    const fetchCategory = async ()=>{
+  useEffect(() => {
+    const fetchCategory = async () => {
       let data = await getCategories();
       setCategories(data);
-      setLoading(false)
-    }
-    fetchCategory()
-  },[])
+      setLoading(false);
+    };
+    fetchCategory();
+  }, []);
 
-  
   if (loading) {
     return (
       <View style={styles.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else
-  return (
-    <View>
-      <Modal animationType="slide" transparent={false} visible={isVisible}>
-        <CommonBackgroundWithSafeArea>
-          <View style={styles.ModalHeader}>
-            <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
-              <MaterialIcons name="close" size={24} color="white" />
-            </TouchableOpacity>
-            <Text style={styles.HeaderText}> Select Categories</Text>
-            <TouchableOpacity
-              onPress={handleAdCategories}
-              style={[
-                styles.Button,
-                {
-                  //   opacity: postText ? 1 : 0.5,
-                },
-              ]}
-              //  disabled={}
-            >
-              <Text style={styles.InnerButton}>Done</Text>
-            </TouchableOpacity>
-          </View>
-          <ThematicBreak />
-          <FlatList
-            data={categories}
-            renderItem={({ item }) => <SelectableCategory category={item} isChecked={selectedCategories.includes(item.id)} addCategory={addCategory} removeCategory={removeCategory}/>}
-            ItemSeparatorComponent={() => <ThematicBreak />}
-          />
-        </CommonBackgroundWithSafeArea>
-      </Modal>
-    </View>
-  );
+    return (
+      <View>
+        <Modal animationType="slide" transparent={false} visible={isVisible}>
+          <CommonBackgroundWithSafeArea>
+            <View style={styles.ModalHeader}>
+              <TouchableOpacity onPress={onDismiss} style={styles.CloseButton}>
+                <MaterialIcons name="close" size={24} color="white" />
+              </TouchableOpacity>
+              <Text style={styles.HeaderText}> Select Categories</Text>
+              <TouchableOpacity
+                onPress={handleAdCategories}
+                style={[
+                  styles.Button,
+                  {
+                    //   opacity: postText ? 1 : 0.5,
+                  },
+                ]}
+                //  disabled={}
+              >
+                <Text style={styles.InnerButton}>Done</Text>
+              </TouchableOpacity>
+            </View>
+            <ThematicBreak />
+            <FlatList
+              data={categories}
+              renderItem={({ item }) => (
+                <SelectableCategory
+                  category={item}
+                  isChecked={selectedCategories.includes(item.id)}
+                  addCategory={addCategory}
+                  removeCategory={removeCategory}
+                />
+              )}
+              ItemSeparatorComponent={() => <ThematicBreak />}
+            />
+          </CommonBackgroundWithSafeArea>
+        </Modal>
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -112,12 +115,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   Button: {
-    borderWidth: 1,
     borderRadius: 20,
     width: 75,
     alignItems: "center",
     height: 35,
-    backgroundColor: "#F6977F",
+    backgroundColor: COLORS.CTAButtonBackground,
     justifyContent: "center",
     marginEnd: 10,
     position: "absolute",

@@ -7,8 +7,15 @@ export const placeOrder = async (req: Request, res: Response) => {
   const jwt: string = req.get("Authorization")?.toString()!;
   const userId: number = extractUserFromJwt(jwt);
   try {
-    const { street_name, apt_number, floor, phone_number, price } =
-      req.body;
+    const {
+      street_name,
+      apt_number,
+      floor,
+      phone_number,
+      price,
+      buildingNumber,
+      instructions,
+    } = req.body;
 
     let cart: Cart[] = await Cart.findAll({ where: { user_id: userId } });
 
@@ -20,6 +27,8 @@ export const placeOrder = async (req: Request, res: Response) => {
       floor,
       phone_number,
       price,
+      building_number: buildingNumber,
+      instructions,
     });
 
     cart.forEach(async (element: Cart) => {
@@ -40,11 +49,11 @@ export const placeOrder = async (req: Request, res: Response) => {
   }
 };
 
-export const getOrderForShopId = async (req: Request, res: Response) => {
+export const getOrdersForShopId = async (req: Request, res: Response) => {
   const shopId = req.params.shopId;
 
   try {
-    const orders = await Order.findAll({
+    const orders: Order[] = await Order.findAll({
       where: {
         shopId: shopId,
       },
@@ -71,6 +80,42 @@ export const getOrdersForUserId = async (req: Request, res: Response) => {
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: error });
+  }
+};
+
+export const getItemsForOrderId = async (req: Request, res: Response) => {
+  const orderId = req.params.orderId;
+  const jwt: string = req.get("Authorization")?.toString()!;
+  const userId: number = extractUserFromJwt(jwt);
+
+  try {
+    const itemOrders: ItemOrder[] = await ItemOrder.findAll({
+      where: {
+        orderId: orderId,
+      },
+    });
+    if (itemOrders.length == 0) {
+      res.status(404).json("No items found");
+      return;
+    }
+    res.status(200).json(itemOrders);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
+export const getOrderById = async (req: Request, res: Response) => {
+  const orderId = req.params.orderId;
+
+  try {
+    const order: Order | null = await Order.findByPk(orderId);
+    if (!order) {
+      res.status(404).json("No order found");
+      return;
+    }
+    res.status(200).json(order);
+  } catch (error) {
     res.status(500).json({ error: error });
   }
 };

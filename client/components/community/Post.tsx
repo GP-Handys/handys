@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   Image,
-  Dimensions,
   StyleProp,
   ViewStyle,
   ImageStyle,
@@ -16,6 +15,7 @@ import CommentButton from "./CommentButton";
 import { PostModel } from "../../models/Post";
 import { useState } from "react";
 import COLORS from "../../common/colors";
+
 interface PostProps {
   post: PostModel;
   isComment?: boolean;
@@ -42,13 +42,13 @@ export default function Post({
   const [liked, setLiked] = useState(isLiked);
   const [likeCount, setlikeCount] = useState(post.votes);
 
-  function handleIsLiked(newValue:boolean){
-    setLiked(newValue)
+  function handleIsLiked(newValue: boolean) {
+    setLiked(newValue);
   }
 
-  function handleLikeCount(value:number){
-    post.votes=value
-    setlikeCount(value)
+  function handleLikeCount(value: number) {
+    post.votes = value;
+    setlikeCount(value);
   }
 
   return (
@@ -69,14 +69,28 @@ export default function Post({
       <View>
         <View style={[styles.mainPost, mainPostStyle]}>
           <Text style={{ color: COLORS.postContent, fontSize: 14, marginLeft:15  }}>{post.content}</Text>
+            {post.content}
+          </Text>
           {post.img_url && (
-            <View style={styles.postImgContainer}>
-              <Image style={styles.postImg} source={{ uri: post.img_url }} />
+            <View style={[styles.postImgContainer]}>
+              <Image
+                style={styles.postImg}
+                source={{ uri: post.img_url }}
+                resizeMode="cover"
+              />
             </View>
           )}
         </View>
         <View style={[styles.footer, footerStyle]}>
-          {!isComment && <LikeButton postId={post.id} isLiked={liked} likeCount={likeCount} handleIsLiked={handleIsLiked} handleLikeCount={handleLikeCount}/>}
+          {!isComment && (
+            <LikeButton
+              postId={post.id}
+              isLiked={liked}
+              likeCount={likeCount}
+              handleIsLiked={handleIsLiked}
+              handleLikeCount={handleLikeCount}
+            />
+          )}
           {!isComment && <CommentButton post={post} isLiked={liked} />}
         </View>
       </View>
@@ -85,7 +99,7 @@ export default function Post({
 }
 const styles = StyleSheet.create({
   userProfile: {
-    color:COLORS.postUser,
+    color: COLORS.postUser,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -98,16 +112,26 @@ const styles = StyleSheet.create({
     height: "auto",
     marginTop: 8,
     borderRadius: 8,
+    marginEnd: 15,
   },
   postImgContainer: {
     marginTop: 8,
-    borderRadius:5,
+    borderRadius: 5,
+    alignSelf: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   postImg: {
-    width: 300,
-    height: 300,
-    borderRadius:5,
-    alignSelf:'center'
+    width: 340,
+    height: 340,
+    borderRadius: 5,
+    alignSelf: "center",
     //Dimensions.get("window").width - 20
   },
   footer: {

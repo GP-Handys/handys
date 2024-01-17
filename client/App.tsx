@@ -5,7 +5,6 @@ import { Stack } from "./components/navigation/NavigationStack";
 import { firebaseConfig } from "./storage/firebase";
 import { initializeApp } from "firebase/app";
 import SendTicketScreen from "./screens/support/SendTicket";
-import Home from "./screens/mainscreens/home";
 import DoneScreen from "./screens/support/Done";
 import COLORS from "./common/colors";
 import CreateShop from "./screens/shop/CreateShop";
@@ -25,7 +24,11 @@ import GenerationHistoryScreen from "./screens/ai/History";
 import DonePlaceOrder from "./screens/checkout/donePlaceOrder";
 import AiPromptScreen from "./screens/ai/Prompt";
 import GeneratedImageScreen from "./screens/ai/GeneratedImage";
+import ShopContactScreen from "./screens/shop/Contact";
+import { ItemOrderScreen } from "./screens/profile/ItemOrders";
 import { MyOrders } from "./screens/profile/MyOrders";
+import { ShopOrders } from "./screens/shop/Orders";
+import ShopOrderItemsScreen from "./screens/shop/OrderItems";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -34,18 +37,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OnboardingScreensContainer">
         <Stack.Screen
-          name="home"
-          component={Home}
-          options={{
-            title: "Address",
-            headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
             headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name="OnboardingScreensContainer"
           component={OnboardingNavigationContainer}
           options={{
@@ -66,7 +58,7 @@ export default function App() {
           options={{
             title: "Send Ticket",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -87,7 +79,7 @@ export default function App() {
           options={{
             title: "Create Shop",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -99,7 +91,7 @@ export default function App() {
           options={({ route }) => ({
             title: route.params.shopName,
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -111,7 +103,7 @@ export default function App() {
           options={{
             title: "Comments",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -123,7 +115,7 @@ export default function App() {
           options={{
             title: "Add Item",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -135,7 +127,7 @@ export default function App() {
           options={{
             title: "Edit profile",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -147,7 +139,7 @@ export default function App() {
           options={({ route }) => ({
             title: route.params.category.category_name,
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -159,7 +151,7 @@ export default function App() {
           options={{
             title: "Wishlist",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -171,7 +163,7 @@ export default function App() {
           options={({ route }) => ({
             title: route.params.item.name,
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
           })}
@@ -182,7 +174,7 @@ export default function App() {
           options={{
             title: "My Posts",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -194,19 +186,32 @@ export default function App() {
           options={{
             title: "Edit Item",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
           }}
         />
+
         <Stack.Screen
           name="ShopSettingsScreen"
           component={ShopSettingsScreen}
           options={{
             title: "Shop Settings",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShopContactScreen"
+          component={ShopContactScreen}
+          options={{
+            title: "Shop Contact",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -218,10 +223,9 @@ export default function App() {
           options={{
             title: "Select Location",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -230,10 +234,9 @@ export default function App() {
           options={{
             title: "Address",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -242,10 +245,9 @@ export default function App() {
           options={{
             title: "Address",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
-            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -254,7 +256,7 @@ export default function App() {
           options={{
             title: "Ideas Generator",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -266,7 +268,7 @@ export default function App() {
           options={{
             title: "Generated Image",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -278,7 +280,7 @@ export default function App() {
           options={{
             title: "Generated Images",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,
@@ -290,7 +292,43 @@ export default function App() {
           options={{
             title: "My Orders",
             headerTitleStyle: { color: "white" },
-            headerStyle: { backgroundColor: COLORS.commonBackground },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ItemOrderScreen"
+          component={ItemOrderScreen}
+          options={{
+            title: "My Order",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShopOrdersScreen"
+          component={ShopOrders}
+          options={{
+            title: "My Shop's Orders",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ShopOrderItemsScreen"
+          component={ShopOrderItemsScreen}
+          options={{
+            title: "Order",
+            headerTitleStyle: { color: "white" },
+            headerStyle: { backgroundColor: COLORS.CTAButtonBackground },
             headerTintColor: "white",
             headerTitleAlign: "center",
             headerBackTitleVisible: false,

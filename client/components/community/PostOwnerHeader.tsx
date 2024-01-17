@@ -47,27 +47,24 @@ export default function PostOwnerHeader({
           style={[styles.pfpImg, pfpImgStyle]}
         />
       )}
-
       <Text style={[styles.userName, userNameStyle]}> {user?.name} </Text>
     </View>
   );
 }
 const styles = StyleSheet.create({
   userData: {
-    // borderWidth:1,
     flexDirection: "row",
     alignItems: "center",
   },
   pfpImg: {
     height: 35,
     width: 35,
-    borderRadius: 40,
+    borderRadius: 35,
   },
   userName: {
     color: "#45291C",
     fontSize: 16,
     paddingLeft: 6,
-    fontWeight:"500"
-    // borderWidth:1,
+    fontWeight: "500",
   },
 });

@@ -67,7 +67,7 @@ export const updateItem = async (req: Request, res: Response) => {
       discount,
       quantity,
       customization,
-      categories,
+      selectedCategories,
       img_url
     } = req.body;
     const itemId: number = Number(req.params.itemId);
@@ -96,19 +96,19 @@ export const updateItem = async (req: Request, res: Response) => {
         img_url
       });
 
-      // categories.forEach(async (categoryId: number) => {
-      //   await DB.query("DELETE FROM item_category WHERE itemId=" + itemId);
+      selectedCategories.forEach(async (categoryId: number) => {
+        await DB.query("DELETE FROM item_category WHERE itemId=" + itemId);
 
-      //   let category = Category.findByPk(categoryId);
-      //   if (category != null) {
-      //     let query = `insert into item_category (itemId , categoryId) values (${
-      //       item!.id
-      //     },${categoryId})`;
-      //     await DB.query(query);
-      //   }
-      // });
+        let category = Category.findByPk(categoryId);
+        if (category != null) {
+          const currentDate = new Date();
+          const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); 
+          let query = `insert into item_category (itemId , categoryId , createdAt,updatedAt) values (${itemId},${categoryId},'${formattedDate}','${formattedDate}')`;
+          await DB.query(query);
+        }
+      });
 
-      res.status(200).json("item modified");
+      res.status(200).json("Item information has been updated!");
     }
   } catch (error) {
     console.log(error)
@@ -164,48 +164,29 @@ export const getItem = async (req: Request, res: Response) => {
   }
 };
 
-export const addReview = async (req: Request, res: Response) => {
-  //TODO : check if user buy the item
+export const addRating = async (req: Request, res: Response) => {
   try {
     const itemId = req.params.itemId;
     const jwt: string = req.get("Authorization")?.toString()!;
     const userId = extractUserFromJwt(jwt);
-    const { content, rating } = req.body;
-    const data = { content, rating, userId, itemId };
+    const { rating } = req.body;
+    const data = { rating, userId, itemId };
     const item = await Item.findByPk(itemId);
 
     if (item == null) {
       res.sendStatus(404);
       return;
     }
-
-    const review = await ItemReview.create(data);
-    res.status(200).json("Review Added successfully");
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const removeReview = async (req: Request, res: Response) => {
-  try {
-    const reviewId = req.params.reviewId;
-    const jwt: string = req.get("Authorization")?.toString()!;
-
-    const userId = extractUserFromJwt(jwt);
-    const user = await User.findByPk(userId);
-    let review = await ItemReview.findByPk(reviewId);
-
-    if (review == null) {
-      res.sendStatus(404);
-      return;
-    }
-
-    if (user!.is_sys_admin || userId == review.userId) {
-      await review.destroy();
-      res.status(200).json("Review removed successfully ");
-    } else {
-      res.sendStatus(404);
-    }
+    await ItemReview.create(data);
+    const averageRating = await ItemReview.findOne({
+      attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
+      where: { itemId: itemId },
+    });
+    await Item.update(
+      { rating: averageRating?.toJSON().average },
+      { where: { id: itemId } }
+    );
+    res.status(200).json("Shop rating submitted successfully!");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -214,9 +195,9 @@ export const removeReview = async (req: Request, res: Response) => {
 export const searchItem = async (req: Request, res: Response) => {
   try {
     const search = req.query.search;
-    const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
-     OR id LIKE (select itemId from item_category where categoryId Like 
-      (select categoryId from categories where category_name LIKE '%${search}%'));`;
+    const query = `SELECT * FROM items WHERE name = '%${search}%' OR description = '%${search}%'
+     OR id = (select itemId from item_category where categoryId = 
+      (select categoryId from categories where category_name = '%${search}%'));`;
 
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult[0]);
@@ -229,16 +210,6 @@ export const getByShop = async (req: Request, res: Response) => {
   try {
     const shopId = req.params.shopId;
     const result = await Item.findAll({ where: { shopId: shopId } });
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-export const getReviews = async (req: Request, res: Response) => {
-  try {
-    const itemId = req.params.shopId;
-    const result = await ItemReview.findAll({ where: { itemId: itemId } });
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
@@ -261,7 +232,7 @@ export const getbyCategory = async (req: Request, res: Response) => {
   try {
     const categoryId = req.params.categoryId;
 
-    const query = `SELECT * FROM items WHERE id LIKE (select itemId from item_category where categoryId Like ${categoryId});`;
+    const query = `SELECT * FROM items WHERE id = (select itemId from item_category where categoryId = ${categoryId} and itemId=items.id);`;
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult[0]);
   } catch (error) {

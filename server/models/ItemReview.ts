@@ -5,7 +5,6 @@ import { User } from "./User";
 
 class ItemReview extends Model {
   public id!: number;
-  public content!: string;
   public rating!: number;
   public userId!: number;
 }
@@ -17,10 +16,6 @@ ItemReview.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    content: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     rating: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -28,11 +23,7 @@ ItemReview.init(
         min: 1,
         max: 5,
       },
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    }
   },
   {
     sequelize: connection,

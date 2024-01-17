@@ -19,7 +19,7 @@ export default function TabBarNavigationContainer() {
           borderTopWidth: 0,
         },
         headerStyle: {
-          backgroundColor: COLORS.commonBackground,
+          backgroundColor: COLORS.CTAButtonBackground,
         },
         tabBarShowLabel: false,
         headerShadowVisible: false,
@@ -49,7 +49,11 @@ export default function TabBarNavigationContainer() {
         },
       })}
     >
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="Community" component={Community} />
       <Tab.Screen name="Cart" component={Cart} />

@@ -17,8 +17,9 @@ import { Shop } from "../../models/Shop";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../../components/navigation/NavigationStack";
 import { addToWishList, removeFromWishList } from "../../api/WishlistApi";
-import { addToCart } from "../../api/CartApi";
+import { addToCart, clearCart } from "../../api/CartApi";
 import CustomizeModal from "./CustomizeModal";
+import STRINGS from "../../strings/strings";
 
 export default function ItemScreen({ route }: any) {
   const navigation = useNavigation<StackProps["navigation"]>();
@@ -27,6 +28,8 @@ export default function ItemScreen({ route }: any) {
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isCustomizeModalVisible, setIsCustomizeModalVisible] = useState(false);
   const [customization, setCustomization] = useState("");
+  const [isAddToCartButtonDisabled, setIsAddToCartButtonDisabled] =
+    useState(false);
 
   const fetchShopDataById = async () => {
     await getShopById(item.shopId).then((res) => {
@@ -44,6 +47,35 @@ export default function ItemScreen({ route }: any) {
       setIsFavorite(true);
       await addToWishList(item.id);
     }
+  };
+
+  const handleAddToCart = async () => {
+    setIsAddToCartButtonDisabled(true);
+    await addToCart(item.id, customization).then((res) => {
+      if (res.status === 201) {
+        Alert.alert(res.data);
+      } else if (res.status === 400) {
+        Alert.alert(
+          STRINGS.failPopUp,
+          res.data,
+          [
+            {
+              text: "Continue shopping",
+              onPress: () => setIsAddToCartButtonDisabled(false),
+            },
+            {
+              text: "Clear cart and add this item",
+              onPress: async () => {
+                await clearCart();
+                await addToCart(item.id, customization);
+                setIsAddToCartButtonDisabled(false);
+              },
+            },
+          ],
+          { cancelable: false }
+        );
+      }
+    });
   };
 
   useEffect(() => {
@@ -127,6 +159,7 @@ export default function ItemScreen({ route }: any) {
 
               {isCustomizeModalVisible && (
                 <CustomizeModal
+                  customization={customization}
                   setCustomization={setCustomization}
                   isVisible={isCustomizeModalVisible}
                   itemCustomization={item.customization}
@@ -136,7 +169,15 @@ export default function ItemScreen({ route }: any) {
             </TouchableOpacity>
             {item.customization && (
               <TouchableOpacity
-                style={styles.button}
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor:
+                      customization.length > 0
+                        ? COLORS.greenColor
+                        : COLORS.handysGrey,
+                  },
+                ]}
                 onPress={() => setIsCustomizeModalVisible(true)}
               >
                 <Text
@@ -150,11 +191,12 @@ export default function ItemScreen({ route }: any) {
             <ThematicBreak />
 
             <TouchableOpacity
-              style={styles.cartButton}
-              onPress={() => {
-                Alert.alert("Item added to cart succefully");
-                addToCart(item.id, customization);
-              }}
+              style={[
+                styles.cartButton,
+                isAddToCartButtonDisabled && { opacity: 0.5 },
+              ]}
+              onPress={handleAddToCart}
+              disabled={isAddToCartButtonDisabled}
             >
               <Feather name="shopping-cart" size={24} color="white" />
               <Text
@@ -258,7 +300,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   button: {
-    backgroundColor: COLORS.handysGrey,
     justifyContent: "center",
     alignItems: "center",
     height: 45,

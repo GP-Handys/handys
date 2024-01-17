@@ -16,6 +16,9 @@ interface Props {
   bgColor?: string;
   mode?: any;
   style?: StyleProp<TextStyle>;
+  defaultValue?:string;
+  returnKeyType?:any;
+  onSubmitEditing?:any;
 }
 
 export default function CustomTextInput({
@@ -32,7 +35,9 @@ export default function CustomTextInput({
   bgColor = "#CABEAB",
   mode = "text",
   style,
-
+  defaultValue,
+  returnKeyType,
+  onSubmitEditing
 }: Props) {
   return (
     <TextInput
@@ -59,6 +64,9 @@ export default function CustomTextInput({
       multiline={multiline}
       inputMode={mode}
       underlineStyle={{display:"none"}}
+      defaultValue={defaultValue}
+      returnKeyType={returnKeyType}
+      onSubmitEditing={onSubmitEditing}
       
     />
   );

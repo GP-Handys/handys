@@ -30,15 +30,21 @@ const AddressScreen = ({ route }: any) => {
   let DELIVREY_FEE = parseInt("5");
   let serviceFee = parseFloat((totalAmount * 0.03).toFixed(2));
   let grandTotal = parseFloat(totalAmount + serviceFee + DELIVREY_FEE);
+  const [disableClick , setDisableClick] = useState(false);
+
 
   function handleConfirm() {
+    setDisableClick(true)
     checkoutHelper(
       streetName,
       apartment,
       floor,
       phoneNumber,
       grandTotal,
-      navigation
+      buildingNumber,
+      instructions,
+      navigation,
+      setDisableClick
     );
   }
 
@@ -78,13 +84,13 @@ const AddressScreen = ({ route }: any) => {
           />
           <View style={styles.row}>
             <CustomTextInput
-              style={{ paddingRight: 30 }}
+              style={{flexGrow:1}}
               placeholder="Apt. Number"
               value={apartment}
               onChangeText={(Apartment) => setApartment(Apartment)}
             />
             <CustomTextInput
-              style={{ paddingRight: 90 }}
+              style={{flexGrow:2,}}
               placeholder="Floor"
               value={floor}
               onChangeText={(Floor) => setFloor(Floor)}
@@ -107,7 +113,7 @@ const AddressScreen = ({ route }: any) => {
           />
           <CustomTextInput
             style={{ marginTop: 10 }}
-            placeholder={"Any Instructions?"}
+            placeholder={"special Instructions"}
             onChangeText={(Instructions) => setInstructions(Instructions)}
             value={instructions}
             multiline={true}
@@ -137,8 +143,8 @@ const AddressScreen = ({ route }: any) => {
           </View>
         </View>
         <View>
-          <TouchableOpacity onPress={handleConfirm}>
-            <View style={styles.button}>
+          <TouchableOpacity onPress={handleConfirm} disabled={disableClick}> 
+            <View style={[styles.button,{backgroundColor: disableClick ? COLORS.disabledButtom : COLORS.CTAButtonBackground}]}>
               <Text style={styles.confirm}>Confirm</Text>
             </View>
           </TouchableOpacity>
@@ -202,8 +208,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 10,
     justifyContent: "space-between"
+    gap:20
   },
   paymentContainer: {
+    
     marginTop: 10,
     padding: 15,
     height: 140,
@@ -211,24 +219,23 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 7.5,
     backgroundColor: COLORS.handysGrey
+    justifyContent:"space-between"
   },
   paymentRows: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 3
+    justifyContent:"space-between"
   },
   title: {
-    marginLeft: 35,
     color: COLORS.darkBrown,
     fontSize: 12,
     fontWeight: "500",
-    width: 185
   },
   titlePrice: {
     color: COLORS.darkBrown,
     fontSize: 12,
     fontWeight: "500",
-    width: 75,
     textAlign: "right"
   },
   paymentSummaryWord: {
@@ -239,22 +246,18 @@ const styles = StyleSheet.create({
   },
   grandTotalTitle: {
     marginTop: 5,
-    marginLeft: 33,
     color: COLORS.darkBrown,
     fontSize: 14,
     fontWeight: "700",
-    width: 160
   },
   grandTotalPrice: {
     marginTop: 5,
     color: COLORS.darkBrown,
     fontSize: 14,
     fontWeight: "800",
-    width: 100,
     textAlign: "right"
   },
   button: {
-    backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",

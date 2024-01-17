@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  shopName: { fontSize: 18, fontWeight: "500", color: "white" },
+  shopName: { fontSize: 18, fontWeight: "500", color: COLORS.normalText,
+},
   shopDetails: { gap: 15, flexDirection: "row", alignItems: "center" },
 });

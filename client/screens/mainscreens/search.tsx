@@ -1,5 +1,16 @@
-import { View, Text, Dimensions, Keyboard, FlatList } from "react-native";
-import { CommonScrollableBackground } from "../../common/background";
+import {
+  View,
+  Text,
+  Keyboard,
+  FlatList,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
+import {
+  CommonBackgroundWithNoSafeArea,
+  CommonScrollableBackground,
+} from "../../common/background";
 import CustomTextInput from "../../components/CustomTextInput";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { TextInput } from "react-native-paper";
@@ -8,7 +19,6 @@ import { useState } from "react";
 import COLORS from "../../common/colors";
 import { shopSearch } from "../../api/ShopApi";
 import SearchShopCard from "../../components/search/SearchShopCard";
-import { ActivityIndicator } from "react-native-paper";
 import { ItemSearch } from "../../api/ItemApi";
 import ItemCard from "../../components/home/ItemCard";
 import { Item } from "../../models/Item";
@@ -24,16 +34,18 @@ export default function Search(this: any) {
   const [loadingItems, setLoadingItems] = useState(false);
   const [loadingFav, setLoadingFav] = useState(false);
   const [favItems, setFavItems] = useState<any[]>([]);
+  const [searchedOneTime, setSearchedOneTime] = useState(false);
 
   async function handleSearch() {
+    setSearchedOneTime(true);
     setLoadingShops(true);
     setLoadingItems(true);
-    setLoadingFav(true)
+    setLoadingFav(true);
 
-    await getWishList("ids").then((result)=>{
-      setFavItems(result)
-      setLoadingFav(false)
-    })
+    await getWishList("ids").then((result) => {
+      setFavItems(result);
+      setLoadingFav(false);
+    });
 
     await shopSearch(searchQuery).then((result) => {
       setShops(result);
@@ -44,9 +56,6 @@ export default function Search(this: any) {
       setItems(result);
       setLoadingItems(false);
     });
-
-    
-
   }
 
   return (
@@ -58,7 +67,13 @@ export default function Search(this: any) {
           multiline={false}
           left={
             <TextInput.Icon
-              icon={() => <FontAwesome5 name="search" size={20} color="#854627" />}
+              icon={() => (
+                <FontAwesome5
+                  name="search"
+                  size={20}
+                  color={COLORS.normalText}
+                />
+              )}
             />
           }
           right={
@@ -73,6 +88,8 @@ export default function Search(this: any) {
               style={{ marginRight: 15 }}
             />
           }
+          returnKeyType={"search"}
+          onSubmitEditing={handleSearch}
         />
         <FontAwesome5 size={24} color="black" />
 
@@ -95,7 +112,7 @@ export default function Search(this: any) {
           activeTabTextStyle={{ color: "white", fontWeight: "bold" }}
         />
 
-        {(loadingItems || loadingShops || loadingFav)? (
+        {loadingItems || loadingShops || loadingFav ? (
           <View
             style={{
               alignItems: "center",
@@ -107,26 +124,74 @@ export default function Search(this: any) {
           </View>
         ) : (
           <View style={{ marginTop: 15 }}>
-            {index === 0 ? (
-              <FlatList
-                key={"_"}
-                keyExtractor={(item) => "_" + item.id}
-                data={items}
-                renderItem={({ item }) => <ItemCard item={item} isFavorite={favItems.includes(item.id)} isEditable={false}/>}
-                numColumns={2}
-                columnWrapperStyle={{ justifyContent: "space-between" }}
-                scrollEnabled={false}
-              />
-            ) : (
-              <FlatList
-                key={"#"}
-                keyExtractor={(item) => "#" + item.id}
-                data={shops}
-                renderItem={({ item }) => <SearchShopCard shop={item} />}
-                ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-                scrollEnabled={false}
-                numColumns={1}
-              />
+            {searchedOneTime && (
+              <View>
+                {index === 0 ? (
+                  <View>
+                    {items.length > 0 ? (
+                      <FlatList
+                        key={"_"}
+                        keyExtractor={(item) => "_" + item.id}
+                        data={items}
+                        renderItem={({ item }) => (
+                          <ItemCard
+                            item={item}
+                            isFavorite={favItems.includes(item.id)}
+                            isEditable={false}
+                          />
+                        )}
+                        numColumns={2}
+                        columnWrapperStyle={{ justifyContent: "space-between" }}
+                        scrollEnabled={false}
+                      />
+                    ) : (
+                      <CommonBackgroundWithNoSafeArea>
+                        <View style={styles.Emptycontainer}>
+                          <Text style={styles.textIcon}>Sorry</Text>
+                          <Image
+                            style={styles.image}
+                            source={require("../../assets/Done-pana.png")}
+                          />
+                          <Text style={styles.textIcon}>
+                            We can't find any result
+                          </Text>
+                        </View>
+                      </CommonBackgroundWithNoSafeArea>
+                    )}
+                  </View>
+                ) : (
+                  <View>
+                    {shops.length > 0 ? (
+                      <FlatList
+                        key={"#"}
+                        keyExtractor={(item) => "#" + item.id}
+                        data={shops}
+                        renderItem={({ item }) => (
+                          <SearchShopCard shop={item} />
+                        )}
+                        ItemSeparatorComponent={() => (
+                          <View style={{ height: 20 }} />
+                        )}
+                        scrollEnabled={false}
+                        numColumns={1}
+                      />
+                    ) : (
+                      <CommonBackgroundWithNoSafeArea>
+                        <View style={styles.Emptycontainer}>
+                          <Text style={styles.textIcon}>Sorry</Text>
+                          <Image
+                            style={styles.image}
+                            source={require("../../assets/Done-pana.png")}
+                          />
+                          <Text style={styles.textIcon}>
+                            We can't find any result
+                          </Text>
+                        </View>
+                      </CommonBackgroundWithNoSafeArea>
+                    )}
+                  </View>
+                )}
+              </View>
             )}
           </View>
         )}
@@ -134,3 +199,28 @@ export default function Search(this: any) {
     </CommonScrollableBackground>
   );
 }
+
+const styles = StyleSheet.create({
+  textIcon: {
+    marginTop: 20,
+    color: "white",
+    fontWeight: "500",
+    fontSize: 20,
+  },
+  Emptycontainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  okay: {
+    backgroundColor: COLORS.CTAButtonBackground,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 50,
+    borderRadius: 8,
+  },
+  image: {
+    width: 300,
+    height: 300,
+  },
+});

@@ -4,8 +4,9 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   FlatList
+  Platform,
+  ActivityIndicator,
 } from "react-native";
 import COLORS from "../../common/colors";
 import {
@@ -20,7 +21,6 @@ import ThematicBreak from "../../components/ThematicBreak";
 import { getShopsForUserId } from "../../api/ShopApi";
 import React, { useState, useEffect } from "react";
 import { StackProps } from "../../components/navigation/NavigationStack";
-import { ActivityIndicator } from "react-native-paper";
 import { getProfile } from "../../api/UserApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native";
@@ -56,25 +56,25 @@ export default function Profile() {
   if (loading) {
     return (
       <View style={style.loadingPage}>
-        <ActivityIndicator size={"large"} color="white" />
+        <ActivityIndicator size={"large"} color={COLORS.normalText} />
       </View>
     );
   } else
     return (
       <CommonScrollableBackground>
         {/* page container */}
-        <View style={{ paddingHorizontal: 40, alignItems: "center" }}>
+        <View style={{ marginHorizontal: 40, alignItems: "center" }}>
           {/* user informations */}
-
-          {user.pfp_url === null ? (
-            <Image
-              source={require("../../assets/default_profile_img.jpg")}
-              style={style.profileIMG}
-            />
-          ) : (
-            <Image source={{ uri: user.pfp_url }} style={style.profileIMG} />
-          )}
-
+          <View style={style.shadowImg}>
+            {user.pfp_url === null ? (
+              <Image
+                source={require("../../assets/default_profile_img.jpg")}
+                style={style.profileIMG}
+              />
+            ) : (
+              <Image source={{ uri: user.pfp_url }} style={style.profileIMG} />
+            )}
+          </View>
           <Text style={style.font}>{user.name}</Text>
 
           <View
@@ -84,21 +84,21 @@ export default function Profile() {
           </View>
 
           <TouchableOpacity
-            style={style.editProfile}
+            style={[style.editProfile, style.editProfileShadow]}
             onPress={() => {
               navigation.navigate("EditProfile", {
                 user: user
               });
             }}
           >
-            <View
+            <Feather name="edit" size={32} color={COLORS.normalText} />
+            <Text
               style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center"
+                fontSize: 18,
+                fontWeight: "500",
+                color: COLORS.normalText,
               }}
             >
-              <FontAwesome5 name="edit" size={24} color="white" />
               <Text
                 style={{
                   fontSize: 18,
@@ -117,16 +117,12 @@ export default function Profile() {
             <Text style={style.lableFont}>Your shops</Text>
           </View>
 
-          <View style={{ paddingHorizontal: 15, width: "100%" }}>
-            {shops.length && (
+          <View style={{ width: "100%", alignItems: "center", paddingTop: 10 }}>
+            {shops.length > 0 && (
               <FlatList
                 scrollEnabled={false}
-                style={{
-                  alignSelf: "center",
-                  marginTop: 10,
-                  width: "100%"
-                }}
                 data={shops}
+                style={[style.userShopShadow, { width: "100%" }]}
                 renderItem={({ item }) => <UserShop shop={item} />}
                 ItemSeparatorComponent={() => {
                   return <View style={{ marginVertical: 5 }} />;
@@ -134,7 +130,7 @@ export default function Profile() {
               />
             )}
           </View>
-          <View style={{ gap: 20, paddingVertical: 15 }}>
+          <View style={{ gap: 20, paddingVertical: 15, width: "100%" }}>
             <TouchableOpacity
               style={style.createShop}
               onPress={() => {
@@ -158,61 +154,66 @@ export default function Profile() {
         </View>
 
         <View style={style.cardsContainer}>
-          <View style={style.otherGrid}>
+          <View style={[style.otherGrid]}>
             <TouchableOpacity
-              style={style.card}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("MyPostsScreen")}
             >
               <MaterialCommunityIcons
                 name="note-text-outline"
                 size={28}
-                color="white"
+                color={COLORS.normalText}
               />
               <Text style={style.cardFont}>My Posts</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={style.card}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("MyOrdersScreen")}
             >
-              <Entypo name="shopping-bag" size={24} color="white" />
+              <Entypo name="shopping-bag" size={24} color={COLORS.normalText} />
               <Text style={style.cardFont}>Orders</Text>
             </TouchableOpacity>
           </View>
           <View style={style.otherGrid}>
             <TouchableOpacity
-              style={style.card}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("WishlistScreen")}
             >
-              <FontAwesome5 name="heart" size={24} color="white" />
+              <FontAwesome5 name="heart" size={24} color={COLORS.normalText} />
               <Text style={style.cardFont}>Favorites</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={style.card}
+              style={[style.card, style.cardShadow]}
               onPress={() => navigation.navigate("SendTicketScreen")}
             >
-              <MaterialIcons name="headset-mic" size={24} color="white" />
+              <MaterialIcons
+                name="headset-mic"
+                size={24}
+                color={COLORS.normalText}
+              />
               <Text style={style.cardFont}>Support</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        <TouchableOpacity
-          onPress={async () => {
-            await AsyncStorage.removeItem("Authorization");
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "OnboardingScreensContainer" }]
-            });
-          }}
-          style={style.logout}
-        >
-          <MaterialIcons
-            name="logout"
-            size={28}
-            color={"white"}
-            style={{ paddingTop: 11 }}
-          />
-          <Text
+        <View style={{ paddingHorizontal: 40 }}>
+          <TouchableOpacity
+            onPress={async () => {
+              await AsyncStorage.removeItem("Authorization");
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "OnboardingScreensContainer" }],
+              });
+            }}
+            style={style.logout}
+          >
+            <MaterialIcons
+              name="logout"
+              size={24}
+              color={"white"}
+              style={{ paddingTop: 11 }}
+            />
+            <Text style={style.Logoutfont}>Logout</Text>
             style={{
               fontSize: 20,
               fontWeight: "500",
@@ -222,7 +223,8 @@ export default function Profile() {
           >
             Logout
           </Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       </CommonScrollableBackground>
     );
 }
@@ -239,20 +241,28 @@ const style = StyleSheet.create({
     height: 120,
     borderRadius: 60
   },
+    paddingTop: 10,
+  },
+  profileIMG: {
+    width: 120,
+    height: 120,
+    borderRadius: 120,
+  },
   editProfile: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: COLORS.brown,
     height: 60,
-    width: 280,
+    width: "100%",
     alignSelf: "center",
     borderRadius: 12,
     paddingLeft: 15,
     marginBottom: 15
+    color: COLORS.normalText,
   },
   createShop: {
     height: 60,
-    width: 280,
+    width: "100%",
     borderWidth: 2,
     borderStyle: "dashed",
     borderRadius: 9,
@@ -264,12 +274,12 @@ const style = StyleSheet.create({
   createNewShopFont: {
     fontSize: 14,
     fontWeight: "500",
-    color: COLORS.darkBrown
+    color: COLORS.normalText,
   },
   lableFont: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "500",
-    color: COLORS.darkBrown
+    color: COLORS.normalText,
   },
   lable: {
     alignSelf: "flex-start"
@@ -285,7 +295,7 @@ const style = StyleSheet.create({
   },
   otherGrid: { flexDirection: "row", gap: 25 },
   logout: {
-    width: 280,
+    width: "100%",
     height: 50,
     backgroundColor: "#BA1200",
     borderRadius: 5,
@@ -297,7 +307,7 @@ const style = StyleSheet.create({
   },
   cardFont: {
     fontSize: 19,
-    color: "white",
+    color: COLORS.normalText,
     fontWeight: "500"
   },
   cardsContainer: {
@@ -315,5 +325,51 @@ const style = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flex: 1
-  }
+  },
+  shadowImg: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    marginVertical: 20,
+  },
+  cardShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    borderRadius: 9,
+    backgroundColor: COLORS.commonBackground,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  editProfileShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    borderRadius: 9,
+  },
+  userShopShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: Platform.OS === "ios" ? 0.3 : 0.7,
+    shadowRadius: 7.49,
+    elevation: 12,
+    borderRadius: 9,
+    backgroundColor: COLORS.commonBackground,
+    alignSelf: "center",
+    color: COLORS.normalText,
 });

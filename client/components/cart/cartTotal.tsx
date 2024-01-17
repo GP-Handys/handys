@@ -18,7 +18,7 @@ export default function cartTotal() {
         <Pressable
           style={styles.pressable}
           onPress={() => {
-            navigation.navigate("Map");
+            navigation.navigate("Map", { totalAmount: totalPrice });
           }}
         >
           <Text style={styles.button}>Checkout</Text>
@@ -32,23 +32,23 @@ const styles = StyleSheet.create({
   container: {
     margin: 20,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   text: {
     color: COLORS.textTitle,
     fontSize: 12,
-    fontWeight: "normal"
+    fontWeight: "normal",
   },
   price: {
     color: COLORS.textTitle,
     fontSize: 18,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   button: {
     textAlignVertical: "center",
     color: "white",
     fontSize: 18,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   pressable: {
     height: 40,
@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "rgba(246, 151, 127, 1)",
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

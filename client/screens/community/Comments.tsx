@@ -162,10 +162,13 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     backgroundColor: COLORS.commentBackground,
     borderRadius: 7.5,
+    borderTopLeftRadius: 0,
     marginTop: 4,
     alignSelf: "flex-start",
     padding: 5,
+    maxWidth: "80%",
     paddingRight:15,
     
+    marginVertical: 5,
   }
 });

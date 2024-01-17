@@ -20,6 +20,7 @@ export default function EditProfile({ route }: any) {
   const [password, setPassword] = useState("");
   const [Confirmassword, setConfirmPassword] = useState("");
   const UserNameLength = 25;
+  const [disableClick , setDisableClick] = useState(false);
 
   const [userImageUrl, setUserImageUrl]: any = useState(user.pfp_url);
   const [userImageUrlPicked, setUserImageUrlPicked] = useState(() => {
@@ -27,13 +28,15 @@ export default function EditProfile({ route }: any) {
   });
 
   async function handleEditProfile() {
+    setDisableClick(true)
     EditProfileHelper(
       name,
       password,
       Confirmassword,
       userImageUrl,
       user.id,
-      navigation
+      navigation,
+      setDisableClick
     );
   }
 
@@ -105,7 +108,8 @@ export default function EditProfile({ route }: any) {
       <View style={{ marginHorizontal: 38 }}>
         <TouchableOpacity
           onPress={handleEditProfile}
-          style={style.ConfirmButton}
+          style={[style.ConfirmButton,{backgroundColor: disableClick ? COLORS.disabledButtom : COLORS.CTAButtonBackground}]}
+          disabled={disableClick}
         >
           <Text style={style.blackFont}>Confirm</Text>
         </TouchableOpacity>
@@ -122,7 +126,6 @@ const style = StyleSheet.create({
     alignSelf: "flex-end"
   },
   ConfirmButton: {
-    backgroundColor: COLORS.CTAButtonBackground,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,

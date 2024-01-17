@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, Pressable, Alert } from "react-native";
+import { View, StyleSheet, Image, Text, Pressable, Alert,Dimensions } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ThematicBreak from "../ThematicBreak";
 import React, { useEffect, useState } from "react";
@@ -17,6 +17,10 @@ interface Props {
   removeItem: any;
 }
 
+const windowDimensions = Dimensions.get('window');
+const screenDimensions = Dimensions.get('screen');
+
+
 export default function cartItem({
   cartItem,
   item,
@@ -26,28 +30,34 @@ export default function cartItem({
   const [counter, setCounter] = useState(cartItem.quantity);
   const [ItemTotalPrice, setItemTotalPrice] = useState(0);
 
+  const [dimensions, setDimensions] = useState({
+    window: windowDimensions,
+    screen: screenDimensions,
+  });
+
+
   const plus = () => {
     const newCounter = counter + 1;
     setCounter(newCounter);
     const newTotalPrice = newCounter * item.base_price;
     setItemTotalPrice(newTotalPrice);
     updateTotal(item.id, newTotalPrice);
-    editQuantity(cartItem.id, counter);
+    editQuantity(cartItem?.id, counter);
   };
 
   const minus = () => {
-    if (counter > 1) {
+    if (counter > 1 && counter<item.quantity) {
       const newCounter = counter - 1;
       setCounter(newCounter);
       const newTotalPrice = newCounter * item.base_price;
       setItemTotalPrice(newTotalPrice);
       updateTotal(item.id, newTotalPrice);
-      editQuantity(cartItem.id, counter);
+      editQuantity(cartItem?.id, counter);
     } else {
       Alert.alert("Delete item from cart", "Are you sure?", [
         {
           text: "Yes",
-          onPress: () => removeItem(cartItem.id),
+          onPress: () => removeItem(cartItem?.id),
         },
         {
           text: "Cancel",
@@ -57,7 +67,7 @@ export default function cartItem({
   };
 
   useEffect(() => {
-    const quantity = cartItem.quantity;
+    const quantity = cartItem?.quantity;
     setCounter(quantity);
     const newTotalPrice = counter * item.base_price;
     setItemTotalPrice(newTotalPrice);
@@ -66,14 +76,14 @@ export default function cartItem({
 
   return (
     <View>
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <View style={styles.info}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.itemName}>{item.name}</Text>
-            {cartItem.customization != "" && (
+            <Text style={styles.itemName}>{item?.name}</Text>
+            {cartItem?.customization != null && (
               <View>
                 <Text style={styles.Customized}>Customized</Text>
-                <Text style={styles.details}>Details: {cartItem.customization}</Text>
+                <Text style={[styles.details,{maxWidth:(dimensions.screen.width-200)}]}>Details: {cartItem?.customization}</Text>
               </View>
             )}
           </View>
@@ -91,13 +101,13 @@ export default function cartItem({
           </View>
         </View>
 
-        {item.img_url === null ? (
+        {item?.img_url === null ? (
           <Image
             source={require("../../assets/default_shop_img.png")}
             style={styles.image}
           />
         ) : (
-          <Image source={{ uri: item.img_url }} style={styles.image} />
+          <Image source={{ uri: item?.img_url }} style={styles.image} />
         )}
       </View>
     </View>
@@ -128,6 +138,9 @@ const styles = StyleSheet.create({
     color: COLORS.CTAButtonBackground,
     fontSize: 14,
     textDecorationLine: "underline",
+    
+    flexWrap:"wrap"
+
   },
   details: {
     fontSize: 12,
