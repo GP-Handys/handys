@@ -92,9 +92,10 @@ export default function Profile() {
               });
             }}
           >
-            <Feather name="edit" size={32} color={COLORS.normalText} />
+            <Feather name="edit" size={26} color={COLORS.normalText} />
             <Text
               style={{
+                marginLeft:15,
                 fontSize: 18,
                 fontWeight: "500",
                 color: COLORS.normalText,
@@ -233,7 +234,7 @@ const style = StyleSheet.create({
   editProfile: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: COLORS.brown,
+    backgroundColor: COLORS.lightestBrown,
     height: 60,
     width: "100%",
     alignSelf: "center",

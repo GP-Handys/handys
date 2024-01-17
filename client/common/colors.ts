@@ -22,7 +22,8 @@ let COLORS = {
   postText: "#5B2F19",
   lightBrown: "#9F9586",
   brown: "#854627",
-  shopCard : "#7C7459AD"
+  shopCard : "#7C7459AD",
+  lightestBrown:'#CABEAB'
 };
 
 export default COLORS;
