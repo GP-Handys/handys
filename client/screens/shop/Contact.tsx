@@ -10,8 +10,6 @@ import {
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import COLORS from "../../common/colors";
 import ThematicBreak from "../../components/ThematicBreak";
-import { useNavigation } from "@react-navigation/native";
-import { StackProps } from "../../components/navigation/NavigationStack";
 import { Shop } from "../../models/Shop";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
@@ -45,8 +43,8 @@ export default function ShopContactScreen({ route }: any) {
   } else
     return (
       <SafeAreaView style={styles.mainContainer}>
-        <TouchableOpacity style={styles.touchableStyle}>
-          <Text style={{ color: "black", fontSize:18 }}>owner : </Text>
+        <View style={styles.touchableStyle}>
+          <Text style={{ color: "black", fontSize:18 }}>Owner: </Text>
           {user.pfp_url === null ? (
             <Image
               source={require("../../assets/default_profile_img.jpg")}
@@ -58,7 +56,7 @@ export default function ShopContactScreen({ route }: any) {
           <View style={{ display: "flex", flexDirection: "row" }}>
             <Text style={{ color: "black", fontSize: 18 }}>{user.name}</Text>
           </View>
-        </TouchableOpacity>
+        </View>
         <View style={{ marginVertical: 20, width: "100%" }}>
           <ThematicBreak marginHorizontal={25} />
         </View>
