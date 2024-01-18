@@ -43,16 +43,20 @@ export default function cartItem({
   });
 
   const plus = () => {
-    const newCounter = counter + 1;
-    setCounter(newCounter);
-    const newTotalPrice = newCounter * item?.base_price;
-    setItemTotalPrice(newTotalPrice);
-    updateTotal(item.id, newTotalPrice);
-    editQuantity(cartItem?.id, counter);
+    if (counter < item.quantity) {
+      const newCounter = counter + 1;
+      setCounter(newCounter);
+      const newTotalPrice = newCounter * item?.base_price;
+      setItemTotalPrice(newTotalPrice);
+      updateTotal(item.id, newTotalPrice);
+      editQuantity(cartItem?.id, counter);
+    } else {
+      Alert.alert("There are not enough items in stock");
+    }
   };
 
   const minus = () => {
-    if (counter > 1 && counter < item.quantity) {
+    if (counter > 1) {
       const newCounter = counter - 1;
       setCounter(newCounter);
       const newTotalPrice = newCounter * item?.base_price;
@@ -103,7 +107,14 @@ export default function cartItem({
           </View>
           <View style={styles.footer}>
             <Text style={styles.price}>JOD {ItemTotalPrice}</Text>
-            <View style={{ flexDirection: "row", gap: 5, justifyContent:'center', alignItems:'center' }}>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 5,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <Pressable onPress={minus}>
                 <MaterialIcons name="remove" size={24} color="#715A4F" />
               </Pressable>
