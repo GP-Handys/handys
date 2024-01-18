@@ -19,7 +19,7 @@ export default function OnboardingNavigationContainer() {
         name="SignIn"
         component={SignIn}
         options={{
-          headerTintColor: "white",
+          headerTintColor: COLORS.normalText,
           title: "",
           headerStyle: {
             backgroundColor: COLORS.commonBackground,
@@ -31,7 +31,7 @@ export default function OnboardingNavigationContainer() {
         name="SignUp"
         component={SignUp}
         options={{
-          headerTintColor: "white",
+          headerTintColor: COLORS.normalText,
           title: "",
           headerStyle: {
             backgroundColor: COLORS.commonBackground,
