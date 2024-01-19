@@ -34,7 +34,7 @@ export default function AiPromptScreen() {
         <View>
           <View style={styles.lowerContainer}>
             <Text style={styles.note}>
-              *Note: please use words that are related to handcrafts to get
+              *Note: please use words that are related to handicrafts to get
               better results.
             </Text>
             <Text style={styles.note}>
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   note: {
-    color: COLORS.oliveBrown,
     marginTop: 10,
     fontWeight: "400",
     fontSize: 14,

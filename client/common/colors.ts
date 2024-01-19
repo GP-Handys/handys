@@ -24,7 +24,7 @@ let COLORS = {
   brown: "#854627",
   shopCard : "#7C7459AD",
   lightestBrown:'#CABEAB',
-  oliveBrown: "9D4F29"
+  oliveBrown: "#9D4F29"
 };
 
 export default COLORS;
