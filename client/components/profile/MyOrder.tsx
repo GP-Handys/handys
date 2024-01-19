@@ -4,6 +4,7 @@ import { getShopById } from "../../api/ShopApi";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackProps } from "../navigation/NavigationStack";
+import COLORS from "../../common/colors";
 
 interface Props {
   shopId: number;
@@ -46,7 +47,7 @@ export default function MyOrder({ shopId, orderId }: Props) {
         <MaterialIcons
           name="keyboard-arrow-right"
           size={30}
-          color="white"
+          color={COLORS.normalText}
           style={{
             alignItems: "center",
             justifyContent: "center",
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
   shopName: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "white",
+    color: COLORS.normalText,
     marginTop: 5,
     paddingRight: 5,
   },

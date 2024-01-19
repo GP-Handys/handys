@@ -197,7 +197,7 @@ export const searchItem = async (req: Request, res: Response) => {
     const search = req.query.search;
     const query = `SELECT * FROM items WHERE name LIKE '%${search}%' OR description LIKE '%${search}%'
      OR id LIKE (select itemId from item_category where categoryId Like 
-      (select categoryId from categories where category_name LIKE '%${search}%'));`;
+      (select categoryId from categories where category_name LIKE '%${search}%') limit 1);`;
 
     const searchResult = await DB.query(query);
     res.status(200).json(searchResult[0]);

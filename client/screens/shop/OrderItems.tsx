@@ -73,7 +73,7 @@ export default function ShopOrderItemsScreen({ route }: any) {
           <View style={styles.userInfo}>
             <Text
               style={{
-                color: "white",
+                color: COLORS.normalText,
                 fontSize: 16,
                 fontWeight: "bold",
                 marginBottom: 5,
@@ -83,7 +83,7 @@ export default function ShopOrderItemsScreen({ route }: any) {
             </Text>
             <Text
               style={{
-                color: "white",
+                color: COLORS.normalText,
                 fontSize: 11,
                 fontWeight: "bold",
                 marginBottom: 5,
@@ -93,7 +93,7 @@ export default function ShopOrderItemsScreen({ route }: any) {
             </Text>
             <Text
               style={{
-                color: "white",
+                color: COLORS.normalText,
                 fontSize: 11,
                 fontWeight: "bold",
                 marginBottom: 5,
@@ -103,7 +103,7 @@ export default function ShopOrderItemsScreen({ route }: any) {
             </Text>
             <Text
               style={{
-                color: "white",
+                color: COLORS.normalText,
                 fontSize: 11,
                 fontWeight: "bold",
                 marginBottom: 5,
@@ -113,7 +113,7 @@ export default function ShopOrderItemsScreen({ route }: any) {
             </Text>
             <Text
               style={{
-                color: "white",
+                color: COLORS.normalText,
                 fontSize: 11,
                 fontWeight: "bold",
                 marginBottom: 5,
@@ -123,7 +123,7 @@ export default function ShopOrderItemsScreen({ route }: any) {
             </Text>
             <Text
               style={{
-                color: "white",
+                color: COLORS.normalText,
                 fontSize: 11,
                 fontWeight: "bold",
               }}
@@ -136,7 +136,7 @@ export default function ShopOrderItemsScreen({ route }: any) {
           <View style={styles.specialInstructions}>
             <Text
               style={{
-                color: "white",
+                color: COLORS.normalText,
                 fontSize: 12,
                 fontWeight: "bold",
               }}
