@@ -82,7 +82,7 @@ export function ItemOrderScreen({ route }: any) {
                 rating={shopRating}
                 onChange={setShopRating}
                 starSize={25}
-                color="white"
+                color={COLORS.normalText}
               />
             </View>
           </>
@@ -122,7 +122,7 @@ export function ItemOrderScreen({ route }: any) {
             }}
           >
             <Text
-              style={{ color: "black", fontWeight: "bold", fontSize: 18.44 }}
+              style={{ color: "white", fontWeight: "bold", fontSize: 18.44 }}
             >
               Submit Rating
             </Text>
@@ -151,12 +151,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   shopName: {
-    color: "white",
+    color: COLORS.normalText,
     fontWeight: "bold",
     fontSize: 16,
   },
   screenDescription: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",

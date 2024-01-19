@@ -4,6 +4,7 @@ import StarRating from "react-native-star-rating-widget";
 import { ItemOrderModel } from "../../models/ItemOrder";
 import { getItemById } from "../../api/ItemApi";
 import { Item } from "../../models/Item";
+import COLORS from "../../common/colors";
 
 interface Props {
   itemOrder: ItemOrderModel;
@@ -40,7 +41,7 @@ export default function ItemOrder({ itemOrder, onItemReviewChange }: Props) {
             <View style={{ flex: 1 }}>
               <Text style={styles.itemName}>{item?.name}</Text>
               <View style={{ marginRight: 5, marginTop: 5, marginBottom: 5 }}>
-                <Text style={{ opacity: 0.25, color: "white" }}>
+                <Text style={{ opacity: 0.6, color: "black" }}>
                   Customization:
                   {itemOrder.customization.length === 0
                     ? " This item is not customizable."
@@ -60,7 +61,7 @@ export default function ItemOrder({ itemOrder, onItemReviewChange }: Props) {
                 }}
               >
                 <Text
-                  style={{ fontSize: 13, color: "white", fontWeight: "bold" }}
+                  style={{ fontSize: 13, color: COLORS.normalText, fontWeight: "bold" }}
                 >
                   x{itemOrder.quantity}
                 </Text>
@@ -77,7 +78,7 @@ export default function ItemOrder({ itemOrder, onItemReviewChange }: Props) {
                 setItemRating(rating);
                 onItemReviewChange(itemOrder.itemId, rating);
               }}
-              color="white"
+              color={COLORS.normalText}
               starSize={25}
             />
           </View>
@@ -103,12 +104,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   itemName: {
-    color: "white",
+    color: COLORS.normalText,
     fontWeight: "bold",
     fontSize: 16,
   },
   itemPrice: {
-    color: "white",
+    color: COLORS.normalText,
     fontSize: 13,
     fontWeight: "bold",
   },
