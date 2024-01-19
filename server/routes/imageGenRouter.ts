@@ -51,7 +51,7 @@ export const getGeneratedImagesForUser = async (
         userId: userId,
       },
     });
-    res.status(200).json(images);
+    res.status(200).json(images.reverse());
   } catch (error) {
     res.status(500).json({ error: "Error getting images" });
   }
