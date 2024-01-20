@@ -48,7 +48,13 @@ export default function ShopOrder({ userId, orderId }: Props) {
         </View>
       )}
       <View style={styles.textContainer}>
-        <Text style={styles.userName}>{user?.name}</Text>
+        <View>
+          <Text style={styles.userName}>{user?.name}</Text>
+          <View>
+            <Text style={styles.userName}>Order #{orderId}</Text>
+          </View>
+        </View>
+
         <MaterialIcons
           name="keyboard-arrow-right"
           size={30}
@@ -69,6 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     gap: 10,
+    marginTop: 20
   },
   imageContainer: {
     paddingLeft: 15,

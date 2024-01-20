@@ -43,7 +43,10 @@ export default function MyOrder({ shopId, orderId }: Props) {
         </View>
       )}
       <View style={styles.textContainer}>
-        <Text style={styles.shopName}>{shop?.name}</Text>
+        <View>
+          <Text style={styles.shopName}>{shop?.name}</Text>
+          <Text style={styles.shopName}>Order #{orderId}</Text>
+        </View>
         <MaterialIcons
           name="keyboard-arrow-right"
           size={30}
